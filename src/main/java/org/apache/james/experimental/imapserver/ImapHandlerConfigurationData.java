@@ -19,8 +19,9 @@
 
 package org.apache.james.experimental.imapserver;
 
-import org.apache.james.mailboxmanager.manager.MailboxManagerProvider;
-import org.apache.james.services.UsersRepository;
+import org.apache.james.api.imap.process.ImapProcessor;
+import org.apache.james.imapserver.codec.decode.ImapDecoder;
+import org.apache.james.imapserver.codec.encode.ImapEncoder;
 
 
 /**
@@ -44,13 +45,9 @@ public interface ImapHandlerConfigurationData
      */
     int getResetLength();
 
-    /**
-     * Returns the UsersRepository for this service.
-     *
-     * @return the local users repository
-     */
-    UsersRepository getUsersRepository();
+    ImapDecoder getImapDecoder();
     
-    MailboxManagerProvider getMailboxManagerProvider();
-
+    ImapEncoder getImapEncoder();
+    
+    ImapProcessor getImapProcessor();
 }
