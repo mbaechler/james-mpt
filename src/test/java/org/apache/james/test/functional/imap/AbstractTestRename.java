@@ -30,12 +30,24 @@ public abstract class AbstractTestRename extends BaseTestSelectedState {
     public void testRenameUS() throws Exception {
         scriptTest("Rename", Locale.US);
     }
-//    
-//    public void testAppendToSelectedKOREA() throws Exception {
-//        scriptTest("AppendToSelected", Locale.KOREA);
-//    }
-//    
-//    public void testAppendToSelectedITALY() throws Exception {
-//        scriptTest("AppendToSelected", Locale.ITALY);
-//    }
+    
+    public void testRenameKOREA() throws Exception {
+        scriptTest("Rename", Locale.KOREA);
+    }
+    
+    public void testRenameITALY() throws Exception {
+        scriptTest("Rename", Locale.ITALY);
+    }
+    
+    public void testRenameHierarchyUS() throws Exception {
+        scriptTest("RenameHierarchy", Locale.US);
+    }
+    
+    public void testRenameHierarchyKO() throws Exception {
+        scriptTest("RenameHierarchy", Locale.KOREA);
+    }
+    
+    public void testRenameHierarchyIT() throws Exception {
+        scriptTest("RenameHierarchy", Locale.ITALY);
+    }
 }
