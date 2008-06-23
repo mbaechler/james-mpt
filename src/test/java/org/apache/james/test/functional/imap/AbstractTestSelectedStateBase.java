@@ -17,40 +17,45 @@
  * under the License.                                           *
  ****************************************************************/
 
+
 package org.apache.james.test.functional.imap;
 
 
 
 /**
- * <p>Runs tests for commands valid in the NON_AUTHENTICATED state.
- * A welcome message precedes the execution of the test elements.
+ * <p>Runs tests for commands valid only in the SELECTED state. A login session
+ * and setup of a "seleted" mailbox precedes the execution of the test elements.
  * </p><p>
- * Recommended test scripts:
+ * Recommended scripts:
  * </p><ul>
- * <li>ValidAuthenticated</li>
- * <li>ValidSelected</li>
- * <li>Capability</li>
- * <li>Noop</li>
- * <li>Logout</li>
- * <li>Authenticate</li>
- * <li>Login</li>
+ * <li>Check"</li>
+ * <li>Expunge"</li>
+ * <li>Search"</li>
+ * <li>FetchSingleMessage"</li>
+ * <li>FetchMultipleMessages"</li>
+ * <li>FetchPeek"</li>
+ * <li>Store"</li>
+ * <li>Copy"</li>
+ * <li>Uid"</li>
  * </ul>
  */
-public class BaseTestNonAuthenticatedState
-        extends SimpleScriptedTestProtocol
+public class AbstractTestSelectedStateBase
+        extends AbstractTestForAuthenticatedState
 {
-    public BaseTestNonAuthenticatedState( HostSystem system )
+    public AbstractTestSelectedStateBase( HostSystem system )
     {
         super( system );
     }
 
     /**
-     * Adds a welcome message to the {@link #preElements}.
+     * Superclass sets up welcome message and login session in {@link #preElements}.
+     * A "SELECT INBOX" session is then added to these elements.
      * @throws Exception
      */
     public void setUp() throws Exception
     {
         super.setUp();
-        addTestFile( "Welcome.test", preElements );
+        addTestFile( "SelectedStateSetup.test", preElements );
+        addTestFile( "SelectedStateCleanup.test", postElements );
     }
 }

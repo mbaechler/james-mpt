@@ -21,56 +21,58 @@
 package org.apache.james.test.functional.imap;
 
 
-
 /**
- * <p>Tests commands which are valid in AUTHENTICATED and NONAUTHENTICATED by running
- * them in the SELECTED state. Many commands function identically, while others
- * are invalid in this state.
+ * <p>Runs tests for commands valid in the AUTHENTICATED state. A login session precedes
+ * the execution of the test elements.
  * </p><p>
- * Recommended scripts:
+ * Suggested tests:
  * </p><ul>
+ * <li>ValidSelected</li>
  * <li>ValidNonAuthenticated</li>
  * <li>Capability</li>
  * <li>Noop</li>
  * <li>Logout</li>
+ * <li>AppendExamineInbox</li>
+ * <li>AppendSelectInbox</li>
  * <li>Create</li>
  * <li>ExamineEmpty</li>
  * <li>SelectEmpty</li>
  * <li>ListNamespace</li>
  * <li>ListMailboxes</li>
  * <li>Status</li>
- * <li>StringArgs</li>
  * <li>Subscribe</li>
- * <li>Append</li>
  * <li>Delete</li>
+ * <li>Append</li>
+ * <li>Compound:<ul>
+ * <li>AppendExpunge</li>
+ * <li>SelectAppend</li>
+ * <li>StringArgs</li>
+ * </ul></li>
  * </ul>
- *
- * @author  Darrell DeBoer <darrell@apache.org>
- *
- * @version $Revision: 560719 $
+ * </p>
  */
-public class BaseTestSelectedInbox
-        extends BaseTestForAuthenticatedState
+public abstract class AbstractTestForAuthenticatedState
+        extends AbstractSimpleScriptedTestProtocol implements ImapTestConstants
 {
-    public BaseTestSelectedInbox( HostSystem system )
+    public AbstractTestForAuthenticatedState( HostSystem hostSystem)
     {
-        super( system );
+        super( hostSystem );
     }
 
     /**
-     * Superclass sets up welcome message and login session in {@link #preElements}.
-     * A "SELECT INBOX" session is then added to these elements.
+     * Sets up {@link #preElements} with a welcome message and login request/response.
      * @throws Exception
      */
     public void setUp() throws Exception
     {
         super.setUp();
-        addTestFile( "SelectInbox.test", preElements );
+        addTestFile( "Welcome.test", preElements );
+        addLogin( USER, PASSWORD );
     }
 
-    protected void addCloseInbox()
+    protected void addLogin( String username, String password )
     {
-        postElements.CL( "a CLOSE");
-        postElements.SL( ".*", "BaseTestSelectedInbox.java:76");
+        preElements.CL( "a001 LOGIN " + username + " " + password );
+        preElements.SL( "a001 OK LOGIN completed.", "AbstractTestForAuthenticatedState.java:53" );
     }
 }
