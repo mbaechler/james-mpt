@@ -17,30 +17,36 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.experimental.imapserver.encode.writer;
+package org.apache.james.imap.main;
 
-import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.channels.Channels;
+import java.io.ByteArrayOutputStream;
 
-/**
- * Class providing methods to send response messages from the server
- * to the client.
- */
-public class OutputStreamImapResponseWriter extends ChannelImapResponseWriter {
-    
-    private final OutputStream output;
+import junit.framework.TestCase;
 
-    public OutputStreamImapResponseWriter( OutputStream output )
-    {
-        super(Channels.newChannel(output));
-        this.output = output;
+public abstract class AbstractTestOutputStreamImapResponseWriter extends
+        TestCase {
+
+    OutputStreamImapResponseWriter writer;
+    ByteArrayOutputStream out;
+
+    public AbstractTestOutputStreamImapResponseWriter() {
+        super();
     }
 
-    public void flush() throws IOException {
-        super.flush();
-        output.flush();
+    protected void setUp() throws Exception {
+        out = new ByteArrayOutputStream();
+        writer = new OutputStreamImapResponseWriter(out);
     }
-    
-    
+
+    protected void checkExpected(String expected) throws Exception {
+        StringBuffer buffer = new StringBuffer();
+        writer.flush();
+        out.flush();
+        byte[] output = out.toByteArray();
+        for (int i=0;i<output.length;i++) {
+            buffer.append((char) output[i]);
+        }
+        assertEquals(expected, buffer.toString());
+    }
+
 }

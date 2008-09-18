@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.experimental.imapserver;
+package org.apache.james.imap.main;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +32,6 @@ import org.apache.james.api.imap.process.ImapProcessor;
 import org.apache.james.api.imap.process.ImapSession;
 import org.apache.james.api.imap.process.SelectedImapMailbox;
 import org.apache.james.api.imap.process.ImapProcessor.Responder;
-import org.apache.james.experimental.imapserver.encode.writer.OutputStreamImapResponseWriter;
 import org.apache.james.imapserver.codec.ProtocolException;
 import org.apache.james.imapserver.codec.decode.ImapDecoder;
 import org.apache.james.imapserver.codec.decode.ImapRequestLineReader;

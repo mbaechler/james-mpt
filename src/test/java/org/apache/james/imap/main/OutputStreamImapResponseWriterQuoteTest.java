@@ -17,38 +17,42 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.experimental.imapserver;
-
-import org.apache.james.api.imap.process.ImapProcessor;
-import org.apache.james.imapserver.codec.decode.ImapDecoder;
-import org.apache.james.imapserver.codec.encode.ImapEncoder;
+package org.apache.james.imap.main;
 
 
-/**
- * Provides a number of server-wide constant values to the
- * ImapHandlers
- * @deprecated unnecessary
- */
-public interface ImapHandlerConfigurationData
-{
+public class OutputStreamImapResponseWriterQuoteTest extends AbstractTestOutputStreamImapResponseWriter {
 
-    /**
-     * Returns the service wide hello name
-     *
-     * @return the hello name
-     */
-    String getHelloName();
+    protected void tearDown() throws Exception {
+        super.tearDown();
+    }
 
-    /**
-     * Returns the service wide reset length in bytes.
-     *
-     * @return the reset length
-     */
-    int getResetLength();
-
-    ImapDecoder getImapDecoder();
+    public void testEmpty() throws Exception {
+        writer.quote("");
+        checkExpected(" \"\"");
+    }
     
-    ImapEncoder getImapEncoder();
+    public void testStartSlash() throws Exception {
+        writer.quote("\\");
+        checkExpected(" \"\\\\\"");
+    }
     
-    ImapProcessor getImapProcessor();
+    public void testSimpleQuote() throws Exception {
+        writer.quote("Simple");
+        checkExpected(" \"Simple\"");
+    }
+    
+    public void testComplexQuote() throws Exception {
+        writer.quote("Complex Quote With Spaces");
+        checkExpected(" \"Complex Quote With Spaces\"");
+    }
+    
+    public void testDQuoteQuote() throws Exception {
+        writer.quote("Complex\"Quote With Spaces");
+        checkExpected(" \"Complex\\\"Quote With Spaces\"");
+    }
+    
+    public void testFSlashQuote() throws Exception {
+        writer.quote("Complex Quote \\With Spaces");
+        checkExpected(" \"Complex Quote \\\\With Spaces\"");
+    }
 }

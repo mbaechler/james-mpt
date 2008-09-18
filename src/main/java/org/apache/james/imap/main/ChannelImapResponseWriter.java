@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.experimental.imapserver.encode.writer;
+package org.apache.james.imap.main;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;

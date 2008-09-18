@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.experimental.imapserver.encode.writer;
+package org.apache.james.imap.main;
 
 
 public class OutputStreamImapResponseWriterTest extends AbstractTestOutputStreamImapResponseWriter {

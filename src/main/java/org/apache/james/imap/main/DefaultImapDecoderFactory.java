@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.experimental.imapserver;
+package org.apache.james.imap.main;
 
 import org.apache.james.api.imap.imap4rev1.Imap4Rev1CommandFactory;
 import org.apache.james.api.imap.imap4rev1.Imap4Rev1MessageFactory;

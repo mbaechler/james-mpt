@@ -17,42 +17,30 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.experimental.imapserver.encode.writer;
+package org.apache.james.imap.main;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.channels.Channels;
 
-public class OutputStreamImapResponseWriterQuoteTest extends AbstractTestOutputStreamImapResponseWriter {
+/**
+ * Class providing methods to send response messages from the server
+ * to the client.
+ */
+public class OutputStreamImapResponseWriter extends ChannelImapResponseWriter {
+    
+    private final OutputStream output;
 
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    public OutputStreamImapResponseWriter( OutputStream output )
+    {
+        super(Channels.newChannel(output));
+        this.output = output;
     }
 
-    public void testEmpty() throws Exception {
-        writer.quote("");
-        checkExpected(" \"\"");
+    public void flush() throws IOException {
+        super.flush();
+        output.flush();
     }
     
-    public void testStartSlash() throws Exception {
-        writer.quote("\\");
-        checkExpected(" \"\\\\\"");
-    }
     
-    public void testSimpleQuote() throws Exception {
-        writer.quote("Simple");
-        checkExpected(" \"Simple\"");
-    }
-    
-    public void testComplexQuote() throws Exception {
-        writer.quote("Complex Quote With Spaces");
-        checkExpected(" \"Complex Quote With Spaces\"");
-    }
-    
-    public void testDQuoteQuote() throws Exception {
-        writer.quote("Complex\"Quote With Spaces");
-        checkExpected(" \"Complex\\\"Quote With Spaces\"");
-    }
-    
-    public void testFSlashQuote() throws Exception {
-        writer.quote("Complex Quote \\With Spaces");
-        checkExpected(" \"Complex Quote \\\\With Spaces\"");
-    }
 }

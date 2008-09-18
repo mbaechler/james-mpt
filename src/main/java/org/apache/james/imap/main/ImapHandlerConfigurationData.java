@@ -17,36 +17,38 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.experimental.imapserver.encode.writer;
+package org.apache.james.imap.main;
 
-import java.io.ByteArrayOutputStream;
+import org.apache.james.api.imap.process.ImapProcessor;
+import org.apache.james.imapserver.codec.decode.ImapDecoder;
+import org.apache.james.imapserver.codec.encode.ImapEncoder;
 
-import junit.framework.TestCase;
 
-public abstract class AbstractTestOutputStreamImapResponseWriter extends
-        TestCase {
+/**
+ * Provides a number of server-wide constant values to the
+ * ImapHandlers
+ * @deprecated unnecessary
+ */
+public interface ImapHandlerConfigurationData
+{
 
-    OutputStreamImapResponseWriter writer;
-    ByteArrayOutputStream out;
+    /**
+     * Returns the service wide hello name
+     *
+     * @return the hello name
+     */
+    String getHelloName();
 
-    public AbstractTestOutputStreamImapResponseWriter() {
-        super();
-    }
+    /**
+     * Returns the service wide reset length in bytes.
+     *
+     * @return the reset length
+     */
+    int getResetLength();
 
-    protected void setUp() throws Exception {
-        out = new ByteArrayOutputStream();
-        writer = new OutputStreamImapResponseWriter(out);
-    }
-
-    protected void checkExpected(String expected) throws Exception {
-        StringBuffer buffer = new StringBuffer();
-        writer.flush();
-        out.flush();
-        byte[] output = out.toByteArray();
-        for (int i=0;i<output.length;i++) {
-            buffer.append((char) output[i]);
-        }
-        assertEquals(expected, buffer.toString());
-    }
-
+    ImapDecoder getImapDecoder();
+    
+    ImapEncoder getImapEncoder();
+    
+    ImapProcessor getImapProcessor();
 }
