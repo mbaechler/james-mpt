@@ -19,14 +19,19 @@
 -->
 <project>
   <parent>
-    <artifactId>apache-james-imap</artifactId>
+    <artifactId>apache-james-mpt-project</artifactId>
     <groupId>org.apache.james</groupId>
     <version>0.1-SNAPSHOT</version>
+    <!-- Either this really points to the james-project/pom.xml or you
+         will have to tune the local repository, later, in this file -->
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
-  <artifactId>apache-james-imap-protocol-tester</artifactId>
+  <artifactId>apache-james-mtp</artifactId>
   <name>Apache JAMES Protocol Tester</name>
+  <description>Apache JAMES Mail Protocol Tester (MTP) is a library providing a framework for the 
+scritable functional testing of ASCII based line protocols.</description>
   <dependencies>
     <dependency>
       <groupId>commons-logging</groupId>
