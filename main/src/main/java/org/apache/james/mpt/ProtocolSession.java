@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.test.functional;
+package org.apache.james.mpt;
 
 import java.io.IOException;
 import java.util.ArrayList;
