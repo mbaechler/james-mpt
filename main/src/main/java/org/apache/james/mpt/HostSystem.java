@@ -21,7 +21,7 @@ package org.apache.james.mpt;
 
 /**
  * Host system under test.
- * 
+ * @see Session supports multiple connection to the host system
  */
 public interface HostSystem {
 
@@ -51,9 +51,24 @@ public interface HostSystem {
      */
     public Session newSession(Continuation continuation) throws Exception;
 
+    /**
+     * A connection to the host.
+     */
     public interface Session {
+        
+        /**
+         * Reads a line from the session input,
+         * blocking until a new line is available.
+         * @return not null
+         * @throws Exception
+         */
         public String readLine() throws Exception;
 
+        /**
+         * Writes a line to the session output.
+         * @param line not null
+         * @throws Exception
+         */
         public void writeLine(String line) throws Exception;
 
         /**
