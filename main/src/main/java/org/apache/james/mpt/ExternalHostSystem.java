@@ -17,14 +17,12 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.test.functional.imap.manual;
+package org.apache.james.mpt;
 
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
-
-import org.apache.james.test.functional.HostSystem;
 
 public class ExternalHostSystem implements HostSystem {
 
