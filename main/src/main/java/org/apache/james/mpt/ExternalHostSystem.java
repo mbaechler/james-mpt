@@ -24,23 +24,35 @@ import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
+/**
+ * Connects to a host system serving on an open port.
+ */
 public class ExternalHostSystem implements HostSystem {
 
-    public static final HostSystem createLocalImap() {
-        final ExternalHostSystem result = new ExternalHostSystem("localhost",
-                143, new SystemLoggingMonitor());
-        return result;
-    }
+    public static final String IMAP_SHABANG = "* OK IMAP4rev1 Server ready";
 
     private final InetSocketAddress address;
 
     private final Monitor monitor;
 
+    private final String shabang;
+
+    /**
+     * Constructs a host system suitable for connection to an open port.
+     * @param host host name that will be connected to, not null
+     * @param port port on host that will be connected to, not null
+     * @param monitor monitors the conduct of the connection
+     * @param shabang protocol shabang will be sent to the script test in the place of the
+     * first line received from the server. Many protocols pass server specific information
+     * in the first line. When not null, this line will be replaced.
+     * Or null when the first line should be passed without replacement
+     */
     public ExternalHostSystem(final String host, final int port,
-            final Monitor monitor) {
+            final Monitor monitor, final String shabang) {
         super();
         this.address = new InetSocketAddress(host, port);
         this.monitor = monitor;
+        this.shabang = shabang;
     }
 
     public boolean addUser(String user, String password) throws Exception {
@@ -52,24 +64,12 @@ public class ExternalHostSystem implements HostSystem {
     public Session newSession(Continuation continuation) throws Exception {
         final SocketChannel channel = SocketChannel.open(address);
         channel.configureBlocking(false);
-        final SessionImpl result = new SessionImpl(channel, monitor);
+        final SessionImpl result = new SessionImpl(channel, monitor, shabang);
         return result;
     }
 
     public void reset() throws Exception {
         monitor.note("Please reset system.");
-    }
-
-    public interface Monitor {
-        void note(String message);
-    }
-
-    public static final class SystemLoggingMonitor implements Monitor {
-
-        public void note(String message) {
-            System.out.println(message);
-        }
-
     }
 
     private final static class SessionImpl implements Session {
@@ -88,23 +88,26 @@ public class ExternalHostSystem implements HostSystem {
 
         private boolean first = true;
 
-        public SessionImpl(final SocketChannel socket, final Monitor monitor) {
+        private final String shabang;
+
+        public SessionImpl(final SocketChannel socket, final Monitor monitor, String shabang) {
             super();
             this.socket = socket;
             this.monitor = monitor;
             readBuffer = ByteBuffer.allocateDirect(2048);
             ascii = Charset.forName("US-ASCII");
             lineEndBuffer = ByteBuffer.wrap(CRLF);
+            this.shabang = shabang;
         }
 
         public String readLine() throws Exception {
             StringBuffer buffer = new StringBuffer();
             readlineInto(buffer);
             final String result;
-            if (first) {
+            if (first && shabang != null) {
                 // fake shabang
                 monitor.note("<-" + buffer.toString());
-                result = "* OK IMAP4rev1 Server ready";
+                result = shabang;
                 first = false;
             } else {
                 result = buffer.toString();
