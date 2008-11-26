@@ -19,31 +19,20 @@
 
 package org.apache.james.mpt;
 
+import org.apache.james.mpt.HostSystem.Continuation;
+
 /**
- * Host system under test.
- * @see Session supports multiple connection to the host system
+ * Builds sessions for protocol testing.
  */
-public interface HostSystem extends SessionFactory {
+public interface SessionFactory {
 
     /**
-     * Resets host system to initial state.
+     * Creates a new session for functional testing.
      * 
+     * @return <code>Session</code>, not null
      * @throws Exception
      */
-    public void reset() throws Exception;
+    public abstract Session newSession(Continuation continuation)
+            throws Exception;
 
-    /**
-     * Add a user for testing.
-     * 
-     * @param user
-     *            user name
-     * @param password
-     *            user password
-     * @throws Exception
-     */
-    public void addUser(String user, String password) throws Exception;
-
-    public interface Continuation {
-        public void doContinue();
-    }
 }

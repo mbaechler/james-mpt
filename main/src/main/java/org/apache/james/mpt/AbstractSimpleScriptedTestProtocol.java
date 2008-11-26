@@ -57,12 +57,11 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
      * Reads test elements from the protocol session file and adds them to the
      * {@link #testElements} ProtocolSession. Then calls {@link #runSessions}.
      * 
-     * @param locale
-     *            TODO
+     * @param locale test under this default locale, not null
      */
     protected void scriptTest(String fileName, Locale locale) throws Exception {
         Locale.setDefault(locale);
-        addTestFile(fileName + ".test", testElements);
+        addTestFile(fileName + ".test", runner.getTestElements());
         runSessions();
     }
 

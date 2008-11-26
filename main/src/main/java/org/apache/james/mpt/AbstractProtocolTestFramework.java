@@ -32,15 +32,8 @@ import junit.framework.TestCase;
  * @author Andrew C. Oliver
  */
 public abstract class AbstractProtocolTestFramework extends TestCase {
-    /** The Protocol session which is run before the testElements */
-    protected ProtocolSession preElements = new ProtocolSession();
 
-    /** The Protocol session which contains the tests elements */
-    protected ProtocolSession testElements = new ProtocolSession();
-
-    /** The Protocol session which is run after the testElements. */
-    protected ProtocolSession postElements = new ProtocolSession();
-
+    protected final Runner runner;
     private final HostSystem hostSystem;
     
     private final String userName;
@@ -50,6 +43,7 @@ public abstract class AbstractProtocolTestFramework extends TestCase {
         this.hostSystem = hostSystem;
         this.userName = userName;
         this.password = password;
+        runner = new Runner();
     }
 
     protected void setUp() throws Exception {
@@ -58,9 +52,7 @@ public abstract class AbstractProtocolTestFramework extends TestCase {
     }
 
     protected void continueAfterFailure() {
-        preElements.setContinueAfterFailure(true);
-        testElements.setContinueAfterFailure(true);
-        postElements.setContinueAfterFailure(true);
+        runner.continueAfterFailure();
     }
 
     /**
@@ -75,38 +67,7 @@ public abstract class AbstractProtocolTestFramework extends TestCase {
      * {@link MockImapServer#getImapSession()} works.
      */
     protected void runSessions() throws Exception {
-        class SessionContinuation implements HostSystem.Continuation {
-
-            public ProtocolSession session;
-
-            public void doContinue() {
-                if (session != null) {
-                    session.doContinue();
-                }
-            }
-
-        }
-        SessionContinuation continuation = new SessionContinuation();
-
-        HostSystem.Session[] sessions = new HostSystem.Session[testElements
-                .getSessionCount()];
-
-        for (int i = 0; i < sessions.length; i++) {
-            sessions[i] = hostSystem.newSession(continuation);
-            sessions[i].start();
-        }
-        try {
-            continuation.session = preElements;
-            preElements.runSessions(sessions);
-            continuation.session = testElements;
-            testElements.runSessions(sessions);
-            continuation.session = postElements;
-            postElements.runSessions(sessions);
-        } finally {
-            for (int i = 0; i < sessions.length; i++) {
-                sessions[i].stop();
-            }
-        }
+        runner.runSessions(hostSystem);
     }
 
     /**

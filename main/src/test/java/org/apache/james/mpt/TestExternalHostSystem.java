@@ -64,7 +64,7 @@ public class TestExternalHostSystem extends MockObjectTestCase {
     }
     
     public void testWrite() throws Exception {
-        ExternalHostSystem.Session session = newSession(SHABANG);
+        Session session = newSession(SHABANG);
         final String in = "Hello, World";
         session.writeLine(in);
         session.stop();
@@ -77,9 +77,9 @@ public class TestExternalHostSystem extends MockObjectTestCase {
         system.addUser(USER, PASSWORD);
     }
 
-    private ExternalHostSystem.Session newSession(final String shabang) throws Exception {
+    private Session newSession(final String shabang) throws Exception {
         ExternalHostSystem system = buildSystem(shabang);
-        ExternalHostSystem.Session session = system.newSession(continuation);
+        Session session = system.newSession(continuation);
         return session;
     }
 
