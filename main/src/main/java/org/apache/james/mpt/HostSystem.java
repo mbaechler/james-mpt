@@ -41,7 +41,7 @@ public interface HostSystem {
      *            user password
      * @throws Exception
      */
-    public boolean addUser(String user, String password) throws Exception;
+    public void addUser(String user, String password) throws Exception;
 
     /**
      * Creates a new session for functional testing.

@@ -36,6 +36,8 @@ public class ExternalHostSystem implements HostSystem {
     private final Monitor monitor;
 
     private final String shabang;
+    
+    private final UserAdder userAdder;
 
     /**
      * Constructs a host system suitable for connection to an open port.
@@ -46,19 +48,24 @@ public class ExternalHostSystem implements HostSystem {
      * first line received from the server. Many protocols pass server specific information
      * in the first line. When not null, this line will be replaced.
      * Or null when the first line should be passed without replacement
+     * @param userAdder null when test system has appropriate users already set
      */
     public ExternalHostSystem(final String host, final int port,
-            final Monitor monitor, final String shabang) {
+            final Monitor monitor, final String shabang, final UserAdder userAdder) {
         super();
         this.address = new InetSocketAddress(host, port);
         this.monitor = monitor;
         this.shabang = shabang;
+        this.userAdder = userAdder;
     }
 
-    public boolean addUser(String user, String password) throws Exception {
-        monitor.note("Please ensure user '" + user + "' with password '"
+    public void addUser(String user, String password) throws Exception {
+        if (userAdder == null) {
+            monitor.note("Please ensure user '" + user + "' with password '"
                 + password + "' exists.");
-        return true;
+        } else {
+            userAdder.addUser(user, password);
+        }
     }
 
     public Session newSession(Continuation continuation) throws Exception {

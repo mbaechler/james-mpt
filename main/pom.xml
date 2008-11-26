@@ -41,5 +41,10 @@ scritable functional testing of ASCII based line protocols.</description>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
+	<dependency>
+      <groupId>jmock</groupId>
+      <artifactId>jmock</artifactId>
+      <scope>test</scope>
+    </dependency>   
   </dependencies>
 </project>

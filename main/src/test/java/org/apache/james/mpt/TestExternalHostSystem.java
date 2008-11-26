@@ -20,12 +20,18 @@
 package org.apache.james.mpt;
 
 import org.apache.james.mpt.HostSystem.Continuation;
+import org.jmock.Mock;
+import org.jmock.MockObjectTestCase;
 
 import junit.framework.TestCase;
 
-public class TestExternalHostSystem extends TestCase {
+public class TestExternalHostSystem extends MockObjectTestCase {
 
     
+    private static final String USER = "USER NAME";
+
+    private static final String PASSWORD = "SOME PASSWORD";
+
     private static final String SHABANG = "This Is The Shabang";
 
     private static final int PORT = 10001;
@@ -33,6 +39,12 @@ public class TestExternalHostSystem extends TestCase {
     private DiscardProtocol protocol;
     
     private DiscardProtocol.Record record;
+
+    private Continuation continuation;
+
+    private UserAdder userAdder;
+
+    private Mock mockUserAdder;
     
     //@Override
     protected void setUp() throws Exception {
@@ -40,6 +52,9 @@ public class TestExternalHostSystem extends TestCase {
         protocol = new DiscardProtocol(PORT);
         protocol.start();
         record = protocol.recordNext();
+        continuation = (Continuation) mock(Continuation.class).proxy();
+        mockUserAdder = mock(UserAdder.class);
+        userAdder = (UserAdder) mockUserAdder.proxy();
     }
 
     //@Override
@@ -55,13 +70,22 @@ public class TestExternalHostSystem extends TestCase {
         session.stop();
         assertEquals(in + "\r\n", record.complete());
     }
+    
+    public void testAddUser() throws Exception {
+        mockUserAdder.expects(once()).method("addUser").with(eq(USER), eq(PASSWORD));
+        ExternalHostSystem system = buildSystem(SHABANG);
+        system.addUser(USER, PASSWORD);
+    }
 
     private ExternalHostSystem.Session newSession(final String shabang) throws Exception {
-        ExternalHostSystem system = new ExternalHostSystem("localhost", PORT ,
-                new SystemLoggingMonitor(), shabang);
-        ExternalHostSystem.Session session = system.newSession(new Continuation() {
-            public void doContinue() {}
-        });
+        ExternalHostSystem system = buildSystem(shabang);
+        ExternalHostSystem.Session session = system.newSession(continuation);
         return session;
+    }
+
+    private ExternalHostSystem buildSystem(final String shabang) {
+        ExternalHostSystem system = new ExternalHostSystem("localhost", PORT ,
+                new NullMonitor(), shabang, userAdder);
+        return system;
     }
 }
