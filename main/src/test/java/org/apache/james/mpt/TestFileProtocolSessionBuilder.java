@@ -30,7 +30,7 @@ public class TestFileProtocolSessionBuilder extends MockObjectTestCase {
     private static final String SCRIPT_WITH_FOO_REPLACED_BY_WHATEVER = "HELLO ${not} whatever WORLD ${bar}";
     private static final String SCRIPT_WITH_VARIABLES_INLINED = "HELLO not foo WORLD bar";
     
-    FileProtocolSessionBuilder builder;
+    ProtocolSessionBuilder builder;
     ProtocolInteractor session;
 
     private Mock mockSession;
@@ -38,7 +38,7 @@ public class TestFileProtocolSessionBuilder extends MockObjectTestCase {
     //@Override
     protected void setUp() throws Exception {
         super.setUp();
-        builder = new FileProtocolSessionBuilder();
+        builder = new ProtocolSessionBuilder();
         mockSession = mock(ProtocolInteractor.class);
         session = (ProtocolInteractor) mockSession.proxy();
     }
@@ -49,7 +49,7 @@ public class TestFileProtocolSessionBuilder extends MockObjectTestCase {
     }
 
     private void addLines() throws Exception {
-        builder.addProtocolLines("A Script", new StringReader(FileProtocolSessionBuilder.CLIENT_TAG + " " + SCRIPT_WITH_VARIABLES), session);
+        builder.addProtocolLines("A Script", new StringReader(ProtocolSessionBuilder.CLIENT_TAG + " " + SCRIPT_WITH_VARIABLES), session);
     }
     
     public void testShouldPreserveContentsWhenNoVariablesSet() throws Exception {
@@ -74,13 +74,13 @@ public class TestFileProtocolSessionBuilder extends MockObjectTestCase {
     public void testShouldReplaceVariableAtBeginningAndEnd() throws Exception {
         mockSession.expects(once()).method("CL").with(eq(-1), eq("whatever Some Other Scriptwhateverwhatever"));
         builder.setVariable("foo", "whatever");
-        builder.addProtocolLines("A Script", new StringReader(FileProtocolSessionBuilder.CLIENT_TAG + " " + "${foo} Some Other Script${foo}${foo}"), session);
+        builder.addProtocolLines("A Script", new StringReader(ProtocolSessionBuilder.CLIENT_TAG + " " + "${foo} Some Other Script${foo}${foo}"), session);
     }
     
     public void testShouldIgnoreNotQuiteVariables() throws Exception {
         final String NEARLY = "{foo}${}${foo Some Other Script${foo}";
         mockSession.expects(once()).method("CL").with(eq(-1), eq(NEARLY));
         builder.setVariable("foo", "whatever");
-        builder.addProtocolLines("A Script", new StringReader(FileProtocolSessionBuilder.CLIENT_TAG + " " + NEARLY), session);
+        builder.addProtocolLines("A Script", new StringReader(ProtocolSessionBuilder.CLIENT_TAG + " " + NEARLY), session);
     }
 }

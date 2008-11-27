@@ -29,13 +29,13 @@ import java.util.Properties;
 
 
 /**
- * A builder which generates a ProtocolSession from a test file.
+ * A builder which generates scripts from textual input.
  * 
  * @author Darrell DeBoer <darrell@apache.org>
  * 
  * @version $Revision$
  */
-public class FileProtocolSessionBuilder {
+public class ProtocolSessionBuilder {
     
     public static final String SERVER_CONTINUATION_TAG = "S: \\+";
 
@@ -53,7 +53,7 @@ public class FileProtocolSessionBuilder {
 
     private final Properties variables;
     
-    public FileProtocolSessionBuilder() {
+    public ProtocolSessionBuilder() {
         variables = new Properties();
     }
     
@@ -83,6 +83,21 @@ public class FileProtocolSessionBuilder {
         addTestFile(fileName, session);
         return session;
     }
+    
+    /**
+     * Builds a ProtocolSession by reading lines from the reader.
+     * 
+     * @param fileName
+     *            The name of the protocol session file.
+     * @return The ProtocolSession
+     */
+    public ProtocolInteractor buildProtocolSession(final String scriptName, final Reader reader)
+            throws Exception {
+        ProtocolInteractor session = new ProtocolSession();
+        addProtocolLines(scriptName, reader, session);
+        return session;
+    }
+
 
     /**
      * Adds all protocol elements from a test file to the ProtocolSession

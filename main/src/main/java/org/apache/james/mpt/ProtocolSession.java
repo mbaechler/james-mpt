@@ -231,6 +231,27 @@ public class ProtocolSession implements ProtocolInteractor {
         public boolean isClient() {
             return true;
         }
+
+        /**
+         * Constructs a <code>String</code> with all attributes
+         * in name = value format.
+         *
+         * @return a <code>String</code> representation 
+         * of this object.
+         */
+        public String toString()
+        {
+            final String TAB = " ";
+            
+            String retValue = "ClientRequest ( "
+                + "sessionNumber = " + this.sessionNumber + TAB
+                + "message = " + this.message + TAB
+                + " )";
+        
+            return retValue;
+        }
+        
+        
     }
 
     /**
@@ -355,6 +376,29 @@ public class ProtocolSession implements ProtocolInteractor {
         public boolean isClient() {
             return false;
         }
+
+        /**
+         * Constructs a <code>String</code> with all attributes
+         * in name = value format.
+         *
+         * @return a <code>String</code> representation 
+         * of this object.
+         */
+        public String toString()
+        {
+            final String TAB = " ";
+            
+            String result = "ServerResponse ( "
+                + "lastClientMessage = " + this.lastClientMessage + TAB
+                + "sessionNumber = " + this.sessionNumber + TAB
+                + "expectedLine = " + this.expectedLine + TAB
+                + "location = " + this.location + TAB
+                + " )";
+        
+            return result;
+        }
+        
+        
     }
 
     /**
@@ -444,6 +488,26 @@ public class ProtocolSession implements ProtocolInteractor {
                 }
             }
         }
+
+        /**
+         * Constructs a <code>String</code> with all attributes
+         * in name = value format.
+         *
+         * @return a <code>String</code> representation 
+         * of this object.
+         */
+        public String toString()
+        {
+            final String TAB = " ";
+            
+            String result = "ServerUnorderedBlockResponse ( "
+                + "expectedLines = " + this.expectedLines + TAB
+                + " )";
+        
+            return result;
+        }
+        
+        
     }
 
     private class ContinuationElement implements ProtocolElement {
@@ -479,6 +543,26 @@ public class ProtocolSession implements ProtocolInteractor {
         public boolean isClient() {
             return false;
         }
+
+        /**
+         * Constructs a <code>String</code> with all attributes
+         * in name = value format.
+         *
+         * @return a <code>String</code> representation 
+         * of this object.
+         */
+        public String toString()
+        {
+            final String TAB = " ";
+            
+            String result = "ContinuationElement ( "
+                + "sessionNumber = " + this.sessionNumber + TAB
+                + " )";
+        
+            return result;
+        }
+        
+        
     }
 
     /**
@@ -502,12 +586,29 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
-     * An exception which is thrown when the actual response from a server is
-     * different from that expected.
+     * Constructs a <code>String</code> with all attributes
+     * in name = value format.
+     *
+     * @return a <code>String</code> representation 
+     * of this object.
      */
-    public class InvalidServerResponseException extends Exception {
-        public InvalidServerResponseException(String message) {
-            super(message);
-        }
+    public String toString()
+    {
+        final String TAB = " ";
+        
+        String result  = "ProtocolSession ( "
+            + "continued = " + this.continued + TAB
+            + "continuationExpected = " + this.continuationExpected + TAB
+            + "maxSessionNumber = " + this.maxSessionNumber + TAB
+            + "testElements = " + this.testElements + TAB
+            + "elementsIterator = " + this.elementsIterator + TAB
+            + "sessions = " + this.sessions + TAB
+            + "nextTest = " + this.nextTest + TAB
+            + "continueAfterFailure = " + this.continueAfterFailure + TAB
+            + " )";
+    
+        return result;
     }
+    
+    
 }

@@ -32,7 +32,7 @@ import java.util.Locale;
  */
 public abstract class AbstractSimpleScriptedTestProtocol extends
         AbstractProtocolTestFramework {
-    private FileProtocolSessionBuilder builder = new FileProtocolSessionBuilder();
+    private ProtocolSessionBuilder builder = new ProtocolSessionBuilder();
 
     private static final Locale BASE_DEFAULT_LOCALE = Locale.getDefault();
 

@@ -76,7 +76,7 @@ public class TestExternalHostSystem extends MockObjectTestCase {
     }
 
     private Session newSession(final String shabang) throws Exception {
-        ExternalHostSystem system = buildSystem(shabang);
+        ExternalSessionFactory system = buildSystem(shabang);
         Session session = system.newSession(continuation);
         return session;
     }

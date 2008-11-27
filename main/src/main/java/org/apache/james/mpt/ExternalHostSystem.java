@@ -19,24 +19,12 @@
 
 package org.apache.james.mpt;
 
-import java.net.InetSocketAddress;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
-import java.nio.charset.Charset;
 
 /**
  * Connects to a host system serving on an open port.
  */
-public class ExternalHostSystem implements HostSystem {
+public class ExternalHostSystem extends ExternalSessionFactory implements HostSystem {
 
-    public static final String IMAP_SHABANG = "* OK IMAP4rev1 Server ready";
-
-    private final InetSocketAddress address;
-
-    private final Monitor monitor;
-
-    private final String shabang;
-    
     private final UserAdder userAdder;
 
     /**
@@ -52,10 +40,7 @@ public class ExternalHostSystem implements HostSystem {
      */
     public ExternalHostSystem(final String host, final int port,
             final Monitor monitor, final String shabang, final UserAdder userAdder) {
-        super();
-        this.address = new InetSocketAddress(host, port);
-        this.monitor = monitor;
-        this.shabang = shabang;
+        super(host, port, monitor, shabang);
         this.userAdder = userAdder;
     }
 
@@ -65,115 +50,6 @@ public class ExternalHostSystem implements HostSystem {
                 + password + "' exists.");
         } else {
             userAdder.addUser(user, password);
-        }
-    }
-
-    public Session newSession(Continuation continuation) throws Exception {
-        final SocketChannel channel = SocketChannel.open(address);
-        channel.configureBlocking(false);
-        final SessionImpl result = new SessionImpl(channel, monitor, shabang);
-        return result;
-    }
-
-    public void reset() throws Exception {
-        monitor.note("Please reset system.");
-    }
-
-    private final static class SessionImpl implements Session {
-
-        private static final byte[] CRLF = { '\r', '\n' };
-
-        private final SocketChannel socket;
-
-        private final Monitor monitor;
-
-        private final ByteBuffer readBuffer;
-
-        private final Charset ascii;
-
-        private final ByteBuffer lineEndBuffer;
-
-        private boolean first = true;
-
-        private final String shabang;
-
-        public SessionImpl(final SocketChannel socket, final Monitor monitor, String shabang) {
-            super();
-            this.socket = socket;
-            this.monitor = monitor;
-            readBuffer = ByteBuffer.allocateDirect(2048);
-            ascii = Charset.forName("US-ASCII");
-            lineEndBuffer = ByteBuffer.wrap(CRLF);
-            this.shabang = shabang;
-        }
-
-        public String readLine() throws Exception {
-            StringBuffer buffer = new StringBuffer();
-            readlineInto(buffer);
-            final String result;
-            if (first && shabang != null) {
-                // fake shabang
-                monitor.note("<-" + buffer.toString());
-                result = shabang;
-                first = false;
-            } else {
-                result = buffer.toString();
-                monitor.note("<-" + result);
-            }
-            return result;
-        }
-
-        private void readlineInto(StringBuffer buffer) throws Exception {
-            while (socket.read(readBuffer) == 0)
-                ;
-            readBuffer.flip();
-            while (readOneMore(buffer))
-                ;
-            readBuffer.compact();
-        }
-
-        private boolean readOneMore(StringBuffer buffer) throws Exception {
-            final boolean result;
-            if (readBuffer.hasRemaining()) {
-                char next = (char) readBuffer.get();
-                if (next == '\n') {
-                    result = false;
-                } else if (next == '\r') {
-                    result = true;
-                } else {
-                    buffer.append(next);
-                    result = true;
-                }
-            } else {
-                readBuffer.clear();
-                readlineInto(buffer);
-                result = true;
-            }
-            return result;
-        }
-
-        public void start() throws Exception {
-            while (!socket.finishConnect()) {
-                monitor.note("connecting...");
-                Thread.sleep(10);
-            }
-        }
-
-        public void stop() throws Exception {
-            monitor.note("closing");
-            socket.close();
-        }
-
-        public void writeLine(String line) throws Exception {
-            monitor.note("-> " + line);
-            ByteBuffer writeBuffer = ascii.encode(line);
-            while (writeBuffer.hasRemaining()) {
-                socket.write(writeBuffer);
-            }
-            lineEndBuffer.rewind();
-            while (lineEndBuffer.hasRemaining()) {
-                socket.write(lineEndBuffer);
-            }
         }
     }
 }
