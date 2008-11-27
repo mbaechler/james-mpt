@@ -23,8 +23,6 @@ import org.apache.james.mpt.HostSystem.Continuation;
 import org.jmock.Mock;
 import org.jmock.MockObjectTestCase;
 
-import junit.framework.TestCase;
-
 public class TestExternalHostSystem extends MockObjectTestCase {
 
     
