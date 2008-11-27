@@ -43,7 +43,7 @@ public class Runner {
      * Gets protocol session run after test.
      * @return not null
      */
-    public ProtocolSession getPostElements() {
+    public ProtocolInteractor getPostElements() {
         return postElements;
     }
 
@@ -51,14 +51,14 @@ public class Runner {
      * Gets protocol session run before test.
      * @return not null
      */
-    public ProtocolSession getPreElements() {
+    public ProtocolInteractor getPreElements() {
         return preElements;
     }
     /**
      * Gets protocol session run on test.
      * @return not null
      */
-    public ProtocolSession getTestElements() {
+    public ProtocolInteractor getTestElements() {
         return testElements;
     }
 

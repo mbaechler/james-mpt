@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
  * 
  * @version $Revision$
  */
-public class ProtocolSession {
+public class ProtocolSession implements ProtocolInteractor {
     private boolean continued = false;
 
     private boolean continuationExpected = false;
@@ -120,23 +120,22 @@ public class ProtocolSession {
         }
     }
 
-    /**
-     * adds a new Client request line to the test elements
+    /* (non-Javadoc)
+     * @see org.apache.james.mpt.ProtocolScript#CL(java.lang.String)
      */
     public void CL(String clientLine) {
         testElements.add(new ClientRequest(clientLine));
     }
 
     /**
-     * adds a new Server Response line to the test elements, with the specified
-     * location.
+     * @see org.apache.james.mpt.ProtocolScript#SL(java.lang.String, java.lang.String)
      */
     public void SL(String serverLine, String location) {
         testElements.add(new ServerResponse(serverLine, location));
     }
 
     /**
-     * adds a new Server Unordered Block to the test elements.
+     * @see org.apache.james.mpt.ProtocolScript#SUB(java.util.List, java.lang.String)
      */
     public void SUB(List serverLines, String location) {
         testElements
@@ -144,7 +143,7 @@ public class ProtocolSession {
     }
 
     /**
-     * adds a new Client request line to the test elements
+     * @see org.apache.james.mpt.ProtocolScript#CL(int, java.lang.String)
      */
     public void CL(int sessionNumber, String clientLine) {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
@@ -152,7 +151,7 @@ public class ProtocolSession {
     }
 
     /**
-     * Adds a continuation. To allow one thread to be used for testing.
+     * @see org.apache.james.mpt.ProtocolScript#CONT(int)
      */
     public void CONT(int sessionNumber) throws Exception {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
@@ -160,8 +159,7 @@ public class ProtocolSession {
     }
 
     /**
-     * adds a new Server Response line to the test elements, with the specified
-     * location.
+     * @see org.apache.james.mpt.ProtocolScript#SL(int, java.lang.String, java.lang.String, java.lang.String)
      */
     public void SL(int sessionNumber, String serverLine, String location,
             String lastClientMessage) {
@@ -171,7 +169,7 @@ public class ProtocolSession {
     }
 
     /**
-     * adds a new Server Unordered Block to the test elements.
+     * @see org.apache.james.mpt.ProtocolScript#SUB(int, java.util.List, java.lang.String, java.lang.String)
      */
     public void SUB(int sessionNumber, List serverLines, String location,
             String lastClientMessage) {

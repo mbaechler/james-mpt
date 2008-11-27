@@ -75,7 +75,7 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
      * @param session
      *            The ProtocolSession to add elements to.
      */
-    protected void addTestFile(String fileName, ProtocolSession session)
+    protected void addTestFile(String fileName, ProtocolInteractor session)
             throws Exception {
         fileName = "/org/apache/james/test/functional/imap/scripts/" + fileName;
         // Need to find local resource.
@@ -84,6 +84,6 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
             throw new Exception("Test Resource '" + fileName + "' not found.");
         }
 
-        builder.addProtocolLinesFromStream(is, session, fileName);
+        builder.addProtocolLines(fileName, is, session);
     }
 }

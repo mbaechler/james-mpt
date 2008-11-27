@@ -22,8 +22,12 @@ package org.apache.james.mpt;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Properties;
 
 
 /**
@@ -34,20 +38,39 @@ import java.util.List;
  * @version $Revision$
  */
 public class FileProtocolSessionBuilder {
-    private static final String SERVER_CONTINUATION_TAG = "S: \\+";
+    
+    public static final String SERVER_CONTINUATION_TAG = "S: \\+";
 
-    private static final String CLIENT_TAG = "C:";
+    public static final String CLIENT_TAG = "C:";
 
-    private static final String SERVER_TAG = "S:";
+    public static final String SERVER_TAG = "S:";
 
-    private static final String OPEN_UNORDERED_BLOCK_TAG = "SUB {";
+    public static final String OPEN_UNORDERED_BLOCK_TAG = "SUB {";
 
-    private static final String CLOSE_UNORDERED_BLOCK_TAG = "}";
+    public static final String CLOSE_UNORDERED_BLOCK_TAG = "}";
 
-    private static final String COMMENT_TAG = "#";
+    public static final String COMMENT_TAG = "#";
 
-    private static final String SESSION_TAG = "SESSION:";
+    public static final String SESSION_TAG = "SESSION:";
 
+    private final Properties variables;
+    
+    public FileProtocolSessionBuilder() {
+        variables = new Properties();
+    }
+    
+    /**
+     * Sets a substitution varaible.
+     * The value of a variable will be substituted whereever
+     * ${<code>NAME</code>} is found in the input
+     * where <code>NAME</code> is the name of the variable.
+     * @param name not null
+     * @param value not null
+     */
+    public void setVariable(final String name, final String value) {
+        variables.put(name, value);
+    }
+    
     /**
      * Builds a ProtocolSession by reading lines from the test file with the
      * supplied name.
@@ -56,9 +79,9 @@ public class FileProtocolSessionBuilder {
      *            The name of the protocol session file.
      * @return The ProtocolSession
      */
-    public ProtocolSession buildProtocolSession(String fileName)
+    public ProtocolInteractor buildProtocolSession(String fileName)
             throws Exception {
-        ProtocolSession session = new ProtocolSession();
+        ProtocolInteractor session = new ProtocolSession();
         addTestFile(fileName, session);
         return session;
     }
@@ -72,7 +95,7 @@ public class FileProtocolSessionBuilder {
      * @param session
      *            The ProtocolSession to add the elements to.
      */
-    public void addTestFile(String fileName, ProtocolSession session)
+    public void addTestFile(String fileName, ProtocolInteractor session)
             throws Exception {
         // Need to find local resource.
         InputStream is = this.getClass().getResourceAsStream(fileName);
@@ -80,79 +103,146 @@ public class FileProtocolSessionBuilder {
             throw new Exception("Test Resource '" + fileName + "' not found.");
         }
 
-        addProtocolLinesFromStream(is, session, fileName);
+        addProtocolLines(fileName, is, session);
     }
 
     /**
      * Reads ProtocolElements from the supplied InputStream and adds them to the
      * ProtocolSession.
-     * 
+     * @param scriptName
+     *            The name of the source file, for error messages.
      * @param is
      *            The input stream containing the protocol definition.
      * @param session
      *            The ProtocolSession to add elements to.
-     * @param fileName
+     */
+    public void addProtocolLines(String scriptName, InputStream is, ProtocolInteractor session) throws Exception {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+        
+        doAddProtocolLines(session, scriptName, reader);
+    }
+
+    /**
+     * Reads ProtocolElements from the supplied Reader and adds them to the
+     * ProtocolSession.
+     * @param scriptName
+     *            The name of the source file, for error messages.
+     * @param reader
+     *            the reader containing the protocol definition.
+     * @param session
+     *            The ProtocolSession to add elements to.
+     */
+    public void addProtocolLines(String scriptName, Reader reader, ProtocolInteractor session) throws Exception {
+        final BufferedReader bufferedReader;
+        if (reader instanceof BufferedReader) {
+            bufferedReader = (BufferedReader) reader;
+        } else {
+            bufferedReader = new BufferedReader(reader);
+        }
+        doAddProtocolLines(session, scriptName, bufferedReader);
+    }
+    
+    /**
+     * Reads ProtocolElements from the supplied Reader and adds them to the
+     * ProtocolSession.
+     * 
+     * @param reader
+     *            the reader containing the protocol definition.
+     * @param session
+     *            The ProtocolSession to add elements to.
+     * @param scriptName
      *            The name of the source file, for error messages.
      */
-    public void addProtocolLinesFromStream(InputStream is,
-            ProtocolSession session, String fileName) throws Exception {
+    private void doAddProtocolLines(ProtocolInteractor session, String scriptName, BufferedReader reader) throws Exception {
+        String line;
         int sessionNumber = -1;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        String next;
         int lineNumber = -1;
         String lastClientMsg = "";
-        while ((next = reader.readLine()) != null) {
-            String location = fileName + ":" + lineNumber;
-            if (SERVER_CONTINUATION_TAG.equals(next)) {
+        while ((line = reader.readLine()) != null) {
+            line = substituteVariables(line);
+            String location = scriptName + ":" + lineNumber;
+            if (SERVER_CONTINUATION_TAG.equals(line)) {
                 session.CONT(sessionNumber);
-            } else if (next.startsWith(CLIENT_TAG)) {
+            } else if (line.startsWith(CLIENT_TAG)) {
                 String clientMsg = "";
-                if (next.length() > 3) {
-                    clientMsg = next.substring(3);
+                if (line.length() > 3) {
+                    clientMsg = line.substring(3);
                 }
                 session.CL(sessionNumber, clientMsg);
                 lastClientMsg = clientMsg;
-            } else if (next.startsWith(SERVER_TAG)) {
+            } else if (line.startsWith(SERVER_TAG)) {
                 String serverMsg = "";
-                if (next.length() > 3) {
-                    serverMsg = next.substring(3);
+                if (line.length() > 3) {
+                    serverMsg = line.substring(3);
                 }
                 session.SL(sessionNumber, serverMsg, location, lastClientMsg);
-            } else if (next.startsWith(OPEN_UNORDERED_BLOCK_TAG)) {
+            } else if (line.startsWith(OPEN_UNORDERED_BLOCK_TAG)) {
                 List unorderedLines = new ArrayList(5);
-                next = reader.readLine();
+                line = reader.readLine();
 
-                while (!next.startsWith(CLOSE_UNORDERED_BLOCK_TAG)) {
-                    if (!next.startsWith(SERVER_TAG)) {
+                while (!line.startsWith(CLOSE_UNORDERED_BLOCK_TAG)) {
+                    if (!line.startsWith(SERVER_TAG)) {
                         throw new Exception(
                                 "Only 'S: ' lines are permitted inside a 'SUB {' block.");
                     }
-                    String serverMsg = next.substring(3);
+                    String serverMsg = line.substring(3);
                     unorderedLines.add(serverMsg);
-                    next = reader.readLine();
+                    line = reader.readLine();
                     lineNumber++;
                 }
 
                 session.SUB(sessionNumber, unorderedLines, location,
                         lastClientMsg);
-            } else if (next.startsWith(COMMENT_TAG)
-                    || next.trim().length() == 0) {
+            } else if (line.startsWith(COMMENT_TAG)
+                    || line.trim().length() == 0) {
                 // ignore these lines.
-            } else if (next.startsWith(SESSION_TAG)) {
-                String number = next.substring(SESSION_TAG.length()).trim();
+            } else if (line.startsWith(SESSION_TAG)) {
+                String number = line.substring(SESSION_TAG.length()).trim();
                 if (number.length() == 0) {
                     throw new Exception("No session number specified");
                 }
                 sessionNumber = Integer.parseInt(number);
             } else {
-                String prefix = next;
-                if (next.length() > 3) {
-                    prefix = next.substring(0, 3);
+                String prefix = line;
+                if (line.length() > 3) {
+                    prefix = line.substring(0, 3);
                 }
                 throw new Exception("Invalid line prefix: " + prefix);
             }
             lineNumber++;
         }
+    }
+
+    /**
+     * Replaces ${<code>NAME</code>} with variable value.
+     * @param line not null
+     * @return not null
+     */
+    private String substituteVariables(String line) {
+        if (variables.size() > 0) {
+            final StringBuffer buffer = new StringBuffer(line);
+            int start = 0;
+            int end = 0;
+            while (start >= 0 && end >= 0) { 
+                start = buffer.indexOf("${", end);
+                if (start < 0) {
+                    break;
+                }
+                end = buffer.indexOf("}", start);
+                if (end < 0) {
+                    break;
+                }
+                final String name = buffer.substring(start+2, end);
+                final String value = variables.getProperty(name);
+                if (value != null) {
+                    buffer.replace(start, end + 1, value);
+                    final int variableLength = (end - start + 2);
+                    end = end + (value.length() - variableLength);
+                }
+            }
+            line = buffer.toString();
+        }
+        return line;
     }
 
 }
