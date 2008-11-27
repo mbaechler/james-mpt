@@ -35,6 +35,7 @@
   <packaging>pom</packaging>
   <modules>
     <module>main</module>
+    <module>antlib</module>
   </modules>
   <scm>
     <connection>scm:svn:http://svn.apache.org/repos/asf/james/protocol-tester/trunk</connection>
