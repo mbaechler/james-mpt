@@ -27,7 +27,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
   <artifactId>apache-james-mpt-project</artifactId>
-  <name>Apache JAMES MPT Product</name>
+  <name>Apache JAMES MPT Project</name>
   <version>0.1-SNAPSHOT</version>
   <description>Functional test framework specialised for the ASCII line-base protocols common in mail.</description>
   <url>http://james.apache.org/mpt/</url>
@@ -218,9 +218,14 @@
   </distributionManagement>
   <dependencyManagement>
     <dependencies>
+
     <dependency>
+<!-- TODO: FIXME
+       My maven foo is weak!
+       Can't seem to be able to pick up this version from the antlib module :-/ 
+     --> 
       <groupId>org.apache.james</groupId>
-      <artifactId>apache-james-mpt-main</artifactId>
+      <artifactId>apache-james-mpt</artifactId>
       <version>0.1-SNAPSHOT</version>
     </dependency>
 
@@ -257,6 +262,11 @@
       <artifactId>jmock</artifactId>
       <version>1.1.0</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.ant</groupId>
+      <artifactId>ant</artifactId>
+      <version>1.7.0</version>
     </dependency>
    </dependencies>
   </dependencyManagement>
