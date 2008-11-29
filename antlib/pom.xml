@@ -35,10 +35,10 @@ scritable functional testing of ASCII based line protocols. This AntLib provides
 to the library requiring no extra coding.</description>
   <dependencies>
     <dependency>
-      <groupId>org.apache.james</groupId>
+      <groupId>${project.groupId}</groupId>
       <artifactId>apache-james-mtp</artifactId>
       <!-- TODO: Use dependency from project pom -->
-      <version>0.1-SNAPSHOT</version>
+      <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>commons-logging</groupId>
