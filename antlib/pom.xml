@@ -57,5 +57,45 @@ to the library requiring no extra coding.</description>
       <artifactId>jmock</artifactId>
       <scope>test</scope>
     </dependency>   
+    <dependency>
+      <groupId>org.apache.ant</groupId>
+      <artifactId>ant-antunit</artifactId>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>test</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <tasks>
+                <ant antfile="src/test/resources/build.xml" inheritAll="false" inheritRefs="false">
+                  <property name="jar.name" location="${project.build.outputDirectory}"/>
+                  <property name="base.dir" location="${basedir}"/>
+                  <property name="test.skipped" value="${maven.test.skip}"/>
+                  <property name="test.classpath" refid="maven.test.classpath" />
+                </ant>
+              </tasks>
+            </configuration>
+          </execution>
+        </executions>
+        <dependencies>
+          <!-- AntUnit require Ant 1.7+ -->
+          <dependency>
+            <groupId>org.apache.ant</groupId>
+            <artifactId>ant</artifactId>
+            <version>1.7.1</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
+  
 </project>

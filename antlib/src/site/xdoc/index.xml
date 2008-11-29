@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one
+  or more contributor license agreements.  See the NOTICE file
+  distributed with this work for additional information
+  regarding copyright ownership.  The ASF licenses this file
+  to you under the Apache License, Version 2.0 (the
+  "License"); you may not use this file except in compliance
+  with the License.  You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing,
+  software distributed under the License is distributed on an
+  "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+  KIND, either express or implied.  See the License for the
+  specific language governing permissions and limitations
+  under the License.    
+-->
+
+<document>
+
+ <properties>
+  <title>Overview</title>
+  <author email="server-dev@james.apache.org">Mail Protocol Tester AntLib</author>
+ </properties>
+
+<body>
+<section name="What is the Apache James MTP?">
+<p>
+Apache James Mail Protocol Tester (MTP) is a library providing a framework for the 
+scritable functional testing of ASCII based line protocols.</p>
+<p>
+An antlib defines a suite of extensions for <a href='http://ant.apache.org'>Apache Ant</a>.
+This antlib defines a suite of functional testing tools particularly suitable for 
+use with ASCII based line protocols (as are common in mail).
+</p>
+</section>
+<section name='Usage'>
+<p>
+See: 
+</p>
+<ul>
+<li>Apache Ant <a href='http://ant.apache.org/manual/CoreTypes/antlib.html'>manual</a></li>
+<li><a href='http://www.onjava.com/pub/a/onjava/2006/08/09/ant-1-7-using-antlibs.html'>Using AntLibs</a> (article)</li>
+<li><a href='http://www.oracle.com/technology/pub/articles/bodewig_taskwriters.html'>Ant 1.6 for Task Writers</a> (article)</li>
+</ul>
+</section>
+<section name='Tasks'>
+<subsection name='mpt'>
+<p>
+Executes <a href='../main'>MPT</a> scripts against a running independent server.
+If these scripts require users then these can be added by script by using the <code>AddUser</code>
+element.
+</p>
+<subsection name='Parameters'>
+<table> 
+<tr>
+	<td><strong>Attribute</strong></td> <td><strong>Description</strong></td> <td><strong>Required</strong></td>
+</tr> 
+<tr>
+	<td>port</td> 
+	<td>Port number that the scripts should be executed against</td> 
+	<td>Yes</td>
+</tr>
+<tr>
+	<td>host</td> 
+	<td>Host name or IP address of the server against which the scripts should be executed</td> 
+	<td>No (Defaults to <code>127.0.0.1</code>)</td>
+</tr> 
+<tr>
+	<td>script</td> 
+	<td>File containing a script to be executed. To execute multiple scripts, 
+	use a <a href='#Any Resource Collection'>Resource Collection</a></td> 
+	<td>When no resource collections elements exist</td>
+</tr> 
+<tr>
+	<td>skip</td> 
+	<td>Skips execution of scripts. For simple conditional execution</td> 
+	<td>No</td>
+</tr> 
+</table>
+</subsection>
+</subsection>
+
+<subsection name='Nested Elements'>
+<subsection name='Any Resource Collection'>
+<p>
+<a href='http://ant.apache.org/manual/CoreTypes/resources.html#collection'>Resource Collection</a>s
+are used to specify a group of scripts to execute. When resource collections are set, attribute <code>
+</code>
+</p>
+</subsection>
+<subsection name='AddUser'>
+<p>
+Allows scripted addition of any users required by the tests. 
+The port can vary but the host is inherited.
+</p>
+<table> 
+<tr>
+	<td><strong>Attribute</strong></td> <td><strong>Description</strong></td> <td><strong>Required</strong></td>
+</tr> 
+<tr>
+	<td>port</td> 
+	<td>Port number that the user addition script should be executed against</td> 
+	<td>Yes</td>
+</tr>
+
+<tr>
+	<td>passwd</td> 
+	<td>Password to be set for user created. Will be passed to the script.</td> 
+	<td>Yes</td>
+</tr> 
+
+<tr>
+	<td>user</td> 
+	<td>Name of the user to be created. Will be passed to the script.</td> 
+	<td>Yes</td>
+</tr> 
+
+<tr>
+	<td>script</td> 
+	<td>File containing the user creation script</td> 
+	<td>Yes</td>
+</tr> 
+</table>
+</subsection>
+<subsection name='Example'>
+<p>TODO:</p>
+</subsection>
+</subsection>
+</section>
+</body>
+</document>
