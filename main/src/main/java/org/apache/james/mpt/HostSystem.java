@@ -20,8 +20,16 @@
 package org.apache.james.mpt;
 
 /**
- * Host system under test.
- * @see Session supports multiple connection to the host system
+ * <p>Host system under test.</p>
+ * <p>
+ * This interface encapsulates the interaction between the server
+ * under test and the test framework. MPT can be used to test components
+ * without the need to serve the protocol though a socket by creating a 
+ * suitable implementation of this interface.
+ * </p>
+ * @see ExternalHostSystem  ExternalHostSystem (a <code>HostSystem</code> for servers
+ * running independently)
+ * @see Session Session (supports multiple connection to the host system)
  */
 public interface HostSystem extends SessionFactory {
 

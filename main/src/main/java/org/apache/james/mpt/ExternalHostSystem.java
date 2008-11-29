@@ -21,10 +21,16 @@ package org.apache.james.mpt;
 
 
 /**
- * Connects to a host system serving on an open port.
+ * <p>Connects to a host system serving on an open port.</p>
+ * <p>
+ * This is typically used for functional integration testing of a complete
+ * server system (including sockets). Apache James MPT AntLib provides an
+ * <a href='http://ant.apache.org' rel='tag'>Ant</a> task suitable for this
+ * use case.
+ * </p>
  */
 public class ExternalHostSystem extends ExternalSessionFactory implements HostSystem {
-
+    
     private final UserAdder userAdder;
 
     /**
