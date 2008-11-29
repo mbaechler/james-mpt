@@ -26,7 +26,6 @@ import java.util.Iterator;
 
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Task;
-import org.apache.tools.ant.types.Resource;
 import org.apache.tools.ant.types.ResourceCollection;
 import org.apache.tools.ant.types.resources.Union;
 
