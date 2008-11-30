@@ -209,7 +209,8 @@ public class MailProtocolTestTask extends Task implements Monitor {
             } catch (IOException e) {
                 throw new BuildException("Cannot load script " + resource.getName(), e);
             } catch (Exception e) {
-                throw new BuildException("[FAILURE] in script " + resource.getName(), e);
+                log(e.getMessage(), Project.MSG_ERR);
+                throw new BuildException("[FAILURE] in script " + resource.getName() + "\n" + e.getMessage(), e);
             }
             
         }
@@ -342,7 +343,8 @@ public class MailProtocolTestTask extends Task implements Monitor {
                 final ScriptedUserAdder adder = new ScriptedUserAdder(getHost(), getPort(), MailProtocolTestTask.this);
                 adder.addUser(getUser(), getPasswd(), reader);
             } catch (Exception e) {
-                throw new BuildException("User addition failed", e);
+                log(e.getMessage(), Project.MSG_ERR);
+                throw new BuildException("User addition failed: \n" + e.getMessage(), e);
             }
         } 
     }
