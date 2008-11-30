@@ -121,9 +121,14 @@ The port can vary but the host is inherited.
 <tr>
 	<td>script</td> 
 	<td>File containing the user creation script</td> 
-	<td>Yes</td>
+	<td>Either this attribute must be set, or the user addition script </td>
 </tr> 
 </table>
+<p>
+User addition scripts are typically short. As an alternative to the script attribute
+(which specifies the file containing the script), the script text can be added directly
+as text to the body of this element.
+</p>
 </subsection>
 <subsection name='Example'>
 <p>TODO:</p>

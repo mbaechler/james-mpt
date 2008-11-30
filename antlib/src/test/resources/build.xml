@@ -17,94 +17,108 @@
   specific language governing permissions and limitations
   under the License.    
 -->
-<project 
-	name="tests" default="all"
-	  xmlns:au="antlib:org.apache.ant.antunit"
-	  xmlns:mpt="antlib:org.apache.james.mpt.ant">
-	
-    <taskdef uri="antlib:org.apache.ant.antunit"
-             resource="org/apache/ant/antunit/antlib.xml"
-             classpath="${test.classpath}" />
-	
-    <taskdef uri="antlib:org.apache.james.mpt.ant"
-             resource="org/apache/james/mpt/ant/antlib.xml"
-             classpath="${jar.name}" />
-	
-	<target name='testMustNotAllowScriptsAndScript'>
-		<au:expectfailure>
-		  <mpt:mpt skip='true' port='10000' script='pom.xml'>
-			  <fileset dir='${basedir}'/>
-		  </mpt:mpt>				
-	    </au:expectfailure>
-	</target>
-	
-	<target name='testMustSetScriptsOrScript'>
-		<au:expectfailure>
-		  <mpt:mpt skip='true' port='10000'/>
-	    </au:expectfailure>
-		<mpt:mpt port='10000' skip='true'>
-		  <fileset dir='${basedir}'/>
-		</mpt:mpt>	
-		<mpt:mpt port='10000' skip='true' script='pom.xml'/>
-	</target>
-	
-	<target name='testMustSetPort'>
-		<au:expectfailure>
-		  <mpt:mpt skip='true'>
-		  	<fileset dir='${basedir}'/>
-		  </mpt:mpt>
-	    </au:expectfailure>
-		<mpt:mpt port='10000' skip='true'>
-			<fileset dir='${basedir}'/>
-		</mpt:mpt>	
-	</target>
-	
-	<target name='testMaySetHost'>
-		<mpt:mpt port='10000' skip='true' host='example.org'>
-		  	<fileset dir='${basedir}'/>
-		</mpt:mpt>
-		<mpt:mpt port='10000' skip='true' host='10.0.0.66'>
-	  		<fileset dir='${basedir}'/>
-	  	</mpt:mpt>
-	</target>
-	
-	<target name='testShouldAllowAddUserToBeSet'>
-		<mpt:mpt port='10000' skip='true' host='example.org'>
-		  	<fileset dir='${basedir}'/>
-			<addUser port='10001' user='user' passwd='passwd' script='pom.xml'/>
-		</mpt:mpt>
-	</target>
-	
-	
-	<target name='testAddUserMustSetPortNamePasswordScript'>
-		<au:expectfailure>
-			<mpt:mpt port='10000' skip='true' host='example.org'>
-			  	<fileset dir='${basedir}'/>
-				<addUser user='user' passwd='passwd' script='pom.xml'/>
-			</mpt:mpt>
-		</au:expectfailure>
-		<au:expectfailure>
-			<mpt:mpt port='10000' skip='true' host='example.org'>
-			  	<fileset dir='${basedir}'/>
-				<addUser port='10001' passwd='passwd' script='pom.xml'/>
-			</mpt:mpt>
-		</au:expectfailure>
-		<au:expectfailure>
-			<mpt:mpt port='10000' skip='true' host='example.org'>
-			  	<fileset dir='${basedir}'/>
-				<addUser port='10001' user='user' script='pom.xml'/>
-			</mpt:mpt>
-		</au:expectfailure>
-		<au:expectfailure>
-			<mpt:mpt port='10000' skip='true' host='example.org'>
-			  	<fileset dir='${basedir}'/>
-				<addUser port='10001' user='user' passwd='passwd'/>
-			</mpt:mpt>
-		</au:expectfailure>
-	</target>
+<project name="tests" default="all" xmlns:au="antlib:org.apache.ant.antunit" xmlns:mpt="antlib:org.apache.james.mpt.ant">
 
-	<target name='testMptAttributes' depends='testMustSetPort, testMaySetHost,testMustSetScriptsOrScript, testMustNotAllowScriptsAndScript'/>
-	<target name='testAddUser' depends='testShouldAllowAddUserToBeSet, testAddUserMustSetPortNamePasswordScript'/>
-	
-	<target name='all' depends='testMptAttributes, testAddUser'/>
+    <taskdef uri="antlib:org.apache.ant.antunit" resource="org/apache/ant/antunit/antlib.xml" classpath="${test.classpath}" />
+
+    <taskdef uri="antlib:org.apache.james.mpt.ant" resource="org/apache/james/mpt/ant/antlib.xml">
+        <classpath>
+            <pathelement location="${jar.name}" />
+            <pathelement path='${test.classpath}' />
+        </classpath>
+    </taskdef>
+
+    <target name='testMustNotAllowScriptsAndScript'>
+        <au:expectfailure>
+            <mpt:mpt skip='true' port='10000' script='pom.xml'>
+                <fileset dir='${basedir}' />
+            </mpt:mpt>
+        </au:expectfailure>
+    </target>
+
+    <target name='testMustSetScriptsOrScript'>
+        <au:expectfailure>
+            <mpt:mpt skip='true' port='10000' />
+        </au:expectfailure>
+        <mpt:mpt port='10000' skip='true'>
+            <fileset dir='${basedir}' />
+        </mpt:mpt>
+        <mpt:mpt port='10000' skip='true' script='pom.xml' />
+    </target>
+
+    <target name='testMustSetPort'>
+        <au:expectfailure>
+            <mpt:mpt skip='true'>
+                <fileset dir='${basedir}' />
+            </mpt:mpt>
+        </au:expectfailure>
+        <mpt:mpt port='10000' skip='true'>
+            <fileset dir='${basedir}' />
+        </mpt:mpt>
+    </target>
+
+    <target name='testMaySetHost'>
+        <mpt:mpt port='10000' skip='true' host='example.org'>
+            <fileset dir='${basedir}' />
+        </mpt:mpt>
+        <mpt:mpt port='10000' skip='true' host='10.0.0.66'>
+            <fileset dir='${basedir}' />
+        </mpt:mpt>
+    </target>
+
+    <target name='testShouldAllowAddUserToBeSet'>
+        <mpt:mpt port='10000' skip='true' host='example.org'>
+            <fileset dir='${basedir}' />
+            <addUser port='10001' user='user' passwd='passwd' script='pom.xml' />
+        </mpt:mpt>
+    </target>
+
+
+    <target name='testAddUserMustSetPortNamePasswordScript'>
+        <au:expectfailure>
+            <mpt:mpt port='10000' skip='true' host='example.org'>
+                <fileset dir='${basedir}' />
+                <addUser user='user' passwd='passwd' script='pom.xml' />
+            </mpt:mpt>
+        </au:expectfailure>
+        <au:expectfailure>
+            <mpt:mpt port='10000' skip='true' host='example.org'>
+                <fileset dir='${basedir}' />
+                <addUser port='10001' passwd='passwd' script='pom.xml' />
+            </mpt:mpt>
+        </au:expectfailure>
+        <au:expectfailure>
+            <mpt:mpt port='10000' skip='true' host='example.org'>
+                <fileset dir='${basedir}' />
+                <addUser port='10001' user='user' script='pom.xml' />
+            </mpt:mpt>
+        </au:expectfailure>
+        <au:expectfailure>
+            <mpt:mpt port='10000' skip='true' host='example.org'>
+                <fileset dir='${basedir}' />
+                <addUser port='10001' user='user' passwd='passwd' />
+            </mpt:mpt>
+        </au:expectfailure>
+    </target>
+
+    <target name='testAddUserMayIncludeScriptText'>
+        <mpt:mpt port='10000' skip='true' host='example.org'>
+            <fileset dir='${basedir}'/>
+            <addUser port='10000' user='user' passwd='passwd'>C: Foo Bar</addUser>
+        </mpt:mpt>
+    </target>
+    
+    <target name='testAddUserBothScriptTextAndScriptAttributeMayNotBeSet'>
+        <au:expectfailure>
+            <mpt:mpt port='10000' skip='true' host='example.org'>
+                <fileset dir='${basedir}'/>
+                <addUser port='10000' user='user' passwd='passwd' script='pom.xml'>C: Foo Bar</addUser>
+            </mpt:mpt>
+        </au:expectfailure>
+    </target>
+
+    <target name='testMptAttributes' depends='testMustSetPort, testMaySetHost,testMustSetScriptsOrScript, testMustNotAllowScriptsAndScript'/>
+    <target name='testAddUser' depends='testShouldAllowAddUserToBeSet, testAddUserMustSetPortNamePasswordScript, testAddUserMayIncludeScriptText, testAddUserBothScriptTextAndScriptAttributeMayNotBeSet'/>
+
+    <target name='all' depends='testMptAttributes, testAddUser'/>
 </project>

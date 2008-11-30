@@ -20,11 +20,17 @@
 package org.apache.james.mpt.ant;
 
 import java.io.File;
+import java.io.FileReader;
+import java.io.Reader;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.apache.james.mpt.Monitor;
+import org.apache.james.mpt.ScriptedUserAdder;
 import org.apache.tools.ant.BuildException;
+import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
 import org.apache.tools.ant.types.ResourceCollection;
 import org.apache.tools.ant.types.resources.Union;
@@ -33,7 +39,7 @@ import org.apache.tools.ant.types.resources.Union;
  * Task executes MPT scripts against a server
  * running on a given port and host.
  */
-public class MailProtocolTestTask extends Task {
+public class MailProtocolTestTask extends Task implements Monitor {
 
     private File script;
     private Union scripts;
@@ -153,13 +159,15 @@ public class MailProtocolTestTask extends Task {
     }
 
     /**
-     * 
+     * Adds a user.
      */
-    public static class AddUser {
+    public class AddUser {
+        
         private int port;
         private String user;
         private String passwd;
         private File script;
+        private String scriptText;
 
         /**
          * Gets the port against which the user addition
@@ -211,6 +219,14 @@ public class MailProtocolTestTask extends Task {
         public void setUser(String user) {
             this.user = user;
         }
+        
+        /**
+         * Sets user addition script.
+         * @param scriptText not null
+         */
+        public void addText(String scriptText) {
+            this.scriptText = getProject().replaceProperties(scriptText);
+        }
 
         /**
          * Gets the file containing the user creation script.
@@ -232,19 +248,46 @@ public class MailProtocolTestTask extends Task {
          * Validates mandatory fields have been filled.
          */
         void validate() throws BuildException {
-            if (script == null) {
-                throw new BuildException("'script' attribute must be set on AddUser to the file containing the user creations script.");
+            if (script == null && scriptText == null) {
+                throw new BuildException("Either the 'script' attribute must be set, or the body must contain the text of the script");
             }
+            
+            if (script != null && scriptText != null) {
+                throw new BuildException("Choose either script text or script attribute but not both.");
+            }
+            
             if (user == null) {
                 throw new BuildException("'user' attribute must be set on AddUser to the name of the user to be created.");
             }
+            
             if (passwd == null) {
                 throw new BuildException("'passwd' attribute must be set on AddUser to the password to be set for the user created");
             }
+            
             if (port <= 0) {
                 throw new BuildException("'port' attribute must be set on AddUser to the port against which the script should run.");
             }
-            
         }
+        
+        void execute() throws BuildException {
+            validate();
+            try {
+                final File scriptFile = getScript();
+                final Reader reader;
+                if (scriptFile == null) {
+                    reader = new StringReader(scriptText);
+                } else {
+                    reader = new FileReader(scriptFile);
+                }
+                ScriptedUserAdder adder = new ScriptedUserAdder(getHost(), getPort(), MailProtocolTestTask.this);
+                adder.addUser(getUser(), getPasswd(), reader);
+            } catch (Exception e) {
+                throw new BuildException("User addition failed", e);
+            }
+        } 
+    }
+
+    public void note(String message) {
+        log(message, Project.MSG_DEBUG);
     }
 }

@@ -19,6 +19,7 @@
 
 package org.apache.james.mpt;
 
+import java.io.Reader;
 import java.io.StringReader;
 
 /**
@@ -37,8 +38,29 @@ public class ScriptedUserAdder implements UserAdder {
     private final String script;
     private final Monitor monitor;
     
+    /**
+     * Constructs an adder without a script.
+     * Note that {@link #addUser(String, String)} will not be available
+     * @param host connect to this host
+     * @param port connect to this port
+     */
+    public ScriptedUserAdder(final String host, final int port)
+    {
+        this(host, port, (String) null);
+    }
+    
     public ScriptedUserAdder(final String host, final int port, final String script) {
         this(host, port, script, new NullMonitor());
+    }
+    
+    /**
+     * Note that {@link #addUser(String, String)} will not be available
+     * @param host connect to this host
+     * @param port connect to this port
+     * @param monitor not null
+     */
+    public ScriptedUserAdder(final String host, final int port, final Monitor monitor) {
+        this(host, port, null, monitor);
     }
     
     public ScriptedUserAdder(final String host, final int port, final String script, final Monitor monitor) {
@@ -48,13 +70,31 @@ public class ScriptedUserAdder implements UserAdder {
         this.monitor = monitor;
     }
     
+    /**
+     * Adds a user using the script read from the given input.
+     * @param user user name, not null
+     * @param password password to set, not null
+     * @throws Exception upon failure
+     * @throws NullPointerException when script has not been set
+     */
     public void addUser(final String user, final String password) throws Exception {
+        final StringReader reader = new StringReader(script);
+        addUser(user, password, reader);
+    }
+
+    /**
+     * Adds a user using the script read from the given input.
+     * @param user user name, not null
+     * @param password password to set, not null
+     * @param reader reader for script, not null
+     * @throws Exception upon failure
+     */
+    public void addUser(final String user, final String password, final Reader reader) throws Exception {
         final ProtocolSessionBuilder builder = new ProtocolSessionBuilder();
         builder.setVariable(USER_VARIABLE_NAME, user);
         builder.setVariable(PASSWORD_VARIABLE_NAME, password);
         
         final Runner runner = new Runner();
-        final StringReader reader = new StringReader(script);
         builder.addProtocolLines(SCRIPT_NAME, reader, runner.getTestElements());
         final ExternalSessionFactory factory = new ExternalSessionFactory(host, port, monitor, null);
         runner.runSessions(factory);
