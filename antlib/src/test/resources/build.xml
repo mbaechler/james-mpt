@@ -79,30 +79,28 @@
         </mpt:mpt>
     </target>
 
+    <target name='testAddUserMaySetNamePassword'>
+        <mpt:mpt port='10000' skip='true' host='example.org'>
+            <fileset dir='${basedir}' />
+            <addUser port='10001' user='user' passwd='passwd' script='pom.xml'/>
+        </mpt:mpt>
+        <mpt:mpt port='10000' skip='true' host='example.org'>
+            <fileset dir='${basedir}' />
+            <addUser port='10001' script='pom.xml'/>
+        </mpt:mpt>
+    </target>
 
-    <target name='testAddUserMustSetPortNamePasswordScript'>
+    <target name='testAddUserMustSetPortScript'>
         <au:expectfailure>
             <mpt:mpt port='10000' skip='true' host='example.org'>
                 <fileset dir='${basedir}' />
-                <addUser user='user' passwd='passwd' script='pom.xml' />
+                <addUser script='pom.xml' />
             </mpt:mpt>
         </au:expectfailure>
         <au:expectfailure>
             <mpt:mpt port='10000' skip='true' host='example.org'>
                 <fileset dir='${basedir}' />
-                <addUser port='10001' passwd='passwd' script='pom.xml' />
-            </mpt:mpt>
-        </au:expectfailure>
-        <au:expectfailure>
-            <mpt:mpt port='10000' skip='true' host='example.org'>
-                <fileset dir='${basedir}' />
-                <addUser port='10001' user='user' script='pom.xml' />
-            </mpt:mpt>
-        </au:expectfailure>
-        <au:expectfailure>
-            <mpt:mpt port='10000' skip='true' host='example.org'>
-                <fileset dir='${basedir}' />
-                <addUser port='10001' user='user' passwd='passwd' />
+                <addUser port='10001'/>
             </mpt:mpt>
         </au:expectfailure>
     </target>
@@ -124,7 +122,7 @@
     </target>
 
     <target name='testMptAttributes' depends='testMustSetPort, testMaySetHost,testMustSetScriptsOrScript, testMustNotAllowScriptsAndScript, testMaySetShabang'/>
-    <target name='testAddUser' depends='testShouldAllowAddUserToBeSet, testAddUserMustSetPortNamePasswordScript, testAddUserMayIncludeScriptText, testAddUserBothScriptTextAndScriptAttributeMayNotBeSet'/>
+    <target name='testAddUser' depends='testShouldAllowAddUserToBeSet, testAddUserMustSetPortScript, testAddUserMayIncludeScriptText, testAddUserBothScriptTextAndScriptAttributeMayNotBeSet, testAddUserMaySetNamePassword'/>
 
     <target name='all' depends='testMptAttributes, testAddUser'/>
 </project>

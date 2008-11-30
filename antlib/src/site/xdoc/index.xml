@@ -113,13 +113,13 @@ The port can vary but the host is inherited.
 <tr>
 	<td>passwd</td> 
 	<td>Password to be set for user created. Will be passed to the script.</td> 
-	<td>Yes</td>
+	<td>No</td>
 </tr> 
 
 <tr>
 	<td>user</td> 
 	<td>Name of the user to be created. Will be passed to the script.</td> 
-	<td>Yes</td>
+	<td>No</td>
 </tr> 
 
 <tr>

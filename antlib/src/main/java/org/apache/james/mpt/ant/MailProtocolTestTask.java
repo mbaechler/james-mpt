@@ -320,14 +320,6 @@ public class MailProtocolTestTask extends Task implements Monitor {
                 throw new BuildException("Choose either script text or script attribute but not both.");
             }
             
-            if (user == null) {
-                throw new BuildException("'user' attribute must be set on AddUser to the name of the user to be created.");
-            }
-            
-            if (passwd == null) {
-                throw new BuildException("'passwd' attribute must be set on AddUser to the password to be set for the user created");
-            }
-            
             if (port <= 0) {
                 throw new BuildException("'port' attribute must be set on AddUser to the port against which the script should run.");
             }
