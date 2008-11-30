@@ -76,9 +76,14 @@ element.
 </tr> 
 <tr>
 	<td>skip</td> 
-	<td>Skips execution of scripts. For simple conditional execution</td> 
+	<td>Skips execution of scripts. For simple conditional execution.</td> 
 	<td>No</td>
 </tr> 
+<tr>
+    <td>shabang</td> 
+    <td>Optional server shabang will be substituted for first server response.</td> 
+    <td>No</td>
+</tr>
 </table>
 </subsection>
 </subsection>

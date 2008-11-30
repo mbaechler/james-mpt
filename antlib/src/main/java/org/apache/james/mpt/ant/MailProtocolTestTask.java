@@ -53,7 +53,7 @@ public class MailProtocolTestTask extends Task implements Monitor {
     private int port = 0;
     private String host = "127.0.0.1";
     private boolean skip = false;
-    private String shabang = "";
+    private String shabang = null;
     private Collection users = new ArrayList();
     
     /**
@@ -123,9 +123,25 @@ public class MailProtocolTestTask extends Task implements Monitor {
         this.script = script;
     }
 
-    //TODO:
+    /**
+     * Gets script shabang.
+     * This will be substituted for the first server response.
+     * @return script shabang, 
+     * or null for no shabang
+     */
     public String getShabang() {
         return shabang;
+    }
+    
+    /**
+     * Sets the script shabang.
+     * When not null, this value will be used to be substituted for the 
+     * first server response.
+     * @param shabang script shabang, 
+     * or null for no shabang.
+     */
+    public void setShabang(String shabang) {
+        this.shabang = shabang;
     }
 
     //@Override
