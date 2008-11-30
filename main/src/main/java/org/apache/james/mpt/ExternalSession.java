@@ -40,8 +40,12 @@ final class ExternalSession implements Session {
     private boolean first = true;
 
     private final String shabang;
-
+    
     public ExternalSession(final SocketChannel socket, final Monitor monitor, String shabang) {
+        this(socket, monitor, shabang, false);
+    }
+
+    public ExternalSession(final SocketChannel socket, final Monitor monitor, String shabang, boolean debug) {
         super();
         this.socket = socket;
         this.monitor = monitor;
@@ -68,12 +72,14 @@ final class ExternalSession implements Session {
     }
 
     private void readlineInto(StringBuffer buffer) throws Exception {
+        monitor.debug("[Reading line]");
         while (socket.read(readBuffer) == 0)
             ;
         readBuffer.flip();
         while (readOneMore(buffer))
             ;
         readBuffer.compact();
+        monitor.debug("[Done]");
     }
 
     private boolean readOneMore(StringBuffer buffer) throws Exception {
@@ -83,8 +89,10 @@ final class ExternalSession implements Session {
             if (next == '\n') {
                 result = false;
             } else if (next == '\r') {
+                monitor.debug('\r');
                 result = true;
             } else {
+                monitor.debug(next);
                 buffer.append(next);
                 result = true;
             }
@@ -110,6 +118,7 @@ final class ExternalSession implements Session {
 
     public void writeLine(String line) throws Exception {
         monitor.note("-> " + line);
+        monitor.debug("[Writing line]");
         ByteBuffer writeBuffer = ascii.encode(line);
         while (writeBuffer.hasRemaining()) {
             socket.write(writeBuffer);
@@ -118,6 +127,7 @@ final class ExternalSession implements Session {
         while (lineEndBuffer.hasRemaining()) {
             socket.write(lineEndBuffer);
         }
+        monitor.debug("[Done]");
     }
 
     /**

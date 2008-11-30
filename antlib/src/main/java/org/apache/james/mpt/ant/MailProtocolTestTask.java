@@ -352,4 +352,11 @@ public class MailProtocolTestTask extends Task implements Monitor {
     public void note(String message) {
         log(message, Project.MSG_DEBUG);
     }
+
+    public void debug(char character) {
+    }
+
+    public void debug(String message) {
+        log(message, Project.MSG_DEBUG);
+    }
 }

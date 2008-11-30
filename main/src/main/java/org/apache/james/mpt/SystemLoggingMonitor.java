@@ -24,8 +24,28 @@ package org.apache.james.mpt;
  */
 public final class SystemLoggingMonitor implements Monitor {
 
+    private boolean verbose = false;
+    
+    
+    public boolean isVerbose() {
+        return verbose;
+    }
+
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
+
     public void note(String message) {
         System.out.println(message);
     }
 
+    public void debug(char character) {
+        System.out.print(character);
+    }
+
+    public void debug(String message) {
+       System.out.println(message);
+    }
+
+    
 }

@@ -26,4 +26,10 @@ public class NullMonitor implements Monitor {
 
     public void note(String message) {
     }
+
+    public void debug(char character) {
+    }
+
+    public void debug(String messsage) {
+    }
 }
