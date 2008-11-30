@@ -62,6 +62,15 @@ to the library requiring no extra coding.</description>
       <artifactId>ant-antunit</artifactId>
       <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>${project.groupId}</groupId>
+        <artifactId>apache-james-mtp</artifactId>
+        <!-- TODO: Use dependency from project pom -->
+        <version>${project.version}</version>
+        <type>test-jar</type>
+        <scope>test</scope>
+    </dependency>
+    
   </dependencies>
 
   <build>

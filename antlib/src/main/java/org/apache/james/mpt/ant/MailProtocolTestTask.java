@@ -148,8 +148,11 @@ public class MailProtocolTestTask extends Task implements Monitor {
         scripts.add(resources);
     }
     
-    private void doExecute() {
-        super.execute();
+    private void doExecute() throws BuildException {
+        for (final Iterator it=users.iterator();it.hasNext();) {
+            final AddUser userAdder = (AddUser) it.next();
+            userAdder.execute();
+        }
     }
     
     public AddUser createAddUser() {
@@ -269,6 +272,10 @@ public class MailProtocolTestTask extends Task implements Monitor {
             }
         }
         
+        /**
+         * Creates a user.
+         * @throws BuildException
+         */
         void execute() throws BuildException {
             validate();
             try {
@@ -279,7 +286,7 @@ public class MailProtocolTestTask extends Task implements Monitor {
                 } else {
                     reader = new FileReader(scriptFile);
                 }
-                ScriptedUserAdder adder = new ScriptedUserAdder(getHost(), getPort(), MailProtocolTestTask.this);
+                final ScriptedUserAdder adder = new ScriptedUserAdder(getHost(), getPort(), MailProtocolTestTask.this);
                 adder.addUser(getUser(), getPasswd(), reader);
             } catch (Exception e) {
                 throw new BuildException("User addition failed", e);
