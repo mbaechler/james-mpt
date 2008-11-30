@@ -20,19 +20,28 @@
 package org.apache.james.mpt.ant;
 
 import java.io.File;
-
-import org.apache.james.mpt.DiscardProtocol;
-import org.apache.tools.ant.Project;
-import org.apache.tools.ant.types.resources.Union;
+import java.io.FileWriter;
+import java.io.InputStream;
 
 import junit.framework.TestCase;
 
-public class TestAddUser extends TestCase {
+import org.apache.james.mpt.DiscardProtocol;
+import org.apache.tools.ant.Project;
+import org.apache.tools.ant.types.Resource;
+import org.apache.tools.ant.types.resources.FileResource;
+import org.apache.tools.ant.types.resources.StringResource;
+import org.apache.tools.ant.types.resources.Union;
+
+public class TestRunScripts extends TestCase {
+
+    private static final String SCRIPT = "A script";
 
     private static final int PORT = 10001;
     
-    DiscardProtocol fakeServer;
+    Union stubResourceCollection;
+    Resource stubResource;
     
+    DiscardProtocol fakeServer;
     DiscardProtocol.Record record;
     
     MailProtocolTestTask subject;
@@ -43,10 +52,13 @@ public class TestAddUser extends TestCase {
         fakeServer.start();
         record = fakeServer.recordNext();
         
+        stubResourceCollection = new Union();        
+        stubResource = new StringResource("C: " + SCRIPT);
+        stubResourceCollection.add(stubResource);
+        
         subject = new MailProtocolTestTask();
         subject.setHost("127.0.0.1");
-        subject.setPort(PORT+1);
-        subject.add(new Union());
+        subject.setPort(PORT);
         subject.setProject(new Project());
     }
 
@@ -55,14 +67,32 @@ public class TestAddUser extends TestCase {
         fakeServer.stop();
     }
 
-    public void testShouldExecuteScriptAgainstPort() throws Exception {
-        MailProtocolTestTask.AddUser user = subject.createAddUser();
-        user.setPort(PORT);
-        user.setPasswd("PASSWORD");
-        user.setUser("USER");
-        final String script = "This script adds a user";
-        user.addText("C: " + script);
+    public void testIgnoreUnsupportedResource() throws Exception {
+        final Resource unsupportedResource = new StringResource() {
+            public InputStream getInputStream() {
+                throw new UnsupportedOperationException();
+            }
+        };
+        stubResourceCollection.add(unsupportedResource);
+        subject.add(stubResourceCollection);
         subject.execute();
-        assertEquals(script + "\r\n", record.complete());
+        assertEquals(SCRIPT +"\r\n", record.complete());
+    }
+    
+    public void testRunOneScriptFromCollection() throws Exception {
+        subject.add(stubResourceCollection);
+        subject.execute();
+        assertEquals(SCRIPT +"\r\n", record.complete());
+    }
+    
+    public void testRunOneScriptFromAttribute() throws Exception {
+        final File file = File.createTempFile("Test", "mpt");
+        file.deleteOnExit();
+        final FileWriter writer = new FileWriter(file);
+        writer.write("C: " + SCRIPT);
+        writer.close();
+        subject.setScript(file);
+        subject.execute();
+        assertEquals(SCRIPT +"\r\n", record.complete());
     }
 }

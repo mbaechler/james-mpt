@@ -21,18 +21,25 @@ package org.apache.james.mpt.ant;
 
 import java.io.File;
 import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.apache.james.mpt.ExternalHostSystem;
 import org.apache.james.mpt.Monitor;
+import org.apache.james.mpt.ProtocolSessionBuilder;
+import org.apache.james.mpt.Runner;
 import org.apache.james.mpt.ScriptedUserAdder;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;
+import org.apache.tools.ant.types.Resource;
 import org.apache.tools.ant.types.ResourceCollection;
+import org.apache.tools.ant.types.resources.FileResource;
 import org.apache.tools.ant.types.resources.Union;
 
 /**
@@ -46,6 +53,7 @@ public class MailProtocolTestTask extends Task implements Monitor {
     private int port = 0;
     private String host = "127.0.0.1";
     private boolean skip = false;
+    private String shabang = "";
     private Collection users = new ArrayList();
     
     /**
@@ -115,6 +123,11 @@ public class MailProtocolTestTask extends Task implements Monitor {
         this.script = script;
     }
 
+    //TODO:
+    public String getShabang() {
+        return shabang;
+    }
+
     //@Override
     public void execute() throws BuildException {
         if (port <= 0) {
@@ -153,6 +166,38 @@ public class MailProtocolTestTask extends Task implements Monitor {
             final AddUser userAdder = (AddUser) it.next();
             userAdder.execute();
         }
+        
+        final ExternalHostSystem host = new ExternalHostSystem(getHost(), getPort(), this, getShabang(), null);
+        final ProtocolSessionBuilder builder = new ProtocolSessionBuilder();
+        
+        if (scripts == null) {
+            scripts = new Union();
+            scripts.add(new FileResource(script));
+        }
+    
+        for (final Iterator it=scripts.iterator();it.hasNext();) {
+            final Resource resource = (Resource) it.next();
+            try {
+                final Runner runner = new Runner();
+                
+                try {
+                    
+                    final InputStream inputStream = resource.getInputStream();
+                    final String name = resource.getName();
+                    builder.addProtocolLines(name == null ? "[Unknown]" : name, inputStream, runner.getTestElements());
+                    runner.runSessions(host);
+                    
+                } catch (UnsupportedOperationException e) {
+                    log("Resource cannot be read: " + resource.getName(), Project.MSG_WARN);
+                }
+            } catch (IOException e) {
+                throw new BuildException("Cannot load script " + resource.getName(), e);
+            } catch (Exception e) {
+                throw new BuildException("[FAILURE] in script " + resource.getName(), e);
+            }
+            
+        }
+    
     }
     
     public AddUser createAddUser() {
