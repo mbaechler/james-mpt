@@ -25,6 +25,9 @@ import java.nio.charset.Charset;
 
 final class ExternalSession implements Session {
 
+    /** Number of milliseconds to sleep after empty read */
+    private static final int SHORT_WAIT_FOR_INPUT = 10;
+
     private static final byte[] CRLF = { '\r', '\n' };
 
     private final SocketChannel socket;
@@ -73,32 +76,43 @@ final class ExternalSession implements Session {
 
     private void readlineInto(StringBuffer buffer) throws Exception {
         monitor.debug("[Reading line]");
-        while (socket.read(readBuffer) == 0)
-            ;
         readBuffer.flip();
-        while (readOneMore(buffer))
+        while (oneFromLine(buffer))
             ;
+//      May have partial read
         readBuffer.compact();
         monitor.debug("[Done]");
     }
 
-    private boolean readOneMore(StringBuffer buffer) throws Exception {
+    private boolean oneFromLine(StringBuffer buffer) throws Exception {
         final boolean result;
         if (readBuffer.hasRemaining()) {
             char next = (char) readBuffer.get();
             if (next == '\n') {
+                monitor.debug("[LF]");
+//              Reached end of the line
                 result = false;
             } else if (next == '\r') {
-                monitor.debug('\r');
+//              CRLF line endings so drop
+                monitor.debug("[CR]");
                 result = true;
             } else {
+//              Load buffer
                 monitor.debug(next);
                 buffer.append(next);
                 result = true;
             }
         } else {
+            monitor.debug("[Reading into buffer]");
             readBuffer.clear();
-            readlineInto(buffer);
+            while (socket.read(readBuffer) == 0) {
+//              No response yet
+//              Wait a little while
+                Thread.sleep(SHORT_WAIT_FOR_INPUT);
+            }
+//          Reset for transfer into string buffer
+            readBuffer.flip();
+            monitor.debug("[Done]");
             result = true;
         }
         return result;
