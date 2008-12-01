@@ -84,6 +84,11 @@ element.
     <td>Optional server shabang will be substituted for first server response.</td> 
     <td>No</td>
 </tr>
+<tr>
+    <td>quiet</td> 
+    <td>Optional boolean setting when true will suppress progress output.</td> 
+    <td>No (defaults to false)</td>
+</tr>
 </table>
 </subsection>
 

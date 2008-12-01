@@ -48,6 +48,7 @@ import org.apache.tools.ant.types.resources.Union;
  */
 public class MailProtocolTestTask extends Task implements Monitor {
 
+    private boolean quiet = false;
     private File script;
     private Union scripts;
     private int port = 0;
@@ -56,6 +57,24 @@ public class MailProtocolTestTask extends Task implements Monitor {
     private String shabang = null;
     private Collection users = new ArrayList();
     
+    /**
+     * Should progress output be suppressed?
+     * @return true if progress information should be suppressed,
+     * false otherwise
+     */
+    public boolean isQuiet() {
+        return quiet;
+    }
+
+    /**
+     * Sets whether progress output should be suppressed/
+     * @param quiet true if progress information should be suppressed,
+     * false otherwise
+     */
+    public void setQuiet(boolean quiet) {
+        this.quiet = quiet;
+    }
+
     /**
      * Should the execution be skipped?
      * @return true if exection should be skipped, 
@@ -350,7 +369,11 @@ public class MailProtocolTestTask extends Task implements Monitor {
     }
 
     public void note(String message) {
-        log(message, Project.MSG_INFO);
+        if (quiet) {
+            log(message, Project.MSG_DEBUG);
+        } else {
+            log(message, Project.MSG_INFO);
+        }
     }
 
     public void debug(char character) {
