@@ -68,9 +68,48 @@ abstract superclasses which setup up appropriate fixtures.
 </subsection>
 </section>
 <section name="Script Features">
+<subsection name='Basic Syntax'>
+<p>
+MPT scripts are line based plain text files. The initial letter of each line determines it's type:
+</p>
+<table>
+<tr>
+    <td><strong>Line Prefix</strong></td> <td><strong>Description</strong></td>
+</tr> 
+<tr>
+    <td>#</td> 
+    <td>A comment: the rest of the line will be ignored</td> 
+</tr>
+<tr>
+    <td>C: </td> 
+    <td>A client request: the rest of the line will be sent to the server</td> 
+</tr>
+<tr>
+    <td>S: </td> 
+    <td>A server response: the framework will read one line of response from the server, 
+    and compare it to the rest of the line (see 
+    <a href='#Regex Matching Of Server Responses'>regex matching</a>)</td> 
+</tr>
+</table>
+<p>
+Example:
+</p>
+<source><pre>
+#
+# This script is a basic SMTP HELO.
+# 
+S: 220 localhost. SMTP Server \(JAMES SMTP Server .*
+C: HELO example.org
+S: 250 localhost. Hello example.org .*
+C: QUIT
+S: 221 2.0.0 localhost. Service closing transmission channel
+</pre></source>
+</subsection>
 <subsection name='Regex Matching Of Server Responses'>
 <p>
-The server responses in the script support regex matching.
+The server responses in the script support regex matching. 
+<a href='http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html'>Java Pattern</a>
+is used for the regex comparison and so the syntax is identical. 
 </p>
 </subsection>
 <subsection name='Variable Substitution'>
