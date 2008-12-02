@@ -40,7 +40,7 @@ public interface ProtocolInteractor {
     /**
      * adds a new Server Unordered Block to the test elements.
      */
-    public abstract void SUB(List serverLines, String location);
+    public abstract void SUB(List<String> serverLines, String location);
 
     /**
      * adds a new Client request line to the test elements
@@ -62,7 +62,7 @@ public interface ProtocolInteractor {
     /**
      * adds a new Server Unordered Block to the test elements.
      */
-    public abstract void SUB(int sessionNumber, List serverLines,
+    public abstract void SUB(int sessionNumber, List<String> serverLines,
             String location, String lastClientMessage);
 
 }

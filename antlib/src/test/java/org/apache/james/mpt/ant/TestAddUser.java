@@ -19,13 +19,11 @@
 
 package org.apache.james.mpt.ant;
 
-import java.io.File;
+import junit.framework.TestCase;
 
 import org.apache.james.mpt.DiscardProtocol;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.types.resources.Union;
-
-import junit.framework.TestCase;
 
 public class TestAddUser extends TestCase {
 

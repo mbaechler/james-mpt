@@ -35,7 +35,7 @@ public class TestFileProtocolSessionBuilder extends MockObjectTestCase {
 
     private Mock mockSession;
     
-    //@Override
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         builder = new ProtocolSessionBuilder();
@@ -43,7 +43,7 @@ public class TestFileProtocolSessionBuilder extends MockObjectTestCase {
         session = (ProtocolInteractor) mockSession.proxy();
     }
 
-    //@Override
+    @Override
     protected void tearDown() throws Exception {
         super.tearDown();
     }

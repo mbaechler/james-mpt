@@ -44,7 +44,7 @@ public class TestExternalHostSystem extends MockObjectTestCase {
 
     private Mock mockUserAdder;
     
-    //@Override
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         protocol = new DiscardProtocol(PORT);
@@ -55,7 +55,7 @@ public class TestExternalHostSystem extends MockObjectTestCase {
         userAdder = (UserAdder) mockUserAdder.proxy();
     }
 
-    //@Override
+    @Override
     protected void tearDown() throws Exception {
         protocol.stop();
         super.tearDown();

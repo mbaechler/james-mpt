@@ -59,7 +59,7 @@ public class TestDiscardProtocol extends TestCase {
 
     private DiscardProtocol.Record record;
     
-    //@Override
+    @Override
     protected void setUp() throws Exception {
         super.setUp();
         protocol = new DiscardProtocol(PORT);
@@ -68,7 +68,7 @@ public class TestDiscardProtocol extends TestCase {
         record = protocol.recordNext();
     }
 
-    //@Override
+    @Override
     protected void tearDown() throws Exception {
         protocol.stop();
         super.tearDown();

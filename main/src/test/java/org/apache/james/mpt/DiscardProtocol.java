@@ -54,9 +54,9 @@ public class DiscardProtocol {
      * Queues requests for recordings.
      * Also, used as lock.
      */
-    private final Queue queue;
+    private final Queue<Server> queue;
     
-    private final Collection runningServers;
+    private final Collection<Server> runningServers;
     
     /** 
      * Server socket when started, null otherwise.
@@ -68,8 +68,8 @@ public class DiscardProtocol {
     public DiscardProtocol(final int port) {
         super();
         this.port = port;
-        queue = new LinkedList();
-        runningServers = new LinkedList();
+        queue = new LinkedList<Server>();
+        runningServers = new LinkedList<Server>();
     }
     
     /**

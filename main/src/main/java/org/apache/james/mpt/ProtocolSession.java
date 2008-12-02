@@ -43,7 +43,7 @@ public class ProtocolSession implements ProtocolInteractor {
 
     private int maxSessionNumber;
 
-    protected List testElements = new ArrayList();
+    protected List<ProtocolElement> testElements = new ArrayList<ProtocolElement>();
 
     private Iterator elementsIterator;
 
@@ -137,7 +137,7 @@ public class ProtocolSession implements ProtocolInteractor {
     /**
      * @see org.apache.james.mpt.ProtocolScript#SUB(java.util.List, java.lang.String)
      */
-    public void SUB(List serverLines, String location) {
+    public void SUB(List<String> serverLines, String location) {
         testElements
                 .add(new ServerUnorderedBlockResponse(serverLines, location));
     }
@@ -171,7 +171,7 @@ public class ProtocolSession implements ProtocolInteractor {
     /**
      * @see org.apache.james.mpt.ProtocolScript#SUB(int, java.util.List, java.lang.String, java.lang.String)
      */
-    public void SUB(int sessionNumber, List serverLines, String location,
+    public void SUB(int sessionNumber, List<String> serverLines, String location,
             String lastClientMessage) {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
         testElements.add(new ServerUnorderedBlockResponse(sessionNumber,
@@ -406,7 +406,7 @@ public class ProtocolSession implements ProtocolInteractor {
      * non-specified order.
      */
     private class ServerUnorderedBlockResponse extends ServerResponse {
-        private List expectedLines = new ArrayList();
+        private List<String> expectedLines = new ArrayList<String>();
 
         /**
          * Sets up a ServerUnorderedBlockResponse with the list of expected
@@ -418,7 +418,7 @@ public class ProtocolSession implements ProtocolInteractor {
          * @param location
          *            A descriptive location string for error messages.
          */
-        public ServerUnorderedBlockResponse(List expectedLines, String location) {
+        public ServerUnorderedBlockResponse(List<String> expectedLines, String location) {
             this(-1, expectedLines, location, null);
         }
 
@@ -436,7 +436,7 @@ public class ProtocolSession implements ProtocolInteractor {
          *            A descriptive location string for error messages.
          */
         public ServerUnorderedBlockResponse(int sessionNumber,
-                List expectedLines, String location, String lastClientMessage) {
+                List<String> expectedLines, String location, String lastClientMessage) {
             super(sessionNumber, "<Unordered Block>", location,
                     lastClientMessage);
             this.expectedLines = expectedLines;
@@ -455,7 +455,7 @@ public class ProtocolSession implements ProtocolInteractor {
          */
         protected void checkResponse(Session session,
                 boolean continueAfterFailure) throws Exception {
-            List testLines = new ArrayList(expectedLines);
+            List<String> testLines = new ArrayList<String>(expectedLines);
             while (testLines.size() > 0) {
                 String actualLine = readLine(session);
 

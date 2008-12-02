@@ -55,7 +55,7 @@ public class MailProtocolTestTask extends Task implements Monitor {
     private String host = "127.0.0.1";
     private boolean skip = false;
     private String shabang = null;
-    private Collection users = new ArrayList();
+    private Collection<AddUser> users = new ArrayList<AddUser>();
     
     /**
      * Should progress output be suppressed?
@@ -163,7 +163,7 @@ public class MailProtocolTestTask extends Task implements Monitor {
         this.shabang = shabang;
     }
 
-    //@Override
+    @Override
     public void execute() throws BuildException {
         if (port <= 0) {
             throw new BuildException("Port must be set to a positive integer");
