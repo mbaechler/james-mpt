@@ -42,6 +42,7 @@ public class ExternalSessionFactory implements SessionFactory {
     }
 
     public Session newSession(Continuation continuation) throws Exception {
+        monitor.note("Connecting to " + address.getHostName() + ":" + address.getPort());
         final SocketChannel channel = SocketChannel.open(address);
         channel.configureBlocking(false);
         final ExternalSession result = new ExternalSession(channel, monitor, shabang);
