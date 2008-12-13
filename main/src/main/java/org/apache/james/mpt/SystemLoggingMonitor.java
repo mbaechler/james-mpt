@@ -26,6 +26,13 @@ public final class SystemLoggingMonitor implements Monitor {
 
     private boolean verbose = false;
     
+    public SystemLoggingMonitor() {
+        this(false);
+    }
+    
+    public SystemLoggingMonitor(final boolean verbose) {
+        this.verbose = verbose;
+    }
     
     public boolean isVerbose() {
         return verbose;
@@ -40,11 +47,15 @@ public final class SystemLoggingMonitor implements Monitor {
     }
 
     public void debug(char character) {
-        System.out.print(character);
+        if (verbose) {
+            System.out.print(character);
+        }
     }
 
     public void debug(String message) {
-       System.out.println(message);
+        if (verbose) {
+            System.out.println(message);
+        }
     }
 
     
