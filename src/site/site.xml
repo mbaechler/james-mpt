@@ -36,6 +36,7 @@
       <item name="Overview" href="http://james.apache.org/mpt/index.html"/>
       <item name='Main Library' href='http://james.apache.org/mpt/main'/>
       <item name='AntLib' href='http://james.apache.org/mpt/antlib'/>
+      <item name='Application' href='http://james.apache.org/mpt/app'/>
     </menu>
 
     <menu name="Useful Information" inherit='bottom'>

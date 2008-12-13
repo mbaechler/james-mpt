@@ -41,8 +41,33 @@ template responses.
 </section>
 <section name='Development Interface'>
 <p>
-This module contains an executable interface useful when developing scripts. 
+This module contains an executable interface useful when developing scripts. The application ships as a 
+self-contained executable jar. To run:
 </p>
+<source>
+java -jar apache-james-mtp-app-<em>version</em>.jar
+</source>
+<p>
+Usage:
+</p>
+<source><pre><![CDATA[
+ -f,--file <file>         run this script
+ -h,--host <host>         runs against this host (defaults to localhost)
+ -p,--port <port>         runs against this port
+ -s,--shabang <shabang>   sets shabang (defaults to empty)
+ -v,--verbose             prints lots of logging
+]]></pre></source>
+</section>
+<section name='Features'>
+<subsection name='Run Single Script'>
+<p>
+Executes a single script from a file against a given port and host. The host default to <code>localhost</code>.
+For example, to run the script in file <code>&lt;file&gt;</code> against localhost port <code>&lt;port&gt;</code>:
+</p>
+<source>
+java -jar apache-james-mtp-app-<em>version</em>.jar -f <![CDATA[<file> -p <port> ]]>
+</source>
+</subsection>
 </section>
 </body>
 </document>

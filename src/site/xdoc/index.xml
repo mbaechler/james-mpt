@@ -47,6 +47,10 @@ The <a href='antlib'>AntLib</a> module extends the standalone framework
 to create functional testing tasks suitable for execution against a 
 indepedently running server.
 </p>
+<p>
+The <a href='app'>Application</a> module provides an executable interface
+for MPT.
+</p>
 </subsection>
 </section>
 <section name='More Information'>
