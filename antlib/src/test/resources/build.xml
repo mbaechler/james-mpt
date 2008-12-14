@@ -78,6 +78,11 @@
             </mpt:mpt>
     </target>
 
+    <target name='testMaySetErrorProperty'>
+            <mpt:mpt port='10000' skip='true' errorproperty='mpt.failed'>
+                <fileset dir='${basedir}' />
+            </mpt:mpt>
+    </target>
 
     <target name='testShouldAllowAddUserToBeSet'>
         <mpt:mpt port='10000' skip='true' host='example.org'>
@@ -128,7 +133,7 @@
         </au:expectfailure>
     </target>
 
-    <target name='testMptAttributes' depends='testMustSetPort, testMaySetHost,testMustSetScriptsOrScript, testMustNotAllowScriptsAndScript, testMaySetShabang, testMaySetQuiet'/>
+    <target name='testMptAttributes' depends='testMustSetPort, testMaySetHost,testMustSetScriptsOrScript, testMustNotAllowScriptsAndScript, testMaySetShabang, testMaySetQuiet, testMaySetErrorProperty'/>
     <target name='testAddUser' depends='testShouldAllowAddUserToBeSet, testAddUserMustSetPortScript, testAddUserMayIncludeScriptText, testAddUserBothScriptTextAndScriptAttributeMayNotBeSet, testAddUserMaySetNamePassword'/>
 
     <target name='all' depends='testMptAttributes, testAddUser'/>

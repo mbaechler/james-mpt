@@ -56,7 +56,27 @@ public class MailProtocolTestTask extends Task implements Monitor {
     private boolean skip = false;
     private String shabang = null;
     private Collection<AddUser> users = new ArrayList<AddUser>();
+    private String errorProperty;
     
+    /**
+     * Gets the error property.
+     * 
+     * @return name of the ant property to be set on error,
+     * null if the script should terminate on error
+     */
+    public String getErrorProperty() {
+        return errorProperty;
+    }
+
+    /**
+     * Sets the error property.
+     * @param errorProperty name of the ant property to be set on error,
+     * nul if the script should terminate on error
+     */
+    public void setErrorProperty(String errorProperty) {
+        this.errorProperty = errorProperty;
+    }
+
     /**
      * Should progress output be suppressed?
      * @return true if progress information should be suppressed,
@@ -184,8 +204,16 @@ public class MailProtocolTestTask extends Task implements Monitor {
         
         if(skip) {
             log("Skipping excution");
-        } else {
+        } else if (errorProperty == null) {
             doExecute();
+        } else {
+            try {
+                doExecute();
+            } catch (BuildException e) {
+                final Project project = getProject();
+                project.setProperty(errorProperty, e.getMessage());
+                log(e, Project.MSG_DEBUG);
+            }
         }
     }
 
@@ -209,7 +237,7 @@ public class MailProtocolTestTask extends Task implements Monitor {
             scripts = new Union();
             scripts.add(new FileResource(script));
         }
-    
+        
         for (final Iterator it=scripts.iterator();it.hasNext();) {
             final Resource resource = (Resource) it.next();
             try {

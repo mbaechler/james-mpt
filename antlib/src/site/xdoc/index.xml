@@ -89,6 +89,12 @@ element.
     <td>Optional boolean setting when true will suppress progress output.</td> 
     <td>No (defaults to false)</td>
 </tr>
+<tr>
+    <td>errorproperty</td> 
+    <td>Optionally names a property which will be set (with error message) when test fails.
+    When unset, the build will terminate when test fails.</td> 
+    <td>No</td>
+</tr>
 </table>
 </subsection>
 
