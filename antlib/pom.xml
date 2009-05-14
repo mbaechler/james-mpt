@@ -29,7 +29,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
   <artifactId>apache-james-mpt-antlib</artifactId>
-  <name>Apache JAMES MPT AntLib</name>
+  <name>Apache James MPT AntLib</name>
   <description>Apache JAMES Mail Protocol Tester (MTP) is a library providing a framework for the 
 scritable functional testing of ASCII based line protocols. This AntLib provides an easy interface
 to the library requiring no extra coding.</description>
