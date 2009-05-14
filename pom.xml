@@ -27,7 +27,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
   <artifactId>apache-james-mpt-project</artifactId>
-  <name>Apache James MPT Project</name>
+  <name>Apache JAMES MPT Project</name>
   <version>0.1-SNAPSHOT</version>
   <description>Functional test framework specialised for the ASCII line-base protocols common in mail.</description>
   <url>http://james.apache.org/mpt/</url>
