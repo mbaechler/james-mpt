@@ -44,7 +44,7 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>${project.basedir}/../util/target</directory>
+      <directory>${project.basedir}/../app/target</directory>
       <outputDirectory>/</outputDirectory>
       <includes>
         <include>apache-james-mpt*.jar</include>
@@ -68,7 +68,6 @@
       <useProjectArtifact>false</useProjectArtifact>
       <scope>runtime</scope>
       <excludes>
-        <exclude>apache-james-mpt*</exclude>
       </excludes>
     </dependencySet>
   </dependencySets>

@@ -28,7 +28,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
-  <artifactId>apache-james-mtp</artifactId>
+  <artifactId>apache-james-mpt-main</artifactId>
   <name>Apache JAMES MPT Main</name>
   <description>Apache JAMES Mail Protocol Tester (MTP) is a library providing a framework for the 
 scritable functional testing of ASCII based line protocols.</description>

@@ -28,7 +28,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
-  <artifactId>apache-james-mtp-app</artifactId>
+  <artifactId>apache-james-mpt-app</artifactId>
   <name>Apache JAMES MPT Application</name>
   <description>Apache JAMES Mail Protocol Tester (MTP) is a library providing a framework for the 
 scritable functional testing of ASCII based line protocols. This application provides easy executable
@@ -37,7 +37,7 @@ interfaces to the MPT library.</description>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>apache-james-mtp</artifactId>
+      <artifactId>apache-james-mpt-main</artifactId>
       <!-- TODO: Use dependency from project pom -->
       <version>${project.version}</version>
     </dependency>
@@ -60,7 +60,7 @@ interfaces to the MPT library.</description>
     </dependency>
     <dependency>
         <groupId>${project.groupId}</groupId>
-        <artifactId>apache-james-mtp</artifactId>
+        <artifactId>apache-james-mpt-main</artifactId>
         <!-- TODO: Use dependency from project pom -->
         <version>${project.version}</version>
         <type>test-jar</type>
