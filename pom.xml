@@ -55,6 +55,7 @@
           <optimize>true</optimize>
           <source>1.5</source>
           <target>1.5</target>
+          <encoding>iso8859-1</encoding>
         </configuration>
       </plugin>
       <plugin>
