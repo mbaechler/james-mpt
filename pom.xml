@@ -44,7 +44,7 @@
   </modules>
   <scm>
     <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/trunk</connection>
-    <developerConnection>scm:svn:https://${maven.username}@svn.apache.org/repos/asf/james/mpt/trunk</developerConnection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/james/mpt/trunk</developerConnection>
     <url>http://svn.apache.org/viewcvs.cgi/james/mpt/trunk?root=Apache-SVN</url>
   </scm>
   <build>
