@@ -17,7 +17,7 @@
   specific language governing permissions and limitations
   under the License.    
 -->
-<project>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
     <artifactId>james-project</artifactId>
     <groupId>org.apache.james</groupId>
@@ -28,7 +28,7 @@
   <groupId>org.apache.james</groupId>
   <artifactId>apache-james-mpt-project</artifactId>
   <name>Apache JAMES MPT Project</name>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1RC1</version>
   <description>Functional test framework specialised for the ASCII line-base protocols common in mail.</description>
   <url>http://james.apache.org/mpt/</url>
   <issueManagement>
@@ -43,9 +43,9 @@
     <module>assemble</module>
   </modules>
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/trunk</connection>
-    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/james/mpt/trunk</developerConnection>
-    <url>http://svn.apache.org/viewcvs.cgi/james/mpt/trunk?root=Apache-SVN</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/tags/apache-james-mpt-0.1RC1</connection>
+    <developerConnection>scm:svn:https://svn.apache.org/repos/asf/james/mpt/tags/apache-james-mpt-0.1RC1</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/james/mpt/trunk/tags/apache-james-mpt-0.1RC1?root=Apache-SVN</url>
   </scm>
   <build>
     <plugins>

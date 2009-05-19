@@ -21,14 +21,14 @@
   <parent>
     <artifactId>apache-james-mpt-project</artifactId>
     <groupId>org.apache.james</groupId>
-    <version>0.1-SNAPSHOT</version>
+    <version>0.1RC1</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
   <artifactId>apache-james-mpt</artifactId>
   <name>Apache JAMES MPT Assembly</name>
-  <version>0.1-SNAPSHOT</version>
+  <version>0.1RC1</version>
   <packaging>pom</packaging>
   <description>
 This module assembles distributions 
