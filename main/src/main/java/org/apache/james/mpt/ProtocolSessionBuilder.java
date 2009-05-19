@@ -87,8 +87,8 @@ public class ProtocolSessionBuilder {
     /**
      * Builds a ProtocolSession by reading lines from the reader.
      * 
-     * @param fileName
-     *            The name of the protocol session file.
+     * @param scriptName not null
+     * @param reader not null
      * @return The ProtocolSession
      */
     public ProtocolInteractor buildProtocolSession(final String scriptName, final Reader reader)

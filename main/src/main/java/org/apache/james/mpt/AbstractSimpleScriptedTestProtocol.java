@@ -26,8 +26,8 @@ import java.util.Locale;
 /**
  * A Protocol test which reads the test protocol session from a file. The file
  * read is taken as "<test-name>.test", where <test-name> is the value passed
- * into the constructor. Subclasses of this test can set up {@link #preElements}
- * and {@link #postElements} for extra elements not defined in the protocol
+ * into the constructor. Subclasses of this test can set up pre-
+ * and post elements for extra elements not defined in the protocol
  * session file.
  */
 public abstract class AbstractSimpleScriptedTestProtocol extends
@@ -37,12 +37,10 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
     private static final Locale BASE_DEFAULT_LOCALE = Locale.getDefault();
 
     /**
-     * Sets up a SimpleFileProtocolTest which reads the protocol session from a
-     * file of name "<fileName>.test". This file should be available in the
-     * classloader in the same location as this test class.
-     * 
-     * @param fileName
-     *            The name of the file to read protocol elements from.
+     * Constructs a scripted test.
+     * @param hostSystem not null
+     * @param userName user name
+     * @param password password for user
      */
     public AbstractSimpleScriptedTestProtocol(HostSystem hostSystem, String userName, String password) {
         super(hostSystem, userName, password);
@@ -55,7 +53,7 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
 
     /**
      * Reads test elements from the protocol session file and adds them to the
-     * {@link #testElements} ProtocolSession. Then calls {@link #runSessions}.
+     * ProtocolSession. Then calls {@link #runSessions()}.
      * 
      * @param locale test under this default locale, not null
      */

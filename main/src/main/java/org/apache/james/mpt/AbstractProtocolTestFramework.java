@@ -22,7 +22,7 @@ package org.apache.james.mpt;
 import junit.framework.TestCase;
 
 /**
- * Abstract Protocol Test is the root of all of the James Imap Server test
+ * Abstract Protocol Test is the root of all of the scripted test
  * cases. It provides basic functionality for running a protocol session as a
  * JUnit test, and failing if exceptions are thrown. To create a test which
  * reads the entire protocol session from a single protocol definition file, use
@@ -56,22 +56,19 @@ public abstract class AbstractProtocolTestFramework extends TestCase {
     }
 
     /**
-     * Runs the pre,test and post protocol sessions against a local copy of the
-     * ImapServer. This does not require that James be running, and is useful
-     * for rapid development and debugging.
-     * 
+     * <p>Runs the pre,test and post protocol sessions against a local copy of the
+     * Server. This is useful for rapid development and debugging.
+     * </p>
      * Instead of sending requests to a socket connected to a running instance
-     * of James, this method uses the {@link MockImapServer} to simplify
+     * of James, this method uses the {@link HostSystem} to simplify
      * testing. One mock instance is required per protocol session/connection.
-     * These share the same underlying Mailboxes, because of the way
-     * {@link MockImapServer#getImapSession()} works.
      */
     protected void runSessions() throws Exception {
         runner.runSessions(hostSystem);
     }
 
     /**
-     * Initialises the UsersRepository and ImapHost on first call.
+     * Initialises the host on first call.
      */
     private void setUpEnvironment() throws Exception {
         hostSystem.reset();

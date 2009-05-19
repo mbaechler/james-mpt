@@ -65,15 +65,13 @@ public class Runner {
 
 
     /**
-     * Runs the pre,test and post protocol sessions against a local copy of the
-     * ImapServer. This does not require that James be running, and is useful
+     * <p>Runs the pre,test and post protocol sessions against a local copy of the
+     * server. This does not require that James be running, and is useful
      * for rapid development and debugging.
-     * 
+     * </p><p>
      * Instead of sending requests to a socket connected to a running instance
-     * of James, this method uses the {@link MockImapServer} to simplify
+     * of James, this method uses the {@link HostSystem} to simplify
      * testing. One mock instance is required per protocol session/connection.
-     * These share the same underlying Mailboxes, because of the way
-     * {@link MockImapServer#getImapSession()} works.
      */
     public void runSessions(final SessionFactory factory) throws Exception {
         class SessionContinuation implements HostSystem.Continuation {

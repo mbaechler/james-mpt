@@ -77,10 +77,7 @@ public class ProtocolSession implements ProtocolInteractor {
      * in the array corresponds to the number of the session. If an exception
      * occurs, no more test elements are executed.
      * 
-     * @param out
-     *            The client requests are written to here.
-     * @param in
-     *            The server responses are read from here.
+     * @param sessions not null
      */
     public void runSessions(Session[] sessions) throws Exception {
         this.sessions = sessions;
@@ -121,21 +118,21 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolScript#CL(java.lang.String)
+     * @see org.apache.james.mpt.ProtocolInteractor#CL(java.lang.String)
      */
     public void CL(String clientLine) {
         testElements.add(new ClientRequest(clientLine));
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolScript#SL(java.lang.String, java.lang.String)
+     * @see org.apache.james.mpt.ProtocolInteractor#SL(java.lang.String, java.lang.String)
      */
     public void SL(String serverLine, String location) {
         testElements.add(new ServerResponse(serverLine, location));
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolScript#SUB(java.util.List, java.lang.String)
+     * @see org.apache.james.mpt.ProtocolInteractor#SUB(java.util.List, java.lang.String)
      */
     public void SUB(List<String> serverLines, String location) {
         testElements
@@ -143,7 +140,7 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolScript#CL(int, java.lang.String)
+     * @see org.apache.james.mpt.ProtocolInteractor#CL(int, java.lang.String)
      */
     public void CL(int sessionNumber, String clientLine) {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
@@ -151,7 +148,7 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolScript#CONT(int)
+     * @see org.apache.james.mpt.ProtocolInteractor#CONT(int)
      */
     public void CONT(int sessionNumber) throws Exception {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
@@ -159,7 +156,7 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolScript#SL(int, java.lang.String, java.lang.String, java.lang.String)
+     * @see org.apache.james.mpt.ProtocolInteractor#SL(int, java.lang.String, java.lang.String, java.lang.String)
      */
     public void SL(int sessionNumber, String serverLine, String location,
             String lastClientMessage) {
@@ -169,7 +166,7 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolScript#SUB(int, java.util.List, java.lang.String, java.lang.String)
+     * @see org.apache.james.mpt.ProtocolInteractor#SUB(int, java.util.List, java.lang.String, java.lang.String)
      */
     public void SUB(int sessionNumber, List<String> serverLines, String location,
             String lastClientMessage) {
