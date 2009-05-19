@@ -35,7 +35,7 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
     private ProtocolSessionBuilder builder = new ProtocolSessionBuilder();
 
     private static final Locale BASE_DEFAULT_LOCALE = Locale.getDefault();
-
+    
     /**
      * Constructs a scripted test.
      * @param hostSystem not null
@@ -45,7 +45,7 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
     public AbstractSimpleScriptedTestProtocol(HostSystem hostSystem, String userName, String password) {
         super(hostSystem, userName, password);
     }
-
+    
     protected void tearDown() throws Exception {
         Locale.setDefault(BASE_DEFAULT_LOCALE);
         super.tearDown();
@@ -75,7 +75,6 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
      */
     protected void addTestFile(String fileName, ProtocolInteractor session)
             throws Exception {
-        fileName = "/org/apache/james/test/functional/imap/scripts/" + fileName;
         // Need to find local resource.
         InputStream is = this.getClass().getResourceAsStream(fileName);
         if (is == null) {
