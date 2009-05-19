@@ -120,7 +120,7 @@ public class ProtocolSession implements ProtocolInteractor {
         }
     }
 
-    /* (non-Javadoc)
+    /**
      * @see org.apache.james.mpt.ProtocolScript#CL(java.lang.String)
      */
     public void CL(String clientLine) {
@@ -575,8 +575,8 @@ public class ProtocolSession implements ProtocolInteractor {
         /**
          * Executes the ProtocolElement against the supplied session.
          * 
-         * @param continueAfterFailure
-         *            TODO
+         * @param continueAfterFailure true when the execution should continue,
+         * false otherwise
          * @throws Exception
          */
         void testProtocol(Session[] sessions,
