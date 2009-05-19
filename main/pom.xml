@@ -21,7 +21,7 @@
   <parent>
     <artifactId>apache-james-mpt-project</artifactId>
     <groupId>org.apache.james</groupId>
-    <version>0.1RC1</version>
+    <version>0.1RC2-SNAPSHOT</version>
     <!-- Either this really points to the james-project/pom.xml or you
          will have to tune the local repository, later, in this file -->
     <relativePath>../pom.xml</relativePath>
@@ -50,9 +50,9 @@ scritable functional testing of ASCII based line protocols.</description>
   </dependencies>
   
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/tags/apache-james-mpt-0.1RC1/main</connection>
-    <developerConnection>scm:svn:https://rdonkin@svn.apache.org/repos/asf/james/mpt/tags/apache-james-mpt-0.1RC1/main</developerConnection>
-    <url>http://svn.apache.org/viewcvs.cgi/james/mpt/tags/apache-james-mpt-0.1RC1/main?root=Apache-SVN</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/trunk/main</connection>
+    <developerConnection>scm:svn:https://rdonkin@svn.apache.org/repos/asf/james/mpt/trunk/main</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/james/mpt/trunk/main?root=Apache-SVN</url>
   </scm>
   <build>
     <plugins>
