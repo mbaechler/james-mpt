@@ -53,8 +53,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <configuration>
           <optimize>true</optimize>
-          <source>1.5</source>
-          <target>1.5</target>
+          <source>${target.jdk}</source>
+          <target>${target.jdk}</target>
           <encoding>iso8859-1</encoding>
         </configuration>
       </plugin>
@@ -246,14 +246,14 @@
         <inherited>true</inherited>
         <configuration>
           <aggregate>true</aggregate>
-          <targetjdk>1.4</targetjdk>
+          <targetjdk>${target.jdk}</targetjdk>
           <rulesets>
             <ruleset>/rulesets/basic.xml</ruleset>
             <ruleset>/rulesets/controversial.xml</ruleset>
           </rulesets>
           <format>xml</format>
           <linkXref>true</linkXref>
-          <sourceEncoding>utf-8</sourceEncoding>
+          <sourceEncoding>${project.build.sourceEncoding}</sourceEncoding>
           <minimumTokens>100</minimumTokens>
         </configuration>
       </plugin>
@@ -378,6 +378,7 @@
     <!-- Overridding this value allows single set of loopback settings to be maintained -->
     <james.www.id>mpt-website</james.www.id>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <target.jdk>1.5</target.jdk>
   </properties>
 
 </project>
