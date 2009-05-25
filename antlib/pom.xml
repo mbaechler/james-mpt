@@ -21,7 +21,7 @@
   <parent>
     <artifactId>apache-james-mpt-project</artifactId>
     <groupId>org.apache.james</groupId>
-    <version>0.1</version>
+    <version>0.2-SNAPSHOT</version>
     <!-- Either this really points to the james-project/pom.xml or you
          will have to tune the local repository, later, in this file -->
     <relativePath>../pom.xml</relativePath>
@@ -164,9 +164,9 @@ to the library requiring no extra coding.</description>
   </build>
   
   <scm>
-    <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/tags/apache-james-mpt-0.1/antlib</connection>
-    <developerConnection>scm:svn:https://rdonkin@svn.apache.org/repos/asf/james/mpt/tags/apache-james-mpt-0.1/antlib</developerConnection>
-    <url>http://svn.apache.org/viewcvs.cgi/james/mpt/tags/apache-james-mpt-0.1/antlib?root=Apache-SVN</url>
+    <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/trunk/antlib</connection>
+    <developerConnection>scm:svn:https://rdonkin@svn.apache.org/repos/asf/james/mpt/trunk/antlib</developerConnection>
+    <url>http://svn.apache.org/viewcvs.cgi/james/mpt/trunk/antlib?root=Apache-SVN</url>
   </scm>
 
 </project>
