@@ -39,6 +39,11 @@
       <item name='AntLib' href='http://james.apache.org/mpt/antlib'/>
       <item name='Application' href='http://james.apache.org/mpt/app'/>
     </menu>
+    
+    <menu name="Releases" inherit='bottom'>
+        <item name='0.1 Documentation' href='http://james.apache.org/mpt/0.1'/>
+        <item name='0.1 Release Notes' href='http://james.apache.org/mpt/0.1/release-notes.html'/>
+    </menu>
 
     <menu name="The Apache Software Foundation" inherit='bottom'>
       <item name="Get Involved" href="http://jakarta.apache.org/site/getinvolved.html"/>
