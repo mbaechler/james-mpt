@@ -31,6 +31,22 @@
 Apache James Mail Protocol Tester (MPT) is  a framework for the 
 scritable functional testing of ASCII based line protocols. 
 Apache James MPT requires Java 1.5 or higher.</p>
+<subsection name='Releases'>
+    <subsection name='0.2 (Roadmap)'>
+        <p>
+        See <a href='https://issues.apache.org/jira/browse/MPT/fixforversion/12314091'>roadmap</a>.
+        </p>
+    </subsection>
+    <subsection name='0.1'>
+        <p>
+        Apache James MPT 0.1 is now available to 
+        <a href='http://james.apache.org/download.html#Apache%20MPT'>download</a>.
+        </p><p>
+        This is the first release. See the <a href='http://james.apache.org/mpt/0.1/release-notes.html'>release notes</a> 
+        and <a href='http://james.apache.org/mpt/0.1/'>documentation</a> for more details.
+        </p>
+    </subsection>
+</subsection>
 <subsection name='Modules'>
 <p>
 The <a href='main'>main library</a> contains the basic frameworks suitable
