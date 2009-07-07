@@ -40,7 +40,7 @@ Apache James MPT requires Java 1.5 or higher.</p>
     <subsection name='0.1'>
         <p>
         Apache James MPT 0.1 is now available to 
-        <a href='http://james.apache.org/download.html#Apache%20MPT'>download</a>.
+        <a href='http://james.apache.org/download.cgi#Apache%20MPT'>download</a>.
         </p><p>
         This is the first release. See the <a href='http://james.apache.org/mpt/0.1/release-notes.html'>release notes</a> 
         and <a href='http://james.apache.org/mpt/0.1/'>documentation</a> for more details.
