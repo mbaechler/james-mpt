@@ -23,50 +23,75 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 import org.apache.james.mpt.ExternalHostSystem;
 import org.apache.james.mpt.Monitor;
 import org.apache.james.mpt.ProtocolSessionBuilder;
 import org.apache.james.mpt.Runner;
+import org.apache.james.mpt.ScriptedUserAdder;
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
+/**
+ * @goal mpt
+ */
 public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
 
     /**
      *
-     * @parameter default-value="0"
+     * @parameter
+     * @required
      */
     private Integer port;
     
     /**
      *
      * @parameter 
+     * @required
      */
     private File scriptFile;
     
     /**
+     * @required
      * @parameter 
      */
     private String host;
 
-    
+    /**
+     * @parameter 
+     */
+    private String user;
+    /**
+     * @parameter 
+     */
+    private String pass;
     /**
      * @parameter 
      */
     private String shabang;
     
+    /*
+     * (non-Javadoc)
+     * @see org.apache.maven.plugin.AbstractMojo#execute()
+     */
 	public void execute() throws MojoExecutionException, MojoFailureException {
 		validate();
 		
-		 final ExternalHostSystem hostSystem = new ExternalHostSystem(host, port, this, shabang, null);
-	     final ProtocolSessionBuilder builder = new ProtocolSessionBuilder();
-	     
+     
          final Runner runner = new Runner();
          InputStream inputStream;
 		try {
 			inputStream = new FileInputStream(scriptFile);
+
+		    final ScriptedUserAdder adder = new ScriptedUserAdder(host, port,this);
+	        
+			if (user != null) adder.addUser(user, pass, new InputStreamReader(inputStream));
+	        
+			final ExternalHostSystem hostSystem = new ExternalHostSystem(host, port, this, shabang, adder);
+		    final ProtocolSessionBuilder builder = new ProtocolSessionBuilder();
+		     
 	        builder.addProtocolLines(scriptFile.getName(), inputStream, runner.getTestElements());
 			runner.runSessions(hostSystem);
 
@@ -78,17 +103,14 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
        
 	}
 
+	/**
+	 * Validate if the configured parameters are valid
+	 * 
+	 * @throws MojoFailureException
+	 */
 	private void validate() throws MojoFailureException {
 		if (port <= 0) {
             throw new MojoFailureException("'port' configuration must be set.");
-		}
-		
-		if (host == null) {
-            throw new MojoFailureException("'host' configuration must be set.");
-		}
-		
-		if (scriptFile == null ) {
-            throw new MojoFailureException("'scriptFile' configuration must be set.");
 		}
 		
 		if (scriptFile.exists() == false ) {
@@ -96,14 +118,27 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
 		}
 		
 	}
+	
+	/*
+	 * (non-Javadoc)
+	 * @see org.apache.james.mpt.Monitor#debug(char)
+	 */
 	public void debug(char character) {
 		getLog().debug("'" + character + "'");
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.apache.james.mpt.Monitor#debug(java.lang.String)
+	 */
 	public void debug(String message) {
 		getLog().debug(message);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * @see org.apache.james.mpt.Monitor#note(java.lang.String)
+	 */
 	public void note(String message) {
 		getLog().debug(message);
 	}
