@@ -40,9 +40,10 @@
     <module>main</module>
     <module>antlib</module>
     <module>app</module>
-    <module>assemble</module>
+    <module>assemble</module>  
     <module>mavenplugin</module>  
   </modules>
+  
   <scm>
     <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/trunk</connection>
     <developerConnection>scm:svn:https://svn.apache.org/repos/asf/james/mpt/trunk</developerConnection>
@@ -276,13 +277,42 @@
     <dependencies>
 
     <dependency>
-<!-- TODO: FIXME
-       My maven foo is weak!
-       Can't seem to be able to pick up this version from the antlib module :-/ 
-     --> 
       <groupId>${project.groupId}</groupId>
-      <artifactId>apache-james-mpt</artifactId>
+      <artifactId>apache-james-mpt-antlib</artifactId>
       <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>apache-james-mpt-antlib</artifactId>
+      <version>${project.version}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>apache-james-mpt-app</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>apache-james-mpt-app</artifactId>
+      <version>${project.version}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
+    </dependency>
+    
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>apache-james-mpt-main</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>${project.groupId}</groupId>
+      <artifactId>apache-james-mpt-main</artifactId>
+      <version>${project.version}</version>
+      <classifier>tests</classifier>
+      <scope>test</scope>
     </dependency>
 
     <dependency>    
@@ -308,6 +338,7 @@
         </exclusion>
       </exclusions>
     </dependency>
+    
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

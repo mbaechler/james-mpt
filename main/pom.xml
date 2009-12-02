@@ -77,6 +77,16 @@ scritable functional testing of ASCII based line protocols.</description>
         </configuration>
       </plugin>
       <plugin>
+        <artifactId>maven-jar-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>test-jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
         <version>1.4.3</version>
