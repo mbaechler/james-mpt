@@ -34,6 +34,7 @@
 scritable functional testing of ASCII based line protocols. This Maven2 Plugin  is an easy interface
 to the library requiring no extra coding.</description>
   <url>http://james.apache.org/mpt/mavenplugin</url>
+  <packaging>maven-plugin</packaging>
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
@@ -68,6 +69,7 @@ to the library requiring no extra coding.</description>
         <artifactId>maven-jar-plugin</artifactId>
         <version>2.2</version>
         <configuration>
+        <!-- 
         <archive>
           <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
             <manifestEntries>
@@ -81,8 +83,10 @@ to the library requiring no extra coding.</description>
               <url>${pom.url}</url>
             </manifestEntries>
           </archive>
+          -->
         </configuration>
       </plugin>
+      <!-- 
       <plugin>
         <groupId>org.apache.felix</groupId>
         <artifactId>maven-bundle-plugin</artifactId>
@@ -104,6 +108,7 @@ to the library requiring no extra coding.</description>
                 </instructions>
         </configuration>
       </plugin>
+      -->
       <plugin>
         <artifactId>maven-javadoc-plugin</artifactId>
         <version>2.4</version>
