@@ -23,7 +23,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringReader;
+import java.util.List;
 
 import org.apache.james.mpt.ExternalHostSystem;
 import org.apache.james.mpt.Monitor;
@@ -35,7 +37,7 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 
 /**
- * @goal mpt
+ * @goal run
  */
 public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
 
@@ -58,19 +60,36 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
      * @parameter 
      */
     private String host;
-
-    /**
-     * @parameter 
-     */
-    private String user;
-    /**
-     * @parameter 
-     */
-    private String pass;
+    
     /**
      * @parameter 
      */
     private String shabang;
+    
+    /**
+     * @parameter
+     */
+    private AddUser[] addUsers;
+
+
+    /**
+     * Gets the host (either name or number) against which this
+     * test will run.
+     * @return host, not null
+     */
+    public String getHost() {
+        return host;
+    }
+
+
+    /**
+     * Gets the port against which this test will run.
+     * @return port number
+     */
+    public int getPort() {
+        return port;
+    }
+
     
     /*
      * (non-Javadoc)
@@ -80,16 +99,25 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
 		validate();
 		
      
-         final Runner runner = new Runner();
-         InputStream inputStream;
+		for (int i = 0; i < addUsers.length; i++) {
+			AddUser addUser = (AddUser) addUsers[i];
+			  try {
+		            
+		            final Reader reader = new StringReader(addUser.getText());
+		            
+		            final ScriptedUserAdder adder = new ScriptedUserAdder(addUser.getHost(), addUser.getPort(), MailProtocolTestMojo.this);
+		            adder.addUser(addUser.getUser(), addUser.getPasswd(), reader);
+		        } catch (Exception e) {
+		            getLog().error("Unable to add user", e);
+		            throw new MojoFailureException("User addition failed: \n" + e.getMessage());
+		        }
+		}
+        final Runner runner = new Runner();
+        InputStream inputStream;
 		try {
 			inputStream = new FileInputStream(scriptFile);
 
-		    final ScriptedUserAdder adder = new ScriptedUserAdder(host, port,this);
-	        
-			if (user != null) adder.addUser(user, pass, new InputStreamReader(inputStream));
-	        
-			final ExternalHostSystem hostSystem = new ExternalHostSystem(host, port, this, shabang, adder);
+			final ExternalHostSystem hostSystem = new ExternalHostSystem(host, port, this, shabang, null);
 		    final ProtocolSessionBuilder builder = new ProtocolSessionBuilder();
 		     
 	        builder.addProtocolLines(scriptFile.getName(), inputStream, runner.getTestElements());
@@ -117,7 +145,24 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
             throw new MojoFailureException("'scriptFile' not exists");
 		}
 		
+		for (int i = 0; i < addUsers.length; i++) {
+			AddUser addUser = (AddUser)addUsers[i];
+			
+			if (addUser.getText() == null) {
+	            throw new MojoFailureException("AddUser must contain the text of the script");
+	        }
+	        
+	        if (addUser.getPort() <= 0) {
+	            throw new MojoFailureException("'port' attribute must be set on AddUser to the port against which the script should run.");
+	        }
+	        
+	        if (addUser.getHost() == null) {
+	            throw new MojoFailureException("'host' attribute must be set on AddUser to the host against which the script should run.");
+	        }
+		}
+		
 	}
+	
 	
 	/*
 	 * (non-Javadoc)
@@ -143,4 +188,97 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
 		getLog().debug(message);
 	}
 	
+ 
+	
+    /**
+     * Adds a user.
+     */
+    public class AddUser {
+        
+        private int port;
+        private String user;
+        private String passwd;
+        private String scriptText;
+        private String host;
+        
+        /**
+         * Gets the host (either name or number) against which this
+         * test will run.
+         * @return host, not null
+         */
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+        	this.host = host;
+        }
+        
+        /**
+         * Gets the port against which the user addition
+         * script should be executed.
+         * @return port number
+         */
+        public int getPort() {
+            return port;
+        }
+
+        /**
+         * Sets the port against which the user addition
+         * script should be executed.
+         * @param port port number
+         */
+        public void setPort(int port) {
+            this.port = port;
+        }
+
+        /**
+         * Gets the password for the user.
+         * @return password not null
+         */
+        public String getPasswd() {
+            return passwd;
+        }
+
+        /**
+         * Sets the password for the user.
+         * This will be passed in the user creation script.
+         * @param passwd not null
+         */
+        public void setPasswd(String passwd) {
+            this.passwd = passwd;
+        }
+
+        /**
+         * Gets the name of the user to be created.
+         * @return user name, not null
+         */
+        public String getUser() {
+            return user;
+        }
+
+        /**
+         * Sets the name of the user to be created.
+         * @param user not null
+         */
+        public void setUser(String user) {
+            this.user = user;
+        }
+        
+        /**
+         * Sets user addition script.
+         * @param scriptText not null
+         */
+        public void setText(String scriptText) {
+            this.scriptText = scriptText;
+        }
+
+
+        public String getText() {
+            return scriptText;
+        }
+
+        
+    }
+    
 }
