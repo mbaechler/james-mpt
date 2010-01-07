@@ -21,11 +21,11 @@ package org.apache.james.mpt.maven;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
-import java.util.List;
 
 import org.apache.james.mpt.ExternalHostSystem;
 import org.apache.james.mpt.Monitor;
@@ -103,8 +103,12 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
 			AddUser addUser = (AddUser) addUsers[i];
 			  try {
 		            
-		            final Reader reader = new StringReader(addUser.getText());
-		            
+		            final Reader reader; 
+		            if (addUser.getScriptText() != null) {
+		            	reader = new StringReader(addUser.getScriptText());
+		            } else {
+		            	reader = new FileReader(addUser.getScriptFile());
+		            }
 		            final ScriptedUserAdder adder = new ScriptedUserAdder(addUser.getHost(), addUser.getPort(), MailProtocolTestMojo.this);
 		            adder.addUser(addUser.getUser(), addUser.getPasswd(), reader);
 		        } catch (Exception e) {
@@ -148,8 +152,8 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
 		for (int i = 0; i < addUsers.length; i++) {
 			AddUser addUser = (AddUser)addUsers[i];
 			
-			if (addUser.getText() == null) {
-	            throw new MojoFailureException("AddUser must contain the text of the script");
+			if (addUser.getScriptText() == null && addUser.getScriptFile() == null) {
+	            throw new MojoFailureException("AddUser must contain the text of the script or a scriptFile");
 	        }
 	        
 	        if (addUser.getPort() <= 0) {
@@ -200,7 +204,8 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
         private String passwd;
         private String scriptText;
         private String host;
-        
+        private File scriptFile;
+
         /**
          * Gets the host (either name or number) against which this
          * test will run.
@@ -269,15 +274,22 @@ public class MailProtocolTestMojo extends AbstractMojo implements Monitor{
          * Sets user addition script.
          * @param scriptText not null
          */
-        public void setText(String scriptText) {
+        public void setScriptText(String scriptText) {
             this.scriptText = scriptText;
         }
 
 
-        public String getText() {
+        public String getScriptText() {
             return scriptText;
         }
 
+        public File getScriptFile() {
+        	return scriptFile;
+        }
+        
+        public void setScriptFile(File scriptFile) {
+        	this.scriptFile = scriptFile;
+        }
         
     }
     
