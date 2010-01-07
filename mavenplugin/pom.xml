@@ -28,7 +28,7 @@
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
-  <artifactId>apache-james-mpt-mavenplugin</artifactId>
+  <artifactId>maven-mpt-plugin</artifactId>
   <name>Apache JAMES MPT Maven2 Plugin</name>
   <description>Apache JAMES Mail Protocol Tester (MPT) is a library providing a framework for the 
 scritable functional testing of ASCII based line protocols. This Maven2 Plugin  is an easy interface
