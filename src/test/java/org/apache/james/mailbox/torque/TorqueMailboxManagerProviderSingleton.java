@@ -30,6 +30,7 @@ import org.apache.james.imap.functional.ImapHostSystem;
 import org.apache.james.imap.functional.InMemoryUserManager;
 import org.apache.james.mailbox.MailboxManager;
 import org.apache.james.mailbox.SubscriptionManager;
+import org.apache.james.mailbox.store.Authenticator;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.torque.TorqueMailboxManager;
 import org.apache.james.mailbox.torque.om.MailboxRowPeer;
@@ -165,6 +166,8 @@ public class TorqueMailboxManagerProviderSingleton {
 
     private static InMemoryUserManager USER_MANAGER  = new InMemoryUserManager();
 
+    private static MockAuthenticator AUTHENTICATOR  = new MockAuthenticator();
+
     public static final ImapHostSystem HOST = new TorqueHostSystem();
 
     public synchronized static MailboxManager getTorqueMailboxManagerInstance()
@@ -179,12 +182,13 @@ public class TorqueMailboxManagerProviderSingleton {
 
     public static void addUser(String user, String password) {
         USER_MANAGER.addUser(user, password);
+        AUTHENTICATOR.addUser(user, password);
     }
 
     private static TorqueMailboxManager getMailboxManager() throws Exception {
         if (TORQUE_MAILBOX_MANAGER == null) {
             initialize();
-            TORQUE_MAILBOX_MANAGER = new TorqueMailboxManager(new MockAuthenticator());
+            TORQUE_MAILBOX_MANAGER = new TorqueMailboxManager(AUTHENTICATOR);
         }
         return TORQUE_MAILBOX_MANAGER;
     }
