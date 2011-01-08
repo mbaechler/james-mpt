@@ -32,14 +32,17 @@
     <dependency>
       <groupId>org.apache.james</groupId>
       <artifactId>apache-james-imap-api</artifactId>
+      <version>${version.james-imap}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.james</groupId>
       <artifactId>apache-james-imap-message</artifactId>
+      <version>${version.james-imap}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.james</groupId>
       <artifactId>apache-james-imap-processor</artifactId>
+      <version>${version.james-imap}</version>
     </dependency>
     <dependency>
       <groupId>commons-io</groupId>
@@ -108,5 +111,8 @@
       <scope>compile</scope>
     </dependency>
   </dependencies>
+  <properties>
+    <version.james-imap>0.2-M2-SNAPSHOT</version.james-imap>
+  </properties>
 </project>
 
