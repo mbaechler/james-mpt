@@ -22,7 +22,6 @@
     <artifactId>apache-james-mailbox-parent</artifactId>
     <groupId>org.apache.james</groupId>
     <version>0.2-M2-SNAPSHOT</version>
-    <relativePath>../parent/pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
