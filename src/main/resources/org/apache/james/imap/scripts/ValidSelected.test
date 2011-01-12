@@ -32,4 +32,4 @@ S: a001 NO FETCH failed. Command not valid in this state.
 C: a001 STORE 1 +FLAGS (\Seen)
 S: a001 NO STORE failed. Command not valid in this state.
 C: a001 UID FETCH 1 ALL
-S: a001 NO FETCH failed. Command not valid in this state.
+S: a001 NO UID failed. Command not valid in this state.
