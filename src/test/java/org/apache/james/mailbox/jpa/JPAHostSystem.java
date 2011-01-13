@@ -36,6 +36,7 @@ import org.apache.james.mailbox.SubscriptionManager;
 import org.apache.james.mailbox.jpa.JPAMailboxSessionMapperFactory;
 import org.apache.james.mailbox.jpa.JPASubscriptionManager;
 import org.apache.james.mailbox.jpa.mail.JPACachingUidProvider;
+import org.apache.james.mailbox.jpa.mail.model.JPAHeader;
 import org.apache.james.mailbox.jpa.mail.model.JPAMailbox;
 import org.apache.james.mailbox.jpa.mail.model.JPAProperty;
 import org.apache.james.mailbox.jpa.mail.model.openjpa.AbstractJPAMailboxMembership;
@@ -68,7 +69,8 @@ public class JPAHostSystem extends ImapHostSystem {
         properties.put("openjpa.Log", "JDBC=WARN, SQL=WARN, Runtime=WARN");
         properties.put("openjpa.ConnectionFactoryProperties", "PrettyPrint=true, PrettyPrintLineLength=72");
         properties.put("openjpa.jdbc.SynchronizeMappings", "buildSchema(ForeignKeys=true)");
-        properties.put("openjpa.MetaDataFactory", "jpa(Types=org.apache.james.mailbox.jpa.mail.model.JPAHeader;" +
+        properties.put("openjpa.MetaDataFactory", "jpa(Types=" +
+        		JPAHeader.class.getName() + ";" +
                 JPAMailbox.class.getName() + ";" +
                 AbstractJPAMailboxMembership.class.getName() + ";" +
                 JPAMailboxMembership.class.getName() + ";" +
