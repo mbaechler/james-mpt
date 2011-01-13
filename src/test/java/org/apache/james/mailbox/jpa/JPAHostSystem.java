@@ -42,6 +42,7 @@ import org.apache.james.mailbox.jpa.mail.model.openjpa.AbstractJPAMessage;
 import org.apache.james.mailbox.jpa.mail.model.openjpa.JPAMailboxMembership;
 import org.apache.james.mailbox.jpa.mail.model.openjpa.JPAMessage;
 import org.apache.james.mailbox.jpa.openjpa.OpenJPAMailboxManager;
+import org.apache.james.mailbox.jpa.openjpa.OpenJPAMessageManager;
 import org.apache.james.mailbox.jpa.user.model.JPASubscription;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.test.functional.HostSystem;
@@ -61,12 +62,35 @@ public class JPAHostSystem extends ImapHostSystem {
     private final EntityManagerFactory entityManagerFactory;
 
     public JPAHostSystem() throws Exception {
+
         HashMap<String, String> properties = new HashMap<String, String>();
+        
+        // Configure OpenJPA for H2 Memory Database
         properties.put("openjpa.ConnectionDriverName", org.h2.Driver.class.getName());
-        properties.put("openjpa.ConnectionURL", "jdbc:h2:mem:imap;DB_CLOSE_DELAY=-1");
+        properties.put("openjpa.ConnectionURL", "jdbc:h2:mem:imap;DB_CLOSE_DELAY=-1"); // Memory H2 database
+        
+        // Configure OpenJPA for Derby Memory Database
+        // properties.put("openjpa.ConnectionDriverName", org.apache.derby.jdbc.EmbeddedDriver.class.getName());
+        // properties.put("openjpa.ConnectionURL", "jdbc:derby:memory:test;create=true"); // Memory Derby database
+        
+        // Configure OpenJPA for Derby Embedded Database
+        //properties.put("openjpa.ConnectionURL", "jdbc:derby:test;create=true");
+        //properties.put("openjpa.ConnectionFactoryProperties", "PrettyPrint=true, PrettyPrintLineLength=72");
+
+        // Configure OpenJPA Tables creation
+        properties.put("openjpa.jdbc.SynchronizeMappings", "buildSchema(ForeignKeys=true)"); // Create Foreign Keys
+        properties.put("openjpa.jdbc.MappingDefaults", "ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict");
+        properties.put("openjpa.jdbc.SchemaFactory", "native(ForeignKeys=true)");
+
+        // Configure OpenJPA Cache
+        properties.put("openjpa.jdbc.QuerySQLCache", "false");
+        
+        // Configure OpenJPA Log
         properties.put("openjpa.Log", "JDBC=WARN, SQL=WARN, Runtime=WARN");
-        properties.put("openjpa.ConnectionFactoryProperties", "PrettyPrint=true, PrettyPrintLineLength=72");
-        properties.put("openjpa.jdbc.SynchronizeMappings", "buildSchema(ForeignKeys=true)");
+        //properties.put("openjpa.Log", "SQL=TRACE");          // Use SQL=TRACE to trace SQL.
+        //properties.put("openjpa.Log", "DefaultLevel=TRACE"); // Use the DefaultLevel=TRACE to trace all.
+
+        // Configure OpenJPA Metadata
         properties.put("openjpa.MetaDataFactory", "jpa(Types=" +
         		JPAHeader.class.getName() + ";" +
                 JPAMailbox.class.getName() + ";" +
@@ -76,19 +100,27 @@ public class JPAHostSystem extends ImapHostSystem {
                 JPAMessage.class.getName() + ";" +
                 JPAProperty.class.getName() + ";" +
                 JPASubscription.class.getName() + ")");
+        
         userManager = new MockAuthenticator();
         entityManagerFactory = OpenJPAPersistence.getEntityManagerFactory(properties);
+
         JPACachingUidProvider uidProvider = new JPACachingUidProvider(entityManagerFactory);
 
         JPAMailboxSessionMapperFactory mf = new JPAMailboxSessionMapperFactory(entityManagerFactory);
+
         mailboxManager = new OpenJPAMailboxManager(mf, userManager, uidProvider);
         mailboxManager.init();
+
         SubscriptionManager subscriptionManager = new JPASubscriptionManager(mf);
+        
         final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, subscriptionManager);
+        
         resetUserMetaData();
+        
         configure(new DefaultImapDecoderFactory().buildImapDecoder(),
                 new DefaultImapEncoderFactory().buildImapEncoder(),
                 defaultImapProcessorFactory);
+
     }
 
     public boolean addUser(String user, String password) {
