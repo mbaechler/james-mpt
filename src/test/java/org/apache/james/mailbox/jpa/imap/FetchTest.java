@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.UidSearch;
+import org.apache.james.imap.tester.suite.Fetch;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class UidSearchTest extends UidSearch {
+public class FetchTest extends Fetch {
 
-    public UidSearchTest() throws Exception {
+    public FetchTest() throws Exception {
         super(JPAHostSystem.build());
     }
 }

@@ -17,13 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.SelectedInbox;
+import org.apache.james.imap.tester.suite.Listing;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class SelectedInboxTest extends SelectedInbox {
+public class ListingTest extends Listing {
 
-    public SelectedInboxTest() throws Exception {
+    public ListingTest() throws Exception {
         super(JPAHostSystem.build());
     }
+
 }

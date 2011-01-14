@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.host;
 
 import java.io.File;
 import java.util.HashMap;
@@ -34,6 +34,8 @@ import org.apache.james.imap.tester.ImapHostSystem;
 import org.apache.james.imap.tester.base.HostSystem;
 import org.apache.james.mailbox.MailboxSession;
 import org.apache.james.mailbox.SubscriptionManager;
+import org.apache.james.mailbox.jpa.JPAMailboxSessionMapperFactory;
+import org.apache.james.mailbox.jpa.JPASubscriptionManager;
 import org.apache.james.mailbox.jpa.mail.JPACachingUidProvider;
 import org.apache.james.mailbox.jpa.mail.model.JPAHeader;
 import org.apache.james.mailbox.jpa.mail.model.JPAMailbox;

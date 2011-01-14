@@ -17,14 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.PartialFetch;
+import org.apache.james.imap.tester.suite.AuthenticatedState;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class PartialFetchTest extends PartialFetch {
-
-    public PartialFetchTest() throws Exception {
+public class AuthenticatedStateTest extends
+        AuthenticatedState {
+    public AuthenticatedStateTest() throws Exception {
         super(JPAHostSystem.build());
     }
-
 }

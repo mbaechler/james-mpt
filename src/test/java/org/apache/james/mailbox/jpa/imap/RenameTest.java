@@ -17,14 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.ConcurrentSessions;
+import org.apache.james.imap.tester.suite.Rename;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class ConcurrentSessionsTest extends
-        ConcurrentSessions {
+public class RenameTest extends Rename {
 
-    public ConcurrentSessionsTest() throws Exception {
+    public RenameTest() throws Exception {
         super(JPAHostSystem.build());
     }
 

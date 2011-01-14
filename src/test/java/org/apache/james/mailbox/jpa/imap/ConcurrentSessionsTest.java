@@ -17,14 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.FetchBodySection;
+import org.apache.james.imap.tester.suite.ConcurrentSessions;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class FetchBodySectionTest extends
-        FetchBodySection {
+public class ConcurrentSessionsTest extends
+        ConcurrentSessions {
 
-    public FetchBodySectionTest() throws Exception {
+    public ConcurrentSessionsTest() throws Exception {
         super(JPAHostSystem.build());
     }
 

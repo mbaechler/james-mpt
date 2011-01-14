@@ -17,13 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.Select;
+import org.apache.james.imap.tester.suite.FetchBodySection;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class SelectTest extends Select {
+public class FetchBodySectionTest extends
+        FetchBodySection {
 
-    public SelectTest() throws Exception {
+    public FetchBodySectionTest() throws Exception {
         super(JPAHostSystem.build());
     }
 

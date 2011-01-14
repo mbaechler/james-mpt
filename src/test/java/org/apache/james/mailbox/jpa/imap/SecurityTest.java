@@ -17,14 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.NonAuthenticatedState;
+import org.apache.james.imap.tester.suite.Security;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class NonAuthenticatedStateTest extends
-        NonAuthenticatedState {
+public class SecurityTest extends Security {
 
-    public NonAuthenticatedStateTest() throws Exception {
+    public SecurityTest() throws Exception {
         super(JPAHostSystem.build());
     }
+
 }

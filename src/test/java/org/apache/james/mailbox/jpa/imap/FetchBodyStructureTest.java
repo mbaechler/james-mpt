@@ -17,13 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.Security;
+import org.apache.james.imap.tester.suite.FetchBodyStructure;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class SecurityTest extends Security {
+public class FetchBodyStructureTest extends
+        FetchBodyStructure {
 
-    public SecurityTest() throws Exception {
+    public FetchBodyStructureTest() throws Exception {
         super(JPAHostSystem.build());
     }
 

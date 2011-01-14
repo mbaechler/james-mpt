@@ -17,14 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.FetchBodyStructure;
+import org.apache.james.imap.tester.suite.Events;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class FetchBodyStructureTest extends
-        FetchBodyStructure {
+public class EventTest extends Events {
 
-    public FetchBodyStructureTest() throws Exception {
+    public EventTest() throws Exception {
         super(JPAHostSystem.build());
     }
 

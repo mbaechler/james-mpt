@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.Rename;
+import org.apache.james.imap.tester.suite.FetchHeaders;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class RenameTest extends Rename {
+public class FetchHeadersTest extends FetchHeaders {
 
-    public RenameTest() throws Exception {
+    public FetchHeadersTest() throws Exception {
         super(JPAHostSystem.build());
     }
 

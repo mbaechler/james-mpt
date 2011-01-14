@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jpa;
+package org.apache.james.mailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.AuthenticatedState;
+import org.apache.james.imap.tester.suite.SelectedState;
+import org.apache.james.mailbox.jpa.host.JPAHostSystem;
 
-public class AuthenticatedStateTest extends
-        AuthenticatedState {
-    public AuthenticatedStateTest() throws Exception {
+public class SelectedStateTest extends SelectedState {
+
+    public SelectedStateTest() throws Exception {
         super(JPAHostSystem.build());
     }
 }
