@@ -16,14 +16,16 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package org.apache.james.mailbox.jcr;
 
-import org.apache.james.imap.tester.suite.FetchBodySection;
+package org.apache.james.mailbox.jcr.imap;
 
-public class FetchBodySectionTest extends FetchBodySection {
+import org.apache.james.imap.tester.suite.Security;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
-    public FetchBodySectionTest() throws Exception {
+public class SecurityTest extends Security {
+
+    public SecurityTest() throws Exception {
         super(JCRHostSystem.build());
-
     }
+
 }

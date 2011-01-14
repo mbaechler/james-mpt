@@ -17,14 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jcr;
+package org.apache.james.mailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.FetchHeaders;
+import org.apache.james.imap.tester.suite.SelectedState;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
-public class FetchHeadersTest extends FetchHeaders {
+public class SelectedStateTest extends SelectedState {
 
-    public FetchHeadersTest() throws Exception {
+    public SelectedStateTest() throws Exception {
         super(JCRHostSystem.build());
     }
-
 }

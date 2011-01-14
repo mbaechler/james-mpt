@@ -17,14 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jcr;
+package org.apache.james.mailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.PartialFetch;
+import org.apache.james.imap.tester.suite.Fetch;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
-public class PartialFetchTest extends PartialFetch {
+public class FetchTest extends Fetch {
 
-    public PartialFetchTest() throws Exception {
+    public FetchTest() throws Exception {
         super(JCRHostSystem.build());
     }
-
 }

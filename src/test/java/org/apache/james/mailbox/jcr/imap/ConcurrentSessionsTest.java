@@ -17,13 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jcr;
+package org.apache.james.mailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.Expunge;
+import org.apache.james.imap.tester.suite.ConcurrentSessions;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
-public class ExpungeTest extends Expunge {
+public class ConcurrentSessionsTest extends
+        ConcurrentSessions {
 
-    public ExpungeTest() throws Exception {
+    public ConcurrentSessionsTest() throws Exception {
         super(JCRHostSystem.build());
     }
 

@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jcr;
+package org.apache.james.mailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.SelectedInbox;
+import org.apache.james.imap.tester.suite.AuthenticatedState;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
-public class SelectedInboxTest extends SelectedInbox {
-
-    public SelectedInboxTest() throws Exception {
+public class AuthenticatedStateTest extends
+        AuthenticatedState {
+    public AuthenticatedStateTest() throws Exception {
         super(JCRHostSystem.build());
     }
 }

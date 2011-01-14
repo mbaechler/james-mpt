@@ -16,9 +16,10 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package org.apache.james.mailbox.jcr;
+package org.apache.james.mailbox.jcr.imap;
 
 import org.apache.james.imap.tester.suite.Listing;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
 public class ListingTest extends Listing{
 

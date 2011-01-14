@@ -17,14 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jcr;
+package org.apache.james.mailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.NonAuthenticatedState;
+import org.apache.james.imap.tester.suite.Events;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
-public class NonAuthenticatedStateTest extends
-        NonAuthenticatedState {
+public class EventTest extends Events {
 
-    public NonAuthenticatedStateTest() throws Exception {
+    public EventTest() throws Exception {
         super(JCRHostSystem.build());
     }
+
 }

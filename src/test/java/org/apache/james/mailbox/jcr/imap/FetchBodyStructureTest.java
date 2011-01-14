@@ -17,14 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jcr;
+package org.apache.james.mailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.ConcurrentSessions;
+import org.apache.james.imap.tester.suite.FetchBodyStructure;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
-public class ConcurrentSessionsTest extends
-        ConcurrentSessions {
+public class FetchBodyStructureTest extends
+        FetchBodyStructure {
 
-    public ConcurrentSessionsTest() throws Exception {
+    public FetchBodyStructureTest() throws Exception {
         super(JCRHostSystem.build());
     }
 

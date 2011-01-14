@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.jcr;
+package org.apache.james.mailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.Events;
+import org.apache.james.imap.tester.suite.Expunge;
+import org.apache.james.mailbox.jcr.host.JCRHostSystem;
 
-public class EventTest extends Events {
+public class ExpungeTest extends Expunge {
 
-    public EventTest() throws Exception {
+    public ExpungeTest() throws Exception {
         super(JCRHostSystem.build());
     }
 
