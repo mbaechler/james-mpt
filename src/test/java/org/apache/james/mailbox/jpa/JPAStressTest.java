@@ -57,8 +57,8 @@ public class JPAStressTest extends AbstractStressTest{
     public void setUp() throws MailboxException {
         
         HashMap<String, String> properties = new HashMap<String, String>();
-        properties.put("openjpa.ConnectionDriverName", "org.h2.Driver");
-        properties.put("openjpa.ConnectionURL", "jdbc:h2:mem:imap;DB_CLOSE_DELAY=-1");
+        properties.put("openjpa.ConnectionDriverName", org.h2.Driver.class.getName());
+        properties.put("openjpa.ConnectionURL", "jdbc:h2:mem:mailboxintegrationstress;DB_CLOSE_DELAY=-1");
         properties.put("openjpa.Log", "JDBC=WARN, SQL=WARN, Runtime=WARN");
         properties.put("openjpa.ConnectionFactoryProperties", "PrettyPrint=true, PrettyPrintLineLength=72");
         properties.put("openjpa.jdbc.SynchronizeMappings", "buildSchema(ForeignKeys=true)");

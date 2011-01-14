@@ -67,11 +67,11 @@ public class JPAHostSystem extends ImapHostSystem {
         
         // Configure OpenJPA for H2 Memory Database
         properties.put("openjpa.ConnectionDriverName", org.h2.Driver.class.getName());
-        properties.put("openjpa.ConnectionURL", "jdbc:h2:mem:imap;DB_CLOSE_DELAY=-1"); // Memory H2 database
+        properties.put("openjpa.ConnectionURL", "jdbc:h2:mem:mailboxintegration;DB_CLOSE_DELAY=-1"); // Memory H2 database
         
         // Configure OpenJPA for Derby Memory Database
         // properties.put("openjpa.ConnectionDriverName", org.apache.derby.jdbc.EmbeddedDriver.class.getName());
-        // properties.put("openjpa.ConnectionURL", "jdbc:derby:memory:test;create=true"); // Memory Derby database
+        // properties.put("openjpa.ConnectionURL", "jdbc:derby:memory:mailboxintegration;create=true"); // Memory Derby database
         
         // Configure OpenJPA for Derby Embedded Database
         //properties.put("openjpa.ConnectionURL", "jdbc:derby:test;create=true");
