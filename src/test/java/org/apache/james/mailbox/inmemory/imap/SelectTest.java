@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Events;
+import org.apache.james.imap.tester.suite.Select;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class EventTest extends Events {
+public class SelectTest extends Select {
 
-    public EventTest() throws Exception {
+    public SelectTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
 

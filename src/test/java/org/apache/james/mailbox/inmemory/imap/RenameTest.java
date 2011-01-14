@@ -17,14 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.FetchBodyStructure;
+import org.apache.james.imap.tester.suite.Rename;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class FetchBodyStructureTest extends
-        FetchBodyStructure {
+public class RenameTest extends Rename {
 
-    public FetchBodyStructureTest() throws Exception {
+    public RenameTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
 

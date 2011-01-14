@@ -17,15 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.FetchBodySection;
+import org.apache.james.imap.tester.suite.Search;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class FetchBodySectionTest extends
-        FetchBodySection {
+public class SearchTest extends Search {
 
-    public FetchBodySectionTest() throws Exception {
+    public SearchTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
-
 }

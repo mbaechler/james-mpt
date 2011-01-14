@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.host;
 
 import org.apache.james.imap.api.process.ImapProcessor;
 import org.apache.james.imap.encode.main.DefaultImapEncoderFactory;
@@ -38,7 +38,7 @@ public class InMemoryHostSystem extends ImapHostSystem {
     private MockAuthenticator userManager; 
     private InMemoryMailboxSessionMapperFactory factory;
     
-    static HostSystem build() throws Exception {
+    public static HostSystem build() throws Exception {
         InMemoryHostSystem host =  new InMemoryHostSystem();
         return host;
     }

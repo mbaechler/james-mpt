@@ -17,9 +17,10 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
 import org.apache.james.imap.tester.suite.SelectedState;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
 public class SelectedStateTest extends SelectedState {
 

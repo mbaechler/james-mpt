@@ -17,13 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Rename;
+import org.apache.james.imap.tester.suite.ConcurrentSessions;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class RenameTest extends Rename {
+public class ConcurrentSessionsTest extends
+        ConcurrentSessions {
 
-    public RenameTest() throws Exception {
+    public ConcurrentSessionsTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
 

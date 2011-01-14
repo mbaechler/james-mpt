@@ -17,13 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Fetch;
+import org.apache.james.imap.tester.suite.Listing;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class FetchTest extends Fetch {
+public class ListingTest extends Listing {
 
-    public FetchTest() throws Exception {
+    public ListingTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
+
 }

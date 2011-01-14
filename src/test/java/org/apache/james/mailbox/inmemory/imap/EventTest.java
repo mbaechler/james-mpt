@@ -17,14 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.ConcurrentSessions;
+import org.apache.james.imap.tester.suite.Events;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class ConcurrentSessionsTest extends
-        ConcurrentSessions {
+public class EventTest extends Events {
 
-    public ConcurrentSessionsTest() throws Exception {
+    public EventTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
 

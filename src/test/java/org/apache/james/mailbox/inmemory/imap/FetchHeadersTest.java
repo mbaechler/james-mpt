@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Security;
+import org.apache.james.imap.tester.suite.FetchHeaders;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class SecurityTest extends Security {
+public class FetchHeadersTest extends FetchHeaders {
 
-    public SecurityTest() throws Exception {
+    public FetchHeadersTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
 

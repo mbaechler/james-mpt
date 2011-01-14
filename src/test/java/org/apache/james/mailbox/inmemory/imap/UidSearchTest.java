@@ -17,14 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.PartialFetch;
+import org.apache.james.imap.tester.suite.UidSearch;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class PartialFetchTest extends PartialFetch {
+public class UidSearchTest extends UidSearch {
 
-    public PartialFetchTest() throws Exception {
+    public UidSearchTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
-
 }

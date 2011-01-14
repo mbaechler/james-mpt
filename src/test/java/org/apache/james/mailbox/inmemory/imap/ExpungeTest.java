@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Listing;
+import org.apache.james.imap.tester.suite.Expunge;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class ListingTest extends Listing {
+public class ExpungeTest extends Expunge {
 
-    public ListingTest() throws Exception {
+    public ExpungeTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
 

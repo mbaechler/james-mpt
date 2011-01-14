@@ -17,13 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.SelectedInbox;
+import org.apache.james.imap.tester.suite.Security;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class SelectedInboxTest extends SelectedInbox {
+public class SecurityTest extends Security {
 
-    public SelectedInboxTest() throws Exception {
+    public SecurityTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
+
 }

@@ -17,14 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Select;
+import org.apache.james.imap.tester.suite.NonAuthenticatedState;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class SelectTest extends Select {
+public class NonAuthenticatedStateTest extends
+        NonAuthenticatedState {
 
-    public SelectTest() throws Exception {
+    public NonAuthenticatedStateTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
-
 }

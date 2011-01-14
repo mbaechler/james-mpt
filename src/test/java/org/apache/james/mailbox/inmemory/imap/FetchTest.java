@@ -17,13 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.inmemory;
+package org.apache.james.mailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.AuthenticatedState;
+import org.apache.james.imap.tester.suite.Fetch;
+import org.apache.james.mailbox.inmemory.host.InMemoryHostSystem;
 
-public class AuthenticatedStateTest extends
-        AuthenticatedState {
-    public AuthenticatedStateTest() throws Exception {
+public class FetchTest extends Fetch {
+
+    public FetchTest() throws Exception {
         super(InMemoryHostSystem.build());
     }
 }
