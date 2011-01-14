@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.torque;
+package org.apache.james.mailbox.torque.host;
 
 import java.io.File;
 

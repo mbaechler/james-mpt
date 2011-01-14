@@ -17,22 +17,16 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mailbox.torque;
+package org.apache.james.mailbox.torque.imap;
 
-import org.apache.james.imap.tester.ImapHostSystem;
+import org.apache.james.imap.tester.suite.FetchBodySection;
+import org.apache.james.mailbox.torque.host.TorqueHostSystemFactory;
 
-public class TorqueHostSystem extends ImapHostSystem {
+public class FetchBodySectionTest extends
+        FetchBodySection {
 
-    public boolean addUser(String user, String password) throws Exception {
-        TorqueMailboxManagerProviderSingleton.addUser(user, password);
-        return true;
+    public FetchBodySectionTest() throws Exception {
+        super(TorqueHostSystemFactory.createStandardImap());
     }
 
-    @Override
-    protected void resetData() throws Exception {
-        TorqueMailboxManagerProviderSingleton.reset();
-        TorqueHostSystemFactory.resetUserMetaData(); 
-    }
-    
-    
 }
