@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.torque;
 
-import org.apache.james.imap.functional.ImapHostSystem;
+import org.apache.james.imap.tester.ImapHostSystem;
 
 public class TorqueHostSystem extends ImapHostSystem {
 

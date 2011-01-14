@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jpa;
 
-import org.apache.james.imap.functional.suite.Rename;
+import org.apache.james.imap.tester.suite.Rename;
 
 public class RenameTest extends Rename {
 

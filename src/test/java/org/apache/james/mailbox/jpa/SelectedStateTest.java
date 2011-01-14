@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jpa;
 
-import org.apache.james.imap.functional.suite.SelectedState;
+import org.apache.james.imap.tester.suite.SelectedState;
 
 public class SelectedStateTest extends SelectedState {
 

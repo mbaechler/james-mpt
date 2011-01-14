@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.functional.maildir;
 
-import org.apache.james.imap.functional.suite.Expunge;
+import org.apache.james.imap.tester.suite.Expunge;
 
 public class ExpungeTest extends Expunge {
 

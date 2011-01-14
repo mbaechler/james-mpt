@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.functional.torque;
 
-import org.apache.james.imap.functional.suite.FetchBodyStructure;
+import org.apache.james.imap.tester.suite.FetchBodyStructure;
 import org.apache.james.mailbox.torque.TorqueHostSystemFactory;
 
 public class FetchBodyStructureTest extends

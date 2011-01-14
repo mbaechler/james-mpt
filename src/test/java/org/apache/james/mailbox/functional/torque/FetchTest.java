@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.functional.torque;
 
-import org.apache.james.imap.functional.suite.Fetch;
+import org.apache.james.imap.tester.suite.Fetch;
 import org.apache.james.mailbox.torque.TorqueHostSystemFactory;
 
 public class FetchTest extends Fetch {

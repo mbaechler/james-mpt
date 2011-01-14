@@ -28,9 +28,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.logging.impl.SimpleLog;
 import org.apache.james.imap.api.process.ImapProcessor;
 import org.apache.james.imap.encode.main.DefaultImapEncoderFactory;
-import org.apache.james.imap.functional.ImapHostSystem;
 import org.apache.james.imap.main.DefaultImapDecoderFactory;
 import org.apache.james.imap.processor.main.DefaultImapProcessorFactory;
+import org.apache.james.imap.tester.ImapHostSystem;
+import org.apache.james.imap.tester.base.HostSystem;
 import org.apache.james.mailbox.MailboxSession;
 import org.apache.james.mailbox.SubscriptionManager;
 import org.apache.james.mailbox.jpa.mail.JPACachingUidProvider;
@@ -45,7 +46,6 @@ import org.apache.james.mailbox.jpa.openjpa.OpenJPAMailboxManager;
 import org.apache.james.mailbox.jpa.openjpa.OpenJPAMessageManager;
 import org.apache.james.mailbox.jpa.user.model.JPASubscription;
 import org.apache.james.mailbox.store.MockAuthenticator;
-import org.apache.james.test.functional.HostSystem;
 import org.apache.openjpa.persistence.OpenJPAPersistence;
 
 public class JPAHostSystem extends ImapHostSystem {

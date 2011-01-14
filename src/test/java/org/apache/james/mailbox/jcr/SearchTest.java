@@ -1,6 +1,6 @@
 package org.apache.james.mailbox.jcr;
 
-import org.apache.james.imap.functional.suite.Search;
+import org.apache.james.imap.tester.suite.Search;
 
 public class SearchTest extends Search{
 

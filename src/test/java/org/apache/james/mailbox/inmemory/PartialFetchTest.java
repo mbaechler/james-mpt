@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.inmemory;
 
-import org.apache.james.imap.functional.suite.PartialFetch;
+import org.apache.james.imap.tester.suite.PartialFetch;
 
 public class PartialFetchTest extends PartialFetch {
 

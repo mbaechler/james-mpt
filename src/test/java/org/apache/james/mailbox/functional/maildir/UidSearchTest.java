@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.functional.maildir;
 
-import org.apache.james.imap.functional.suite.UidSearch;
+import org.apache.james.imap.tester.suite.UidSearch;
 import org.junit.Test;
 
 public class UidSearchTest extends UidSearch{

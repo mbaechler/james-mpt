@@ -24,10 +24,10 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.james.imap.api.process.ImapProcessor;
 import org.apache.james.imap.encode.main.DefaultImapEncoderFactory;
-import org.apache.james.imap.functional.ImapHostSystem;
 import org.apache.james.imap.main.DefaultImapDecoderFactory;
 import org.apache.james.imap.processor.main.DefaultImapProcessorFactory;
-import org.apache.james.test.functional.HostSystem;
+import org.apache.james.imap.tester.ImapHostSystem;
+import org.apache.james.imap.tester.base.HostSystem;
 
 public class TorqueHostSystemFactory {
 

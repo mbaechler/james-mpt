@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jpa;
 
-import org.apache.james.imap.functional.suite.Security;
+import org.apache.james.imap.tester.suite.Security;
 
 public class SecurityTest extends Security {
 

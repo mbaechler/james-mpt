@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jcr;
 
-import org.apache.james.imap.functional.suite.Events;
+import org.apache.james.imap.tester.suite.Events;
 
 public class EventTest extends Events {
 

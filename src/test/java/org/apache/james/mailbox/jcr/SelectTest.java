@@ -1,6 +1,6 @@
 package org.apache.james.mailbox.jcr;
 
-import org.apache.james.imap.functional.suite.Select;
+import org.apache.james.imap.tester.suite.Select;
 
 public class SelectTest extends Select{
 

@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.functional.maildir;
 
-import org.apache.james.imap.functional.suite.FetchHeaders;
+import org.apache.james.imap.tester.suite.FetchHeaders;
 
 public class FetchHeadersTest extends FetchHeaders {
 

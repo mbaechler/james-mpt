@@ -1,6 +1,6 @@
 package org.apache.james.mailbox.jcr;
 
-import org.apache.james.imap.functional.suite.UidSearch;
+import org.apache.james.imap.tester.suite.UidSearch;
 
 public class UidSearchTest extends UidSearch{
 

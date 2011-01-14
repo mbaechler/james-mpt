@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.inmemory;
 
-import org.apache.james.imap.functional.suite.Listing;
+import org.apache.james.imap.tester.suite.Listing;
 
 public class ListingTest extends Listing {
 

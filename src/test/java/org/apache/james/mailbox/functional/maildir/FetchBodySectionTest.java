@@ -18,7 +18,7 @@
  ****************************************************************/
 package org.apache.james.mailbox.functional.maildir;
 
-import org.apache.james.imap.functional.suite.FetchBodySection;
+import org.apache.james.imap.tester.suite.FetchBodySection;
 
 public class FetchBodySectionTest extends FetchBodySection {
 

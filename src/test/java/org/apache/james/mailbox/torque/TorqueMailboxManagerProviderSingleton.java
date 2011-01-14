@@ -26,8 +26,8 @@ import java.sql.SQLException;
 import java.util.Locale;
 
 import org.apache.commons.configuration.BaseConfiguration;
-import org.apache.james.imap.functional.ImapHostSystem;
-import org.apache.james.imap.functional.InMemoryUserManager;
+import org.apache.james.imap.tester.ImapHostSystem;
+import org.apache.james.imap.tester.InMemoryUserManager;
 import org.apache.james.mailbox.MailboxManager;
 import org.apache.james.mailbox.SubscriptionManager;
 import org.apache.james.mailbox.store.Authenticator;

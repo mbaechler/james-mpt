@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jpa;
 
-import org.apache.james.imap.functional.suite.SelectedInbox;
+import org.apache.james.imap.tester.suite.SelectedInbox;
 
 public class SelectedInboxTest extends SelectedInbox {
 

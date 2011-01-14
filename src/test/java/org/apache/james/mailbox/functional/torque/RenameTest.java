@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.functional.torque;
 
-import org.apache.james.imap.functional.suite.Rename;
+import org.apache.james.imap.tester.suite.Rename;
 import org.apache.james.mailbox.torque.TorqueHostSystemFactory;
 
 public class RenameTest extends Rename {

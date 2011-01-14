@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jcr;
 
-import org.apache.james.imap.functional.suite.Fetch;
+import org.apache.james.imap.tester.suite.Fetch;
 
 public class FetchTest extends Fetch {
 

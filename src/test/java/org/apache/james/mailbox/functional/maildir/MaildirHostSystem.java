@@ -23,17 +23,17 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 import org.apache.james.imap.api.process.ImapProcessor;
 import org.apache.james.imap.encode.main.DefaultImapEncoderFactory;
-import org.apache.james.imap.functional.ImapHostSystem;
-import org.apache.james.imap.functional.InMemoryUserManager;
 import org.apache.james.imap.main.DefaultImapDecoderFactory;
 import org.apache.james.imap.processor.main.DefaultImapProcessorFactory;
+import org.apache.james.imap.tester.ImapHostSystem;
+import org.apache.james.imap.tester.InMemoryUserManager;
+import org.apache.james.imap.tester.base.HostSystem;
 import org.apache.james.mailbox.MailboxException;
 import org.apache.james.mailbox.maildir.MaildirMailboxManager;
 import org.apache.james.mailbox.maildir.MaildirMailboxSessionMapperFactory;
 import org.apache.james.mailbox.maildir.MaildirStore;
 import org.apache.james.mailbox.maildir.MaildirSubscriptionManager;
 import org.apache.james.mailbox.store.MockAuthenticator;
-import org.apache.james.test.functional.HostSystem;
 
 public class MaildirHostSystem extends ImapHostSystem {
 

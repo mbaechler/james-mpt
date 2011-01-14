@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jcr;
 
-import org.apache.james.imap.functional.suite.AuthenticatedState;
+import org.apache.james.imap.tester.suite.AuthenticatedState;
 
 public class AuthenticatedStateTest extends
         AuthenticatedState {

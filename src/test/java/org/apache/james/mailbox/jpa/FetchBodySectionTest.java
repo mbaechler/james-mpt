@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jpa;
 
-import org.apache.james.imap.functional.suite.FetchBodySection;
+import org.apache.james.imap.tester.suite.FetchBodySection;
 
 public class FetchBodySectionTest extends
         FetchBodySection {

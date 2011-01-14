@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.functional.maildir;
 
-import org.apache.james.imap.functional.suite.FetchBodyStructure;
+import org.apache.james.imap.tester.suite.FetchBodyStructure;
 
 public class FetchBodyStructureTest extends
         FetchBodyStructure {

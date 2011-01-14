@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.jpa;
 
-import org.apache.james.imap.functional.suite.NonAuthenticatedState;
+import org.apache.james.imap.tester.suite.NonAuthenticatedState;
 
 public class NonAuthenticatedStateTest extends
         NonAuthenticatedState {

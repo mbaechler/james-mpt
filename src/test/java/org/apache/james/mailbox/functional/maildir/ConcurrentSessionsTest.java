@@ -19,7 +19,7 @@
 
 package org.apache.james.mailbox.functional.maildir;
 
-import org.apache.james.imap.functional.suite.ConcurrentSessions;
+import org.apache.james.imap.tester.suite.ConcurrentSessions;
 
 public class ConcurrentSessionsTest extends
         ConcurrentSessions {
