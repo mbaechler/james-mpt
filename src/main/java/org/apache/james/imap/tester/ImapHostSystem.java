@@ -33,7 +33,6 @@ import org.apache.james.imap.api.process.ImapProcessor;
 import org.apache.james.imap.decode.ImapDecoder;
 import org.apache.james.imap.encode.ImapEncoder;
 import org.apache.james.imap.main.ImapRequestStreamHandler;
-import org.apache.james.imap.main.ImapSessionImpl;
 import org.apache.james.imap.tester.base.HostSystem;
 import org.apache.james.mailbox.MailboxSession.User;
 
@@ -115,8 +114,7 @@ public abstract class ImapHostSystem implements HostSystem {
             out = new ByteBufferOutputStream(continuation);
             in = new ByteBufferInputStream();
             handler = new ImapRequestStreamHandler(decoder, processor, encoder);
-            session = new ImapSessionImpl();
-            session.setLog(new SilentLog());
+            session = new ImapSessionImpl(new SilentLog());
         }
 
         public String readLine() throws Exception {
