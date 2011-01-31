@@ -266,7 +266,7 @@ C:
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A4 OK APPEND completed\.
+S: A4 OK (\[.+\] )?APPEND completed\.
 C: A5 APPEND testmailbox {14996+}
 C: Return-Path: <robertburrelldonkin@gmail.com>
 C: Received: (qmail 26928 invoked from network); 11 Mar 2008 18:54:17 -0000
@@ -520,7 +520,7 @@ C:
 C: 
 S: \* 2 EXISTS
 S: \* 2 RECENT
-S: A5 OK APPEND completed\.
+S: A5 OK (\[.+\] )?APPEND completed\.
 C: A6 APPEND testmailbox {765+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -558,7 +558,7 @@ C: --1729--
 C: 
 S: \* 3 EXISTS
 S: \* 3 RECENT
-S: A6 OK APPEND completed\.
+S: A6 OK (\[.+\] )?APPEND completed\.
 C: A7 APPEND testmailbox {3362+}
 C: Delivered-To: robertburrelldonkin@gmail.com
 C: Received: by 10.114.126.16 with SMTP id y16cs68962wac;
@@ -650,7 +650,7 @@ C: --=-blWYb/063JwXox8nBGv5--
 C:
 S: \* 4 EXISTS
 S: \* 4 RECENT
-S: A7 OK APPEND completed\.
+S: A7 OK (\[.+\] )?APPEND completed\.
 C: A8 APPEND testmailbox {4175+}
 C: Delivered-To: robertburrelldonkin@gmail.com
 C: Received: by 10.114.126.16 with SMTP id y16cs69319wac;
@@ -749,7 +749,7 @@ C: --=-iC8rnNDvTPHypqsz+j7t--
 C:
 S: \* 5 EXISTS
 S: \* 5 RECENT
-S: A8 OK APPEND completed\.
+S: A8 OK (\[.+\] )?APPEND completed\.
 C: A9 APPEND testmailbox {835+}
 C: From: Samual Smith <sam@example.org>
 C: To: John Smith <john@example.org>
@@ -775,7 +775,7 @@ C: "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
 C: <html><head><title>Rhubarb</title></head><body>Rhubarb!</body></html>
 S: \* 6 EXISTS
 S: \* 6 RECENT
-S: A9 OK APPEND completed\.
+S: A9 OK (\[.+\] )?APPEND completed\.
 C: A10 FETCH 1:* ()
 S: \* 1 FETCH \(\)
 S: \* 2 FETCH \(\)

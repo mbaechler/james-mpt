@@ -57,7 +57,7 @@ C: --1729--
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A4 OK APPEND completed\.
+S: A4 OK (\[.+\] )?APPEND completed\.
 C: A5 SELECT testmailbox
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 1 EXISTS

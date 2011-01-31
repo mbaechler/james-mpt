@@ -68,7 +68,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Hello Joe, do you think we can meet at 3:30 tomorrow?
 C:
-S: 1c OK APPEND completed.
+S: 1c OK (\[.+\] )?APPEND completed.
 
 C: 1b STATUS existsresponse (MESSAGES RECENT)
 S: \* STATUS \"existsresponse\" \(MESSAGES 1 RECENT 1\)

@@ -38,7 +38,7 @@ C:
 C: any objections?
 C: 
 C: - robert
-S: g OK APPEND completed\.
+S: g OK (\[.+\] )?APPEND completed\.
 C: a SEARCH FLAGGED
 S: \* SEARCH
 S: a OK SEARCH completed.

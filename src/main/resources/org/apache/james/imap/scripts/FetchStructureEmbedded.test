@@ -120,7 +120,7 @@ C: --1729--
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A4 OK APPEND completed\.
+S: A4 OK (\[.+\] )?APPEND completed\.
 C: A5 FETCH 1 (BODY[])
 S: \* 1 FETCH \(FLAGS \(\\Recent \\Seen\) BODY\[\] \{1767\}
 S: From: Timothy Tayler <timothy@example\.org>

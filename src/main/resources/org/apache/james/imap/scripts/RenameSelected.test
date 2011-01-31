@@ -36,7 +36,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A4 OK APPEND completed\.
+S: A4 OK (\[.+\] )?APPEND completed\.
 C: A5 APPEND testmailbox {185+}
 C: From: John Smith <john@example.org>
 C: To: Timothy Taylor <tim@example.org>
@@ -47,7 +47,7 @@ C:
 C: Hello, World!
 S: \* 2 EXISTS
 S: \* 2 RECENT
-S: A5 OK APPEND completed\.
+S: A5 OK (\[.+\] )?APPEND completed\.
 C: A6 APPEND testmailbox {227+}
 C: From: John Smith <john@example.org>
 C: Sender: Samual Smith <sam@example.org>
@@ -59,7 +59,7 @@ C:
 C: Hello, World!
 S: \* 3 EXISTS
 S: \* 3 RECENT
-S: A6 OK APPEND completed\.
+S: A6 OK (\[.+\] )?APPEND completed\.
 C: A7 APPEND testmailbox {185+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -70,7 +70,7 @@ C: This is a very simple email.
 C: 
 S: \* 4 EXISTS
 S: \* 4 RECENT
-S: A7 OK APPEND completed\.
+S: A7 OK (\[.+\] )?APPEND completed\.
 C: A8 APPEND testmailbox {318+}
 C: From: "Brian G. Hutton" <brian@example.org>
 C: To: Timothy Taylor <tim@example.org>, faith@example.org, Huh? <sam@example.org>
@@ -82,7 +82,7 @@ C:
 C: Rhubarb!
 S: \* 5 EXISTS
 S: \* 5 RECENT
-S: A8 OK APPEND completed\.
+S: A8 OK (\[.+\] )?APPEND completed\.
 C: A9 SELECT testmailbox
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 5 EXISTS

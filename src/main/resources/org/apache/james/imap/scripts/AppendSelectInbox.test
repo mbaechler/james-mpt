@@ -28,7 +28,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Test 01
 C:
-S: A003 OK APPEND completed.
+S: A003 OK (\[.+\] )?APPEND completed.
 
 C: A003 APPEND inbox {254+}
 C: Date: Mon, 7 Feb 1994 21:52:25 -0800 (PST)
@@ -41,7 +41,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Test 02
 C:
-S: A003 OK APPEND completed.
+S: A003 OK (\[.+\] )?APPEND completed.
 
 C: abcd SELECT inbox
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)

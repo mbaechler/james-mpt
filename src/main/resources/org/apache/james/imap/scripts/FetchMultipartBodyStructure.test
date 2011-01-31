@@ -171,7 +171,7 @@ C:
 C: --=-tIdGYVstQJghyEDATnJ+--
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A4 OK APPEND completed\.
+S: A4 OK (\[.+\] )?APPEND completed\.
 C: A5 APPEND testmailbox {569+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -203,7 +203,7 @@ C: --1729--
 C: 
 S: \* 2 EXISTS
 S: \* 2 RECENT
-S: A5 OK APPEND completed\.
+S: A5 OK (\[.+\] )?APPEND completed\.
 C: A6 FETCH 1:* ()
 S: \* 1 FETCH \(\)
 S: \* 2 FETCH \(\)

@@ -47,7 +47,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Test 01
 C:
-S: A005 OK APPEND completed.
+S: A005 OK (\[.+\] )?APPEND completed.
 
 C: a006 STATUS statustest (UNSEEN RECENT )
 S: \* STATUS \"statustest\" \(RECENT 1 UNSEEN 1\)

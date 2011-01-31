@@ -30,7 +30,7 @@ S: a3 OK STORE completed.
 
 # copy messages 2-4
 C: a4 COPY 2:4 copied
-S: a4 OK COPY completed.
+S: a4 OK (\[.+\] )?COPY completed.
 
 # Check there's 3 messages in the copied mailbox
 C: a5 STATUS copied (MESSAGES)

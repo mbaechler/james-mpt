@@ -309,7 +309,7 @@ C:
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A20 OK APPEND completed\.
+S: A20 OK (\[.+\] )?APPEND completed\.
 C: A125 SEARCH SUBJECT o
 S: \* SEARCH 1
 S: A125 OK SEARCH completed\.

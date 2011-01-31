@@ -36,7 +36,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A4 OK APPEND completed.
+S: A4 OK (\[.+\] )?APPEND completed.
 C: A5 APPEND testmailbox {704+}
 C: Received: by 10.114.81.13 with HTTP; Sat, 2 Feb 2008 05:14:19 -0800 (PST)
 C: Message-ID: <f470f68e0802020514m6eaba233u96a9021a2697a48d@mail.gmail.com>
@@ -59,7 +59,7 @@ C:
 C: - robert
 S: \* 2 EXISTS
 S: \* 2 RECENT
-S: A5 OK APPEND completed.
+S: A5 OK (\[.+\] )?APPEND completed.
 C: A6 APPEND testmailbox {668+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -91,7 +91,7 @@ C: --1729--
 C: 
 S: \* 3 EXISTS
 S: \* 3 RECENT
-S: A6 OK APPEND completed.
+S: A6 OK (\[.+\] )?APPEND completed.
 C: A7 APPEND testmailbox {1767+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -186,7 +186,7 @@ C: --1729--
 C: 
 S: \* 4 EXISTS
 S: \* 4 RECENT
-S: A7 OK APPEND completed.
+S: A7 OK (\[.+\] )?APPEND completed.
 C: A8 APPEND testmailbox {185+}
 C: From: John Smith <john@example.org>
 C: To: Timothy Taylor <tim@example.org>
@@ -197,7 +197,7 @@ C:
 C: Hello, World!
 S: \* 5 EXISTS
 S: \* 5 RECENT
-S: A8 OK APPEND completed.
+S: A8 OK (\[.+\] )?APPEND completed.
 C: A9 APPEND testmailbox {3366+}
 C: Delivered-To: robertburrelldonkin@gmail.com
 C: Received: by 10.114.126.16 with SMTP id y16cs68962wac;
@@ -291,7 +291,7 @@ C:
 C: 
 S: \* 6 EXISTS
 S: \* 6 RECENT
-S: A9 OK APPEND completed.
+S: A9 OK (\[.+\] )?APPEND completed.
 C: A10 APPEND testmailbox {4173+}
 C: Delivered-To: robertburrelldonkin@gmail.com
 C: Received: by 10.114.126.16 with SMTP id y16cs69319wac;
@@ -389,7 +389,7 @@ C:
 C: --=-iC8rnNDvTPHypqsz+j7t--
 S: \* 7 EXISTS
 S: \* 7 RECENT
-S: A10 OK APPEND completed.
+S: A10 OK (\[.+\] )?APPEND completed.
 C: A11 APPEND testmailbox {404+}
 C: Resent-From: John Smith <john@example.org>
 C: Resent-To: Samual Smith <sam@example.org>
@@ -404,7 +404,7 @@ C:
 C: Rhubard or custard? Rhubard AND custard!
 S: \* 8 EXISTS
 S: \* 8 RECENT
-S: A11 OK APPEND completed.
+S: A11 OK (\[.+\] )?APPEND completed.
 C: A12 APPEND testmailbox {429+}
 C: Received: from alpha.beta
 C:    by example.org
@@ -423,7 +423,7 @@ C: Rhubard! Rhubard! Rhubard!
 C: 
 S: \* 9 EXISTS
 S: \* 9 RECENT
-S: A12 OK APPEND completed.
+S: A12 OK (\[.+\] )?APPEND completed.
 C: A13 APPEND testmailbox {14996+}
 C: Return-Path: <robertburrelldonkin@gmail.com>
 C: Received: (qmail 26928 invoked from network); 11 Mar 2008 18:54:17 -0000
@@ -677,7 +677,7 @@ C:
 C: 
 S: \* 10 EXISTS
 S: \* 10 RECENT
-S: A13 OK APPEND completed.
+S: A13 OK (\[.+\] )?APPEND completed.
 C: A14 SELECT testmailbox
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 10 EXISTS

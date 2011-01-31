@@ -60,7 +60,7 @@ C: a3 CREATE copied
 S: a3 OK CREATE completed.
 
 C: a4 UID COPY 2 copied
-S: a4 OK COPY completed.
+S: a4 OK (\[.+\] )?COPY completed.
 
 C: a STATUS copied (MESSAGES)
 S: \* STATUS "copied" \(MESSAGES 1\)

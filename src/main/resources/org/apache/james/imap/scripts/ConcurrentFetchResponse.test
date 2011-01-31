@@ -37,7 +37,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Hello Joe, do you think we can meet at 3:30 tomorrow?
 C:
-S: 1c OK APPEND completed.
+S: 1c OK (\[.+\] )?APPEND completed.
 
 C: 1c APPEND multibox {312+}
 C: Date: Mon, 7 Feb 1994 21:52:25 -0800 (PST)
@@ -50,7 +50,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Hello Joe, do you think we can meet at 3:30 tomorrow?
 C:
-S: 1c OK APPEND completed.
+S: 1c OK (\[.+\] )?APPEND completed.
 
 C: 1d SELECT multibox
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
@@ -110,7 +110,7 @@ S: 2b OK NOOP completed.
 SESSION: 3
 C: 3b COPY 2 inbox
 S: \* 1 FETCH \(FLAGS \(\\Flagged\)\)
-S: 3b OK COPY completed.
+S: 3b OK (\[.+\] )?COPY completed.
 
 # Update another flag, this time SILENT 
 # Still get notifications on *other* sessions, but not this one.

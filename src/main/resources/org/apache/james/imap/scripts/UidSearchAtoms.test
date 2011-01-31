@@ -36,7 +36,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A4 OK APPEND completed\.
+S: A4 OK (\[.+\] )?APPEND completed\.
 C: A5 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A5 OK STORE completed\.
@@ -54,7 +54,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A7 OK APPEND completed\.
+S: A7 OK (\[.+\] )?APPEND completed\.
 C: A8 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A8 OK STORE completed\.
@@ -72,7 +72,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A10 OK APPEND completed\.
+S: A10 OK (\[.+\] )?APPEND completed\.
 C: A11 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A11 OK STORE completed\.
@@ -90,7 +90,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A13 OK APPEND completed\.
+S: A13 OK (\[.+\] )?APPEND completed\.
 C: A14 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A14 OK STORE completed\.
@@ -108,7 +108,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A16 OK APPEND completed\.
+S: A16 OK (\[.+\] )?APPEND completed\.
 C: A17 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A17 OK STORE completed\.
@@ -126,7 +126,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A19 OK APPEND completed\.
+S: A19 OK (\[.+\] )?APPEND completed\.
 C: A20 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A20 OK STORE completed\.
@@ -144,7 +144,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A22 OK APPEND completed\.
+S: A22 OK (\[.+\] )?APPEND completed\.
 C: A23 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A23 OK STORE completed\.
@@ -162,7 +162,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A25 OK APPEND completed\.
+S: A25 OK (\[.+\] )?APPEND completed\.
 C: A26 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A26 OK STORE completed\.
@@ -180,7 +180,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A28 OK APPEND completed\.
+S: A28 OK (\[.+\] )?APPEND completed\.
 C: A29 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A29 OK STORE completed\.
@@ -198,7 +198,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A31 OK APPEND completed\.
+S: A31 OK (\[.+\] )?APPEND completed\.
 C: A32 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A32 OK STORE completed\.
@@ -216,7 +216,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A34 OK APPEND completed\.
+S: A34 OK (\[.+\] )?APPEND completed\.
 C: A35 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A35 OK STORE completed\.
@@ -234,7 +234,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A37 OK APPEND completed\.
+S: A37 OK (\[.+\] )?APPEND completed\.
 C: A38 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A38 OK STORE completed\.
@@ -252,7 +252,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A40 OK APPEND completed\.
+S: A40 OK (\[.+\] )?APPEND completed\.
 C: A41 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A41 OK STORE completed\.
@@ -270,7 +270,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A43 OK APPEND completed\.
+S: A43 OK (\[.+\] )?APPEND completed\.
 C: A44 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A44 OK STORE completed\.
@@ -288,7 +288,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A46 OK APPEND completed\.
+S: A46 OK (\[.+\] )?APPEND completed\.
 C: A47 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A47 OK STORE completed\.
@@ -306,7 +306,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A49 OK APPEND completed\.
+S: A49 OK (\[.+\] )?APPEND completed\.
 C: A50 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A50 OK STORE completed\.
@@ -324,7 +324,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A52 OK APPEND completed\.
+S: A52 OK (\[.+\] )?APPEND completed\.
 C: A53 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A53 OK STORE completed\.
@@ -342,7 +342,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A55 OK APPEND completed\.
+S: A55 OK (\[.+\] )?APPEND completed\.
 C: A56 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A56 OK STORE completed\.
@@ -360,7 +360,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A58 OK APPEND completed\.
+S: A58 OK (\[.+\] )?APPEND completed\.
 C: A59 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A59 OK STORE completed\.
@@ -378,7 +378,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A61 OK APPEND completed\.
+S: A61 OK (\[.+\] )?APPEND completed\.
 C: A62 STORE 1  FLAGS (\DELETED)
 S: \* 1 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
 S: A62 OK STORE completed\.
@@ -396,7 +396,7 @@ C: This is a very simple email.
 C: 
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A64 OK APPEND completed\.
+S: A64 OK (\[.+\] )?APPEND completed\.
 C: A65 APPEND testmailbox {704+}
 C: Received: by 10.114.81.13 with HTTP; Sat, 2 Feb 2008 05:14:19 -0800 (PST)
 C: Message-ID: <f470f68e0802020514m6eaba233u96a9021a2697a48d@mail.gmail.com>
@@ -419,7 +419,7 @@ C:
 C: - robert
 S: \* 2 EXISTS
 S: \* 2 RECENT
-S: A65 OK APPEND completed\.
+S: A65 OK (\[.+\] )?APPEND completed\.
 C: A66 APPEND testmailbox {668+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -451,7 +451,7 @@ C: --1729--
 C: 
 S: \* 3 EXISTS
 S: \* 3 RECENT
-S: A66 OK APPEND completed\.
+S: A66 OK (\[.+\] )?APPEND completed\.
 C: A67 APPEND testmailbox {765+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -489,7 +489,7 @@ C: --1729--
 C: 
 S: \* 4 EXISTS
 S: \* 4 RECENT
-S: A67 OK APPEND completed\.
+S: A67 OK (\[.+\] )?APPEND completed\.
 C: A68 APPEND testmailbox {1767+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -584,7 +584,7 @@ C: --1729--
 C: 
 S: \* 5 EXISTS
 S: \* 5 RECENT
-S: A68 OK APPEND completed\.
+S: A68 OK (\[.+\] )?APPEND completed\.
 C: A69 APPEND testmailbox {185+}
 C: From: John Smith <john@example.org>
 C: To: Timothy Taylor <tim@example.org>
@@ -595,7 +595,7 @@ C:
 C: Hello, World!
 S: \* 6 EXISTS
 S: \* 6 RECENT
-S: A69 OK APPEND completed\.
+S: A69 OK (\[.+\] )?APPEND completed\.
 C: A70 APPEND testmailbox {227+}
 C: From: John Smith <john@example.org>
 C: Sender: Samual Smith <sam@example.org>
@@ -607,7 +607,7 @@ C:
 C: Hello, World!
 S: \* 7 EXISTS
 S: \* 7 RECENT
-S: A70 OK APPEND completed\.
+S: A70 OK (\[.+\] )?APPEND completed\.
 C: A71 APPEND testmailbox {185+}
 C: From: Timothy Tayler <timothy@example.org>
 C: To: Samual Smith <samual@example.org>
@@ -618,7 +618,7 @@ C: This is a very simple email.
 C: 
 S: \* 8 EXISTS
 S: \* 8 RECENT
-S: A71 OK APPEND completed\.
+S: A71 OK (\[.+\] )?APPEND completed\.
 C: A72 APPEND testmailbox {318+}
 C: From: "Brian G. Hutton" <brian@example.org>
 C: To: Timothy Taylor <tim@example.org>, faith@example.org, Huh? <sam@example.org>
@@ -630,7 +630,7 @@ C:
 C: Rhubarb!
 S: \* 9 EXISTS
 S: \* 9 RECENT
-S: A72 OK APPEND completed\.
+S: A72 OK (\[.+\] )?APPEND completed\.
 C: A73 APPEND testmailbox {11976+}
 C: Received: by 10.114.126.16 with HTTP; Tue, 11 Mar 2008 11:53:38 -0700 (PDT)
 C: Message-ID: <f470f68e0803111153w2262a775sdefc8c423c5d5c95@mail.gmail.com>
@@ -841,7 +841,7 @@ C: ------=_Part_3998_1661991.1205261618747--
 C: 
 S: \* 10 EXISTS
 S: \* 10 RECENT
-S: A73 OK APPEND completed\.
+S: A73 OK (\[.+\] )?APPEND completed\.
 C: A74 APPEND testmailbox {3367+}
 C: Delivered-To: robertburrelldonkin@gmail.com
 C: Received: by 10.114.126.16 with SMTP id y16cs68962wac;
@@ -935,7 +935,7 @@ C:
 C: 
 S: \* 11 EXISTS
 S: \* 11 RECENT
-S: A74 OK APPEND completed\.
+S: A74 OK (\[.+\] )?APPEND completed\.
 C: A75 APPEND testmailbox {4174+}
 C: Delivered-To: robertburrelldonkin@gmail.com
 C: Received: by 10.114.126.16 with SMTP id y16cs69319wac;
@@ -1033,7 +1033,7 @@ C:
 C: --=-iC8rnNDvTPHypqsz+j7t--
 S: \* 12 EXISTS
 S: \* 12 RECENT
-S: A75 OK APPEND completed\.
+S: A75 OK (\[.+\] )?APPEND completed\.
 C: A76 APPEND testmailbox {302+}
 C: From: Samual Smith <sam@example.org>
 C: To: John Smith <john@example.org>
@@ -1047,7 +1047,7 @@ C:
 C: Rhubard, I say!
 S: \* 13 EXISTS
 S: \* 13 RECENT
-S: A76 OK APPEND completed\.
+S: A76 OK (\[.+\] )?APPEND completed\.
 C: A77 APPEND testmailbox {404+}
 C: Resent-From: John Smith <john@example.org>
 C: Resent-To: Samual Smith <sam@example.org>
@@ -1062,7 +1062,7 @@ C:
 C: Rhubard or custard? Rhubard AND custard!
 S: \* 14 EXISTS
 S: \* 14 RECENT
-S: A77 OK APPEND completed\.
+S: A77 OK (\[.+\] )?APPEND completed\.
 C: A78 APPEND testmailbox {429+}
 C: Received: from alpha.beta
 C:    by example.org
@@ -1081,7 +1081,7 @@ C: Rhubard! Rhubard! Rhubard!
 C: 
 S: \* 15 EXISTS
 S: \* 15 RECENT
-S: A78 OK APPEND completed\.
+S: A78 OK (\[.+\] )?APPEND completed\.
 C: A79 APPEND testmailbox {217+}
 C: From: Timothy Taylor <tim@example.org>
 C: To: Alpha Group:John Smith <john@example.org>, sid@example.org;
@@ -1093,7 +1093,7 @@ C: Custard? Rhubard!
 C: 
 S: \* 16 EXISTS
 S: \* 16 RECENT
-S: A79 OK APPEND completed\.
+S: A79 OK (\[.+\] )?APPEND completed\.
 C: A80 APPEND testmailbox {14863+}
 C: Return-Path: <robertburrelldonkin@gmail.com>
 C: Received: (qmail 16059 invoked from network); 11 Mar 2008 18:54:16 -0000
@@ -1373,7 +1373,7 @@ C:
 C: 
 S: \* 17 EXISTS
 S: \* 17 RECENT
-S: A80 OK APPEND completed\.
+S: A80 OK (\[.+\] )?APPEND completed\.
 C: A81 APPEND testmailbox {14154+}
 C: Return-Path: <robertburrelldonkin@gmail.com>
 C: Delivered-To: rob@localhost
@@ -1614,7 +1614,7 @@ C:
 C: 
 S: \* 18 EXISTS
 S: \* 18 RECENT
-S: A81 OK APPEND completed\.
+S: A81 OK (\[.+\] )?APPEND completed\.
 C: A82 APPEND testmailbox {14996+}
 C: Return-Path: <robertburrelldonkin@gmail.com>
 C: Received: (qmail 26928 invoked from network); 11 Mar 2008 18:54:17 -0000
@@ -1868,7 +1868,7 @@ C:
 C: 
 S: \* 19 EXISTS
 S: \* 19 RECENT
-S: A82 OK APPEND completed\.
+S: A82 OK (\[.+\] )?APPEND completed\.
 C: A83 STORE 1:9  +FLAGS (\FLAGGED)
 S: \* 1 FETCH \(FLAGS \(\\Flagged \\Recent\)\)
 S: \* 2 FETCH \(FLAGS \(\\Flagged \\Recent\)\)

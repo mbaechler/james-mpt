@@ -31,7 +31,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Test 01
 C:
-S: 1b OK APPEND completed.
+S: 1b OK (\[.+\] )?APPEND completed.
 
 C: 1b APPEND expungeresponse {254+}
 C: Date: Mon, 7 Feb 1994 21:52:25 -0800 (PST)
@@ -44,7 +44,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Test 02
 C:
-S: 1b OK APPEND completed.
+S: 1b OK (\[.+\] )?APPEND completed.
 
 C: 1c APPEND expungeresponse (\Deleted) {254+}
 C: Date: Mon, 7 Feb 1994 21:52:25 -0800 (PST)
@@ -57,7 +57,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Test 03
 C:
-S: 1c OK APPEND completed.
+S: 1c OK (\[.+\] )?APPEND completed.
 
 C: 1d APPEND expungeresponse {254+}
 C: Date: Mon, 7 Feb 1994 21:52:25 -0800 (PST)
@@ -70,7 +70,7 @@ C: Content-Type: TEXT/PLAIN; CHARSET=US-ASCII
 C:
 C: Test 04
 C:
-S: 1d OK APPEND completed.
+S: 1d OK (\[.+\] )?APPEND completed.
 
 C: 1e SELECT expungeresponse
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)

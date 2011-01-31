@@ -35,7 +35,7 @@ C: Works!
 C: 
 S: \* 5 EXISTS
 S: \* 5 RECENT
-S: A007 OK APPEND completed.
+S: A007 OK (\[.+\] )?APPEND completed.
 
 C: f1 FETCH 1 (ENVELOPE)
 S: \* 1 FETCH \(ENVELOPE \(\"Mon, 7 Feb 1994 21:52:25 -0800 \(PST\)\" \"Test 01\" \(\(\"Fred Foobar\" NIL \"foobar\" \"Blurdybloop.COM\"\)\) \(\(\"Fred Foobar\" NIL \"foobar\" \"Blurdybloop.COM\"\)\) \(\(\"Fred Foobar\" NIL \"foobar\" \"Blurdybloop.COM\"\)\) \(\(NIL NIL \"mooch\" \"owatagu.siam.edu\"\)\) NIL NIL NIL \"<B27397-0100000@Blurdybloop.COM>\"\)\)

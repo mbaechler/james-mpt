@@ -37,7 +37,7 @@ C:
 C: Rhubarb!
 S: \* 1 EXISTS
 S: \* 1 RECENT
-S: A4 OK APPEND completed\.
+S: A4 OK (\[.+\] )?APPEND completed\.
 C: A5 APPEND testmailbox {704+}
 C: Received: by 10.114.81.13 with HTTP; Sat, 2 Feb 2008 05:14:19 -0800 (PST)
 C: Message-ID: <f470f68e0802020514m6eaba233u96a9021a2697a48d@mail.gmail.com>
@@ -60,7 +60,7 @@ C:
 C: - robert
 S: \* 2 EXISTS
 S: \* 2 RECENT
-S: A5 OK APPEND completed\.
+S: A5 OK (\[.+\] )?APPEND completed\.
 C: A6 APPEND testmailbox {835+}
 C: From: Samual Smith <sam@example.org>
 C: To: John Smith <john@example.org>
@@ -86,7 +86,7 @@ C: "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd\">
 C: <html><head><title>Rhubarb</title></head><body>Rhubarb!</body></html>
 S: \* 3 EXISTS
 S: \* 3 RECENT
-S: A6 OK APPEND completed\.
+S: A6 OK (\[.+\] )?APPEND completed\.
 C: A7 FETCH 1:* ()
 S: \* 1 FETCH \(\)
 S: \* 2 FETCH \(\)
