@@ -132,6 +132,7 @@ public abstract class ImapHostSystem implements HostSystem {
         }
 
         public void stop() throws Exception {
+            session.deselect();
         }
 
         public void writeLine(String line) throws Exception {
@@ -142,6 +143,7 @@ public abstract class ImapHostSystem implements HostSystem {
         public void forceConnectionClose(String byeMessage) {
             try {
                 out.write(byeMessage);
+                session.deselect();
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
