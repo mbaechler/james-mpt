@@ -203,7 +203,7 @@
         <inherited>true</inherited>
         <configuration>
           <aggregate>true</aggregate>
-          <targetjdk>${target.jdk}</targetjdk>
+          <targetJdk>${target.jdk}</targetJdk>
           <rulesets>
             <ruleset>/rulesets/basic.xml</ruleset>
             <ruleset>/rulesets/controversial.xml</ruleset>
