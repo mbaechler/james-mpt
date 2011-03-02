@@ -21,7 +21,6 @@ package org.apache.james.mailbox.jcr.host;
 import java.io.File;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.impl.SimpleLog;
 import org.apache.jackrabbit.core.RepositoryImpl;
 import org.apache.jackrabbit.core.config.RepositoryConfig;
 import org.apache.james.imap.api.process.ImapProcessor;
@@ -38,6 +37,7 @@ import org.apache.james.mailbox.jcr.JCRSubscriptionManager;
 import org.apache.james.mailbox.jcr.JCRUtils;
 import org.apache.james.mailbox.jcr.mail.JCRCachingUidProvider;
 import org.apache.james.mailbox.store.MockAuthenticator;
+import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 public class JCRHostSystem extends ImapHostSystem{
@@ -78,7 +78,7 @@ public class JCRHostSystem extends ImapHostSystem{
 
             final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, new JCRSubscriptionManager(mf));
             resetUserMetaData();
-            MailboxSession session = mailboxManager.createSystemSession("test", new SimpleLog("TestLog"));
+            MailboxSession session = mailboxManager.createSystemSession("test", LoggerFactory.getLogger("TestLog"));
             mailboxManager.startProcessingRequest(session);
             //mailboxManager.deleteEverything(session);
             mailboxManager.endProcessingRequest(session);

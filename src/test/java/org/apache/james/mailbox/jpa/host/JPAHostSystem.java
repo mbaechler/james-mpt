@@ -25,7 +25,6 @@ import java.util.HashMap;
 import javax.persistence.EntityManagerFactory;
 
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.logging.impl.SimpleLog;
 import org.apache.james.imap.api.process.ImapProcessor;
 import org.apache.james.imap.encode.main.DefaultImapEncoderFactory;
 import org.apache.james.imap.main.DefaultImapDecoderFactory;
@@ -49,6 +48,7 @@ import org.apache.james.mailbox.jpa.openjpa.OpenJPAMessageManager;
 import org.apache.james.mailbox.jpa.user.model.JPASubscription;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.openjpa.persistence.OpenJPAPersistence;
+import org.slf4j.LoggerFactory;
 
 public class JPAHostSystem extends ImapHostSystem {
 
@@ -132,7 +132,7 @@ public class JPAHostSystem extends ImapHostSystem {
 
     public void resetData() throws Exception {
         resetUserMetaData();
-        MailboxSession session = mailboxManager.createSystemSession("test", new SimpleLog("TestLog"));
+        MailboxSession session = mailboxManager.createSystemSession("test", LoggerFactory.getLogger("TestLog"));
         mailboxManager.startProcessingRequest(session);
         mailboxManager.deleteEverything(session);
         mailboxManager.endProcessingRequest(session);

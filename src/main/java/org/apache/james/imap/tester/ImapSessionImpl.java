@@ -21,11 +21,11 @@ package org.apache.james.imap.tester;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.apache.commons.logging.Log;
 import org.apache.james.imap.api.ImapSessionState;
 import org.apache.james.imap.api.process.ImapLineHandler;
 import org.apache.james.imap.api.process.ImapSession;
 import org.apache.james.imap.api.process.SelectedMailbox;
+import org.slf4j.Logger;
 
 public class ImapSessionImpl implements ImapSession{
 
@@ -36,9 +36,9 @@ public class ImapSessionImpl implements ImapSession{
 
     private final Map<String, Object> attributesByKey;
 
-	private Log log;
+	private Logger log;
 
-    public ImapSessionImpl(Log log) {
+    public ImapSessionImpl(Logger log) {
         this.attributesByKey = new ConcurrentHashMap<String, Object>();
         this.log = log;
     }
@@ -91,7 +91,7 @@ public class ImapSessionImpl implements ImapSession{
         }
     }
 
-    public Log getLog() {
+    public Logger getLog() {
         return log;
     }
 
