@@ -22,7 +22,6 @@
     <artifactId>apache-james-mpt-project</artifactId>
     <groupId>org.apache.james</groupId>
     <version>0.2-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.apache.james</groupId>
@@ -67,8 +66,8 @@ MPT is a functional test framework specialised for the ASCII line-base protocols
   <build>    
     <plugins>
       <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-assembly-plugin</artifactId>
-        <version>2.2-beta-2</version>
         <configuration>
           <descriptorSourceDirectory>${basedir}/src/assemble/</descriptorSourceDirectory>
         </configuration>
