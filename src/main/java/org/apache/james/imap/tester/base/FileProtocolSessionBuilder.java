@@ -25,6 +25,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
+
 
 /**
  * A builder which generates a ProtocolSession from a test file.
@@ -80,7 +82,11 @@ public class FileProtocolSessionBuilder {
             throw new Exception("Test Resource '" + fileName + "' not found.");
         }
 
-        addProtocolLinesFromStream(is, session, fileName);
+        try {
+            addProtocolLinesFromStream(is, session, fileName);
+        } finally {
+            IOUtils.closeQuietly(is);
+        }
     }
 
     /**
@@ -98,60 +104,64 @@ public class FileProtocolSessionBuilder {
             ProtocolSession session, String fileName) throws Exception {
         int sessionNumber = -1;
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        String next;
-        int lineNumber = -1;
-        String lastClientMsg = "";
-        while ((next = reader.readLine()) != null) {
-            String location = fileName + ":" + lineNumber;
-            if (SERVER_CONTINUATION_TAG.equals(next)) {
-                session.CONT(sessionNumber);
-            } else if (next.startsWith(CLIENT_TAG)) {
-                String clientMsg = "";
-                if (next.length() > 3) {
-                    clientMsg = next.substring(3);
-                }
-                session.CL(sessionNumber, clientMsg);
-                lastClientMsg = clientMsg;
-            } else if (next.startsWith(SERVER_TAG)) {
-                String serverMsg = "";
-                if (next.length() > 3) {
-                    serverMsg = next.substring(3);
-                }
-                session.SL(sessionNumber, serverMsg, location, lastClientMsg);
-            } else if (next.startsWith(OPEN_UNORDERED_BLOCK_TAG)) {
-                List<String> unorderedLines = new ArrayList<String>(5);
-                next = reader.readLine();
-
-                while (!next.startsWith(CLOSE_UNORDERED_BLOCK_TAG)) {
-                    if (!next.startsWith(SERVER_TAG)) {
-                        throw new Exception(
-                                "Only 'S: ' lines are permitted inside a 'SUB {' block.");
+        try {
+            String next;
+            int lineNumber = -1;
+            String lastClientMsg = "";
+            while ((next = reader.readLine()) != null) {
+                String location = fileName + ":" + lineNumber;
+                if (SERVER_CONTINUATION_TAG.equals(next)) {
+                    session.CONT(sessionNumber);
+                } else if (next.startsWith(CLIENT_TAG)) {
+                    String clientMsg = "";
+                    if (next.length() > 3) {
+                        clientMsg = next.substring(3);
                     }
-                    String serverMsg = next.substring(3);
-                    unorderedLines.add(serverMsg);
+                    session.CL(sessionNumber, clientMsg);
+                    lastClientMsg = clientMsg;
+                } else if (next.startsWith(SERVER_TAG)) {
+                    String serverMsg = "";
+                    if (next.length() > 3) {
+                        serverMsg = next.substring(3);
+                    }
+                    session.SL(sessionNumber, serverMsg, location, lastClientMsg);
+                } else if (next.startsWith(OPEN_UNORDERED_BLOCK_TAG)) {
+                    List<String> unorderedLines = new ArrayList<String>(5);
                     next = reader.readLine();
-                    lineNumber++;
+    
+                    while (!next.startsWith(CLOSE_UNORDERED_BLOCK_TAG)) {
+                        if (!next.startsWith(SERVER_TAG)) {
+                            throw new Exception(
+                                    "Only 'S: ' lines are permitted inside a 'SUB {' block.");
+                        }
+                        String serverMsg = next.substring(3);
+                        unorderedLines.add(serverMsg);
+                        next = reader.readLine();
+                        lineNumber++;
+                    }
+    
+                    session.SUB(sessionNumber, unorderedLines, location,
+                            lastClientMsg);
+                } else if (next.startsWith(COMMENT_TAG)
+                        || next.trim().length() == 0) {
+                    // ignore these lines.
+                } else if (next.startsWith(SESSION_TAG)) {
+                    String number = next.substring(SESSION_TAG.length()).trim();
+                    if (number.length() == 0) {
+                        throw new Exception("No session number specified");
+                    }
+                    sessionNumber = Integer.parseInt(number);
+                } else {
+                    String prefix = next;
+                    if (next.length() > 3) {
+                        prefix = next.substring(0, 3);
+                    }
+                    throw new Exception("Invalid line prefix: " + prefix);
                 }
-
-                session.SUB(sessionNumber, unorderedLines, location,
-                        lastClientMsg);
-            } else if (next.startsWith(COMMENT_TAG)
-                    || next.trim().length() == 0) {
-                // ignore these lines.
-            } else if (next.startsWith(SESSION_TAG)) {
-                String number = next.substring(SESSION_TAG.length()).trim();
-                if (number.length() == 0) {
-                    throw new Exception("No session number specified");
-                }
-                sessionNumber = Integer.parseInt(number);
-            } else {
-                String prefix = next;
-                if (next.length() > 3) {
-                    prefix = next.substring(0, 3);
-                }
-                throw new Exception("Invalid line prefix: " + prefix);
+                lineNumber++;
             }
-            lineNumber++;
+        } finally {
+            IOUtils.closeQuietly(reader);
         }
     }
 

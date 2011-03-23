@@ -22,6 +22,7 @@ package org.apache.james.imap.tester.base;
 import java.io.InputStream;
 import java.util.Locale;
 
+import org.apache.commons.io.IOUtils;
 import org.junit.After;
 
 
@@ -87,10 +88,15 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
         fileName = scriptDirectory + fileName;
         // Need to find local resource.
         InputStream is = this.getClass().getResourceAsStream(fileName);
+
         if (is == null) {
             throw new Exception("Test Resource '" + fileName + "' not found.");
         }
 
-        builder.addProtocolLinesFromStream(is, session, fileName);
+        try {
+            builder.addProtocolLinesFromStream(is, session, fileName);
+        } finally {
+            IOUtils.closeQuietly(is);
+        }
     }
 }
