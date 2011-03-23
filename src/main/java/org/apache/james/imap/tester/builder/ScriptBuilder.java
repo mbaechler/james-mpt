@@ -637,11 +637,11 @@ public class ScriptBuilder {
             clear();
         }
 
-        public final boolean isUidSearch() {
+        public boolean isUidSearch() {
             return uidSearch;
         }
 
-        public final void setUidSearch(boolean uidSearch) {
+        public void setUidSearch(boolean uidSearch) {
             this.uidSearch = uidSearch;
         }
 
@@ -908,20 +908,20 @@ public class ScriptBuilder {
 
         private boolean bodyStructureFetch = false;
 
-        public final boolean isBodyFetch() {
+        public boolean isBodyFetch() {
             return bodyFetch;
         }
 
-        public final Fetch setBodyFetch(boolean bodyFetch) {
+        public Fetch setBodyFetch(boolean bodyFetch) {
             this.bodyFetch = bodyFetch;
             return this;
         }
 
-        public final boolean isBodyStructureFetch() {
+        public boolean isBodyStructureFetch() {
             return bodyStructureFetch;
         }
 
-        public final Fetch setBodyStructureFetch(boolean bodyStructureFetch) {
+        public Fetch setBodyStructureFetch(boolean bodyStructureFetch) {
             this.bodyStructureFetch = bodyStructureFetch;
             return this;
         }
@@ -934,74 +934,74 @@ public class ScriptBuilder {
             return "FETCH 1:* (" + fetchData() + ")";
         }
 
-        public final boolean isFlagsFetch() {
+        public boolean isFlagsFetch() {
             return flagsFetch;
         }
 
-        public final Fetch setFlagsFetch(boolean flagsFetch) {
+        public Fetch setFlagsFetch(boolean flagsFetch) {
             this.flagsFetch = flagsFetch;
             return this;
         }
 
-        public final boolean isUid() {
+        public boolean isUid() {
             return uid;
         }
 
-        public final Fetch setUid(boolean uid) {
+        public Fetch setUid(boolean uid) {
             this.uid = uid;
             return this;
         }
 
-        public final boolean isRfc822Size() {
+        public boolean isRfc822Size() {
             return rfc822Size;
         }
 
-        public final Fetch setRfc822Size(boolean rfc822Size) {
+        public Fetch setRfc822Size(boolean rfc822Size) {
             this.rfc822Size = rfc822Size;
             return this;
         }
 
-        public final boolean isRfc() {
+        public boolean isRfc() {
             return rfc;
         }
 
-        public final Fetch setRfc(boolean rfc) {
+        public Fetch setRfc(boolean rfc) {
             this.rfc = rfc;
             return this;
         }
 
-        public final boolean isRfcHeaders() {
+        public boolean isRfcHeaders() {
             return rfcHeaders;
         }
 
-        public final Fetch setRfcHeaders(boolean rfcHeaders) {
+        public Fetch setRfcHeaders(boolean rfcHeaders) {
             this.rfcHeaders = rfcHeaders;
             return this;
         }
 
-        public final boolean isRfcText() {
+        public boolean isRfcText() {
             return rfcText;
         }
 
-        public final Fetch setRfcText(boolean rfcText) {
+        public Fetch setRfcText(boolean rfcText) {
             this.rfcText = rfcText;
             return this;
         }
 
-        public final boolean isInternalDate() {
+        public boolean isInternalDate() {
             return internalDate;
         }
 
-        public final Fetch setInternalDate(boolean internalDate) {
+        public Fetch setInternalDate(boolean internalDate) {
             this.internalDate = internalDate;
             return this;
         }
 
-        public final String getBody() {
+        public String getBody() {
             return body;
         }
 
-        public final void setBody(String bodyPeek) {
+        public void setBody(String bodyPeek) {
             this.body = bodyPeek;
         }
 
