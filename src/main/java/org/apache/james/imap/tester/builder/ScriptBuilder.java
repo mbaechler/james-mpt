@@ -879,13 +879,13 @@ public class ScriptBuilder {
 
     public static final class Fetch {
 
-        public static final String[] COMPREHENSIVE_HEADERS = { "DATE", "FROM",
+        static final String[] COMPREHENSIVE_HEADERS = { "DATE", "FROM",
                 "TO", "CC", "SUBJECT", "REFERENCES", "IN-REPLY-TO",
                 "MESSAGE-ID", "MIME-VERSION", "CONTENT-TYPE", "X-MAILING-LIST",
                 "X-LOOP", "LIST-ID", "LIST-POST", "MAILING-LIST", "ORIGINATOR",
                 "X-LIST", "SENDER", "RETURN-PATH", "X-BEENTHERE" };
 
-        public static final String[] SELECT_HEADERS = { "DATE", "FROM", "TO",
+        static final String[] SELECT_HEADERS = { "DATE", "FROM", "TO",
                 "ORIGINATOR", "X-LIST" };
 
         private boolean flagsFetch = false;
