@@ -434,15 +434,15 @@ public class ScriptBuilder {
     }
 
     public ScriptBuilder fetchSection(String section) throws Exception {
-        final String body;
+        StringBuffer command = new StringBuffer("FETCH ");
+        command.append(messageNumber);
         if (peek) {
-            body = " (BODY.PEEK[";
+            command.append(" (BODY.PEEK[");
         } else {
-            body = " (BODY[";
+            command.append(" (BODY[");
         }
-        final String command = "FETCH " + messageNumber + body + section + "]"
-                + partialFetch + ")";
-        command(command);
+        command.append(section).append("]").append(partialFetch).append(")");
+        command(command.toString());
         return this;
     }
 
@@ -647,9 +647,9 @@ public class ScriptBuilder {
 
         public String command() {
             if (uidSearch) {
-                return "UID SEARCH " + buffer.toString();
+                return buffer.insert(0, "UID SEARCH ").toString();
             } else {
-                return "SEARCH " + buffer.toString();
+                return buffer.insert(0, "SEARCH ").toString();
             }
         }
 
@@ -659,7 +659,7 @@ public class ScriptBuilder {
         }
 
         private Search append(long term) {
-            return append(new Long(term).toString());
+            return append(Long.valueOf(term).toString());
         }
 
         private Search append(String term) {
@@ -1019,31 +1019,31 @@ public class ScriptBuilder {
         }
 
         public String buildBody(boolean peek, String section) {
-            String result;
+            StringBuffer result;
             if (peek) {
-                result = "BODY.PEEK[";
+                result = new StringBuffer("BODY.PEEK[");
             } else {
-                result = "BODY[";
+                result = new StringBuffer("BODY[");
             }
-            result = result + section + "]";
-            return result;
+            result.append(section).append("]");
+            return result.toString();
         }
 
         public String buildHeaderFields(String[] fields, boolean not) {
-            String result;
+            StringBuffer result;
             if (not) {
-                result = "HEADER.FIELDS.NOT (";
+                result = new StringBuffer("HEADER.FIELDS.NOT (");
             } else {
-                result = "HEADER.FIELDS (";
+                result = new StringBuffer("HEADER.FIELDS (");
             }
             for (int i = 0; i < fields.length; i++) {
                 if (i > 0) {
-                    result = result + " ";
+                    result.append(" ");
                 }
-                result = result + fields[i];
+                result.append(fields[i]);
             }
-            result = result + ")";
-            return result;
+            result.append(")");
+            return result.toString();
         }
 
         public String fetchData() {

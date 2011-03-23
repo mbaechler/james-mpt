@@ -183,7 +183,7 @@ public class ProtocolSession {
     /**
      * A client request, which write the specified message to a Writer.
      */
-    private class ClientRequest implements ProtocolElement {
+    private static class ClientRequest implements ProtocolElement {
         private int sessionNumber;
 
         private String message;
@@ -508,7 +508,7 @@ public class ProtocolSession {
      * different from that expected.
      */
     @SuppressWarnings("serial")
-    public class InvalidServerResponseException extends Exception {
+    public static class InvalidServerResponseException extends Exception {
         public InvalidServerResponseException(String message) {
             super(message);
         }
