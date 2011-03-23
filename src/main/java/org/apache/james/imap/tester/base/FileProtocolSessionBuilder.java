@@ -129,6 +129,10 @@ public class FileProtocolSessionBuilder {
                     List<String> unorderedLines = new ArrayList<String>(5);
                     next = reader.readLine();
     
+                    if (next == null)
+                        throw new Exception("Readline doesn't contain any data, but must not be 'null' (linenumber="
+                                + lineNumber);
+
                     while (!next.startsWith(CLOSE_UNORDERED_BLOCK_TAG)) {
                         if (!next.startsWith(SERVER_TAG)) {
                             throw new Exception(
@@ -138,6 +142,11 @@ public class FileProtocolSessionBuilder {
                         unorderedLines.add(serverMsg);
                         next = reader.readLine();
                         lineNumber++;
+
+                        if (next == null)
+                            throw new Exception("Readline doesn't contain any data, but must not be 'null' (linenumber="
+                                    + lineNumber);
+
                     }
     
                     session.SUB(sessionNumber, unorderedLines, location,
