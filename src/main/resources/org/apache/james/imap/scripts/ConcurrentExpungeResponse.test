@@ -76,10 +76,10 @@ C: 1e SELECT expungeresponse
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 4 EXISTS
 S: \* 4 RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 5\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 5\].*
 S: 1e OK \[READ-WRITE\] SELECT completed.
 
 SESSION: 2
@@ -87,10 +87,10 @@ C: 2a SELECT expungeresponse
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 4 EXISTS
 S: \* 0 RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 5\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 5\].*
 S: 2a OK \[READ-WRITE\] SELECT completed.
 
 SESSION: 3
@@ -98,10 +98,10 @@ C: 3a SELECT expungeresponse
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 4 EXISTS
 S: \* 0 RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 5\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 5\].*
 S: 3a OK \[READ-WRITE\] SELECT completed.
 
 # Do an expunge with session 1
@@ -125,10 +125,10 @@ C: 4a SELECT expungeresponse
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 2 EXISTS
 S: \* 0 RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 5\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 5\].*
 S: 4a OK \[READ-WRITE\] SELECT completed.
 
 SESSION: 1

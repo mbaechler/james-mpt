@@ -47,10 +47,10 @@ C: abcd SELECT inbox
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 2 EXISTS
 S: \* 2 RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 3\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 3\].*
 S: abcd OK \[READ-WRITE\] SELECT completed.
 
 # Try again to ensure that no changes to flags were made.
@@ -58,10 +58,10 @@ C: abcd SELECT "INBOX"
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 2 EXISTS
 S: \* 2 RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 3\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 3\].*
 S: abcd OK \[READ-WRITE\] SELECT completed.
 
 # Closing the inbox will cause the messages to be silently expunged

@@ -76,10 +76,10 @@ C: 1e SELECT alpha
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 4 EXISTS
 S: \* 4 RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 5\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 5\].*
 S: 1e OK \[READ-WRITE\] SELECT completed.
 
 C: 1g STORE 1 FLAGS (\Deleted)
@@ -94,10 +94,10 @@ C: 2e SELECT alpha
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 4 EXISTS
 S: \* 0 RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 5\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 5\].*
 S: 2e OK \[READ-WRITE\] SELECT completed.
 
 C: 2f EXPUNGE

@@ -70,10 +70,10 @@ C: A006 SELECT appendexpunge
 S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 3 EXISTS
 S: \* \d+ RECENT
-S: \* OK \[UIDVALIDITY \d+\]
-S: \* OK \[UNSEEN 1\]
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\]
-S: \* OK \[UIDNEXT 4\]
+S: \* OK \[UIDVALIDITY \d+\].*
+S: \* OK \[UNSEEN 1\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[UIDNEXT 4\].*
 S: A006 OK \[READ-WRITE\] SELECT completed.
 
 C: A109 STORE 2 FLAGS.SILENT (\Deleted)
