@@ -1419,8 +1419,7 @@ S: VGhlIHNvaWwgaXMgdGhpcywgdGhhdCB0aG91IGRvc3QgY29tbW9uIGdyb3cuCjwvcHJlPjwvYmxv
 S: Y2txdW90ZT4KPC9ib2R5PjwvaHRtbD4K\)
 S: A16 OK FETCH completed\.
 C: A17 FETCH 1 (BODY[3.HEADER])
-S: \* 1 FETCH \(BODY\[3\.HEADER\] \{2\}
-S: 
+S: \* 1 FETCH \(BODY\[3\.HEADER\] \{0\}
 S: \)
 S: A17 OK FETCH completed\.
 C: A18 FETCH 1 (BODY[3.TEXT])
