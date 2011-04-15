@@ -134,7 +134,8 @@ S: \)
 S: A13 OK FETCH completed\.
 C: A14 FETCH 1 (BODY[3.HEADER])
 # See http://markmail.org/message/2jconrj7scvdi5dj
-S: \* 1 FETCH \(BODY\[3\.HEADER\] \{0\}
+S: \* 1 FETCH \(BODY\[3\.HEADER\] \{2\}
+S: 
 S: \)
 S: A14 OK FETCH completed\.
 C: A15 FETCH 1 (BODY[3.TEXT])

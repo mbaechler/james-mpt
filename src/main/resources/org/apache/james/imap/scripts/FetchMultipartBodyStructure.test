@@ -584,7 +584,8 @@ S:
 S: \)
 S: A12 OK FETCH completed\.
 C: A13 FETCH 1 (BODY[3.HEADER])
-S: \* 1 FETCH \(BODY\[3\.HEADER\] \{0\}
+S: \* 1 FETCH \(BODY\[3\.HEADER\] \{2\}
+S: 
 S: \)
 S: A13 OK FETCH completed\.
 C: A14 FETCH 1 (BODY[3.TEXT])
