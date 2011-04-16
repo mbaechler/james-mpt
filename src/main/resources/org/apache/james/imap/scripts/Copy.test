@@ -53,9 +53,9 @@ S: \* OK \[UIDNEXT \d+\].*
 S: a7 OK \[READ-WRITE\] SELECT completed.
 
 C: a8 FETCH 1:3 (FLAGS)
-S: \* 1 FETCH \(FLAGS \(\)\)
-S: \* 2 FETCH \(FLAGS \(\\Deleted\)\)
-S: \* 3 FETCH \(FLAGS \(\)\)
+S: \* 1 FETCH \(FLAGS \(\\Recent\)\)
+S: \* 2 FETCH \(FLAGS \(\\Deleted \\Recent\)\)
+S: \* 3 FETCH \(FLAGS \(\\Recent\)\)
 S: a8 OK FETCH completed.
 
 C: a9 DELETE copied
