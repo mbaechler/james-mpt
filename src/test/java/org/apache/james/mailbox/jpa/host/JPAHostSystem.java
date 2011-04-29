@@ -78,7 +78,6 @@ public class JPAHostSystem extends ImapHostSystem {
 
         // Configure OpenJPA Tables creation
         properties.put("openjpa.jdbc.SynchronizeMappings", "buildSchema(ForeignKeys=true)"); // Create Foreign Keys
-        properties.put("openjpa.jdbc.MappingDefaults", "ForeignKeyDeleteAction=restrict, JoinForeignKeyDeleteAction=restrict");
         properties.put("openjpa.jdbc.SchemaFactory", "native(ForeignKeys=true)");
 
         // Configure OpenJPA Cache
