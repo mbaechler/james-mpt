@@ -77,7 +77,7 @@ S: \* 4 EXISTS
 S: \* 4 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 5\].*
 S: a1 OK \[READ-WRITE\] SELECT completed.
 

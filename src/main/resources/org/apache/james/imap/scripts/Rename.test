@@ -23,7 +23,7 @@ S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 0 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 1\].*
 S: A3 OK \[READ-WRITE\] SELECT completed\.
 C: A4 APPEND testmailbox {185+}
@@ -1950,7 +1950,7 @@ S: \* 19 EXISTS
 S: \* 19 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 3\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 40\].*
 S: A100 OK \[READ-WRITE\] SELECT completed\.
 C: A101 FETCH 1:* (FLAGS UID BODY.PEEK[HEADER.FIELDS (DATE FROM TO ORIGINATOR X-LIST)])
@@ -2076,7 +2076,7 @@ S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 0 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 1\].*
 S: A103 OK \[READ-WRITE\] SELECT completed\.
 C: A104 APPEND other {14996+}
@@ -2340,7 +2340,7 @@ S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 0 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 1\].*
 S: A106 OK \[READ-WRITE\] SELECT completed\.
 C: A107 RENAME testmailbox moved
@@ -2351,7 +2351,7 @@ S: \* 19 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 3\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 40\].*
 S: A108 OK \[READ-WRITE\] SELECT completed\.
 C: A109 FETCH 1:* (FLAGS UID BODY.PEEK[HEADER.FIELDS (DATE FROM TO ORIGINATOR X-LIST)])
@@ -2482,7 +2482,7 @@ S: \* 19 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 3\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 40\].*
 S: A113 OK \[READ-WRITE\] SELECT completed\.
 C: A114 SELECT other
@@ -2491,7 +2491,7 @@ S: \* 1 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 2\].*
 S: A114 OK \[READ-WRITE\] SELECT completed\.
 C: A115 SELECT base
@@ -2499,7 +2499,7 @@ S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 0 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 1\].*
 S: A115 OK \[READ-WRITE\] SELECT completed\.
 C: A116 SELECT BOGUS
@@ -2514,7 +2514,7 @@ S: \* 1 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 2\].*
 S: A119 OK \[READ-WRITE\] SELECT completed\.
 C: A120 SELECT moved
@@ -2523,7 +2523,7 @@ S: \* 19 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 3\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 40\].*
 S: A120 OK \[READ-WRITE\] SELECT completed\.
 C: A121 SELECT other
@@ -2533,7 +2533,7 @@ S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 0 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 1\].*
 S: A122 OK \[READ-WRITE\] SELECT completed\.
 C: A123 SELECT BOGUS
@@ -2554,7 +2554,7 @@ S: \* 1 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 2\].*
 S: A129 OK \[READ-WRITE\] SELECT completed\.
 C: A130 SELECT moved
@@ -2563,7 +2563,7 @@ S: \* 19 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 3\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 40\].*
 S: A130 OK \[READ-WRITE\] SELECT completed\.
 C: A131 SELECT other
@@ -2573,7 +2573,7 @@ S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 0 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 1\].*
 S: A132 OK \[READ-WRITE\] SELECT completed\.
 C: A133 SELECT BOGUS

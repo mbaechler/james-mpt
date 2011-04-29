@@ -23,7 +23,7 @@ S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 0 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 1\].*
 S: A3 OK \[READ-WRITE\] SELECT completed.
 C: A4 APPEND testmailbox {185+}
@@ -684,7 +684,7 @@ S: \* 10 EXISTS
 S: \* 10 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 11\].*
 S: A14 OK \[READ-WRITE\] SELECT completed.
 C: A15 STORE 4  FLAGS (\DELETED)
@@ -708,7 +708,7 @@ S: \* 7 EXISTS
 S: \* 7 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 11\].*
 S: A19 OK \[READ-WRITE\] SELECT completed.
 C: A20 DELETE testmailbox

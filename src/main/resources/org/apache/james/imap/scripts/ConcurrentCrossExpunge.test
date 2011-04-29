@@ -78,7 +78,7 @@ S: \* 4 EXISTS
 S: \* 4 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 5\].*
 S: 1e OK \[READ-WRITE\] SELECT completed.
 
@@ -96,7 +96,7 @@ S: \* 4 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 5\].*
 S: 2e OK \[READ-WRITE\] SELECT completed.
 

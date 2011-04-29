@@ -58,7 +58,7 @@ S: \* 2 EXISTS
 S: \* 2 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 3\].*
 S: 1d OK \[READ-WRITE\] SELECT completed.
 
@@ -69,7 +69,7 @@ S: \* 2 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 3\].*
 S: 2a OK \[READ-WRITE\] SELECT completed.
 
@@ -80,7 +80,7 @@ S: \* 2 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 3\].*
 S: 3a OK \[READ-WRITE\] SELECT completed.
 
@@ -91,7 +91,7 @@ S: \* 2 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 3\].*
 S: 4a OK \[READ-WRITE\] SELECT completed.
 

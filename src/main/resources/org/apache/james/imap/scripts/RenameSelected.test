@@ -23,7 +23,7 @@ S: \* FLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)
 S: \* 0 EXISTS
 S: \* 0 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 1\].*
 S: A3 OK \[READ-WRITE\] SELECT completed\.
 C: A4 APPEND testmailbox {185+}
@@ -89,7 +89,7 @@ S: \* 5 EXISTS
 S: \* 5 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 6\].*
 S: A9 OK \[READ-WRITE\] SELECT completed\.
 C: A10 FETCH 1:* (FLAGS UID BODY.PEEK[HEADER.FIELDS (DATE FROM TO ORIGINATOR X-LIST)])
@@ -221,7 +221,7 @@ S: \* 5 EXISTS
 S: \* 5 RECENT
 S: \* OK \[UIDVALIDITY \d+\].*
 S: \* OK \[UNSEEN 1\](.)*
-S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\Seen\)\].*
+S: \* OK \[PERMANENTFLAGS \(\\Answered \\Deleted \\Draft \\Flagged \\\Seen( \\\*)?\)\].*
 S: \* OK \[UIDNEXT 6\].*
 S: A19 OK \[READ-WRITE\] SELECT completed\.
 C: A20 FETCH 1:* (FLAGS UID BODY.PEEK[HEADER.FIELDS (DATE FROM TO ORIGINATOR X-LIST)])
