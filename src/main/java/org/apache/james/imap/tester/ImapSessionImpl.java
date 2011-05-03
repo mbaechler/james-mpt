@@ -122,4 +122,12 @@ public class ImapSessionImpl implements ImapSession{
         
     }
 
+    public boolean isPlainAuthDisallowed() {
+        return false;
+    }
+
+    public boolean isTLSActive() {
+        return false;
+    }
+
 }
