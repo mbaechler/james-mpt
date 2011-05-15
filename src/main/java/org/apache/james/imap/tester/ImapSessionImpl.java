@@ -130,4 +130,8 @@ public class ImapSessionImpl implements ImapSession{
         return false;
     }
 
+    public boolean supportMultipleNamespaces() {
+        return false;
+    }
+
 }
