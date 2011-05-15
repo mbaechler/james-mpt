@@ -134,4 +134,8 @@ public class ImapSessionImpl implements ImapSession{
         return false;
     }
 
+    public boolean isCompressionActive() {
+        return false;
+    }
+
 }
