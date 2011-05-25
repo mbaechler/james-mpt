@@ -35,7 +35,6 @@ import org.apache.james.mailbox.MailboxSession;
 import org.apache.james.mailbox.SubscriptionManager;
 import org.apache.james.mailbox.jpa.JPAMailboxSessionMapperFactory;
 import org.apache.james.mailbox.jpa.JPASubscriptionManager;
-import org.apache.james.mailbox.jpa.mail.JPACachingUidProvider;
 import org.apache.james.mailbox.jpa.mail.model.JPAHeader;
 import org.apache.james.mailbox.jpa.mail.model.JPAMailbox;
 import org.apache.james.mailbox.jpa.mail.model.JPAProperty;
@@ -105,11 +104,10 @@ public class JPAHostSystem extends ImapHostSystem {
         userManager = new MockAuthenticator();
         entityManagerFactory = OpenJPAPersistence.getEntityManagerFactory(properties);
 
-        JPACachingUidProvider uidProvider = new JPACachingUidProvider(entityManagerFactory);
 
         JPAMailboxSessionMapperFactory mf = new JPAMailboxSessionMapperFactory(entityManagerFactory);
 
-        mailboxManager = new OpenJPAMailboxManager(mf, userManager, uidProvider);
+        mailboxManager = new OpenJPAMailboxManager(mf, userManager);
         mailboxManager.init();
 
         SubscriptionManager subscriptionManager = new JPASubscriptionManager(mf);

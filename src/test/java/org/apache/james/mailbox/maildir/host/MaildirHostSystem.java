@@ -53,7 +53,7 @@ public class MaildirHostSystem extends ImapHostSystem {
         MaildirStore store = new MaildirStore(MAILDIR_HOME + "/%user");
         mailboxSessionMapperFactory = new MaildirMailboxSessionMapperFactory(store);
         MaildirSubscriptionManager sm = new MaildirSubscriptionManager(mailboxSessionMapperFactory);
-        mailboxManager = new MaildirMailboxManager(mailboxSessionMapperFactory, userManager, store);
+        mailboxManager = new MaildirMailboxManager(mailboxSessionMapperFactory, userManager);
         mailboxManager.init();
 
         final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, sm);
