@@ -31,9 +31,9 @@
     <properties>
         <javax.mail.groupId>javax.mail</javax.mail.groupId>
         <javax.mail.artifactId>mail</javax.mail.artifactId>
-        <version.james-imap>0.2-M2-SNAPSHOT</version.james-imap>
-        <version.james-mailbox>0.3-SNAPSHOT</version.james-mailbox>
-        <version.javax.mail>1.4.3</version.javax.mail>
+        <version.james-imap>0.2.1</version.james-imap>
+        <version.james-mailbox>0.3</version.james-mailbox>
+        <version.javax.mail>1.4.1</version.javax.mail>
         <target.jdk>1.6</target.jdk>
     </properties>
 

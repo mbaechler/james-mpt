@@ -35,6 +35,9 @@ import org.apache.james.mailbox.jcr.JCRMailboxManager;
 import org.apache.james.mailbox.jcr.JCRMailboxSessionMapperFactory;
 import org.apache.james.mailbox.jcr.JCRSubscriptionManager;
 import org.apache.james.mailbox.jcr.JCRUtils;
+import org.apache.james.mailbox.jcr.mail.JCRModSeqProvider;
+import org.apache.james.mailbox.jcr.mail.JCRUidProvider;
+import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
@@ -65,11 +68,15 @@ public class JCRHostSystem extends ImapHostSystem{
             repository =  RepositoryImpl.create(config);
             GlobalMailboxSessionJCRRepository sessionRepos = new GlobalMailboxSessionJCRRepository(repository, workspace, user, pass);
             
+            JVMMailboxPathLocker locker = new JVMMailboxPathLocker();
+            JCRUidProvider uidProvider = new JCRUidProvider(locker, sessionRepos);
+            JCRModSeqProvider modSeqProvider = new JCRModSeqProvider(locker, sessionRepos);
+            
             // Register imap cnd file
             JCRUtils.registerCnd(repository, workspace, user, pass);
             
             userManager = new MockAuthenticator();
-            JCRMailboxSessionMapperFactory mf = new JCRMailboxSessionMapperFactory(sessionRepos);
+            JCRMailboxSessionMapperFactory mf = new JCRMailboxSessionMapperFactory(sessionRepos, uidProvider, modSeqProvider);
 
             mailboxManager = new JCRMailboxManager(mf, userManager);
             mailboxManager.init();

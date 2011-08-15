@@ -24,4 +24,4 @@ C: abcd AUTHENTICATE
 S: abcd BAD AUTHENTICATE failed. Illegal arguments.
 
 C: abcd AUTHENTICATE KERBEROS_V4 extra
-S: abcd BAD AUTHENTICATE failed. Illegal arguments.
+S: abcd NO AUTHENTICATE failed. Authentication mechanism is unsupported.

@@ -26,14 +26,14 @@ import org.apache.james.imap.processor.main.DefaultImapProcessorFactory;
 import org.apache.james.imap.tester.ImapHostSystem;
 import org.apache.james.imap.tester.base.HostSystem;
 import org.apache.james.mailbox.MailboxException;
-import org.apache.james.mailbox.inmemory.InMemoryMailboxManager;
 import org.apache.james.mailbox.inmemory.InMemoryMailboxSessionMapperFactory;
-import org.apache.james.mailbox.inmemory.InMemorySubscriptionManager;
 import org.apache.james.mailbox.store.MockAuthenticator;
+import org.apache.james.mailbox.store.StoreMailboxManager;
+import org.apache.james.mailbox.store.StoreSubscriptionManager;
 
 public class InMemoryHostSystem extends ImapHostSystem {
 
-    private InMemoryMailboxManager mailboxManager;
+    private StoreMailboxManager<Long> mailboxManager;
     private MockAuthenticator userManager; 
     private InMemoryMailboxSessionMapperFactory factory;
     
@@ -59,10 +59,10 @@ public class InMemoryHostSystem extends ImapHostSystem {
     private void initFields() throws MailboxException {
         userManager = new MockAuthenticator();
         factory = new InMemoryMailboxSessionMapperFactory();
-        mailboxManager = new InMemoryMailboxManager(factory, userManager);
+        mailboxManager = new StoreMailboxManager<Long>(factory, userManager);
         mailboxManager.init();
 
-        final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, new InMemorySubscriptionManager(factory));
+        final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, new StoreSubscriptionManager(factory));
         configure(new DefaultImapDecoderFactory().buildImapDecoder(),
                 new DefaultImapEncoderFactory().buildImapEncoder(),
                 defaultImapProcessorFactory);

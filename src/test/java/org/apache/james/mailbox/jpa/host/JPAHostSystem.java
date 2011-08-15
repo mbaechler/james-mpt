@@ -35,7 +35,8 @@ import org.apache.james.mailbox.MailboxSession;
 import org.apache.james.mailbox.SubscriptionManager;
 import org.apache.james.mailbox.jpa.JPAMailboxSessionMapperFactory;
 import org.apache.james.mailbox.jpa.JPASubscriptionManager;
-import org.apache.james.mailbox.jpa.mail.model.JPAHeader;
+import org.apache.james.mailbox.jpa.mail.JPAModSeqProvider;
+import org.apache.james.mailbox.jpa.mail.JPAUidProvider;
 import org.apache.james.mailbox.jpa.mail.model.JPAMailbox;
 import org.apache.james.mailbox.jpa.mail.model.JPAProperty;
 import org.apache.james.mailbox.jpa.mail.model.JPAUserFlag;
@@ -43,6 +44,7 @@ import org.apache.james.mailbox.jpa.mail.model.openjpa.AbstractJPAMessage;
 import org.apache.james.mailbox.jpa.mail.model.openjpa.JPAMessage;
 import org.apache.james.mailbox.jpa.openjpa.OpenJPAMailboxManager;
 import org.apache.james.mailbox.jpa.user.model.JPASubscription;
+import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.openjpa.persistence.OpenJPAPersistence;
 import org.slf4j.LoggerFactory;
@@ -93,7 +95,6 @@ public class JPAHostSystem extends ImapHostSystem {
 
         // Configure OpenJPA Metadata
         properties.put("openjpa.MetaDataFactory", "jpa(Types=" +
-        		JPAHeader.class.getName() + ";" +
                 JPAMailbox.class.getName() + ";" +
                 AbstractJPAMessage.class.getName() + ";" +
                 JPAMessage.class.getName() + ";" +
@@ -105,7 +106,10 @@ public class JPAHostSystem extends ImapHostSystem {
         entityManagerFactory = OpenJPAPersistence.getEntityManagerFactory(properties);
 
 
-        JPAMailboxSessionMapperFactory mf = new JPAMailboxSessionMapperFactory(entityManagerFactory);
+        JVMMailboxPathLocker locker = new JVMMailboxPathLocker();
+        JPAUidProvider uidProvider = new JPAUidProvider(locker, entityManagerFactory);
+        JPAModSeqProvider modSeqProvider = new JPAModSeqProvider(locker, entityManagerFactory);
+        JPAMailboxSessionMapperFactory mf = new JPAMailboxSessionMapperFactory(entityManagerFactory, uidProvider, modSeqProvider);
 
         mailboxManager = new OpenJPAMailboxManager(mf, userManager);
         mailboxManager.init();

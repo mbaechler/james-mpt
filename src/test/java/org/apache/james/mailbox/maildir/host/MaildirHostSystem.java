@@ -26,21 +26,20 @@ import org.apache.james.imap.encode.main.DefaultImapEncoderFactory;
 import org.apache.james.imap.main.DefaultImapDecoderFactory;
 import org.apache.james.imap.processor.main.DefaultImapProcessorFactory;
 import org.apache.james.imap.tester.ImapHostSystem;
-import org.apache.james.imap.tester.InMemoryUserManager;
 import org.apache.james.imap.tester.base.HostSystem;
 import org.apache.james.mailbox.MailboxException;
-import org.apache.james.mailbox.maildir.MaildirMailboxManager;
 import org.apache.james.mailbox.maildir.MaildirMailboxSessionMapperFactory;
 import org.apache.james.mailbox.maildir.MaildirStore;
-import org.apache.james.mailbox.maildir.MaildirSubscriptionManager;
 import org.apache.james.mailbox.store.MockAuthenticator;
+import org.apache.james.mailbox.store.StoreMailboxManager;
+import org.apache.james.mailbox.store.StoreSubscriptionManager;
 
 public class MaildirHostSystem extends ImapHostSystem {
 
     public static final String META_DATA_DIRECTORY = "target/user-meta-data";
     private static final String MAILDIR_HOME = "target/Maildir";
     
-    private final MaildirMailboxManager mailboxManager;
+    private final StoreMailboxManager<Long> mailboxManager;
     private final MockAuthenticator userManager;
     private final MaildirMailboxSessionMapperFactory mailboxSessionMapperFactory;
     
@@ -52,8 +51,8 @@ public class MaildirHostSystem extends ImapHostSystem {
         userManager = new MockAuthenticator();
         MaildirStore store = new MaildirStore(MAILDIR_HOME + "/%user");
         mailboxSessionMapperFactory = new MaildirMailboxSessionMapperFactory(store);
-        MaildirSubscriptionManager sm = new MaildirSubscriptionManager(mailboxSessionMapperFactory);
-        mailboxManager = new MaildirMailboxManager(mailboxSessionMapperFactory, userManager);
+        StoreSubscriptionManager sm = new StoreSubscriptionManager(mailboxSessionMapperFactory);
+        mailboxManager = new StoreMailboxManager(mailboxSessionMapperFactory, userManager);
         mailboxManager.init();
 
         final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, sm);
