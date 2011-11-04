@@ -18,11 +18,6 @@
   under the License.    
 -->
 <project name="JAMES Mail Protocol Tester (MPT)">
-  <skin>
-    <groupId>org.apache.james</groupId>
-    <artifactId>james-skin</artifactId>
-    <version>1.7-SNAPSHOT</version>
-  </skin>
 
   <bannerLeft>
     <name>JAMES MPT</name>
@@ -30,12 +25,6 @@
     <href>http://james.apache.org/mpt/index.html</href>
     <alt>james-mpt-logo.gif</alt>
   </bannerLeft>
-
-  <bannerRight>
-    <name>The Apache Software Foundation</name>
-    <src>images/logo/asf-logo-reduced.gif</src>
-    <href>http://www.apache.org/index.html</href>
-  </bannerRight> 
 
   <body>
 
