@@ -188,6 +188,19 @@ to the library requiring no extra coding.</description>
                     </execution>
                 </executions>
             </plugin>
+            <plugin>      
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>emma-maven-plugin</artifactId>
+                <inherited>true</inherited>          
+                <executions>
+                    <execution>
+                        <phase>process-classes</phase>               
+                        <goals>
+                            <goal>instrument</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
