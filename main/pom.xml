@@ -30,7 +30,6 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <groupId>org.apache.james</groupId>
     <artifactId>apache-james-mpt-main</artifactId>
 
     <name>Apache JAMES MPT Main</name>
@@ -118,19 +117,6 @@ scritable functional testing of ASCII based line protocols.</description>
                         <goals>
                             <goal>javadoc</goal>
                             <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>      
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>emma-maven-plugin</artifactId>
-                <inherited>true</inherited>          
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>               
-                        <goals>
-                            <goal>instrument</goal>
                         </goals>
                     </execution>
                 </executions>

@@ -26,11 +26,10 @@
     <parent>
         <artifactId>james-project</artifactId>
         <groupId>org.apache.james</groupId>
-        <version>1.7</version>
+        <version>1.8</version>
         <relativePath></relativePath>
     </parent>
 
-    <groupId>org.apache.james</groupId>
     <artifactId>apache-james-mpt-project</artifactId>
     <version>0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
@@ -39,23 +38,6 @@
     <description>Functional test framework specialised for the ASCII line-base protocols common in mail.</description>
     <url>http://james.apache.org/mpt/</url>
     <inceptionYear>2008</inceptionYear>
-
-    <mailingLists>
-        <mailingList>
-            <name>Apache James Server User Lists</name>
-            <subscribe>server-user-subscribe@james.apache.org</subscribe>
-            <unsubscribe>server-user-unsubscribe@james.apache.org</unsubscribe>
-            <post>server-user@james.apache.org</post>
-            <archive>http://mail-archives.apache.org/mod_mbox/james-server-user/</archive>
-        </mailingList>
-        <mailingList>
-            <name>Apache James Server Developer Lists</name>
-            <subscribe>server-dev-subscribe@james.apache.org</subscribe>
-            <unsubscribe>server-dev-unsubscribe@james.apache.org</unsubscribe>
-            <post>server-dev@james.apache.org</post>
-            <archive>http://mail-archives.apache.org/mod_mbox/james-server-dev/</archive>
-        </mailingList>
-    </mailingLists>
 
     <modules>
         <module>main</module>
@@ -262,19 +244,6 @@
                         <id>attach-sources</id>
                         <goals>
                             <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>      
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>emma-maven-plugin</artifactId>
-                <inherited>true</inherited>          
-                <executions>
-                    <execution>
-                        <phase>process-classes</phase>               
-                        <goals>
-                            <goal>instrument</goal>
                         </goals>
                     </execution>
                 </executions>
