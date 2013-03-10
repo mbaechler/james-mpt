@@ -22,23 +22,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <artifactId>apache-james-mpt-project</artifactId>
+        <artifactId>apache-james-mpt</artifactId>
         <groupId>org.apache.james</groupId>
         <version>0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-
-    <artifactId>apache-james-mpt-main</artifactId>
-
-    <name>Apache JAMES MPT Main</name>
+    <artifactId>apache-james-mpt-core</artifactId>
+    <name>Apache James MPT Core</name>
     <description>
-      Apache JAMES Mail Protocol Tester (MPT) is a library providing a framework for the 
+      Apache James Mail Protocol Tester (MPT) is a library providing a framework for the 
       scriptable functional testing of ASCII based line protocols.
     </description>
     <url>http://james.apache.org/mpt/main</url>
-
     <properties>
         <hbase.version>0.92.0</hbase.version>
         <hadoop.version>1.0.1</hadoop.version>
@@ -52,13 +48,11 @@
         <version.james-mailbox>0.5-SNAPSHOT</version.james-mailbox>
         <version.james-mpt>0.2-SNAPSHOT</version.james-mpt>
     </properties>
-
     <scm>
-        <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/trunk/main</connection>
-        <developerConnection>scm:svn:https://rdonkin@svn.apache.org/repos/asf/james/mpt/trunk/main</developerConnection>
+        <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/trunk/core</connection>
+        <developerConnection>scm:svn:https://rdonkin@svn.apache.org/repos/asf/james/mpt/trunk/core</developerConnection>
         <url>http://svn.apache.org/viewcvs.cgi/james/mpt/trunk/main?root=Apache-SVN</url>
     </scm>
-
     <dependencies>
         <dependency>
             <groupId>org.apache.james.protocols</groupId>
@@ -119,7 +113,6 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>

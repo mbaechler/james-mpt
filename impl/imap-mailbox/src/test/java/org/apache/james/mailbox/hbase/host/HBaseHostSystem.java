@@ -115,7 +115,6 @@ public class HBaseHostSystem extends ImapHostSystem {
         mailboxManager.logout(session, false);
     }
 
-    @Override
     public boolean addUser(String user, String password) {
         userManager.addUser(user, password);
         return true;

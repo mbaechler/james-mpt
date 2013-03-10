@@ -24,7 +24,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>apache-james-mpt-project</artifactId>
+        <artifactId>apache-james-mpt</artifactId>
         <groupId>org.apache.james</groupId>
         <version>0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -32,8 +32,8 @@
 
     <artifactId>apache-james-mpt-app</artifactId>
 
-    <name>Apache JAMES MPT Application</name>
-    <description>Apache JAMES Mail Protocol Tester (MPT) is a library providing a framework for the 
+    <name>Apache James MPT Application</name>
+    <description>Apache James Mail Protocol Tester (MPT) is a library providing a framework for the 
 scriptable functional testing of ASCII based line protocols. This application provides easy executable
 interfaces to the MPT library.</description>
     <url>http://james.apache.org/mpt/app</url>
@@ -47,7 +47,7 @@ interfaces to the MPT library.</description>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>apache-james-mpt-main</artifactId>
+            <artifactId>apache-james-mpt-core</artifactId>
             <!-- TODO: Use dependency from project pom -->
             <version>${project.version}</version>
         </dependency>
@@ -70,7 +70,7 @@ interfaces to the MPT library.</description>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>apache-james-mpt-main</artifactId>
+            <artifactId>apache-james-mpt-core</artifactId>
             <!-- TODO: Use dependency from project pom -->
             <version>${project.version}</version>
             <type>test-jar</type>
@@ -98,7 +98,7 @@ interfaces to the MPT library.</description>
                             <include>commons-logging:commons-logging</include>
                             <include>commons-cli:commons-cli</include>
                             <include>junit:junit</include>
-                            <include>${project.groupId}:apache-james-mpt-main</include>
+                            <include>${project.groupId}:apache-james-mpt-core</include>
                         </includes>
                     </artifactSet>
                 </configuration>

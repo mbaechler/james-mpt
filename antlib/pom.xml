@@ -24,7 +24,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <artifactId>apache-james-mpt-project</artifactId>
+        <artifactId>apache-james-mpt</artifactId>
         <groupId>org.apache.james</groupId>
         <version>0.2-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
@@ -32,8 +32,8 @@
 
     <artifactId>apache-james-mpt-antlib</artifactId>
 
-    <name>Apache JAMES MPT AntLib</name>
-    <description>Apache JAMES Mail Protocol Tester (MPT) is a library providing a framework for the 
+    <name>Apache James MPT AntLib</name>
+    <description>Apache James Mail Protocol Tester (MPT) is a library providing a framework for the 
 scritable functional testing of ASCII based line protocols. This AntLib provides an easy interface
 to the library requiring no extra coding.</description>
     <url>http://james.apache.org/mpt/antlib</url>
@@ -47,7 +47,7 @@ to the library requiring no extra coding.</description>
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>apache-james-mpt-main</artifactId>
+            <artifactId>apache-james-mpt-core</artifactId>
             <!-- TODO: Use dependency from project pom -->
             <version>${project.version}</version>
         </dependency>
@@ -75,7 +75,7 @@ to the library requiring no extra coding.</description>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>apache-james-mpt-main</artifactId>
+            <artifactId>apache-james-mpt-core</artifactId>
             <!-- TODO: Use dependency from project pom -->
             <version>${project.version}</version>
             <type>test-jar</type>

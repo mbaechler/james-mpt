@@ -22,23 +22,19 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
-        <artifactId>apache-james-mpt-project</artifactId>
+        <artifactId>apache-james-mpt</artifactId>
         <groupId>org.apache.james</groupId>
         <version>0.2-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
+        <relativePath>..</relativePath>
     </parent>
-
-    <artifactId>apache-james-mpt</artifactId>
+    <artifactId>apache-james-mpt-all</artifactId>
     <packaging>pom</packaging>
-
-    <name>Apache JAMES MPT Assembly</name>
+    <name>Apache James MPT All</name>
     <description>
 This module assembles distributions 
 MPT is a functional test framework specialised for the ASCII line-base protocols common in mail.
   </description>
-
     <dependencies>
         <dependency>
             <groupId>commons-logging</groupId>
@@ -67,7 +63,6 @@ MPT is a functional test framework specialised for the ASCII line-base protocols
             <artifactId>commons-cli</artifactId>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -88,7 +83,6 @@ MPT is a functional test framework specialised for the ASCII line-base protocols
             </plugin>
         </plugins>
     </build>
-
     <profiles>
         <profile>
             <id>site-reports</id>

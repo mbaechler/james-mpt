@@ -22,31 +22,27 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
         <artifactId>james-project</artifactId>
         <groupId>org.apache.james</groupId>
         <version>1.8</version>
         <relativePath></relativePath>
     </parent>
-
-    <artifactId>apache-james-mpt-project</artifactId>
+    <artifactId>apache-james-mpt</artifactId>
     <version>0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
-
-    <name>Apache JAMES MPT Project</name>
+    <name>Apache James MPT</name>
     <description>Functional test framework specialised for the ASCII line-base protocols common in mail.</description>
     <url>http://james.apache.org/mpt/</url>
     <inceptionYear>2008</inceptionYear>
-
     <modules>
-        <module>main</module>
         <module>antlib</module>
         <module>app</module>
-        <module>assemble</module>
+        <module>all</module>
+        <module>core</module>
+        <module>impl/imap-mailbox</module>
         <module>mavenplugin</module>
     </modules>
-
     <scm>
         <connection>scm:svn:http://svn.apache.org/repos/asf/james/mpt/trunk</connection>
         <developerConnection>scm:svn:https://svn.apache.org/repos/asf/james/mpt/trunk</developerConnection>
@@ -56,14 +52,12 @@
         <system>JIRA</system>
         <url>http://issues.apache.org/jira/browse/MPT</url>
     </issueManagement>
-
     <distributionManagement>
         <site>
             <id>${james.www.id}</id>
             <url>${james.mpt.www}</url>
         </site>
     </distributionManagement>
-
     <properties>
         <!--
             The website is committed to subversion. This property can be overriden
@@ -90,7 +84,6 @@
         <james.www.id>mpt-website</james.www.id>
         <target.jdk>1.5</target.jdk>
     </properties>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -105,7 +98,6 @@
                 <classifier>tests</classifier>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>apache-james-mpt-app</artifactId>
@@ -120,17 +112,16 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>apache-james-mpt-main</artifactId>
+                <artifactId>apache-james-mpt-core</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>apache-james-mpt-main</artifactId>
+                <artifactId>apache-james-mpt-core</artifactId>
                 <version>${project.version}</version>
                 <classifier>tests</classifier>
                 <scope>test</scope>
             </dependency>
-
             <dependency>
                 <groupId>commons-logging</groupId>
                 <artifactId>commons-logging</artifactId>
@@ -184,7 +175,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
     <build>
         <plugins>
             <plugin>
@@ -206,7 +196,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <!--
                 <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -230,7 +219,7 @@
                 <asfExtOptions>
                 <included>true</included>
                 <pmc>http://james.apache.org</pmc>
-                <name>Apache JAMES</name>
+                <name>Apache James</name>
                 </asfExtOptions>
 
                 </configuration>

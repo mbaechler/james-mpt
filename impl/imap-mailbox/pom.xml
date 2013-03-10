@@ -22,17 +22,14 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <parent>
+        <artifactId>apache-james-mpt</artifactId>
         <groupId>org.apache.james</groupId>
-        <artifactId>james-project</artifactId>
-        <version>1.8.2</version>
+        <version>0.2-SNAPSHOT</version>
+        <relativePath>../..</relativePath>
     </parent>
-
-    <artifactId>apache-james-mailbox-integration-tester</artifactId>
-
-    <name>Apache James Mailbox Integration Tester</name>
-
+    <artifactId>apache-james-mpt-imapmailbox</artifactId>
+    <name>Apache James MPT Imap Mailbox</name>
     <properties>
         <hbase.version>0.92.0</hbase.version>
         <hadoop.version>1.0.1</hadoop.version>
@@ -46,7 +43,6 @@
         <javax.mail.version>1.8.3</javax.mail.version>
 
         <james-protocols.version>1.6.3-SNAPSHOT</james-protocols.version>
-        <james-mpt.version>0.2-SNAPSHOT</james-mpt.version>
 
         <james-mailbox.mailbox>0.6-SNAPSHOT</james-mailbox.mailbox>
         <lucene-core.version>3.6.0</lucene-core.version>
@@ -59,8 +55,8 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.james</groupId>
-            <artifactId>apache-james-mpt-main</artifactId>
-            <version>${james-mpt.version}</version>
+            <artifactId>apache-james-mpt-core</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.james.protocols</groupId>
