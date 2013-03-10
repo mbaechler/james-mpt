@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.hbase.imap;
 
-import org.apache.james.imap.tester.suite.FetchBodyStructure;
 import org.apache.james.mpt.imapmailbox.hbase.host.HBaseHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.FetchBodyStructure;
 
 public class FetchBodyStructureTest extends
         FetchBodyStructure {

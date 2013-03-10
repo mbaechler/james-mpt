@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Events;
 import org.apache.james.mpt.imapmailbox.inmemory.host.InMemoryHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.Events;
 
 public class EventTest extends Events {
 

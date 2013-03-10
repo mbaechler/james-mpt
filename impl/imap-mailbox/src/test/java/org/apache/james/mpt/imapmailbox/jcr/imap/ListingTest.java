@@ -18,8 +18,8 @@
  ****************************************************************/
 package org.apache.james.mpt.imapmailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.Listing;
 import org.apache.james.mpt.imapmailbox.jcr.host.JCRHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.Listing;
 
 public class ListingTest extends Listing{
 

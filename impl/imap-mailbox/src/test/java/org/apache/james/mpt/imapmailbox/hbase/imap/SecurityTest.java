@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.hbase.imap;
 
-import org.apache.james.imap.tester.suite.Security;
 import org.apache.james.mpt.imapmailbox.hbase.host.HBaseHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.Security;
 
 public class SecurityTest extends Security {
 

@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.FetchBodySection;
 import org.apache.james.mpt.imapmailbox.inmemory.host.InMemoryHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.FetchBodySection;
 
 public class FetchBodySectionTest extends
         FetchBodySection {

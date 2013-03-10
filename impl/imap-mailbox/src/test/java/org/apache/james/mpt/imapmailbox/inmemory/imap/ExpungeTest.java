@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Expunge;
 import org.apache.james.mpt.imapmailbox.inmemory.host.InMemoryHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.Expunge;
 
 public class ExpungeTest extends Expunge {
 

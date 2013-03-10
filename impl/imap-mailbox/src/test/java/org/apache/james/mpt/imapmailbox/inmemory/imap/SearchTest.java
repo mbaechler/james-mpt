@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.inmemory.imap;
 
-import org.apache.james.imap.tester.suite.Search;
 import org.apache.james.mpt.imapmailbox.inmemory.host.InMemoryHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.Search;
 
 public class SearchTest extends Search {
 

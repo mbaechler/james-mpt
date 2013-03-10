@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.Fetch;
 import org.apache.james.mpt.imapmailbox.jpa.host.JPAHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.Fetch;
 
 public class FetchTest extends Fetch {
 

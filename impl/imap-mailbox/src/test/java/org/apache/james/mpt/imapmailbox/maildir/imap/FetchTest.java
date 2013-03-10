@@ -19,9 +19,9 @@
 
 package org.apache.james.mpt.imapmailbox.maildir.imap;
 
-import org.apache.james.imap.tester.suite.Fetch;
 import org.apache.james.mpt.imapmailbox.maildir.host.MaildirHostSystem;
 import org.apache.james.mpt.imapmailbox.maildir.util.OsDetector;
+import org.apache.james.mpt.imapmailbox.suite.Fetch;
 
 public class FetchTest extends Fetch {
 

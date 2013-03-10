@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.AuthenticatedState;
 import org.apache.james.mpt.imapmailbox.jcr.host.JCRHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.AuthenticatedState;
 
 public class AuthenticatedStateTest extends
         AuthenticatedState {

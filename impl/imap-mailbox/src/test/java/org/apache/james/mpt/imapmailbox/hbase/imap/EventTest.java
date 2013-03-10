@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.hbase.imap;
 
-import org.apache.james.imap.tester.suite.Events;
 import org.apache.james.mpt.imapmailbox.hbase.host.HBaseHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.Events;
 
 public class EventTest extends Events {
 

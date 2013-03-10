@@ -19,9 +19,9 @@
 
 package org.apache.james.mpt.imapmailbox.maildir.imap;
 
-import org.apache.james.imap.tester.suite.FetchBodyStructure;
 import org.apache.james.mpt.imapmailbox.maildir.host.MaildirHostSystem;
 import org.apache.james.mpt.imapmailbox.maildir.util.OsDetector;
+import org.apache.james.mpt.imapmailbox.suite.FetchBodyStructure;
 
 public class FetchBodyStructureTest extends
         FetchBodyStructure {

@@ -18,8 +18,8 @@
  ****************************************************************/
 package org.apache.james.mpt.imapmailbox.jcr.imap;
 
-import org.apache.james.imap.tester.suite.FetchBodySection;
 import org.apache.james.mpt.imapmailbox.jcr.host.JCRHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.FetchBodySection;
 
 public class FetchBodySectionTest extends FetchBodySection {
 

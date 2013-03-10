@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.Listing;
 import org.apache.james.mpt.imapmailbox.jpa.host.JPAHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.Listing;
 
 public class ListingTest extends Listing {
 

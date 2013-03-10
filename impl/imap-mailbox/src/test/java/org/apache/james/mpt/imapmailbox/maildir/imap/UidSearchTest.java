@@ -19,9 +19,9 @@
 
 package org.apache.james.mpt.imapmailbox.maildir.imap;
 
-import org.apache.james.imap.tester.suite.UidSearch;
 import org.apache.james.mpt.imapmailbox.maildir.host.MaildirHostSystem;
 import org.apache.james.mpt.imapmailbox.maildir.util.OsDetector;
+import org.apache.james.mpt.imapmailbox.suite.UidSearch;
 import org.junit.Test;
 
 public class UidSearchTest extends UidSearch{

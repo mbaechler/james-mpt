@@ -19,8 +19,8 @@
 
 package org.apache.james.mpt.imapmailbox.jpa.imap;
 
-import org.apache.james.imap.tester.suite.SelectedState;
 import org.apache.james.mpt.imapmailbox.jpa.host.JPAHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.SelectedState;
 
 public class SelectedStateTest extends SelectedState {
 

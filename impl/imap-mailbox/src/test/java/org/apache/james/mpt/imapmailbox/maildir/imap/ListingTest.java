@@ -18,9 +18,9 @@
  ****************************************************************/
 package org.apache.james.mpt.imapmailbox.maildir.imap;
 
-import org.apache.james.imap.tester.suite.Listing;
 import org.apache.james.mpt.imapmailbox.maildir.host.MaildirHostSystem;
 import org.apache.james.mpt.imapmailbox.maildir.util.OsDetector;
+import org.apache.james.mpt.imapmailbox.suite.Listing;
 
 public class ListingTest extends Listing{
 
