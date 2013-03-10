@@ -19,6 +19,9 @@
 
 package org.apache.james.imap.tester.base;
 
+import org.apache.james.mpt.Continuation;
+import org.apache.james.mpt.HostSystem;
+import org.apache.james.mpt.Session;
 import org.junit.After;
 import org.junit.Before;
 
@@ -82,7 +85,7 @@ public abstract class AbstractProtocolTestFramework {
      * {@link MockImapServer#getImapSession()} works.
      */
     protected void runSessions() throws Exception {
-        class SessionContinuation implements HostSystem.Continuation {
+        class SessionContinuation implements Continuation {
 
             public ProtocolSession session;
 
@@ -95,7 +98,7 @@ public abstract class AbstractProtocolTestFramework {
         }
         SessionContinuation continuation = new SessionContinuation();
 
-        HostSystem.Session[] sessions = new HostSystem.Session[testElements
+        Session[] sessions = new Session[testElements
                 .getSessionCount()];
 
         for (int i = 0; i < sessions.length; i++) {

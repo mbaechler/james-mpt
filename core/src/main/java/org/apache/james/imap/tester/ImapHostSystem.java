@@ -33,8 +33,9 @@ import org.apache.james.imap.api.process.ImapProcessor;
 import org.apache.james.imap.decode.ImapDecoder;
 import org.apache.james.imap.decode.main.ImapRequestStreamHandler;
 import org.apache.james.imap.encode.ImapEncoder;
-import org.apache.james.imap.tester.base.HostSystem;
 import org.apache.james.mailbox.MailboxSession.User;
+import org.apache.james.mpt.Continuation;
+import org.apache.james.mpt.HostSystem;
 import org.slf4j.LoggerFactory;
 
 public abstract class ImapHostSystem implements HostSystem {
@@ -59,7 +60,7 @@ public abstract class ImapHostSystem implements HostSystem {
         this.processor = processor;
     }
 
-    public HostSystem.Session newSession(Continuation continuation)
+    public Session newSession(Continuation continuation)
             throws Exception {
         return new Session(continuation);
     }
@@ -100,7 +101,7 @@ public abstract class ImapHostSystem implements HostSystem {
         return name;
     }
 
-    class Session implements HostSystem.Session {
+    class Session implements org.apache.james.mpt.Session {
         ByteBufferOutputStream out;
 
         ByteBufferInputStream in;

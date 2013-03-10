@@ -74,7 +74,7 @@ public class Runner {
      * testing. One mock instance is required per protocol session/connection.
      */
     public void runSessions(final SessionFactory factory) throws Exception {
-        class SessionContinuation implements HostSystem.Continuation {
+        class SessionContinuation implements Continuation {
 
             public ProtocolSession session;
 

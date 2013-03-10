@@ -22,7 +22,7 @@ package org.apache.james.mpt;
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 
-import org.apache.james.mpt.HostSystem.Continuation;
+import org.apache.james.mpt.Continuation;
 
 /**
  * Session factory creates session which connection to a server port.

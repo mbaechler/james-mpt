@@ -25,6 +25,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import org.apache.james.mpt.Session;
 
 /**
  * A protocol session which can be run against a reader and writer, which checks
@@ -33,8 +34,6 @@ import java.util.regex.Pattern;
  * sessions.
  * 
  * @author Darrell DeBoer <darrell@apache.org>
- * 
- * @version $Revision$
  */
 public class ProtocolSession {
     private boolean continued = false;
@@ -47,7 +46,7 @@ public class ProtocolSession {
 
     private Iterator<ProtocolElement> elementsIterator;
 
-    private HostSystem.Session[] sessions;
+    private Session[] sessions;
 
     private ProtocolElement nextTest;
 
@@ -82,7 +81,7 @@ public class ProtocolSession {
      * @param in
      *            The server responses are read from here.
      */
-    public void runSessions(HostSystem.Session[] sessions) throws Exception {
+    public void runSessions(Session[] sessions) throws Exception {
         this.sessions = sessions;
         elementsIterator = testElements.iterator();
         while (elementsIterator.hasNext()) {
@@ -213,20 +212,20 @@ public class ProtocolSession {
          * 
          * @throws Exception
          */
-        public void testProtocol(HostSystem.Session[] sessions,
+        public void testProtocol(Session[] sessions,
                 boolean continueAfterFailure) throws Exception {
             if (sessionNumber < 0) {
                 for (int i = 0; i < sessions.length; i++) {
-                    HostSystem.Session session = sessions[i];
+                    Session session = sessions[i];
                     writeMessage(session);
                 }
             } else {
-                HostSystem.Session session = sessions[sessionNumber];
+                Session session = sessions[sessionNumber];
                 writeMessage(session);
             }
         }
 
-        private void writeMessage(HostSystem.Session session) throws Exception {
+        private void writeMessage(Session session) throws Exception {
             session.writeLine(message);
         }
 
@@ -295,20 +294,20 @@ public class ProtocolSession {
          *             If the actual server response didn't match the regular
          *             expression expected.
          */
-        public void testProtocol(HostSystem.Session[] sessions,
+        public void testProtocol(Session[] sessions,
                 boolean continueAfterFailure) throws Exception {
             if (sessionNumber < 0) {
                 for (int i = 0; i < sessions.length; i++) {
-                    HostSystem.Session session = sessions[i];
+                    Session session = sessions[i];
                     checkResponse(session, continueAfterFailure);
                 }
             } else {
-                HostSystem.Session session = sessions[sessionNumber];
+                Session session = sessions[sessionNumber];
                 checkResponse(session, continueAfterFailure);
             }
         }
 
-        protected void checkResponse(HostSystem.Session session,
+        protected void checkResponse(Session session,
                 boolean continueAfterFailure) throws Exception {
             String testLine = readLine(session);
             if (!match(expectedLine, testLine)) {
@@ -344,7 +343,7 @@ public class ProtocolSession {
          * 
          * @return String of the line from the server
          */
-        protected String readLine(HostSystem.Session session) throws Exception {
+        protected String readLine(Session session) throws Exception {
             try {
                 return session.readLine();
             } catch (IOException e) {
@@ -411,7 +410,7 @@ public class ProtocolSession {
          *             If a line is encountered which doesn't match one of the
          *             expected lines.
          */
-        protected void checkResponse(HostSystem.Session session,
+        protected void checkResponse(Session session,
                 boolean continueAfterFailure) throws Exception {
             List<String> testLines = new ArrayList<String>(expectedLines);
             while (testLines.size() > 0) {
@@ -456,9 +455,9 @@ public class ProtocolSession {
             this.sessionNumber = sessionNumber < 0 ? 0 : sessionNumber;
         }
 
-        public void testProtocol(HostSystem.Session[] sessions,
+        public void testProtocol(Session[] sessions,
                 boolean continueAfterFailure) throws Exception {
-            HostSystem.Session session = sessions[sessionNumber];
+            Session session = sessions[sessionNumber];
             continuationExpected = true;
             continued = false;
             String testLine = session.readLine();
@@ -497,7 +496,7 @@ public class ProtocolSession {
          *            TODO
          * @throws Exception
          */
-        void testProtocol(HostSystem.Session[] sessions,
+        void testProtocol(Session[] sessions,
                 boolean continueAfterFailure) throws Exception;
 
         boolean isClient();

@@ -19,7 +19,7 @@
 package org.apache.james.imap.tester;
 
 import org.apache.james.imap.tester.base.AbstractSimpleScriptedTestProtocol;
-import org.apache.james.imap.tester.base.HostSystem;
+import org.apache.james.mpt.HostSystem;
 
 /**
  * Specialise the protocol test framework for IMAP.

@@ -19,7 +19,7 @@
 
 package org.apache.james.mpt;
 
-import org.apache.james.mpt.HostSystem.Continuation;
+import org.apache.james.mpt.Continuation;
 
 /**
  * Builds sessions for protocol testing.

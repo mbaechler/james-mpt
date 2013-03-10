@@ -23,6 +23,7 @@ import java.io.InputStream;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.james.mpt.HostSystem;
 import org.junit.After;
 
 

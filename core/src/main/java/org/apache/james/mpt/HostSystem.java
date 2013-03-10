@@ -49,9 +49,18 @@ public interface HostSystem extends SessionFactory {
      *            user password
      * @throws Exception
      */
-    public void addUser(String user, String password) throws Exception;
+    public boolean addUser(String user, String password) throws Exception;
 
-    public interface Continuation {
-        public void doContinue();
-    }
+    /**
+     * Creates a new session for functional testing.
+     * 
+     * @return <code>Session</code>, not null
+     * @throws Exception
+     */
+    public Session newSession(Continuation continuation) throws Exception;
+
+    public void beforeTests() throws Exception;
+
+    public void afterTests() throws Exception;
+
 }

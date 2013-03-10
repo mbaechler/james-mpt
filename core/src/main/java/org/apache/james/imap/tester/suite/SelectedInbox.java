@@ -22,7 +22,7 @@ package org.apache.james.imap.tester.suite;
 import java.util.Locale;
 
 import org.apache.james.imap.tester.FrameworkForSelectedInbox;
-import org.apache.james.imap.tester.base.HostSystem;
+import org.apache.james.mpt.HostSystem;
 import org.junit.Test;
 
 public abstract class SelectedInbox extends FrameworkForSelectedInbox {

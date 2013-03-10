@@ -19,7 +19,7 @@
 
 package org.apache.james.mpt;
 
-import org.apache.james.mpt.HostSystem.Continuation;
+import org.apache.james.mpt.Continuation;
 import org.jmock.Mock;
 import org.jmock.MockObjectTestCase;
 
