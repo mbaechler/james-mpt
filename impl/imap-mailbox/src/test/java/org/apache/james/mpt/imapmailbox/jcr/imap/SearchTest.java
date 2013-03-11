@@ -21,7 +21,9 @@ package org.apache.james.mpt.imapmailbox.jcr.imap;
 
 import org.apache.james.mpt.imapmailbox.jcr.host.JCRHostSystem;
 import org.apache.james.mpt.imapmailbox.suite.Search;
+import org.junit.Ignore;
 
+@Ignore
 public class SearchTest extends Search{
 
     public SearchTest() throws Exception {

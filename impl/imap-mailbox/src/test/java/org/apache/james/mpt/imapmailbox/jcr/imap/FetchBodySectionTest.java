@@ -20,7 +20,9 @@ package org.apache.james.mpt.imapmailbox.jcr.imap;
 
 import org.apache.james.mpt.imapmailbox.jcr.host.JCRHostSystem;
 import org.apache.james.mpt.imapmailbox.suite.FetchBodySection;
+import org.junit.Ignore;
 
+@Ignore
 public class FetchBodySectionTest extends FetchBodySection {
 
     public FetchBodySectionTest() throws Exception {

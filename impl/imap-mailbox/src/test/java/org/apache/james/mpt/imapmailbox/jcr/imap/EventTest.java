@@ -21,7 +21,9 @@ package org.apache.james.mpt.imapmailbox.jcr.imap;
 
 import org.apache.james.mpt.imapmailbox.jcr.host.JCRHostSystem;
 import org.apache.james.mpt.imapmailbox.suite.Events;
+import org.junit.Ignore;
 
+@Ignore
 public class EventTest extends Events {
 
     public EventTest() throws Exception {

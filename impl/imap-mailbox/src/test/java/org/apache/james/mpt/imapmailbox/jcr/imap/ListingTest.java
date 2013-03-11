@@ -20,7 +20,9 @@ package org.apache.james.mpt.imapmailbox.jcr.imap;
 
 import org.apache.james.mpt.imapmailbox.jcr.host.JCRHostSystem;
 import org.apache.james.mpt.imapmailbox.suite.Listing;
+import org.junit.Ignore;
 
+@Ignore
 public class ListingTest extends Listing{
 
     public ListingTest() throws Exception {
