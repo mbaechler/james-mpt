@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-
+import org.apache.james.mpt.ProtocolSession;
 
 /**
  * A builder which generates a ProtocolSession from a test file.
@@ -58,8 +58,7 @@ public class FileProtocolSessionBuilder {
      *            The name of the protocol session file.
      * @return The ProtocolSession
      */
-    public ProtocolSession buildProtocolSession(String fileName)
-            throws Exception {
+    public ProtocolSession buildProtocolSession(String fileName) throws Exception {
         ProtocolSession session = new ProtocolSession();
         addTestFile(fileName, session);
         return session;
@@ -74,8 +73,7 @@ public class FileProtocolSessionBuilder {
      * @param session
      *            The ProtocolSession to add the elements to.
      */
-    public void addTestFile(String fileName, ProtocolSession session)
-            throws Exception {
+    public void addTestFile(String fileName, ProtocolSession session) throws Exception {
         // Need to find local resource.
         InputStream is = this.getClass().getResourceAsStream(fileName);
         if (is == null) {
@@ -84,7 +82,8 @@ public class FileProtocolSessionBuilder {
 
         try {
             addProtocolLinesFromStream(is, session, fileName);
-        } finally {
+        }
+        finally {
             IOUtils.closeQuietly(is);
         }
     }
@@ -100,8 +99,7 @@ public class FileProtocolSessionBuilder {
      * @param fileName
      *            The name of the source file, for error messages.
      */
-    public void addProtocolLinesFromStream(InputStream is,
-            ProtocolSession session, String fileName) throws Exception {
+    public void addProtocolLinesFromStream(InputStream is, ProtocolSession session, String fileName) throws Exception {
         int sessionNumber = -1;
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         try {
@@ -112,31 +110,33 @@ public class FileProtocolSessionBuilder {
                 String location = fileName + ":" + lineNumber;
                 if (SERVER_CONTINUATION_TAG.equals(next)) {
                     session.CONT(sessionNumber);
-                } else if (next.startsWith(CLIENT_TAG)) {
+                }
+                else if (next.startsWith(CLIENT_TAG)) {
                     String clientMsg = "";
                     if (next.length() > 3) {
                         clientMsg = next.substring(3);
                     }
                     session.CL(sessionNumber, clientMsg);
                     lastClientMsg = clientMsg;
-                } else if (next.startsWith(SERVER_TAG)) {
+                }
+                else if (next.startsWith(SERVER_TAG)) {
                     String serverMsg = "";
                     if (next.length() > 3) {
                         serverMsg = next.substring(3);
                     }
                     session.SL(sessionNumber, serverMsg, location, lastClientMsg);
-                } else if (next.startsWith(OPEN_UNORDERED_BLOCK_TAG)) {
+                }
+                else if (next.startsWith(OPEN_UNORDERED_BLOCK_TAG)) {
                     List<String> unorderedLines = new ArrayList<String>(5);
                     next = reader.readLine();
-    
+
                     if (next == null)
                         throw new Exception("Readline doesn't contain any data, but must not be 'null' (linenumber="
                                 + lineNumber);
 
                     while (!next.startsWith(CLOSE_UNORDERED_BLOCK_TAG)) {
                         if (!next.startsWith(SERVER_TAG)) {
-                            throw new Exception(
-                                    "Only 'S: ' lines are permitted inside a 'SUB {' block.");
+                            throw new Exception("Only 'S: ' lines are permitted inside a 'SUB {' block.");
                         }
                         String serverMsg = next.substring(3);
                         unorderedLines.add(serverMsg);
@@ -144,23 +144,25 @@ public class FileProtocolSessionBuilder {
                         lineNumber++;
 
                         if (next == null)
-                            throw new Exception("Readline doesn't contain any data, but must not be 'null' (linenumber="
-                                    + lineNumber);
+                            throw new Exception(
+                                    "Readline doesn't contain any data, but must not be 'null' (linenumber="
+                                            + lineNumber);
 
                     }
-    
-                    session.SUB(sessionNumber, unorderedLines, location,
-                            lastClientMsg);
-                } else if (next.startsWith(COMMENT_TAG)
-                        || next.trim().length() == 0) {
+
+                    session.SUB(sessionNumber, unorderedLines, location, lastClientMsg);
+                }
+                else if (next.startsWith(COMMENT_TAG) || next.trim().length() == 0) {
                     // ignore these lines.
-                } else if (next.startsWith(SESSION_TAG)) {
+                }
+                else if (next.startsWith(SESSION_TAG)) {
                     String number = next.substring(SESSION_TAG.length()).trim();
                     if (number.length() == 0) {
                         throw new Exception("No session number specified");
                     }
                     sessionNumber = Integer.parseInt(number);
-                } else {
+                }
+                else {
                     String prefix = next;
                     if (next.length() > 3) {
                         prefix = next.substring(0, 3);
@@ -169,7 +171,8 @@ public class FileProtocolSessionBuilder {
                 }
                 lineNumber++;
             }
-        } finally {
+        }
+        finally {
             IOUtils.closeQuietly(reader);
         }
     }

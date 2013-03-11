@@ -23,9 +23,10 @@ import java.io.InputStream;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.james.mpt.AbstractProtocolTestFramework;
 import org.apache.james.mpt.HostSystem;
+import org.apache.james.mpt.ProtocolSession;
 import org.junit.After;
-
 
 /**
  * A Protocol test which reads the test protocol session from a file. The file
@@ -34,8 +35,7 @@ import org.junit.After;
  * and {@link #postElements} for extra elements not defined in the protocol
  * session file.
  */
-public abstract class AbstractSimpleScriptedTestProtocol extends
-        AbstractProtocolTestFramework {
+public abstract class AbstractSimpleScriptedTestProtocol extends AbstractProtocolTestFramework {
     private FileProtocolSessionBuilder builder = new FileProtocolSessionBuilder();
 
     private static final Locale BASE_DEFAULT_LOCALE = Locale.getDefault();
@@ -46,12 +46,15 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
      * Sets up a SimpleFileProtocolTest which reads the protocol session from a
      * file of name "<fileName>.test". This file should be available in the
      * classloader in the same location as this test class.
-     * @param scriptDirectory name of the directory containing the scripts to be run
+     * 
+     * @param scriptDirectory
+     *            name of the directory containing the scripts to be run
      * @param fileName
      *            The name of the file to read protocol elements from.
-     * @throws Exception 
+     * @throws Exception
      */
-    public AbstractSimpleScriptedTestProtocol(HostSystem hostSystem, String userName, String password, String scriptDirectory) throws Exception {
+    public AbstractSimpleScriptedTestProtocol(HostSystem hostSystem, String userName, String password,
+            String scriptDirectory) throws Exception {
         super(hostSystem, userName, password);
         this.scriptDirectory = scriptDirectory;
     }
@@ -96,7 +99,8 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
 
         try {
             builder.addProtocolLinesFromStream(is, session, fileName);
-        } finally {
+        }
+        finally {
             IOUtils.closeQuietly(is);
         }
     }

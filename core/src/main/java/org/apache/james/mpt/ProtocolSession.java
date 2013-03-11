@@ -25,7 +25,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
-
 /**
  * A protocol session which can be run against a reader and writer, which checks
  * the server response against the expected values. TODO make ProtocolSession
@@ -33,8 +32,6 @@ import java.util.regex.Pattern;
  * sessions.
  * 
  * @author Darrell DeBoer <darrell@apache.org>
- * 
- * @version $Revision$
  */
 public class ProtocolSession implements ProtocolInteractor {
     private boolean continued = false;
@@ -45,7 +42,7 @@ public class ProtocolSession implements ProtocolInteractor {
 
     protected List<ProtocolElement> testElements = new ArrayList<ProtocolElement>();
 
-    private Iterator elementsIterator;
+    private Iterator<ProtocolElement> elementsIterator;
 
     private Session[] sessions;
 
@@ -77,7 +74,10 @@ public class ProtocolSession implements ProtocolInteractor {
      * in the array corresponds to the number of the session. If an exception
      * occurs, no more test elements are executed.
      * 
-     * @param sessions not null
+     * @param out
+     *            The client requests are written to here.
+     * @param in
+     *            The server responses are read from here.
      */
     public void runSessions(Session[] sessions) throws Exception {
         this.sessions = sessions;
@@ -109,38 +109,40 @@ public class ProtocolSession implements ProtocolInteractor {
                 if (!elementsIterator.hasNext()) {
                     nextTest = null;
                 }
-            } else {
+            }
+            else {
                 throw new RuntimeException("Unexpected continuation");
             }
-        } catch (Exception e) {
+        }
+        catch (Exception e) {
             throw new RuntimeException(e);
         }
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolInteractor#CL(java.lang.String)
+     * adds a new Client request line to the test elements
      */
     public void CL(String clientLine) {
         testElements.add(new ClientRequest(clientLine));
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolInteractor#SL(java.lang.String, java.lang.String)
+     * adds a new Server Response line to the test elements, with the specified
+     * location.
      */
     public void SL(String serverLine, String location) {
         testElements.add(new ServerResponse(serverLine, location));
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolInteractor#SUB(java.util.List, java.lang.String)
+     * adds a new Server Unordered Block to the test elements.
      */
     public void SUB(List<String> serverLines, String location) {
-        testElements
-                .add(new ServerUnorderedBlockResponse(serverLines, location));
+        testElements.add(new ServerUnorderedBlockResponse(serverLines, location));
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolInteractor#CL(int, java.lang.String)
+     * adds a new Client request line to the test elements
      */
     public void CL(int sessionNumber, String clientLine) {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
@@ -148,7 +150,7 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolInteractor#CONT(int)
+     * Adds a continuation. To allow one thread to be used for testing.
      */
     public void CONT(int sessionNumber) throws Exception {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
@@ -156,29 +158,26 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolInteractor#SL(int, java.lang.String, java.lang.String, java.lang.String)
+     * adds a new Server Response line to the test elements, with the specified
+     * location.
      */
-    public void SL(int sessionNumber, String serverLine, String location,
-            String lastClientMessage) {
+    public void SL(int sessionNumber, String serverLine, String location, String lastClientMessage) {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
-        testElements.add(new ServerResponse(sessionNumber, serverLine,
-                location, lastClientMessage));
+        testElements.add(new ServerResponse(sessionNumber, serverLine, location, lastClientMessage));
     }
 
     /**
-     * @see org.apache.james.mpt.ProtocolInteractor#SUB(int, java.util.List, java.lang.String, java.lang.String)
+     * adds a new Server Unordered Block to the test elements.
      */
-    public void SUB(int sessionNumber, List<String> serverLines, String location,
-            String lastClientMessage) {
+    public void SUB(int sessionNumber, List<String> serverLines, String location, String lastClientMessage) {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
-        testElements.add(new ServerUnorderedBlockResponse(sessionNumber,
-                serverLines, location, lastClientMessage));
+        testElements.add(new ServerUnorderedBlockResponse(sessionNumber, serverLines, location, lastClientMessage));
     }
 
     /**
      * A client request, which write the specified message to a Writer.
      */
-    private class ClientRequest implements ProtocolElement {
+    private static class ClientRequest implements ProtocolElement {
         private int sessionNumber;
 
         private String message;
@@ -202,20 +201,20 @@ public class ProtocolSession implements ProtocolInteractor {
         }
 
         /**
-         * Writes the request message to the PrintWriters. If the sessionNumber ==
-         * -1, the request is written to *all* supplied writers, otherwise, only
-         * the writer for this session is writted to.
+         * Writes the request message to the PrintWriters. If the sessionNumber
+         * == -1, the request is written to *all* supplied writers, otherwise,
+         * only the writer for this session is writted to.
          * 
          * @throws Exception
          */
-        public void testProtocol(Session[] sessions,
-                boolean continueAfterFailure) throws Exception {
+        public void testProtocol(Session[] sessions, boolean continueAfterFailure) throws Exception {
             if (sessionNumber < 0) {
                 for (int i = 0; i < sessions.length; i++) {
                     Session session = sessions[i];
                     writeMessage(session);
                 }
-            } else {
+            }
+            else {
                 Session session = sessions[sessionNumber];
                 writeMessage(session);
             }
@@ -228,27 +227,6 @@ public class ProtocolSession implements ProtocolInteractor {
         public boolean isClient() {
             return true;
         }
-
-        /**
-         * Constructs a <code>String</code> with all attributes
-         * in name = value format.
-         *
-         * @return a <code>String</code> representation 
-         * of this object.
-         */
-        public String toString()
-        {
-            final String TAB = " ";
-            
-            String retValue = "ClientRequest ( "
-                + "sessionNumber = " + this.sessionNumber + TAB
-                + "message = " + this.message + TAB
-                + " )";
-        
-            return retValue;
-        }
-        
-        
     }
 
     /**
@@ -289,8 +267,7 @@ public class ProtocolSession implements ProtocolInteractor {
          * @param location
          *            A descriptive value to use in error messages.
          */
-        public ServerResponse(int sessionNumber, String expectedPattern,
-                String location, String lastClientMessage) {
+        public ServerResponse(int sessionNumber, String expectedPattern, String location, String lastClientMessage) {
             this.sessionNumber = sessionNumber;
             this.expectedLine = expectedPattern;
             this.location = location;
@@ -311,29 +288,28 @@ public class ProtocolSession implements ProtocolInteractor {
          *             If the actual server response didn't match the regular
          *             expression expected.
          */
-        public void testProtocol(Session[] sessions,
-                boolean continueAfterFailure) throws Exception {
+        public void testProtocol(Session[] sessions, boolean continueAfterFailure) throws Exception {
             if (sessionNumber < 0) {
                 for (int i = 0; i < sessions.length; i++) {
                     Session session = sessions[i];
                     checkResponse(session, continueAfterFailure);
                 }
-            } else {
+            }
+            else {
                 Session session = sessions[sessionNumber];
                 checkResponse(session, continueAfterFailure);
             }
         }
 
-        protected void checkResponse(Session session,
-                boolean continueAfterFailure) throws Exception {
+        protected void checkResponse(Session session, boolean continueAfterFailure) throws Exception {
             String testLine = readLine(session);
             if (!match(expectedLine, testLine)) {
-                String errMsg = "\nLocation: " + location + "\nLastClientMsg: "
-                        + lastClientMessage + "\nExpected: '" + expectedLine
-                        + "'\nActual   : '" + testLine + "'";
+                String errMsg = "\nLocation: " + location + "\nLastClientMsg: " + lastClientMessage + "\nExpected: '"
+                        + expectedLine + "'\nActual   : '" + testLine + "'";
                 if (continueAfterFailure) {
                     System.out.println(errMsg);
-                } else {
+                }
+                else {
                     throw new InvalidServerResponseException(errMsg);
                 }
             }
@@ -363,9 +339,9 @@ public class ProtocolSession implements ProtocolInteractor {
         protected String readLine(Session session) throws Exception {
             try {
                 return session.readLine();
-            } catch (IOException e) {
-                String errMsg = "\nLocation: " + location + "\nExpected: "
-                        + expectedLine + "\nReason: Server Timeout.";
+            }
+            catch (IOException e) {
+                String errMsg = "\nLocation: " + location + "\nExpected: " + expectedLine + "\nReason: Server Timeout.";
                 throw new InvalidServerResponseException(errMsg);
             }
         }
@@ -373,29 +349,6 @@ public class ProtocolSession implements ProtocolInteractor {
         public boolean isClient() {
             return false;
         }
-
-        /**
-         * Constructs a <code>String</code> with all attributes
-         * in name = value format.
-         *
-         * @return a <code>String</code> representation 
-         * of this object.
-         */
-        public String toString()
-        {
-            final String TAB = " ";
-            
-            String result = "ServerResponse ( "
-                + "lastClientMessage = " + this.lastClientMessage + TAB
-                + "sessionNumber = " + this.sessionNumber + TAB
-                + "expectedLine = " + this.expectedLine + TAB
-                + "location = " + this.location + TAB
-                + " )";
-        
-            return result;
-        }
-        
-        
     }
 
     /**
@@ -432,10 +385,9 @@ public class ProtocolSession implements ProtocolInteractor {
          * @param location
          *            A descriptive location string for error messages.
          */
-        public ServerUnorderedBlockResponse(int sessionNumber,
-                List<String> expectedLines, String location, String lastClientMessage) {
-            super(sessionNumber, "<Unordered Block>", location,
-                    lastClientMessage);
+        public ServerUnorderedBlockResponse(int sessionNumber, List<String> expectedLines, String location,
+                String lastClientMessage) {
+            super(sessionNumber, "<Unordered Block>", location, lastClientMessage);
             this.expectedLines = expectedLines;
         }
 
@@ -450,8 +402,7 @@ public class ProtocolSession implements ProtocolInteractor {
          *             If a line is encountered which doesn't match one of the
          *             expected lines.
          */
-        protected void checkResponse(Session session,
-                boolean continueAfterFailure) throws Exception {
+        protected void checkResponse(Session session, boolean continueAfterFailure) throws Exception {
             List<String> testLines = new ArrayList<String>(expectedLines);
             while (testLines.size() > 0) {
                 String actualLine = readLine(session);
@@ -467,10 +418,9 @@ public class ProtocolSession implements ProtocolInteractor {
                 }
 
                 if (!foundMatch) {
-                    StringBuffer errMsg = new StringBuffer().append(
-                            "\nLocation: ").append(location).append(
-                            "\nExpected one of: ");
-                    Iterator iter = expectedLines.iterator();
+                    StringBuffer errMsg = new StringBuffer().append("\nLocation: ").append(location)
+                            .append("\nExpected one of: ");
+                    Iterator<String> iter = expectedLines.iterator();
                     while (iter.hasNext()) {
                         errMsg.append("\n    ");
                         errMsg.append(iter.next());
@@ -478,33 +428,13 @@ public class ProtocolSession implements ProtocolInteractor {
                     errMsg.append("\nActual: ").append(actualLine);
                     if (continueAfterFailure) {
                         System.out.println(errMsg.toString());
-                    } else {
-                        throw new InvalidServerResponseException(errMsg
-                                .toString());
+                    }
+                    else {
+                        throw new InvalidServerResponseException(errMsg.toString());
                     }
                 }
             }
         }
-
-        /**
-         * Constructs a <code>String</code> with all attributes
-         * in name = value format.
-         *
-         * @return a <code>String</code> representation 
-         * of this object.
-         */
-        public String toString()
-        {
-            final String TAB = " ";
-            
-            String result = "ServerUnorderedBlockResponse ( "
-                + "expectedLines = " + this.expectedLines + TAB
-                + " )";
-        
-            return result;
-        }
-        
-        
     }
 
     private class ContinuationElement implements ProtocolElement {
@@ -515,8 +445,7 @@ public class ProtocolSession implements ProtocolInteractor {
             this.sessionNumber = sessionNumber < 0 ? 0 : sessionNumber;
         }
 
-        public void testProtocol(Session[] sessions,
-                boolean continueAfterFailure) throws Exception {
+        public void testProtocol(Session[] sessions, boolean continueAfterFailure) throws Exception {
             Session session = sessions[sessionNumber];
             continuationExpected = true;
             continued = false;
@@ -525,7 +454,8 @@ public class ProtocolSession implements ProtocolInteractor {
                 final String message = "Expected continuation";
                 if (continueAfterFailure) {
                     System.out.print(message);
-                } else {
+                }
+                else {
                     throw new InvalidServerResponseException(message);
                 }
             }
@@ -540,26 +470,6 @@ public class ProtocolSession implements ProtocolInteractor {
         public boolean isClient() {
             return false;
         }
-
-        /**
-         * Constructs a <code>String</code> with all attributes
-         * in name = value format.
-         *
-         * @return a <code>String</code> representation 
-         * of this object.
-         */
-        public String toString()
-        {
-            final String TAB = " ";
-            
-            String result = "ContinuationElement ( "
-                + "sessionNumber = " + this.sessionNumber + TAB
-                + " )";
-        
-            return result;
-        }
-        
-        
     }
 
     /**
@@ -572,40 +482,42 @@ public class ProtocolSession implements ProtocolInteractor {
         /**
          * Executes the ProtocolElement against the supplied session.
          * 
-         * @param continueAfterFailure true when the execution should continue,
-         * false otherwise
+         * @param continueAfterFailure
+         *            TODO
          * @throws Exception
          */
-        void testProtocol(Session[] sessions,
-                boolean continueAfterFailure) throws Exception;
+        void testProtocol(Session[] sessions, boolean continueAfterFailure) throws Exception;
 
         boolean isClient();
     }
 
     /**
-     * Constructs a <code>String</code> with all attributes
-     * in name = value format.
-     *
-     * @return a <code>String</code> representation 
-     * of this object.
+     * An exception which is thrown when the actual response from a server is
+     * different from that expected.
      */
-    public String toString()
-    {
+    @SuppressWarnings("serial")
+    public static class InvalidServerResponseException extends Exception {
+        public InvalidServerResponseException(String message) {
+            super(message);
+        }
+    }
+
+    /**
+     * Constructs a <code>String</code> with all attributes in name = value
+     * format.
+     * 
+     * @return a <code>String</code> representation of this object.
+     */
+    public String toString() {
         final String TAB = " ";
-        
-        String result  = "ProtocolSession ( "
-            + "continued = " + this.continued + TAB
-            + "continuationExpected = " + this.continuationExpected + TAB
-            + "maxSessionNumber = " + this.maxSessionNumber + TAB
-            + "testElements = " + this.testElements + TAB
-            + "elementsIterator = " + this.elementsIterator + TAB
-            + "sessions = " + this.sessions + TAB
-            + "nextTest = " + this.nextTest + TAB
-            + "continueAfterFailure = " + this.continueAfterFailure + TAB
-            + " )";
-    
+
+        String result = "ProtocolSession ( " + "continued = " + this.continued + TAB + "continuationExpected = "
+                + this.continuationExpected + TAB + "maxSessionNumber = " + this.maxSessionNumber + TAB
+                + "testElements = " + this.testElements + TAB + "elementsIterator = " + this.elementsIterator + TAB
+                + "sessions = " + this.sessions + TAB + "nextTest = " + this.nextTest + TAB + "continueAfterFailure = "
+                + this.continueAfterFailure + TAB + " )";
+
         return result;
     }
-    
-    
+
 }
