@@ -34,22 +34,8 @@ import org.apache.commons.io.IOUtils;
  * 
  * @version $Revision$
  */
-public class FileProtocolSessionBuilder {
+public class FileProtocolSessionBuilder extends ProtocolSessionBuilder {
     
-    private static final String SERVER_CONTINUATION_TAG = "S: \\+";
-
-    private static final String CLIENT_TAG = "C:";
-
-    private static final String SERVER_TAG = "S:";
-
-    private static final String OPEN_UNORDERED_BLOCK_TAG = "SUB {";
-
-    private static final String CLOSE_UNORDERED_BLOCK_TAG = "}";
-
-    private static final String COMMENT_TAG = "#";
-
-    private static final String SESSION_TAG = "SESSION:";
-
     /**
      * Builds a ProtocolSession by reading lines from the test file with the
      * supplied name.

@@ -37,6 +37,7 @@ import org.apache.james.mpt.api.Session;
  * @author Darrell DeBoer <darrell@apache.org>
  */
 public class ProtocolSession implements ProtocolInteractor {
+
     private boolean continued = false;
 
     private boolean continuationExpected = false;
