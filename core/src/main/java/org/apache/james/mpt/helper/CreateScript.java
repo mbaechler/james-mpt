@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox.builder;
+package org.apache.james.mpt.helper;
 
 public class CreateScript {
 
