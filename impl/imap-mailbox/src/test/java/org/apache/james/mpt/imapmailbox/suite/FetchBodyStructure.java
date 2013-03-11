@@ -22,10 +22,10 @@ package org.apache.james.mpt.imapmailbox.suite;
 import java.util.Locale;
 
 import org.apache.james.mpt.HostSystem;
-import org.apache.james.mpt.imapmailbox.FrameworkForSelectedStateBase;
+import org.apache.james.mpt.imapmailbox.suite.base.BaseSelectedState;
 import org.junit.Test;
 
-public abstract class FetchBodyStructure extends FrameworkForSelectedStateBase {
+public abstract class FetchBodyStructure extends BaseSelectedState {
 
     public FetchBodyStructure(HostSystem system) throws Exception {
         super(system);

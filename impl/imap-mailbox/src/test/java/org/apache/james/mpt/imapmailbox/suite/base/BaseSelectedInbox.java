@@ -17,68 +17,59 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox;
+package org.apache.james.mpt.imapmailbox.suite.base;
 
 import org.apache.james.mpt.HostSystem;
-import org.junit.Before;
 
 /**
  * <p>
- * Runs tests for commands valid in the AUTHENTICATED state. A login session
- * precedes the execution of the test elements.
+ * Tests commands which are valid in AUTHENTICATED and NONAUTHENTICATED by
+ * running them in the SELECTED state. Many commands function identically, while
+ * others are invalid in this state.
  * </p>
  * <p>
- * Suggested tests:
+ * Recommended scripts:
  * </p>
  * <ul>
- * <li>ValidSelected</li>
  * <li>ValidNonAuthenticated</li>
  * <li>Capability</li>
  * <li>Noop</li>
  * <li>Logout</li>
- * <li>AppendExamineInbox</li>
- * <li>AppendSelectInbox</li>
  * <li>Create</li>
  * <li>ExamineEmpty</li>
  * <li>SelectEmpty</li>
  * <li>ListNamespace</li>
  * <li>ListMailboxes</li>
  * <li>Status</li>
- * <li>Subscribe</li>
- * <li>Delete</li>
- * <li>Append</li>
- * <li>Compound:
- * <ul>
- * <li>AppendExpunge</li>
- * <li>SelectAppend</li>
  * <li>StringArgs</li>
+ * <li>Subscribe</li>
+ * <li>Append</li>
+ * <li>Delete</li>
  * </ul>
- * </li>
- * </ul>
- * </p>
+ * 
+ * @author Darrell DeBoer <darrell@apache.org>
+ * 
+ * @version $Revision: 560719 $
  */
-public abstract class FrameworkForAuthenticatedState extends
-        ImapProtocolFramework implements ImapTestConstants {
-    public FrameworkForAuthenticatedState(HostSystem hostSystem) throws Exception {
-        super(hostSystem);
+public abstract class BaseSelectedInbox extends BaseAuthenticatedState {
+    public BaseSelectedInbox(HostSystem system) throws Exception {
+        super(system);
     }
 
     /**
-     * Sets up {@link #preElements} with a welcome message and login
-     * request/response.
+     * Superclass sets up welcome message and login session in
+     * {@link #preElements}. A "SELECT INBOX" session is then added to these
+     * elements.
      * 
      * @throws Exception
      */
-    @Before
     public void setUp() throws Exception {
         super.setUp();
-        addTestFile("Welcome.test", preElements);
-        addLogin(USER, PASSWORD);
+        addTestFile("SelectInbox.test", preElements);
     }
 
-    protected void addLogin(String username, String password) {
-        preElements.CL("a001 LOGIN " + username + " " + password);
-        preElements.SL("a001 OK LOGIN completed.",
-                "AbstractTestForAuthenticatedState.java:53");
+    protected void addCloseInbox() {
+        postElements.CL("a CLOSE");
+        postElements.SL(".*", "AbstractBaseTestSelectedInbox.java:76");
     }
 }

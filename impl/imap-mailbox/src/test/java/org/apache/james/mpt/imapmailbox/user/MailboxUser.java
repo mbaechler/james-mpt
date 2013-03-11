@@ -17,21 +17,21 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox;
+package org.apache.james.mpt.imapmailbox.user;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-class User {
+class MailboxUser {
     private final String userName;
 
     private CharSequence password;
 
     private final Set<String> subscriptions;
 
-    public User(final String userName) {
+    public MailboxUser(final String userName) {
         this.userName = userName;
         this.subscriptions = new HashSet<String>();
     }

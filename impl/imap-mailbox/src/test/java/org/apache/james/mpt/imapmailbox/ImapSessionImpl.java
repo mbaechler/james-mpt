@@ -27,16 +27,15 @@ import org.apache.james.imap.api.process.ImapSession;
 import org.apache.james.imap.api.process.SelectedMailbox;
 import org.slf4j.Logger;
 
-public class ImapSessionImpl implements ImapSession{
+public class ImapSessionImpl implements ImapSession {
 
-        
     private ImapSessionState state = ImapSessionState.NON_AUTHENTICATED;
 
     private SelectedMailbox selectedMailbox = null;
 
     private final Map<String, Object> attributesByKey;
 
-	private Logger log;
+    private Logger log;
 
     public ImapSessionImpl(Logger log) {
         this.attributesByKey = new ConcurrentHashMap<String, Object>();
@@ -86,7 +85,8 @@ public class ImapSessionImpl implements ImapSession{
     public void setAttribute(String key, Object value) {
         if (value == null) {
             attributesByKey.remove(key);
-        } else {
+        }
+        else {
             attributesByKey.put(key, value);
         }
     }
@@ -95,7 +95,6 @@ public class ImapSessionImpl implements ImapSession{
         return log;
     }
 
-    
     public boolean startTLS() {
         return false;
     }
@@ -114,12 +113,12 @@ public class ImapSessionImpl implements ImapSession{
 
     public void pushLineHandler(ImapLineHandler lineHandler) {
         // TODO Auto-generated method stub
-        
+
     }
 
     public void popLineHandler() {
         // TODO Auto-generated method stub
-        
+
     }
 
     public boolean isPlainAuthDisallowed() {

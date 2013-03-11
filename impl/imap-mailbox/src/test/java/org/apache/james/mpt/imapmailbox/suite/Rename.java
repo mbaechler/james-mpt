@@ -22,10 +22,10 @@ package org.apache.james.mpt.imapmailbox.suite;
 import java.util.Locale;
 
 import org.apache.james.mpt.HostSystem;
-import org.apache.james.mpt.imapmailbox.FrameworkForSelectedStateBase;
+import org.apache.james.mpt.imapmailbox.suite.base.BaseSelectedState;
 import org.junit.Test;
 
-public abstract class Rename extends FrameworkForSelectedStateBase {
+public abstract class Rename extends BaseSelectedState {
 
     public Rename(HostSystem system) throws Exception {
         super(system);

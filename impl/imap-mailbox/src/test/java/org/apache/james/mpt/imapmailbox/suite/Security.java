@@ -22,10 +22,10 @@ package org.apache.james.mpt.imapmailbox.suite;
 import java.util.Locale;
 
 import org.apache.james.mpt.HostSystem;
-import org.apache.james.mpt.imapmailbox.ImapProtocolFramework;
+import org.apache.james.mpt.imapmailbox.suite.base.BaseImapProtocol;
 import org.junit.Test;
 
-public abstract class Security extends ImapProtocolFramework {
+public abstract class Security extends BaseImapProtocol {
 
     public Security(HostSystem system) throws Exception {
         super(system);

@@ -22,10 +22,10 @@ package org.apache.james.mpt.imapmailbox.suite;
 import java.util.Locale;
 
 import org.apache.james.mpt.HostSystem;
-import org.apache.james.mpt.imapmailbox.FrameworkForAuthenticatedState;
+import org.apache.james.mpt.imapmailbox.suite.base.BaseAuthenticatedState;
 import org.junit.Test;
 
-public abstract class Listing extends FrameworkForAuthenticatedState {
+public abstract class Listing extends BaseAuthenticatedState {
 
     public Listing(HostSystem system) throws Exception {
         super(system);

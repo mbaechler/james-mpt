@@ -22,10 +22,10 @@ package org.apache.james.mpt.imapmailbox.suite;
 import java.util.Locale;
 
 import org.apache.james.mpt.HostSystem;
-import org.apache.james.mpt.imapmailbox.FrameworkForNonAuthenticatedState;
+import org.apache.james.mpt.imapmailbox.suite.base.BaseNonAuthenticatedState;
 import org.junit.Test;
 
-public abstract class NonAuthenticatedState extends FrameworkForNonAuthenticatedState {
+public abstract class NonAuthenticatedState extends BaseNonAuthenticatedState {
 
     public NonAuthenticatedState(HostSystem system) throws Exception {
         super(system);

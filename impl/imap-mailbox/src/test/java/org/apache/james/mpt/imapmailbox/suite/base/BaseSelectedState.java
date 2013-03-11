@@ -17,42 +17,34 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox;
+package org.apache.james.mpt.imapmailbox.suite.base;
 
 import org.apache.james.mpt.HostSystem;
+import org.junit.Before;
 
 /**
  * <p>
- * Tests commands which are valid in AUTHENTICATED and NONAUTHENTICATED by
- * running them in the SELECTED state. Many commands function identically, while
- * others are invalid in this state.
+ * Runs tests for commands valid only in the SELECTED state. A login session and
+ * setup of a "seleted" mailbox precedes the execution of the test elements.
  * </p>
  * <p>
  * Recommended scripts:
  * </p>
  * <ul>
- * <li>ValidNonAuthenticated</li>
- * <li>Capability</li>
- * <li>Noop</li>
- * <li>Logout</li>
- * <li>Create</li>
- * <li>ExamineEmpty</li>
- * <li>SelectEmpty</li>
- * <li>ListNamespace</li>
- * <li>ListMailboxes</li>
- * <li>Status</li>
- * <li>StringArgs</li>
- * <li>Subscribe</li>
- * <li>Append</li>
- * <li>Delete</li>
+ * <li>Check"</li>
+ * <li>Expunge"</li>
+ * <li>Search"</li>
+ * <li>FetchSingleMessage"</li>
+ * <li>FetchMultipleMessages"</li>
+ * <li>FetchPeek"</li>
+ * <li>Store"</li>
+ * <li>Copy"</li>
+ * <li>Uid"</li>
  * </ul>
- * 
- * @author Darrell DeBoer <darrell@apache.org>
- * 
- * @version $Revision: 560719 $
  */
-public abstract class FrameworkForSelectedInbox extends FrameworkForAuthenticatedState {
-    public FrameworkForSelectedInbox(HostSystem system) throws Exception {
+public abstract class BaseSelectedState extends BaseAuthenticatedState {
+    
+    public BaseSelectedState(HostSystem system) throws Exception {
         super(system);
     }
 
@@ -63,13 +55,10 @@ public abstract class FrameworkForSelectedInbox extends FrameworkForAuthenticate
      * 
      * @throws Exception
      */
+    @Before
     public void setUp() throws Exception {
         super.setUp();
-        addTestFile("SelectInbox.test", preElements);
-    }
-
-    protected void addCloseInbox() {
-        postElements.CL("a CLOSE");
-        postElements.SL(".*", "AbstractBaseTestSelectedInbox.java:76");
+        addTestFile("SelectedStateSetup.test", preElements);
+        addTestFile("SelectedStateCleanup.test", postElements);
     }
 }

@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox;
+package org.apache.james.mpt.imapmailbox.user;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -30,16 +30,16 @@ import org.apache.james.mailbox.exception.SubscriptionException;
 /**
  * Stores users in memory.
  */
-public class InMemoryUserManager implements SubscriptionManager {
+public class InMemoryMailboxUserManager implements SubscriptionManager {
 
-    private final Map<String, User> users;
+    private final Map<String, MailboxUser> users;
 
-    public InMemoryUserManager() {
-        this.users = new HashMap<String, User>();
+    public InMemoryMailboxUserManager() {
+        this.users = new HashMap<String, MailboxUser>();
     }
 
     public boolean isAuthentic(String userid, CharSequence password) {
-        User user = (User) users.get(userid);
+        MailboxUser user = (MailboxUser) users.get(userid);
         final boolean result;
         if (user == null) {
             result = false;
@@ -52,9 +52,9 @@ public class InMemoryUserManager implements SubscriptionManager {
     public void subscribe(MailboxSession session, String mailbox)
             throws SubscriptionException {
         MailboxSession.User u = session.getUser();
-        User user = (User) users.get(u.getUserName());
+        MailboxUser user = (MailboxUser) users.get(u.getUserName());
         if (user == null) {
-            user = new User(u.getUserName());
+            user = new MailboxUser(u.getUserName());
             users.put(u.getUserName(), user);
         }
         user.addSubscription(mailbox);
@@ -62,9 +62,9 @@ public class InMemoryUserManager implements SubscriptionManager {
 
     public Collection<String> subscriptions(org.apache.james.mailbox.MailboxSession session) throws SubscriptionException {
         MailboxSession.User u = session.getUser();
-        User user = (User) users.get(u.getUserName());
+        MailboxUser user = (MailboxUser) users.get(u.getUserName());
         if (user == null) {
-            user = new User(u.getUserName());
+            user = new MailboxUser(u.getUserName());
             users.put(u.getUserName(), user);
         }
         return user.getSubscriptions();
@@ -73,18 +73,18 @@ public class InMemoryUserManager implements SubscriptionManager {
     public void unsubscribe(org.apache.james.mailbox.MailboxSession session, String mailbox)
             throws SubscriptionException {
         MailboxSession.User u = session.getUser();
-        User user = (User) users.get(u.getUserName());
+        MailboxUser user = (MailboxUser) users.get(u.getUserName());
         if (user == null) {
-            user = new User(u.getUserName());
+            user = new MailboxUser(u.getUserName());
             users.put(u.getUserName(), user);
         }
         user.removeSubscription(mailbox);
     }
 
     public void addUser(String userid, CharSequence password) {
-        User user = (User) users.get(userid);
+        MailboxUser user = (MailboxUser) users.get(userid);
         if (user == null) {
-            user = new User(userid);
+            user = new MailboxUser(userid);
             users.put(userid, user);
         }
         user.setPassword(password);
