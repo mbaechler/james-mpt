@@ -17,19 +17,47 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.monitor;
+
+import org.apache.james.mpt.api.Monitor;
 
 /**
- * Discards all monitored messages.
+ * Feeds monitored information to {@link System#out}.
  */
-public class NullMonitor implements Monitor {
+public final class SystemLoggingMonitor implements Monitor {
+
+    private boolean verbose = false;
+
+    public SystemLoggingMonitor() {
+        this(false);
+    }
+
+    public SystemLoggingMonitor(final boolean verbose) {
+        this.verbose = verbose;
+    }
+
+    public boolean isVerbose() {
+        return verbose;
+    }
+
+    public void setVerbose(boolean verbose) {
+        this.verbose = verbose;
+    }
 
     public void note(String message) {
+        System.out.println(message);
     }
 
     public void debug(char character) {
+        if (verbose) {
+            System.out.print(character);
+        }
     }
 
-    public void debug(String messsage) {
+    public void debug(String message) {
+        if (verbose) {
+            System.out.println(message);
+        }
     }
+
 }

@@ -17,18 +17,18 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.exception;
 
 /**
- * Adds users on demand.
+ * An exception which is thrown when the actual response from a server is
+ * different from that expected.
  */
-public interface UserAdder {
-    
-    /**
-     * Adds a user.
-     * @param user not null
-     * @param password not null
-     * @throws Exception when user cannot be added
-     */
-    public void addUser(String user, String password) throws Exception;
+public class InvalidServerResponseException extends Exception {
+
+    private static final long serialVersionUID = 6489140960152710438L;
+
+    public InvalidServerResponseException(String message) {
+        super(message);
+    }
+
 }

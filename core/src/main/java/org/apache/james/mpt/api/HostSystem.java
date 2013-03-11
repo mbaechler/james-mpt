@@ -17,7 +17,9 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.api;
+
+import org.apache.james.mpt.host.ExternalHostSystem;
 
 /**
  * <p>Host system under test.</p>

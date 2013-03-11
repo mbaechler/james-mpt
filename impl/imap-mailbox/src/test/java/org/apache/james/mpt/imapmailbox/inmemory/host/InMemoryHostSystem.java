@@ -32,7 +32,7 @@ import org.apache.james.mailbox.inmemory.InMemoryMailboxSessionMapperFactory;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreMailboxManager;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.HostSystem;
+import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.ImapHostSystem;
 
 public class InMemoryHostSystem extends ImapHostSystem {

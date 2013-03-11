@@ -18,9 +18,9 @@
  ****************************************************************/
 package org.apache.james.mpt.imapmailbox.suite.base;
 
-import org.apache.james.mpt.AbstractSimpleScriptedTestProtocol;
-import org.apache.james.mpt.HostSystem;
+import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.ImapTestConstants;
+import org.apache.james.mpt.script.AbstractSimpleScriptedTestProtocol;
 
 /**
  * Specialise the protocol test framework for IMAP.

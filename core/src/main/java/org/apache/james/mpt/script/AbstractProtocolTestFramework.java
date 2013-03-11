@@ -17,7 +17,13 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.script;
+
+import org.apache.james.mpt.Runner;
+import org.apache.james.mpt.api.Continuation;
+import org.apache.james.mpt.api.HostSystem;
+import org.apache.james.mpt.api.Session;
+import org.apache.james.mpt.protocol.ProtocolSession;
 
 import junit.framework.TestCase;
 

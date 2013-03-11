@@ -17,46 +17,21 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.api;
+
 
 /**
- * Feeds monitored information to {@link System#out}.
+ * Builds sessions for protocol testing.
  */
-public final class SystemLoggingMonitor implements Monitor {
+public interface SessionFactory {
 
-    private boolean verbose = false;
-    
-    public SystemLoggingMonitor() {
-        this(false);
-    }
-    
-    public SystemLoggingMonitor(final boolean verbose) {
-        this.verbose = verbose;
-    }
-    
-    public boolean isVerbose() {
-        return verbose;
-    }
+    /**
+     * Creates a new session for functional testing.
+     * 
+     * @return <code>Session</code>, not null
+     * @throws Exception
+     */
+    public abstract Session newSession(Continuation continuation)
+            throws Exception;
 
-    public void setVerbose(boolean verbose) {
-        this.verbose = verbose;
-    }
-
-    public void note(String message) {
-        System.out.println(message);
-    }
-
-    public void debug(char character) {
-        if (verbose) {
-            System.out.print(character);
-        }
-    }
-
-    public void debug(String message) {
-        if (verbose) {
-            System.out.println(message);
-        }
-    }
-
-    
 }

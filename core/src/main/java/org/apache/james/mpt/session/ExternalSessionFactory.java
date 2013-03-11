@@ -17,12 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.session;
 
 import java.net.InetSocketAddress;
 import java.nio.channels.SocketChannel;
 
-import org.apache.james.mpt.Continuation;
+import org.apache.james.mpt.api.Continuation;
+import org.apache.james.mpt.api.Monitor;
+import org.apache.james.mpt.api.Session;
+import org.apache.james.mpt.api.SessionFactory;
 
 /**
  * Session factory creates session which connection to a server port.
@@ -60,8 +63,7 @@ public class ExternalSessionFactory implements SessionFactory {
      * @return a <code>String</code> representation 
      * of this object.
      */
-    public String toString()
-    {
+    public String toString() {
         final String TAB = " ";
 
         String retValue = "ExternalSessionFactory ( "

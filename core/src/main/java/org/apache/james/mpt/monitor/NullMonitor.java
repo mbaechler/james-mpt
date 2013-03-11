@@ -17,22 +17,21 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.monitor;
 
-import org.apache.james.mpt.Continuation;
+import org.apache.james.mpt.api.Monitor;
 
 /**
- * Builds sessions for protocol testing.
+ * Discards all monitored messages.
  */
-public interface SessionFactory {
+public class NullMonitor implements Monitor {
 
-    /**
-     * Creates a new session for functional testing.
-     * 
-     * @return <code>Session</code>, not null
-     * @throws Exception
-     */
-    public abstract Session newSession(Continuation continuation)
-            throws Exception;
+    public void note(String message) {
+    }
 
+    public void debug(char character) {
+    }
+
+    public void debug(String messsage) {
+    }
 }

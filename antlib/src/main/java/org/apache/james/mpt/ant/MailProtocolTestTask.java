@@ -29,11 +29,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
-import org.apache.james.mpt.ExternalHostSystem;
-import org.apache.james.mpt.Monitor;
-import org.apache.james.mpt.ProtocolSessionBuilder;
 import org.apache.james.mpt.Runner;
-import org.apache.james.mpt.ScriptedUserAdder;
+import org.apache.james.mpt.api.Monitor;
+import org.apache.james.mpt.host.ExternalHostSystem;
+import org.apache.james.mpt.protocol.ProtocolSessionBuilder;
+import org.apache.james.mpt.user.ScriptedUserAdder;
 import org.apache.tools.ant.BuildException;
 import org.apache.tools.ant.Project;
 import org.apache.tools.ant.Task;

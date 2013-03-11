@@ -41,7 +41,7 @@ import org.apache.james.mailbox.jcr.mail.JCRModSeqProvider;
 import org.apache.james.mailbox.jcr.mail.JCRUidProvider;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
-import org.apache.james.mpt.HostSystem;
+import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.ImapHostSystem;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;

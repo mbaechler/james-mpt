@@ -17,12 +17,15 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.script;
 
 import java.io.InputStream;
 import java.util.Locale;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.james.mpt.api.HostSystem;
+import org.apache.james.mpt.protocol.FileProtocolSessionBuilder;
+import org.apache.james.mpt.protocol.ProtocolSession;
 import org.junit.After;
 
 /**
@@ -33,10 +36,10 @@ import org.junit.After;
  * session file.
  */
 public abstract class AbstractSimpleScriptedTestProtocol extends AbstractProtocolTestFramework {
-    private FileProtocolSessionBuilder builder = new FileProtocolSessionBuilder();
-
+    
     private static final Locale BASE_DEFAULT_LOCALE = Locale.getDefault();
 
+    private FileProtocolSessionBuilder builder = new FileProtocolSessionBuilder();
     private final String scriptDirectory;
 
     /**
@@ -86,7 +89,9 @@ public abstract class AbstractSimpleScriptedTestProtocol extends AbstractProtoco
      *            The ProtocolSession to add elements to.
      */
     protected void addTestFile(String fileName, ProtocolSession session) throws Exception {
+
         fileName = scriptDirectory + fileName;
+        
         // Need to find local resource.
         InputStream is = this.getClass().getResourceAsStream(fileName);
 
@@ -100,6 +105,7 @@ public abstract class AbstractSimpleScriptedTestProtocol extends AbstractProtoco
         finally {
             IOUtils.closeQuietly(is);
         }
+        
     }
 
 }

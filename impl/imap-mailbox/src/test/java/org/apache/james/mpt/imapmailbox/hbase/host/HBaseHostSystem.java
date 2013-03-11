@@ -41,7 +41,7 @@ import org.apache.james.mailbox.hbase.mail.HBaseModSeqProvider;
 import org.apache.james.mailbox.hbase.mail.HBaseUidProvider;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.HostSystem;
+import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.ImapHostSystem;
 import org.slf4j.LoggerFactory;
 

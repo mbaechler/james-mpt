@@ -17,39 +17,18 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.api;
 
 /**
- * A connection to the host.
+ * Adds users on demand.
  */
-public interface Session {
+public interface UserAdder {
     
     /**
-     * Reads a line from the session input,
-     * blocking until a new line is available.
-     * @return not null
-     * @throws Exception
+     * Adds a user.
+     * @param user not null
+     * @param password not null
+     * @throws Exception when user cannot be added
      */
-    public String readLine() throws Exception;
-
-    /**
-     * Writes a line to the session output.
-     * @param line not null
-     * @throws Exception
-     */
-    public void writeLine(String line) throws Exception;
-
-    /**
-     * Opens the session.
-     * 
-     * @throws Exception
-     */
-    public void start() throws Exception;
-
-    /**
-     * Closes the session.
-     * 
-     * @throws Exception
-     */
-    public void stop() throws Exception;
+    public void addUser(String user, String password) throws Exception;
 }

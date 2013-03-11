@@ -21,6 +21,8 @@ package org.apache.james.mpt;
 
 import java.io.StringReader;
 
+import org.apache.james.mpt.api.ProtocolInteractor;
+import org.apache.james.mpt.protocol.ProtocolSessionBuilder;
 import org.jmock.Mock;
 import org.jmock.MockObjectTestCase;
 

@@ -17,10 +17,17 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.user;
 
 import java.io.Reader;
 import java.io.StringReader;
+
+import org.apache.james.mpt.Runner;
+import org.apache.james.mpt.api.Monitor;
+import org.apache.james.mpt.api.UserAdder;
+import org.apache.james.mpt.monitor.NullMonitor;
+import org.apache.james.mpt.protocol.ProtocolSessionBuilder;
+import org.apache.james.mpt.session.ExternalSessionFactory;
 
 /**
  * Adds a user by executing a script at a port.

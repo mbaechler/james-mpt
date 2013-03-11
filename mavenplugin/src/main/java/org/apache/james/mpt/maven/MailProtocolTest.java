@@ -27,11 +27,11 @@ import java.io.InputStream;
 import java.io.Reader;
 import java.io.StringReader;
 
-import org.apache.james.mpt.ExternalHostSystem;
-import org.apache.james.mpt.Monitor;
-import org.apache.james.mpt.ProtocolSessionBuilder;
 import org.apache.james.mpt.Runner;
-import org.apache.james.mpt.ScriptedUserAdder;
+import org.apache.james.mpt.api.Monitor;
+import org.apache.james.mpt.host.ExternalHostSystem;
+import org.apache.james.mpt.protocol.ProtocolSessionBuilder;
+import org.apache.james.mpt.user.ScriptedUserAdder;
 import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.MojoFailureException;
 

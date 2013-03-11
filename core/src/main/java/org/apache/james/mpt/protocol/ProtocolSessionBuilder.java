@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.protocol;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -26,6 +26,8 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import org.apache.james.mpt.api.ProtocolInteractor;
 
 
 /**

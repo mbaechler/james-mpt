@@ -19,7 +19,7 @@
 
 package org.apache.james.mpt.imapmailbox.suite.base;
 
-import org.apache.james.mpt.HostSystem;
+import org.apache.james.mpt.api.HostSystem;
 import org.junit.Before;
 
 /**

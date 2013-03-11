@@ -19,7 +19,12 @@
 
 package org.apache.james.mpt;
 
-import org.apache.james.mpt.Continuation;
+import org.apache.james.mpt.api.Continuation;
+import org.apache.james.mpt.api.Session;
+import org.apache.james.mpt.api.UserAdder;
+import org.apache.james.mpt.host.ExternalHostSystem;
+import org.apache.james.mpt.monitor.NullMonitor;
+import org.apache.james.mpt.session.ExternalSessionFactory;
 import org.jmock.Mock;
 import org.jmock.MockObjectTestCase;
 

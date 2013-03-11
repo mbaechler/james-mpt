@@ -21,7 +21,7 @@ package org.apache.james.mpt.imapmailbox.suite;
 
 import java.util.Locale;
 
-import org.apache.james.mpt.HostSystem;
+import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseAuthenticatedState;
 import org.junit.Test;
 

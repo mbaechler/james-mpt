@@ -22,10 +22,10 @@ package org.apache.james.mpt.app;
 import java.io.File;
 import java.io.FileInputStream;
 
-import org.apache.james.mpt.ExternalHostSystem;
-import org.apache.james.mpt.ProtocolSessionBuilder;
 import org.apache.james.mpt.Runner;
-import org.apache.james.mpt.SystemLoggingMonitor;
+import org.apache.james.mpt.host.ExternalHostSystem;
+import org.apache.james.mpt.monitor.SystemLoggingMonitor;
+import org.apache.james.mpt.protocol.ProtocolSessionBuilder;
 
 /**
  * Runs a single script.

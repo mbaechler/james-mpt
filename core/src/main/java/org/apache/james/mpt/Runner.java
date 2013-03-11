@@ -19,6 +19,13 @@
 
 package org.apache.james.mpt;
 
+import org.apache.james.mpt.api.Continuation;
+import org.apache.james.mpt.api.HostSystem;
+import org.apache.james.mpt.api.ProtocolInteractor;
+import org.apache.james.mpt.api.Session;
+import org.apache.james.mpt.api.SessionFactory;
+import org.apache.james.mpt.protocol.ProtocolSession;
+
 /**
  * Runs protocol scripts.
  */

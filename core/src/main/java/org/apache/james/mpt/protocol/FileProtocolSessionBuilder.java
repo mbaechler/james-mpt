@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.protocol;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -35,6 +35,7 @@ import org.apache.commons.io.IOUtils;
  * @version $Revision$
  */
 public class FileProtocolSessionBuilder {
+    
     private static final String SERVER_CONTINUATION_TAG = "S: \\+";
 
     private static final String CLIENT_TAG = "C:";

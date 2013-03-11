@@ -17,13 +17,16 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.session;
 
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
 
-final class ExternalSession implements Session {
+import org.apache.james.mpt.api.Monitor;
+import org.apache.james.mpt.api.Session;
+
+public final class ExternalSession implements Session {
 
     /** Number of milliseconds to sleep after empty read */
     private static final int SHORT_WAIT_FOR_INPUT = 10;
@@ -43,7 +46,7 @@ final class ExternalSession implements Session {
     private boolean first = true;
 
     private final String shabang;
-    
+
     public ExternalSession(final SocketChannel socket, final Monitor monitor, String shabang) {
         this(socket, monitor, shabang, false);
     }
@@ -67,7 +70,8 @@ final class ExternalSession implements Session {
             monitor.note("<-" + buffer.toString());
             result = shabang;
             first = false;
-        } else {
+        }
+        else {
             result = buffer.toString();
             monitor.note("<-" + result);
         }
@@ -79,7 +83,7 @@ final class ExternalSession implements Session {
         readBuffer.flip();
         while (oneFromLine(buffer))
             ;
-//      May have partial read
+        // May have partial read
         readBuffer.compact();
         monitor.debug("[Done]");
     }
@@ -90,27 +94,30 @@ final class ExternalSession implements Session {
             char next = (char) readBuffer.get();
             if (next == '\n') {
                 monitor.debug("[LF]");
-//              Reached end of the line
+                // Reached end of the line
                 result = false;
-            } else if (next == '\r') {
-//              CRLF line endings so drop
+            }
+            else if (next == '\r') {
+                // CRLF line endings so drop
                 monitor.debug("[CR]");
                 result = true;
-            } else {
-//              Load buffer
+            }
+            else {
+                // Load buffer
                 monitor.debug(next);
                 buffer.append(next);
                 result = true;
             }
-        } else {
+        }
+        else {
             monitor.debug("[Reading into buffer]");
             readBuffer.clear();
             while (socket.read(readBuffer) == 0) {
-//              No response yet
-//              Wait a little while
+                // No response yet
+                // Wait a little while
                 Thread.sleep(SHORT_WAIT_FOR_INPUT);
             }
-//          Reset for transfer into string buffer
+            // Reset for transfer into string buffer
             readBuffer.flip();
             monitor.debug("[Done]");
             result = true;
@@ -145,28 +152,19 @@ final class ExternalSession implements Session {
     }
 
     /**
-     * Constructs a <code>String</code> with all attributes
-     * in name = value format.
-     *
-     * @return a <code>String</code> representation 
-     * of this object.
+     * Constructs a <code>String</code> with all attributes in name = value
+     * format.
+     * 
+     * @return a <code>String</code> representation of this object.
      */
-    public String toString()
-    {
+    public String toString() {
         final String TAB = " ";
-        
-        String result =  "External ( "
-            + "socket = " + this.socket + TAB
-            + "monitor = " + this.monitor + TAB
-            + "readBuffer = " + this.readBuffer + TAB
-            + "ascii = " + this.ascii + TAB
-            + "lineEndBuffer = " + this.lineEndBuffer + TAB
-            + "first = " + this.first + TAB
-            + "shabang = " + this.shabang + TAB
-            + " )";
-    
+
+        String result = "External ( " + "socket = " + this.socket + TAB + "monitor = " + this.monitor + TAB
+                + "readBuffer = " + this.readBuffer + TAB + "ascii = " + this.ascii + TAB + "lineEndBuffer = "
+                + this.lineEndBuffer + TAB + "first = " + this.first + TAB + "shabang = " + this.shabang + TAB + " )";
+
         return result;
     }
-    
-    
+
 }

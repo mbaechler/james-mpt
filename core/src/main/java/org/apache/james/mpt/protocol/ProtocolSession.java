@@ -17,13 +17,16 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.protocol;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.apache.james.mpt.api.ProtocolInteractor;
+import org.apache.james.mpt.api.Session;
 
 /**
  * A protocol session which can be run against a reader and writer, which checks

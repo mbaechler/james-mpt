@@ -17,17 +17,14 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt;
+package org.apache.james.mpt.api;
 
 /**
- * An exception which is thrown when the actual response from a server is
- * different from that expected.
+ * Monitors the conduct of a process.
+ * Allows the caller to control the output of the logged information.
  */
-public class InvalidServerResponseException extends Exception {
-
-    private static final long serialVersionUID = 6489140960152710438L;
-
-    public InvalidServerResponseException(String message) {
-        super(message);
-    }
+public interface Monitor {
+    void note(String message);
+    void debug(char character);
+    void debug(String message);
 }

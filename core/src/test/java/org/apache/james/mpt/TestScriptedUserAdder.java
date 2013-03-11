@@ -19,6 +19,8 @@
 
 package org.apache.james.mpt;
 
+import org.apache.james.mpt.user.ScriptedUserAdder;
+
 import junit.framework.TestCase;
 
 public class TestScriptedUserAdder extends TestCase {
