@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox.base;
+package org.apache.james.mpt;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
-import org.apache.james.mpt.ProtocolSession;
 
 /**
  * A builder which generates a ProtocolSession from a test file.

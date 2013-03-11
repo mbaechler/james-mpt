@@ -22,44 +22,56 @@ package org.apache.james.mpt;
 import java.io.InputStream;
 import java.util.Locale;
 
+import org.apache.commons.io.IOUtils;
+import org.junit.After;
 
 /**
  * A Protocol test which reads the test protocol session from a file. The file
  * read is taken as "<test-name>.test", where <test-name> is the value passed
- * into the constructor. Subclasses of this test can set up pre-
- * and post elements for extra elements not defined in the protocol
+ * into the constructor. Subclasses of this test can set up {@link #preElements}
+ * and {@link #postElements} for extra elements not defined in the protocol
  * session file.
  */
-public abstract class AbstractSimpleScriptedTestProtocol extends
-        AbstractProtocolTestFramework {
-    private ProtocolSessionBuilder builder = new ProtocolSessionBuilder();
+public abstract class AbstractSimpleScriptedTestProtocol extends AbstractProtocolTestFramework {
+    private FileProtocolSessionBuilder builder = new FileProtocolSessionBuilder();
 
     private static final Locale BASE_DEFAULT_LOCALE = Locale.getDefault();
-    
+
+    private final String scriptDirectory;
+
     /**
-     * Constructs a scripted test.
-     * @param hostSystem not null
-     * @param userName user name
-     * @param password password for user
+     * Sets up a SimpleFileProtocolTest which reads the protocol session from a
+     * file of name "<fileName>.test". This file should be available in the
+     * classloader in the same location as this test class.
+     * 
+     * @param scriptDirectory
+     *            name of the directory containing the scripts to be run
+     * @param fileName
+     *            The name of the file to read protocol elements from.
+     * @throws Exception
      */
-    public AbstractSimpleScriptedTestProtocol(HostSystem hostSystem, String userName, String password) {
+    public AbstractSimpleScriptedTestProtocol(HostSystem hostSystem, String userName, String password,
+            String scriptDirectory) throws Exception {
         super(hostSystem, userName, password);
+        this.scriptDirectory = scriptDirectory;
     }
-    
-    protected void tearDown() throws Exception {
-        Locale.setDefault(BASE_DEFAULT_LOCALE);
+
+    @After
+    public void tearDown() throws Exception {
         super.tearDown();
+        Locale.setDefault(BASE_DEFAULT_LOCALE);
     }
 
     /**
      * Reads test elements from the protocol session file and adds them to the
-     * ProtocolSession. Then calls {@link #runSessions()}.
+     * {@link #testElements} ProtocolSession. Then calls {@link #runSessions}.
      * 
-     * @param locale test under this default locale, not null
+     * @param locale
+     *            execute the test using this locale
      */
     protected void scriptTest(String fileName, Locale locale) throws Exception {
         Locale.setDefault(locale);
-        addTestFile(fileName + ".test", runner.getTestElements());
+        addTestFile(fileName + ".test", testElements);
         runSessions();
     }
 
@@ -73,14 +85,21 @@ public abstract class AbstractSimpleScriptedTestProtocol extends
      * @param session
      *            The ProtocolSession to add elements to.
      */
-    protected void addTestFile(String fileName, ProtocolInteractor session)
-            throws Exception {
+    protected void addTestFile(String fileName, ProtocolSession session) throws Exception {
+        fileName = scriptDirectory + fileName;
         // Need to find local resource.
         InputStream is = this.getClass().getResourceAsStream(fileName);
+
         if (is == null) {
             throw new Exception("Test Resource '" + fileName + "' not found.");
         }
 
-        builder.addProtocolLines(fileName, is, session);
+        try {
+            builder.addProtocolLinesFromStream(is, session, fileName);
+        }
+        finally {
+            IOUtils.closeQuietly(is);
+        }
     }
+
 }

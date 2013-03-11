@@ -18,14 +18,13 @@
  ****************************************************************/
 package org.apache.james.mpt.imapmailbox;
 
+import org.apache.james.mpt.AbstractSimpleScriptedTestProtocol;
 import org.apache.james.mpt.HostSystem;
-import org.apache.james.mpt.imapmailbox.base.AbstractSimpleScriptedTestProtocol;
 
 /**
  * Specialise the protocol test framework for IMAP.
  */
-public abstract class ImapProtocolFramework extends
-        AbstractSimpleScriptedTestProtocol implements ImapTestConstants {
+public abstract class ImapProtocolFramework extends AbstractSimpleScriptedTestProtocol implements ImapTestConstants {
 
     public ImapProtocolFramework(final HostSystem hostSystem) throws Exception {
         super(hostSystem, USER, PASSWORD, "/org/apache/james/imap/scripts/");
