@@ -42,7 +42,7 @@ import org.apache.james.mailbox.hbase.mail.HBaseUidProvider;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
 import org.apache.james.mpt.api.HostSystem;
-import org.apache.james.mpt.imapmailbox.ImapHostSystem;
+import org.apache.james.mpt.host.ImapHostSystem;
 import org.slf4j.LoggerFactory;
 
 public class HBaseHostSystem extends ImapHostSystem {

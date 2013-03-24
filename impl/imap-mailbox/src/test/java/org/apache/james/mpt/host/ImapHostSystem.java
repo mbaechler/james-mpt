@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox;
+package org.apache.james.mpt.host;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -36,6 +36,7 @@ import org.apache.james.imap.encode.ImapEncoder;
 import org.apache.james.mailbox.MailboxSession.User;
 import org.apache.james.mpt.api.Continuation;
 import org.apache.james.mpt.api.HostSystem;
+import org.apache.james.mpt.session.ImapSessionImpl;
 import org.slf4j.LoggerFactory;
 
 public abstract class ImapHostSystem implements HostSystem {

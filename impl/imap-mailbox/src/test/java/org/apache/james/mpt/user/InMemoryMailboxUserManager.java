@@ -17,7 +17,7 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox.user;
+package org.apache.james.mpt.user;
 
 import java.util.Collection;
 import java.util.HashMap;

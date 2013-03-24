@@ -16,7 +16,7 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package org.apache.james.mpt.imapmailbox;
+package org.apache.james.mpt.session;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

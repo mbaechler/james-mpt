@@ -22,7 +22,6 @@ import org.apache.james.mpt.imapmailbox.AbstractMailboxTest;
 import org.apache.onami.test.annotation.GuiceModules;
 import org.junit.Ignore;
 
-@Ignore
 @GuiceModules({ JcrMailboxTestModule.class })
 public class JcrMailboxTest extends AbstractMailboxTest {
 
