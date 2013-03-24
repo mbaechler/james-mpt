@@ -61,6 +61,6 @@ import org.junit.runners.Suite.SuiteClasses;
     SelectedState.class,
     UidSearch.class
 })
-public class AbstractMailboxTest {
+public abstract class AbstractMailboxTest {
 
 }
