@@ -58,7 +58,7 @@ import org.junit.Before;
  * </ul>
  * </p>
  */
-public abstract class BaseAuthenticatedState extends
+public class BaseAuthenticatedState extends
         BaseImapProtocol implements ImapTestConstants {
     public BaseAuthenticatedState(HostSystem hostSystem) throws Exception {
         super(hostSystem);

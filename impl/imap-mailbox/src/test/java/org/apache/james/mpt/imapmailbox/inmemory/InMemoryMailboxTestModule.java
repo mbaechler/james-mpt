@@ -16,53 +16,25 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-
-package org.apache.james.mpt.imapmailbox.suite;
-
-import java.util.Locale;
-
-import javax.inject.Inject;
+package org.apache.james.mpt.imapmailbox.inmemory;
 
 import org.apache.james.mpt.api.HostSystem;
-import org.apache.james.mpt.imapmailbox.suite.base.BaseSelectedState;
-import org.junit.Test;
+import org.apache.james.mpt.imapmailbox.inmemory.host.InMemoryHostSystem;
 
-public class FetchHeaders extends BaseSelectedState {
+import com.google.inject.AbstractModule;
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
 
-    @Inject
-    private static HostSystem system;
-    
-    public FetchHeaders() throws Exception {
-        super(system);
+public class InMemoryMailboxTestModule extends AbstractModule {
+
+    @Override
+    protected void configure() {
     }
 
-    @Test
-    public void testFetchHeaderFieldsUS() throws Exception {
-        scriptTest("FetchHeaderFields", Locale.US);
+    @Provides
+    @Singleton
+    public HostSystem provideHostSystem() throws Exception {
+        return InMemoryHostSystem.build();
     }
 
-    @Test
-    public void testFetchHeaderFieldsITALY() throws Exception {
-        scriptTest("FetchHeaderFields", Locale.ITALY);
-    }
-
-    @Test
-    public void testFetchHeaderFieldsKOREA() throws Exception {
-        scriptTest("FetchHeaderFields", Locale.KOREA);
-    }
-
-    @Test
-    public void testFetchHeaderFieldsNotUS() throws Exception {
-        scriptTest("FetchHeaderFieldsNot", Locale.US);
-    }
-
-    @Test
-    public void testFetchHeaderFieldsNotITALY() throws Exception {
-        scriptTest("FetchHeaderFieldsNot", Locale.ITALY);
-    }
-
-    @Test
-    public void testFetchHeaderFieldsNotKOREA() throws Exception {
-        scriptTest("FetchHeaderFieldsNot", Locale.KOREA);
-    }
 }

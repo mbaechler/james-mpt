@@ -21,13 +21,18 @@ package org.apache.james.mpt.imapmailbox.suite;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseSelectedInbox;
 import org.junit.Test;
 
-public abstract class SelectedInbox extends BaseSelectedInbox {
+public class SelectedInbox extends BaseSelectedInbox {
 
-    public SelectedInbox(HostSystem system) throws Exception {
+    @Inject
+    private static HostSystem system;
+    
+    public SelectedInbox() throws Exception {
         super(system);
     }
 

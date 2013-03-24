@@ -21,13 +21,18 @@ package org.apache.james.mpt.imapmailbox.suite;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseNonAuthenticatedState;
 import org.junit.Test;
 
-public abstract class NonAuthenticatedState extends BaseNonAuthenticatedState {
+public class NonAuthenticatedState extends BaseNonAuthenticatedState {
 
-    public NonAuthenticatedState(HostSystem system) throws Exception {
+    @Inject
+    private static HostSystem system;
+    
+    public NonAuthenticatedState() throws Exception {
         super(system);
     }
 

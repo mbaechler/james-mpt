@@ -21,13 +21,18 @@ package org.apache.james.mpt.imapmailbox.suite;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseSelectedState;
 import org.junit.Test;
 
-public abstract class Expunge extends BaseSelectedState {
+public class Expunge extends BaseSelectedState {
 
-    public Expunge(HostSystem system) throws Exception {
+    @Inject
+    private static HostSystem system;
+    
+    public Expunge() throws Exception {
         super(system);
     }
     

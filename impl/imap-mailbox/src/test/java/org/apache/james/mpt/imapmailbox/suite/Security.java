@@ -21,13 +21,18 @@ package org.apache.james.mpt.imapmailbox.suite;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseImapProtocol;
 import org.junit.Test;
 
-public abstract class Security extends BaseImapProtocol {
+public class Security extends BaseImapProtocol {
 
-    public Security(HostSystem system) throws Exception {
+    @Inject
+    private static HostSystem system;
+    
+    public Security() throws Exception {
         super(system);
     }
 

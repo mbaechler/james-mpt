@@ -16,44 +16,12 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
+package org.apache.james.mpt.imapmailbox.jpa;
 
-package org.apache.james.mpt.imapmailbox.suite.base;
+import org.apache.james.mpt.imapmailbox.AbstractMailboxTest;
+import org.apache.onami.test.annotation.GuiceModules;
 
-import org.apache.james.mpt.api.HostSystem;
-import org.junit.Before;
+@GuiceModules({ JpaMailboxTestModule.class })
+public class JpaMailboxTest extends AbstractMailboxTest {
 
-/**
- * <p>
- * Runs tests for commands valid in the NON_AUTHENTICATED state. A welcome
- * message precedes the execution of the test elements.
- * </p>
- * <p>
- * Recommended test scripts:
- * </p>
- * <ul>
- * <li>ValidAuthenticated</li>
- * <li>ValidSelected</li>
- * <li>Capability</li>
- * <li>Noop</li>
- * <li>Logout</li>
- * <li>Authenticate</li>
- * <li>Login</li>
- * </ul>
- */
-public class BaseNonAuthenticatedState extends BaseImapProtocol {
-    public BaseNonAuthenticatedState(HostSystem system) throws Exception {
-        super(system);
-    }
-
-    /**
-     * Adds a welcome message to the {@link #preElements}.
-     * 
-     * @throws Exception
-     */
-    @Before
-    public void setUp() throws Exception {
-        super.setUp();
-
-        addTestFile("Welcome.test", preElements);
-    }
 }

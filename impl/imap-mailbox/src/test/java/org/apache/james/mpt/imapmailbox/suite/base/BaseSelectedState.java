@@ -42,7 +42,7 @@ import org.junit.Before;
  * <li>Uid"</li>
  * </ul>
  */
-public abstract class BaseSelectedState extends BaseAuthenticatedState {
+public class BaseSelectedState extends BaseAuthenticatedState {
     
     public BaseSelectedState(HostSystem system) throws Exception {
         super(system);

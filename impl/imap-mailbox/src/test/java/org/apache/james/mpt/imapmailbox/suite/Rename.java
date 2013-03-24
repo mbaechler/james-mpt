@@ -21,13 +21,18 @@ package org.apache.james.mpt.imapmailbox.suite;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseSelectedState;
 import org.junit.Test;
 
-public abstract class Rename extends BaseSelectedState {
+public class Rename extends BaseSelectedState {
 
-    public Rename(HostSystem system) throws Exception {
+    @Inject
+    private static HostSystem system;
+    
+    public Rename() throws Exception {
         super(system);
     }
 

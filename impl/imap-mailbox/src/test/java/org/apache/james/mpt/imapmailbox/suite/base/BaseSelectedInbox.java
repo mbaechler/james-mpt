@@ -51,7 +51,7 @@ import org.apache.james.mpt.api.HostSystem;
  * 
  * @version $Revision: 560719 $
  */
-public abstract class BaseSelectedInbox extends BaseAuthenticatedState {
+public class BaseSelectedInbox extends BaseAuthenticatedState {
     public BaseSelectedInbox(HostSystem system) throws Exception {
         super(system);
     }

@@ -21,13 +21,18 @@ package org.apache.james.mpt.imapmailbox.suite;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseSelectedState;
 import org.junit.Test;
 
-public abstract class FetchBodyStructure extends BaseSelectedState {
+public class FetchBodyStructure extends BaseSelectedState {
 
-    public FetchBodyStructure(HostSystem system) throws Exception {
+    @Inject
+    private static HostSystem system;
+    
+    public FetchBodyStructure() throws Exception {
         super(system);
     }
 

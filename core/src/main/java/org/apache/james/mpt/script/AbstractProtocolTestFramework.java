@@ -25,8 +25,6 @@ import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.api.Session;
 import org.apache.james.mpt.protocol.ProtocolSession;
 
-import junit.framework.TestCase;
-
 /**
  * Abstract Protocol Test is the root of all of the scripted test cases. It
  * provides basic functionality for running a protocol session as a JUnit test,
@@ -37,7 +35,7 @@ import junit.framework.TestCase;
  * @author Darrell DeBoer
  * @author Andrew C. Oliver
  */
-public abstract class AbstractProtocolTestFramework extends TestCase {
+public abstract class AbstractProtocolTestFramework {
 
     /** The Protocol session which is run before the testElements */
     protected ProtocolSession preElements = new ProtocolSession();
@@ -62,8 +60,10 @@ public abstract class AbstractProtocolTestFramework extends TestCase {
     }
 
     protected void setUp() throws Exception {
-        super.setUp();
         setUpEnvironment();
+    }
+
+    protected void tearDown() throws Exception {
     }
 
     /**

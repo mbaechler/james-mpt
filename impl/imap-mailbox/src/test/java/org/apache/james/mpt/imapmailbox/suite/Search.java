@@ -21,13 +21,18 @@ package org.apache.james.mpt.imapmailbox.suite;
 
 import java.util.Locale;
 
+import javax.inject.Inject;
+
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseAuthenticatedState;
 import org.junit.Test;
 
-public abstract class Search extends BaseAuthenticatedState {
+public class Search extends BaseAuthenticatedState {
 
-    public Search(HostSystem system) throws Exception {
+    @Inject
+    private static HostSystem system;
+    
+    public Search() throws Exception {
         super(system);
     }
 

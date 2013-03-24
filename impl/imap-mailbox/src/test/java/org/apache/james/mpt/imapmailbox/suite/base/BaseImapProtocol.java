@@ -25,7 +25,7 @@ import org.apache.james.mpt.script.AbstractSimpleScriptedTestProtocol;
 /**
  * Specialise the protocol test framework for IMAP.
  */
-public abstract class BaseImapProtocol extends AbstractSimpleScriptedTestProtocol implements ImapTestConstants {
+public class BaseImapProtocol extends AbstractSimpleScriptedTestProtocol implements ImapTestConstants {
 
     public BaseImapProtocol(final HostSystem hostSystem) throws Exception {
         super(hostSystem, USER, PASSWORD, "/org/apache/james/imap/scripts/");
