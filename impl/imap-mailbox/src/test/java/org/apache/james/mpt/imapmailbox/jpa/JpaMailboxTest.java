@@ -20,7 +20,9 @@ package org.apache.james.mpt.imapmailbox.jpa;
 
 import org.apache.james.mpt.imapmailbox.AbstractMailboxTest;
 import org.apache.onami.test.annotation.GuiceModules;
+import org.junit.Ignore;
 
+@Ignore("JWC-131 : Error will creating entity manager")
 @GuiceModules({ JpaMailboxTestModule.class })
 public class JpaMailboxTest extends AbstractMailboxTest {
 

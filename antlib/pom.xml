@@ -48,25 +48,16 @@ to the library requiring no extra coding.</description>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>apache-james-mpt-core</artifactId>
-            <!-- TODO: Use dependency from project pom -->
-            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>commons-logging</groupId>
-            <artifactId>commons-logging</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>apache-james-mpt-core</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.ant</groupId>
             <artifactId>ant</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>jmock</groupId>
-            <artifactId>jmock</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.ant</groupId>
@@ -74,12 +65,17 @@ to the library requiring no extra coding.</description>
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>apache-james-mpt-core</artifactId>
-            <!-- TODO: Use dependency from project pom -->
-            <version>${project.version}</version>
-            <type>test-jar</type>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>jmock</groupId>
+            <artifactId>jmock</artifactId>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 

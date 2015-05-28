@@ -21,36 +21,18 @@
         xmlns="http://maven.apache.org/POM/4.0.0"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
     <parent>
         <artifactId>apache-james-mpt</artifactId>
         <groupId>org.apache.james</groupId>
         <version>0.2-SNAPSHOT</version>
         <relativePath>../..</relativePath>
     </parent>
+
     <artifactId>apache-james-mpt-imapmailbox</artifactId>
     <name>Apache James MPT Imap Mailbox</name>
-    <properties>
-        <commons-io.version>2.4</commons-io.version>
-        <commons-lang.version>2.6</commons-lang.version>
-        <derby.version>10.9.1.0</derby.version>
-        <guice.version>3.0</guice.version>
-        <h2.version>1.3.170</h2.version>
-        <hadoop.version>1.0.1</hadoop.version>
-        <hbase.version>0.92.0</hbase.version>
-        <jackrabbit-core.version>2.5.2</jackrabbit-core.version>
-        <james-protocols.version>1.6.3-SNAPSHOT</james-protocols.version>
-        <james-mailbox.mailbox>0.6-SNAPSHOT</james-mailbox.mailbox>
-        <javax.mail.groupId>javax.mail</javax.mail.groupId>
-        <javax.mail.artifactId>mail</javax.mail.artifactId>
-        <javax.mail.version>1.8.3</javax.mail.version>
-        <jmock.version>2.6.0</jmock.version>
-        <junit.version>4.11</junit.version>
-        <log4j.version>1.2.16</log4j.version>
-        <lucene-core.version>3.6.0</lucene-core.version>
-        <onami.version>1.4.1-incubating-SNAPSHOT</onami.version>
-        <slf4j.version>1.6.6</slf4j.version>
-    </properties>
 
     <dependencies>
         <dependency>
@@ -61,50 +43,42 @@
         <dependency>
             <groupId>org.apache.james.protocols</groupId>
             <artifactId>protocols-imap</artifactId>
-            <version>${james-protocols.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.james.protocols</groupId>
             <artifactId>protocols-imap</artifactId>
-            <version>${james-protocols.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-james-mailbox-api</artifactId>
-            <version>${james-mailbox.mailbox}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-james-mailbox-store</artifactId>
-            <version>${james-mailbox.mailbox}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.onami</groupId>
             <artifactId>org.apache.onami.test</artifactId>
-            <version>${onami.version}</version>
             <scope>test</scope>
         </dependency>
-	    <dependency>
-  	        <groupId>com.google.inject</groupId>
-	        <artifactId>guice</artifactId>
-            <version>${guice.version}</version>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
             <scope>test</scope>
-	    </dependency>
+        </dependency>
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>${commons-io.version}</version>
         </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
-            <version>${commons-lang.version}</version>
         </dependency>
         <dependency>
             <groupId>${javax.mail.groupId}</groupId>
@@ -114,19 +88,16 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-james-mailbox-jcr</artifactId>
-            <version>${james-mailbox.mailbox}</version>
             <scope>test</scope>
         </dependency>
         <!-- As mime4j use commons-logging we need to specify the binding here -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>${slf4j.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -134,43 +105,36 @@
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
-            <version>${lucene-core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.jackrabbit</groupId>
             <artifactId>jackrabbit-core</artifactId>
-            <version>${jackrabbit-core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-james-mailbox-jpa</artifactId>
-            <version>${james-mailbox.mailbox}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <version>${h2.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-james-mailbox-maildir</artifactId>
-            <version>${james-mailbox.mailbox}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-james-mailbox-memory</artifactId>
-            <version>${james-mailbox.mailbox}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derby</artifactId>
-            <version>${derby.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -181,59 +145,57 @@
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock</artifactId>
-            <version>${jmock.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jmock</groupId>
             <artifactId>jmock-junit4</artifactId>
-            <version>${jmock.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-james-mailbox-hbase</artifactId>
-            <version>${james-mailbox.mailbox}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase</artifactId>
-            <version>${hbase.version}</version>
             <type>test-jar</type>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hbase</groupId>
             <artifactId>hbase</artifactId>
-            <version>${hbase.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-test</artifactId>
-            <version>${hadoop.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+
+
     <build>
-      <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-               <excludes>
-                 <exclude>**/suite/*.java</exclude>
-                 <exclude>**/suite/**/*.java</exclude>
-               </excludes>
-            </configuration>
-        </plugin>
-      </plugins>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>**/suite/*.java</exclude>
+                        <exclude>**/suite/**/*.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+
+
     <profiles>
         <profile>
             <id>geronimo</id>
@@ -243,7 +205,7 @@
             <properties>
                 <javax.mail.groupId>org.apache.geronimo.javamail</javax.mail.groupId>
                 <javax.mail.artifactId>geronimo-javamail_1.4_mail</javax.mail.artifactId>
-                <version.javax.mail>1.6</version.javax.mail>
+                <javax.mail.version>1.6</javax.mail.version>
             </properties>
         </profile>
         <profile>

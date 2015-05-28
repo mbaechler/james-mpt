@@ -49,12 +49,12 @@ to the library requiring no extra coding.</description>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>apache-james-mpt-core</artifactId>
-            <!-- TODO: Use dependency from project pom -->
-            <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>apache-james-mpt-core</artifactId>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.maven</groupId>
@@ -62,12 +62,8 @@ to the library requiring no extra coding.</description>
             <version>2.0</version>
         </dependency>
         <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>apache-james-mpt-core</artifactId>
-            <!-- TODO: Use dependency from project pom -->
-            <version>${project.version}</version>
-            <type>test-jar</type>
-            <scope>test</scope>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
 
@@ -137,6 +133,9 @@ to the library requiring no extra coding.</description>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <additionalparam>-Xdoclint:none</additionalparam>
+                </configuration>
             </plugin>
             <!--
                 <plugin>
