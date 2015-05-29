@@ -23,7 +23,8 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import org.apache.james.mpt.api.HostSystem;
+import org.apache.james.mailbox.model.MailboxPath;
+import org.apache.james.mpt.host.ImapHostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseAuthenticatedState;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,7 +32,7 @@ import org.junit.Test;
 public class AuthenticatedState extends BaseAuthenticatedState {
     
     @Inject
-    private static HostSystem system;
+    private static ImapHostSystem system;
     
     public AuthenticatedState() throws Exception {
         super(system);
@@ -323,5 +324,41 @@ public class AuthenticatedState extends BaseAuthenticatedState {
     @Test
     public void testNamespaceKOREA() throws Exception {
         scriptTest("Namespace", Locale.KOREA);
+    }
+
+    @Test
+    public void listShouldNotListMailboxWithOtherNamspaceUS() throws Exception {
+        system.createMailbox(new MailboxPath("#namespace", USER, "Other"));
+        scriptTest("ListMailboxes", Locale.US);
+    }
+
+    @Test
+    public void listShouldNotListMailboxWithOtherNamspaceITALY() throws Exception {
+        system.createMailbox(new MailboxPath("#namespace", USER, "Other"));
+        scriptTest("ListMailboxes", Locale.ITALY);
+    }
+
+    @Test
+    public void listShouldNotListMailboxWithOtherNamspaceKOREA() throws Exception {
+        system.createMailbox(new MailboxPath("#namespace", USER, "Other"));
+        scriptTest("ListMailboxes", Locale.KOREA);
+    }
+
+    @Test
+    public void listShouldNotListMailboxWithOtherUserUS() throws Exception {
+        system.createMailbox(new MailboxPath("#namespace", USER + "2", "Other"));
+        scriptTest("ListMailboxes", Locale.US);
+    }
+
+    @Test
+    public void listShouldNotListMailboxWithOtherUserITALY() throws Exception {
+        system.createMailbox(new MailboxPath("#namespace", USER + "2", "Other"));
+        scriptTest("ListMailboxes", Locale.ITALY);
+    }
+
+    @Test
+    public void listShouldNotListMailboxWithOtherUserKOREA() throws Exception {
+        system.createMailbox(new MailboxPath("#namespace", USER + "2", "Other"));
+        scriptTest("ListMailboxes", Locale.KOREA);
     }
 }

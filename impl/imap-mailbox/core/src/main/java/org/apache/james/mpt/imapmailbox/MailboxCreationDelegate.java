@@ -16,27 +16,31 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package org.apache.james.mpt.imapmailbox.jpa;
 
-import org.apache.james.mpt.api.HostSystem;
-import org.apache.james.mpt.host.ImapHostSystem;
-import org.apache.james.mpt.imapmailbox.jpa.host.JPAHostSystem;
+package org.apache.james.mpt.imapmailbox;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
+import org.apache.james.mailbox.MailboxManager;
+import org.apache.james.mailbox.MailboxSession;
+import org.apache.james.mailbox.model.MailboxPath;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class JpaMailboxTestModule extends AbstractModule {
+public class MailboxCreationDelegate {
 
-    @Override
-    protected void configure() {
-        bind(HostSystem.class).to(ImapHostSystem.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MailboxCreationDelegate.class);
+
+    private MailboxManager mailboxManager;
+
+    public MailboxCreationDelegate(MailboxManager mailboxManager) {
+        this.mailboxManager = mailboxManager;
     }
 
-    @Provides
-    @Singleton
-    public ImapHostSystem provideImapHostSystem() throws Exception {
-        return JPAHostSystem.build();
+    public void createMailbox(MailboxPath mailboxPath) throws Exception{
+        MailboxSession mailboxSession = mailboxManager.createSystemSession("system", LOGGER);
+        mailboxManager.startProcessingRequest(mailboxSession);
+        mailboxManager.createMailbox(mailboxPath, mailboxSession);
+        mailboxManager.logout(mailboxSession, true);
+        mailboxManager.endProcessingRequest(mailboxSession);
     }
 
 }

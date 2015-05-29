@@ -29,11 +29,12 @@ import org.apache.james.mailbox.acl.SimpleGroupMembershipResolver;
 import org.apache.james.mailbox.acl.UnionMailboxACLResolver;
 import org.apache.james.mailbox.exception.MailboxException;
 import org.apache.james.mailbox.inmemory.InMemoryMailboxSessionMapperFactory;
+import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreMailboxManager;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
 public class InMemoryHostSystem extends ImapHostSystem {
 
@@ -41,7 +42,7 @@ public class InMemoryHostSystem extends ImapHostSystem {
     private MockAuthenticator userManager; 
     private InMemoryMailboxSessionMapperFactory factory;
     
-    public static HostSystem build() throws Exception {
+    public static ImapHostSystem build() throws Exception {
         InMemoryHostSystem host =  new InMemoryHostSystem();
         return host;
     }
@@ -75,4 +76,8 @@ public class InMemoryHostSystem extends ImapHostSystem {
                 defaultImapProcessorFactory);
     }
 
+    @Override
+    public void createMailbox(MailboxPath mailboxPath) throws Exception{
+        new MailboxCreationDelegate(mailboxManager).createMailbox(mailboxPath);
+    }
 }

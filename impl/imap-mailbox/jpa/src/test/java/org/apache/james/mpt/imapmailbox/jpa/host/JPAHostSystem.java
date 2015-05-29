@@ -46,10 +46,11 @@ import org.apache.james.mailbox.jpa.mail.model.openjpa.AbstractJPAMessage;
 import org.apache.james.mailbox.jpa.mail.model.openjpa.JPAMessage;
 import org.apache.james.mailbox.jpa.openjpa.OpenJPAMailboxManager;
 import org.apache.james.mailbox.jpa.user.model.JPASubscription;
+import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
-import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 import org.apache.openjpa.persistence.OpenJPAPersistence;
 import org.slf4j.LoggerFactory;
 
@@ -57,7 +58,7 @@ public class JPAHostSystem extends ImapHostSystem {
 
     public static final String META_DATA_DIRECTORY = "target/user-meta-data";
 
-    public static HostSystem build() throws Exception {        
+    public static ImapHostSystem build() throws Exception {
         JPAHostSystem host =  new JPAHostSystem();
         return host;
     }
@@ -152,6 +153,11 @@ public class JPAHostSystem extends ImapHostSystem {
             FileUtils.deleteDirectory(dir);
         }
         dir.mkdirs();
+    }
+
+    @Override
+    public void createMailbox(MailboxPath mailboxPath) throws Exception {
+        new MailboxCreationDelegate(mailboxManager).createMailbox(mailboxPath);
     }
 
 }

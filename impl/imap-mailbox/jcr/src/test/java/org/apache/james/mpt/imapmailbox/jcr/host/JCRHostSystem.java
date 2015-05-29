@@ -39,16 +39,17 @@ import org.apache.james.mailbox.jcr.JCRSubscriptionManager;
 import org.apache.james.mailbox.jcr.JCRUtils;
 import org.apache.james.mailbox.jcr.mail.JCRModSeqProvider;
 import org.apache.james.mailbox.jcr.mail.JCRUidProvider;
+import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
-import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
 public class JCRHostSystem extends ImapHostSystem{
 
-    public static HostSystem build() throws Exception { 
+    public static ImapHostSystem build() throws Exception {
         return new JCRHostSystem();
     }
     
@@ -150,6 +151,9 @@ public class JCRHostSystem extends ImapHostSystem{
         }
     }
 
-
+    @Override
+    public void createMailbox(MailboxPath mailboxPath) throws Exception {
+        new MailboxCreationDelegate(mailboxManager).createMailbox(mailboxPath);
+    }
     
 }

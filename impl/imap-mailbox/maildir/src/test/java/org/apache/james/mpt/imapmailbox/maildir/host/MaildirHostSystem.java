@@ -32,12 +32,13 @@ import org.apache.james.mailbox.acl.UnionMailboxACLResolver;
 import org.apache.james.mailbox.exception.MailboxException;
 import org.apache.james.mailbox.maildir.MaildirMailboxSessionMapperFactory;
 import org.apache.james.mailbox.maildir.MaildirStore;
+import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreMailboxManager;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
 public class MaildirHostSystem extends ImapHostSystem {
 
@@ -48,7 +49,7 @@ public class MaildirHostSystem extends ImapHostSystem {
     private final MockAuthenticator userManager;
     private final MaildirMailboxSessionMapperFactory mailboxSessionMapperFactory;
     
-    public static HostSystem build() throws Exception { 
+    public static ImapHostSystem build() throws Exception {
         return new MaildirHostSystem();
     }
     
@@ -94,5 +95,12 @@ public class MaildirHostSystem extends ImapHostSystem {
         }
         dir.mkdirs();
     }
+
+    @Override
+    public void createMailbox(MailboxPath mailboxPath) throws Exception {
+        new MailboxCreationDelegate(mailboxManager).createMailbox(mailboxPath);
+    }
+
+
 
 }

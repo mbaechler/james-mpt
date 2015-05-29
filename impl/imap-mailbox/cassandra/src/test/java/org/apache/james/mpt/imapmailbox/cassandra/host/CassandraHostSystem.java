@@ -27,13 +27,15 @@ import org.apache.james.mailbox.cassandra.CassandraMailboxManager;
 import org.apache.james.mailbox.cassandra.CassandraMailboxSessionMapperFactory;
 import org.apache.james.mailbox.cassandra.mail.CassandraModSeqProvider;
 import org.apache.james.mailbox.cassandra.mail.CassandraUidProvider;
+import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
 import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
 public class CassandraHostSystem extends ImapHostSystem {
-    
+
     private final CassandraMailboxManager mailboxManager;
     private final MockAuthenticator userManager;
     private CassandraClusterSingleton cassandraClusterSingleton;
@@ -72,5 +74,10 @@ public class CassandraHostSystem extends ImapHostSystem {
     @Override
     protected void finalize() throws Throwable {
         super.finalize();
+    }
+
+    @Override
+    public void createMailbox(MailboxPath mailboxPath) throws Exception{
+        new MailboxCreationDelegate(mailboxManager).createMailbox(mailboxPath);
     }
 }

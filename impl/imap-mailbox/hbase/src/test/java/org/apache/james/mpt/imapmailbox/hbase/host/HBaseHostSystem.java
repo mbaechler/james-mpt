@@ -39,10 +39,11 @@ import org.apache.james.mailbox.hbase.HBaseMailboxManager;
 import org.apache.james.mailbox.hbase.HBaseMailboxSessionMapperFactory;
 import org.apache.james.mailbox.hbase.mail.HBaseModSeqProvider;
 import org.apache.james.mailbox.hbase.mail.HBaseUidProvider;
+import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 import org.slf4j.LoggerFactory;
 
 public class HBaseHostSystem extends ImapHostSystem {
@@ -60,7 +61,7 @@ public class HBaseHostSystem extends ImapHostSystem {
     private MiniHBaseCluster hbaseCluster;
     private Configuration conf;
 
-    public static synchronized HostSystem build() throws Exception {
+    public static synchronized ImapHostSystem build() throws Exception {
         if (host == null) {
             host = new HBaseHostSystem(useMiniCluster);
         }
@@ -136,5 +137,10 @@ public class HBaseHostSystem extends ImapHostSystem {
                 hbaseCluster.shutdown();
             }
         }
+    }
+
+    @Override
+    public void createMailbox(MailboxPath mailboxPath) throws Exception{
+        new MailboxCreationDelegate(mailboxManager).createMailbox(mailboxPath);
     }
 }

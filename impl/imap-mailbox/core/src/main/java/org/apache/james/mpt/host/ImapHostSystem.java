@@ -34,6 +34,7 @@ import org.apache.james.imap.decode.ImapDecoder;
 import org.apache.james.imap.decode.main.ImapRequestStreamHandler;
 import org.apache.james.imap.encode.ImapEncoder;
 import org.apache.james.mailbox.MailboxSession.User;
+import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mpt.api.Continuation;
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.session.ImapSessionImpl;
@@ -73,6 +74,8 @@ public abstract class ImapHostSystem implements HostSystem {
     }
     
     protected abstract void resetData() throws Exception;
+
+    public abstract void createMailbox(MailboxPath mailboxPath) throws Exception;
 
     public String getHelloName() {
         return "JAMES";
