@@ -25,7 +25,6 @@ import javax.inject.Inject;
 
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseSelectedInbox;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class SelectedInbox extends BaseSelectedInbox {
@@ -92,7 +91,6 @@ public class SelectedInbox extends BaseSelectedInbox {
         scriptTest("StringArgs", Locale.US);
     }
 
-    @Ignore("JWC-132 : MPT subscription related test do not pass")
     @Test
     public void testSubscribeUS() throws Exception {
         scriptTest("Subscribe", Locale.US);
@@ -163,7 +161,6 @@ public class SelectedInbox extends BaseSelectedInbox {
         scriptTest("StringArgs", Locale.ITALY);
     }
 
-    @Ignore("JWC-132 : MPT subscription related test do not pass")
     @Test
     public void testSubscribeITALY() throws Exception {
         scriptTest("Subscribe", Locale.ITALY);
@@ -234,7 +231,6 @@ public class SelectedInbox extends BaseSelectedInbox {
         scriptTest("StringArgs", Locale.KOREA);
     }
 
-    @Ignore("JWC-132 : MPT subscription related test do not pass")
     @Test
     public void testSubscribeKOREA() throws Exception {
         scriptTest("Subscribe", Locale.KOREA);

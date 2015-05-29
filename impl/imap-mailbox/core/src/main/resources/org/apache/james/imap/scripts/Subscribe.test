@@ -61,13 +61,17 @@ C: a08 UNSUBSCRIBE subscribetest
 S: a08 OK UNSUBSCRIBE completed.
 
 C: a09 LSUB "" "sub*"
+SUB {
 S: \* LSUB \(\) \"\.\" \"subscribetest\.subfolder\"
 S: \* LSUB \(\) \"\.\" \"subscribetest1\.subfolder1\"
+}
 S: a09 OK LSUB completed.
 
 C: b01 LSUB "" "%"    
+SUB {
 S: \* LSUB \(\\Noselect\) \"\.\" \"subscribetest\"
 S: \* LSUB \(\\Noselect\) \"\.\" \"subscribetest1\"
+}
 S: b01 OK LSUB completed.
 
 

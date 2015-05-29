@@ -26,7 +26,6 @@ import javax.inject.Inject;
 import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mpt.host.ImapHostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseAuthenticatedState;
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class AuthenticatedState extends BaseAuthenticatedState {
@@ -93,7 +92,6 @@ public class AuthenticatedState extends BaseAuthenticatedState {
         scriptTest("Status", Locale.US);
     }
 
-    @Ignore("JWC-132 : MPT subscription related test do not pass")
     @Test
     public void testSubscribeUS() throws Exception {
         scriptTest("Subscribe", Locale.US);
@@ -184,7 +182,6 @@ public class AuthenticatedState extends BaseAuthenticatedState {
         scriptTest("Status", Locale.ITALY);
     }
 
-    @Ignore("JWC-132 : MPT subscription related test do not pass")
     @Test
     public void testSubscribeITALY() throws Exception {
         scriptTest("Subscribe", Locale.ITALY);
@@ -275,7 +272,6 @@ public class AuthenticatedState extends BaseAuthenticatedState {
         scriptTest("Status", Locale.KOREA);
     }
 
-    @Ignore("JWC-132 : MPT subscription related test do not pass")
     @Test
     public void testSubscribeKOREA() throws Exception {
         scriptTest("Subscribe", Locale.KOREA);
