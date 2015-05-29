@@ -166,6 +166,17 @@
             </dependency>
             <dependency>
                 <groupId>org.apache.james</groupId>
+                <artifactId>apache-james-mailbox-cassandra</artifactId>
+                <version>${james-mailbox.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.james</groupId>
+                <artifactId>apache-james-mailbox-cassandra</artifactId>
+                <version>${james-mailbox.version}</version>
+                <type>test-jar</type>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.james</groupId>
                 <artifactId>apache-james-mailbox-hbase</artifactId>
                 <version>${james-mailbox.version}</version>
             </dependency>
