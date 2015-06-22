@@ -37,19 +37,32 @@ public class ExternalSessionFactory implements SessionFactory {
     protected final Monitor monitor;
     protected final String shabang;
 
+    public ExternalSessionFactory(final Monitor monitor, final String shabang) {
+        this(null, monitor, shabang);
+    }
+    
     public ExternalSessionFactory(final String host, final int port, final Monitor monitor, final String shabang) {
-        super();
-        this.address = new InetSocketAddress(host, port);
-        this.monitor = monitor;
-        this.shabang = shabang;
+        this(new InetSocketAddress(host, port), monitor, shabang);
     }
 
+    public ExternalSessionFactory(InetSocketAddress address, final Monitor monitor, final String shabang) {
+        super();
+        this.monitor = monitor;
+        this.shabang = shabang;
+        this.address = address;
+    }
+    
     public Session newSession(Continuation continuation) throws Exception {
+        InetSocketAddress address = getAddress();
         monitor.note("Connecting to " + address.getHostName() + ":" + address.getPort());
         final SocketChannel channel = SocketChannel.open(address);
         channel.configureBlocking(false);
         final ExternalSession result = new ExternalSession(channel, monitor, shabang);
         return result;
+    }
+
+    protected InetSocketAddress getAddress() {
+        return address;
     }
 
     /**
@@ -63,7 +76,7 @@ public class ExternalSessionFactory implements SessionFactory {
         final String TAB = " ";
 
         String retValue = "ExternalSessionFactory ( "
-            + "address = " + this.address + TAB
+            + "address = " + this.getAddress() + TAB
             + "monitor = " + this.monitor + TAB
             + "shabang = " + this.shabang + TAB
             + " )";

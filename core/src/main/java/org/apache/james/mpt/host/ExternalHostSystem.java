@@ -62,7 +62,12 @@ public class ExternalHostSystem extends ExternalSessionFactory implements HostSy
         super(host, port, monitor, shabang);
         this.userAdder = userAdder;
     }
-
+    
+    public ExternalHostSystem(final Monitor monitor, final String shabang,
+            final UserAdder userAdder) {
+        super(monitor, shabang);
+        this.userAdder = userAdder;
+    }
     public boolean addUser(String user, String password) throws Exception {
         if (userAdder == null) {
             monitor.note("Please ensure user '" + user + "' with password '" + password + "' exists.");
