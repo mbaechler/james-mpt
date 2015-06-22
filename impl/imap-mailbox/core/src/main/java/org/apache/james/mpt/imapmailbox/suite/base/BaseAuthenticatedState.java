@@ -79,7 +79,7 @@ public class BaseAuthenticatedState extends
 
     protected void addLogin(String username, String password) {
         preElements.CL("a001 LOGIN " + username + " " + password);
-        preElements.SL("a001 OK LOGIN completed.",
-                "AbstractTestForAuthenticatedState.java:53");
+        preElements.SL("a001 OK .*",
+                "BaseAuthenticatedState.java:83");
     }
 }

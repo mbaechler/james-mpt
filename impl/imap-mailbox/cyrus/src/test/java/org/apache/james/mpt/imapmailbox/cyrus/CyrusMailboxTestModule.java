@@ -1,0 +1,23 @@
+package org.apache.james.mpt.imapmailbox.cyrus;
+
+import org.apache.james.mpt.api.HostSystem;
+import org.apache.james.mpt.api.UserAdder;
+import org.apache.james.mpt.host.ExternalHostSystem;
+import org.apache.james.mpt.imapmailbox.cyrus.host.CyrusHostSystem;
+import org.apache.james.mpt.imapmailbox.cyrus.host.CyrusUserAdder;
+import org.apache.james.mpt.imapmailbox.cyrus.host.Docker;
+
+import com.google.inject.AbstractModule;
+import com.spotify.docker.client.messages.ContainerCreation;
+
+public class CyrusMailboxTestModule extends AbstractModule {
+
+    @Override
+    protected void configure() {
+        bind(Docker.class).toInstance(new Docker("linagora/cyrus-imap"));
+        bind(ContainerCreation.class).toProvider(CyrusHostSystem.class);
+        bind(HostSystem.class).to(CyrusHostSystem.class);
+        bind(ExternalHostSystem.class).to(CyrusHostSystem.class);
+        bind(UserAdder.class).to(CyrusUserAdder.class);
+    }
+}
