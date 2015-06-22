@@ -39,22 +39,17 @@ public class Docker {
     private final DefaultDockerClient dockerClient;
     private final ContainerConfig containerConfig;
 
-    public Docker(String imageName) {
+    public Docker(String imageName)  {
         containerConfig = ContainerConfig.builder()
                 .image(imageName)
                 .networkDisabled(false)
                 .exposedPorts(ImmutableSet.of(EXPOSED_IMAP_PORT))
                 .build();
         
-        dockerClient = new DefaultDockerClient(DefaultDockerClient.DEFAULT_UNIX_ENDPOINT);
-        
         try {
+            dockerClient = DefaultDockerClient.fromEnv().build();
             dockerClient.pull(imageName);
-        } catch (DockerException e) {
-            throw Throwables.propagate(e);
-        } catch (InterruptedException e) {
-            throw Throwables.propagate(e);
-        } catch (Throwable e) {
+        } catch (Exception e) {
             throw Throwables.propagate(e);
         }
     }
@@ -77,7 +72,7 @@ public class Docker {
     }
     
     public String getHost(ContainerCreation container) {
-        return "localhost";
+        return dockerClient.getHost();
     }
 
     public int getIMAPPort(ContainerCreation container) {
