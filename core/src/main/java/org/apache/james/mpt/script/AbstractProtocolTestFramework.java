@@ -60,10 +60,12 @@ public abstract class AbstractProtocolTestFramework {
     }
 
     protected void setUp() throws Exception {
-        setUpEnvironment();
+        hostSystem.beforeTest();
+        hostSystem.addUser(userName, password);
     }
 
     protected void tearDown() throws Exception {
+        hostSystem.afterTest();
     }
 
     /**
@@ -108,14 +110,6 @@ public abstract class AbstractProtocolTestFramework {
                 sessions[i].stop();
             }
         }
-    }
-
-    /**
-     * Initialises the host on first call.
-     */
-    public void setUpEnvironment() throws Exception {
-        hostSystem.reset();
-        hostSystem.addUser(userName, password);
     }
 
 }

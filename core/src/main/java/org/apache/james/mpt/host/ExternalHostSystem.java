@@ -75,10 +75,14 @@ public class ExternalHostSystem extends ExternalSessionFactory implements HostSy
     }
 
     public void beforeTests() throws Exception {
-
     }
 
     public void afterTests() throws Exception {
+    }
 
+    public void beforeTest() throws Exception {
+    }
+    
+    public void afterTest() throws Exception {
     }
 }

@@ -67,9 +67,11 @@ public abstract class ImapHostSystem implements HostSystem {
         return new Session(continuation);
     }
 
-    public final void reset() throws Exception {
+    public void beforeTest() throws Exception {
+    }
+    
+    public void afterTest() throws Exception {
         users.clear();
-        
         resetData();
     }
     

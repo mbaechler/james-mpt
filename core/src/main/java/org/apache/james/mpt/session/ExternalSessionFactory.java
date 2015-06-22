@@ -52,10 +52,6 @@ public class ExternalSessionFactory implements SessionFactory {
         return result;
     }
 
-    public void reset() throws Exception {
-        monitor.note("Please reset system.");
-    }
-
     /**
      * Constructs a <code>String</code> with all attributes
      * in name = value format.

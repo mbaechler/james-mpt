@@ -36,13 +36,6 @@ import org.apache.james.mpt.host.ExternalHostSystem;
 public interface HostSystem extends SessionFactory {
 
     /**
-     * Resets host system to initial state.
-     * 
-     * @throws Exception
-     */
-    public void reset() throws Exception;
-
-    /**
      * Add a user for testing.
      * 
      * @param user
@@ -64,5 +57,9 @@ public interface HostSystem extends SessionFactory {
     public void beforeTests() throws Exception;
 
     public void afterTests() throws Exception;
+
+    public void beforeTest() throws Exception;
+
+    public void afterTest() throws Exception;
 
 }
