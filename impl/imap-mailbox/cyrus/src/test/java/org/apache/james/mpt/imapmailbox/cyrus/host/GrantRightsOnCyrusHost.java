@@ -17,36 +17,31 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox.cyrus;
+package org.apache.james.mpt.imapmailbox.cyrus.host;
 
-import org.apache.james.mpt.imapmailbox.suite.ACLCommands;
-import org.apache.onami.test.OnamiSuite;
-import org.apache.onami.test.annotation.GuiceModules;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite.SuiteClasses;
+import com.google.inject.Inject;
+import org.apache.james.mailbox.model.MailboxACL;
+import org.apache.james.mailbox.model.MailboxPath;
+import org.apache.james.mpt.imapmailbox.GrantRightsOnHost;
+import org.apache.james.mpt.protocol.ProtocolSession;
 
-@RunWith(OnamiSuite.class)
-@SuiteClasses({
-    ACLCommands.class
-//    AuthenticatedState.class,
-//    ConcurrentSessions.class,
-//    Events.class,
-//    Expunge.class,
-//    Fetch.class,
-//    FetchBodySection.class,
-//    FetchBodyStructure.class,
-//    FetchHeaders.class,
-//    Listing.class,
-//    NonAuthenticatedState.class,
-//    PartialFetch.class,
-//    Rename.class,
-//    Search.class,
-//    Security.class,
-//    Select.class,
-//    SelectedInbox.class,
-//    SelectedState.class,
-//    UidSearch.class
-})
-@GuiceModules({CyrusMailboxTestModule.class})
-public class CyrusMailboxTest {
+public class GrantRightsOnCyrusHost implements GrantRightsOnHost {
+    private static final String GRANT_RIGHTS_LOCATION = "ACLCommands.grantRights";
+
+    private CyrusHostSystem system;
+
+    @Inject
+    private GrantRightsOnCyrusHost(CyrusHostSystem system) {
+        this.system = system;
+    }
+
+    public void grantRights(MailboxPath mailboxPath, String userName, MailboxACL.MailboxACLRights rights) throws Exception {
+        ProtocolSession protocolSession = system.logAndGetAdminProtocolSession(new ProtocolSession());
+        protocolSession.CL(String.format("A1 SETACL %s %s %s",
+            system.createMailboxStringFromMailboxPath(mailboxPath),
+            userName,
+            rights.serialize()));
+        protocolSession.SL("A1 OK .*", GRANT_RIGHTS_LOCATION);
+        system.executeProtocolSession(system.logoutAndGetProtocolSession(protocolSession));
+    }
 }

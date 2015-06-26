@@ -20,6 +20,8 @@ package org.apache.james.mpt.imapmailbox.cyrus.host;
 
 import java.net.InetSocketAddress;
 
+import com.google.common.base.Joiner;
+import com.google.common.base.Strings;
 import org.apache.james.mailbox.model.MailboxConstants;
 import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mpt.api.Session;
@@ -90,14 +92,33 @@ public class CyrusHostSystem extends ExternalHostSystem implements Provider<Cont
     
     @Override
     public void createMailbox(MailboxPath mailboxPath) {
-        ProtocolSession protocolSession = new ProtocolSession();
+        ProtocolSession protocolSession = logAndGetAdminProtocolSession(new ProtocolSession());
+        protocolSession.CL(String.format("A1 CREATE %s", createMailboxStringFromMailboxPath(mailboxPath)));
+        protocolSession.SL("A1 OK .*", CREATE_MAILBOX_LOCATION);
+        executeProtocolSession(logoutAndGetProtocolSession(protocolSession));
+    }
+
+    public ProtocolSession logoutAndGetProtocolSession(ProtocolSession protocolSession) {
+        protocolSession.CL("A2 LOGOUT");
+        protocolSession.SL("\\* BYE .*", CREATE_MAILBOX_LOCATION);
+        return protocolSession;
+    }
+
+    public ProtocolSession logAndGetAdminProtocolSession(ProtocolSession protocolSession) {
         protocolSession.SL(".*", CREATE_MAILBOX_LOCATION);
         protocolSession.CL(". LOGIN cyrus cyrus");
         protocolSession.SL("\\. OK .*", CREATE_MAILBOX_LOCATION);
-        protocolSession.CL(String.format("A1 CREATE user.%s.%s", mailboxPath.getUser(), mailboxPath.getName()));
-        protocolSession.SL("A1 OK .*", CREATE_MAILBOX_LOCATION);
-        protocolSession.CL("A2 LOGOUT");
-        protocolSession.SL("\\* BYE .*", CREATE_MAILBOX_LOCATION);
+        return protocolSession;
+    }
+
+    public String createMailboxStringFromMailboxPath(MailboxPath mailboxPath) {
+        return Joiner.on('.').skipNulls()
+            .join("user",
+                mailboxPath.getUser(),
+                Strings.emptyToNull(mailboxPath.getName()));
+    }
+
+    public void executeProtocolSession(ProtocolSession protocolSession) {
         try {
             Session session = newSession(null);
             try {

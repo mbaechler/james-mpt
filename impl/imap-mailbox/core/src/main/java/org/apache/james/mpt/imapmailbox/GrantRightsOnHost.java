@@ -17,36 +17,13 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox.cyrus;
+package org.apache.james.mpt.imapmailbox;
 
-import org.apache.james.mpt.imapmailbox.suite.ACLCommands;
-import org.apache.onami.test.OnamiSuite;
-import org.apache.onami.test.annotation.GuiceModules;
-import org.junit.runner.RunWith;
-import org.junit.runners.Suite.SuiteClasses;
+import org.apache.james.mailbox.model.MailboxACL;
+import org.apache.james.mailbox.model.MailboxPath;
 
-@RunWith(OnamiSuite.class)
-@SuiteClasses({
-    ACLCommands.class
-//    AuthenticatedState.class,
-//    ConcurrentSessions.class,
-//    Events.class,
-//    Expunge.class,
-//    Fetch.class,
-//    FetchBodySection.class,
-//    FetchBodyStructure.class,
-//    FetchHeaders.class,
-//    Listing.class,
-//    NonAuthenticatedState.class,
-//    PartialFetch.class,
-//    Rename.class,
-//    Search.class,
-//    Security.class,
-//    Select.class,
-//    SelectedInbox.class,
-//    SelectedState.class,
-//    UidSearch.class
-})
-@GuiceModules({CyrusMailboxTestModule.class})
-public class CyrusMailboxTest {
+public interface GrantRightsOnHost {
+
+    void grantRights(MailboxPath mailboxPath, String userName, MailboxACL.MailboxACLRights rights) throws Exception;
+
 }
