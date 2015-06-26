@@ -60,4 +60,16 @@ public class ACLIntegration extends BaseImapProtocol {
         scriptTest("aclIntegration/ACLIntegrationWithoutRightR", Locale.US);
     }
 
+    @Test
+    public void rightLShouldBeSufficientToPerformListUS() throws Exception {
+        grantRightsOnHost.grantRights(USER, OTHER_USER_MAILBOX, "l");
+        scriptTest("aclIntegration/ACLIntegrationRightL", Locale.US);
+    }
+
+    @Test
+    public void rightLShouldBeNeededToPerformListLsubSubscribeUS() throws Exception {
+        grantRightsOnHost.grantRights(USER, OTHER_USER_MAILBOX, "rswipkxtecda");
+        scriptTest("aclIntegration/ACLIntegrationWithoutRightL", Locale.US);
+    }
+
 }
