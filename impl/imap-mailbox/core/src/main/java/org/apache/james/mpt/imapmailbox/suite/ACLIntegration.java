@@ -23,6 +23,8 @@ import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.model.SimpleMailboxACL;
 import org.apache.james.mpt.api.ImapHostSystem;
 import org.apache.james.mpt.imapmailbox.GrantRightsOnHost;
+import org.apache.james.mpt.imapmailbox.MailboxMessageAppender;
+import org.apache.james.mpt.imapmailbox.MailboxMessageProvider;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseImapProtocol;
 import org.junit.Test;
 
@@ -37,6 +39,8 @@ public class ACLIntegration extends BaseImapProtocol {
     private static ImapHostSystem system;
     @Inject
     private GrantRightsOnHost grantRightsOnHost;
+    @Inject
+    private MailboxMessageAppender mailboxMessageAppender;
 
     public ACLIntegration() throws Exception {
         super(system);
@@ -158,4 +162,45 @@ public class ACLIntegration extends BaseImapProtocol {
         scriptTest("aclIntegration/ACLIntegrationRightIW", Locale.US);
     }
 
+    @Test
+    public void rightRSShouldBeSufficientToPerformStoreAndFetchOnSeenMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rs"));
+        mailboxMessageAppender.fillMailbox(OTHER_USER_MAILBOX);
+        scriptTest("aclIntegration/ACLIntegrationRightRS", Locale.US);
+    }
+
+    @Test
+    public void rightSShouldBeNeededToPerformStoreAndFetchOnSeenMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rwipxtcdlake"));
+        mailboxMessageAppender.fillMailbox(OTHER_USER_MAILBOX);
+        scriptTest("aclIntegration/ACLIntegrationWithoutRightS", Locale.US);
+    }
+
+    @Test
+    public void rightRWShouldBeSufficientToPerformStoreOnFlaggedMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rw"));
+        mailboxMessageAppender.fillMailbox(OTHER_USER_MAILBOX);
+        scriptTest("aclIntegration/ACLIntegrationRightRW", Locale.US);
+    }
+
+    @Test
+    public void rightWShouldBeNeededToPerformStoreOnFlaggedMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rsipxtcdlake"));
+        mailboxMessageAppender.fillMailbox(OTHER_USER_MAILBOX);
+        scriptTest("aclIntegration/ACLIntegrationWithoutRightW", Locale.US);
+    }
+
+    @Test
+    public void rightRTShouldBeSufficientToPerformStoreOnDeletedMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rt"));
+        mailboxMessageAppender.fillMailbox(OTHER_USER_MAILBOX);
+        scriptTest("aclIntegration/ACLIntegrationRightRT", Locale.US);
+    }
+
+    @Test
+    public void rightTShouldBeNeededToPerformStoreOnFlaggedMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rwipxslake"));
+        mailboxMessageAppender.fillMailbox(OTHER_USER_MAILBOX);
+        scriptTest("aclIntegration/ACLIntegrationWithoutRightT", Locale.US);
+    }
 }
