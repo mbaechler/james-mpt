@@ -20,6 +20,7 @@ package org.apache.james.mpt.imapmailbox.cyrus.host;
 
 import java.net.InetSocketAddress;
 
+import org.apache.james.mailbox.model.MailboxConstants;
 import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mpt.api.Session;
 import org.apache.james.mpt.api.UserAdder;
@@ -53,6 +54,16 @@ public class CyrusHostSystem extends ExternalHostSystem implements Provider<Cont
     @Override
     protected InetSocketAddress getAddress() {
         return addressSupplier.get();
+    }
+    
+    @Override
+    public boolean addUser(String user, String password) throws Exception {
+        return super.addUser(user, password) && createUserInbox(user);
+    }
+
+    private boolean createUserInbox(String user) {
+        createMailbox(new MailboxPath(MailboxConstants.USER_NAMESPACE, user, ""));
+        return true;
     }
     
     public void beforeTest() throws Exception {
