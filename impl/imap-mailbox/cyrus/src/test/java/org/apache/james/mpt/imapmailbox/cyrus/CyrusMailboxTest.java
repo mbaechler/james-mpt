@@ -20,6 +20,7 @@
 package org.apache.james.mpt.imapmailbox.cyrus;
 
 import org.apache.james.mpt.imapmailbox.suite.ACLCommands;
+import org.apache.james.mpt.imapmailbox.suite.ACLIntegration;
 import org.apache.onami.test.OnamiSuite;
 import org.apache.onami.test.annotation.GuiceModules;
 import org.junit.runner.RunWith;
@@ -27,7 +28,8 @@ import org.junit.runners.Suite.SuiteClasses;
 
 @RunWith(OnamiSuite.class)
 @SuiteClasses({
-    ACLCommands.class
+    ACLCommands.class,
+    ACLIntegration.class
 //    AuthenticatedState.class,
 //    ConcurrentSessions.class,
 //    Events.class,
