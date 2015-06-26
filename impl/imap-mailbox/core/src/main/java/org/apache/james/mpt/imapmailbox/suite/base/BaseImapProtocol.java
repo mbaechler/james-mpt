@@ -21,6 +21,7 @@ package org.apache.james.mpt.imapmailbox.suite.base;
 import org.apache.james.mpt.api.HostSystem;
 import org.apache.james.mpt.imapmailbox.ImapTestConstants;
 import org.apache.james.mpt.script.AbstractSimpleScriptedTestProtocol;
+import org.junit.Before;
 
 /**
  * Specialise the protocol test framework for IMAP.
@@ -31,4 +32,8 @@ public class BaseImapProtocol extends AbstractSimpleScriptedTestProtocol impleme
         super(hostSystem, USER, PASSWORD, "/org/apache/james/imap/scripts/");
     }
 
+    @Before
+    public void setUp() throws Exception {
+        super.setUp();
+    }
 }
