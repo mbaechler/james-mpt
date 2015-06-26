@@ -42,11 +42,11 @@ import org.apache.james.mailbox.hbase.mail.HBaseUidProvider;
 import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 import org.slf4j.LoggerFactory;
 
-public class HBaseHostSystem extends ImapHostSystem {
+public class HBaseHostSystem extends JamesImapHostSystem {
 
     public static final String META_DATA_DIRECTORY = "target/user-meta-data";
     public static HBaseHostSystem host = null;
@@ -61,7 +61,7 @@ public class HBaseHostSystem extends ImapHostSystem {
     private MiniHBaseCluster hbaseCluster;
     private Configuration conf;
 
-    public static synchronized ImapHostSystem build() throws Exception {
+    public static synchronized JamesImapHostSystem build() throws Exception {
         if (host == null) {
             host = new HBaseHostSystem(useMiniCluster);
         }

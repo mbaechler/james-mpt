@@ -42,14 +42,14 @@ import org.apache.james.mailbox.jcr.mail.JCRUidProvider;
 import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.InputSource;
 
-public class JCRHostSystem extends ImapHostSystem{
+public class JCRHostSystem extends JamesImapHostSystem{
 
-    public static ImapHostSystem build() throws Exception {
+    public static JamesImapHostSystem build() throws Exception {
         return new JCRHostSystem();
     }
     

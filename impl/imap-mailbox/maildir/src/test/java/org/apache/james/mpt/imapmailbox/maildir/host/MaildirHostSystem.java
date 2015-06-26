@@ -37,10 +37,10 @@ import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreMailboxManager;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
-public class MaildirHostSystem extends ImapHostSystem {
+public class MaildirHostSystem extends JamesImapHostSystem {
 
     public static final String META_DATA_DIRECTORY = "target/user-meta-data";
     private static final String MAILDIR_HOME = "target/Maildir";
@@ -49,7 +49,7 @@ public class MaildirHostSystem extends ImapHostSystem {
     private final MockAuthenticator userManager;
     private final MaildirMailboxSessionMapperFactory mailboxSessionMapperFactory;
     
-    public static ImapHostSystem build() throws Exception {
+    public static JamesImapHostSystem build() throws Exception {
         return new MaildirHostSystem();
     }
     

@@ -19,7 +19,7 @@
 package org.apache.james.mpt.imapmailbox.jpa;
 
 import org.apache.james.mpt.api.HostSystem;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.api.ImapHostSystem;
 import org.apache.james.mpt.imapmailbox.jpa.host.JPAHostSystem;
 
 import com.google.inject.AbstractModule;

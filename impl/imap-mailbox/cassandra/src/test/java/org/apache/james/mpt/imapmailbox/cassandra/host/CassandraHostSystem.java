@@ -32,10 +32,10 @@ import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
-public class CassandraHostSystem extends ImapHostSystem {
+public class CassandraHostSystem extends JamesImapHostSystem {
 
     private final CassandraMailboxManager mailboxManager;
     private final MockAuthenticator userManager;

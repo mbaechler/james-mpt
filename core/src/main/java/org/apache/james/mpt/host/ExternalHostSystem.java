@@ -19,7 +19,9 @@
 
 package org.apache.james.mpt.host;
 
-import org.apache.james.mpt.api.HostSystem;
+import org.apache.commons.lang.NotImplementedException;
+import org.apache.james.mailbox.model.MailboxPath;
+import org.apache.james.mpt.api.ImapHostSystem;
 import org.apache.james.mpt.api.Monitor;
 import org.apache.james.mpt.api.UserAdder;
 import org.apache.james.mpt.session.ExternalSessionFactory;
@@ -35,7 +37,7 @@ import org.apache.james.mpt.session.ExternalSessionFactory;
  * case.
  * </p>
  */
-public class ExternalHostSystem extends ExternalSessionFactory implements HostSystem {
+public class ExternalHostSystem extends ExternalSessionFactory implements ImapHostSystem {
 
     private final UserAdder userAdder;
 
@@ -79,6 +81,10 @@ public class ExternalHostSystem extends ExternalSessionFactory implements HostSy
         return true;
     }
 
+    public void createMailbox(MailboxPath mailboxPath) throws Exception {
+        throw new NotImplementedException();
+    }
+    
     public void beforeTests() throws Exception {
     }
 

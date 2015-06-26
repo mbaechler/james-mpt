@@ -1,7 +1,7 @@
 package org.apache.james.mpt.imapmailbox.cassandra;
 
 import org.apache.james.mpt.api.HostSystem;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.api.ImapHostSystem;
 import org.apache.james.mpt.imapmailbox.cassandra.host.CassandraHostSystem;
 
 import com.google.inject.AbstractModule;

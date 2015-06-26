@@ -36,11 +36,11 @@ import org.apache.james.imap.encode.ImapEncoder;
 import org.apache.james.mailbox.MailboxSession.User;
 import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mpt.api.Continuation;
-import org.apache.james.mpt.api.HostSystem;
+import org.apache.james.mpt.api.ImapHostSystem;
 import org.apache.james.mpt.session.ImapSessionImpl;
 import org.slf4j.LoggerFactory;
 
-public abstract class ImapHostSystem implements HostSystem {
+public abstract class JamesImapHostSystem implements ImapHostSystem {
 
     private ImapDecoder decoder;
 
@@ -50,7 +50,7 @@ public abstract class ImapHostSystem implements HostSystem {
 
     private final Set<User> users;
 
-    public ImapHostSystem() {
+    public JamesImapHostSystem() {
         super();
         users = new HashSet<User>();
     }
@@ -77,6 +77,9 @@ public abstract class ImapHostSystem implements HostSystem {
     
     protected abstract void resetData() throws Exception;
 
+    /* (non-Javadoc)
+     * @see org.apache.james.mpt.host.ImapHostSystem#createMailbox(org.apache.james.mailbox.model.MailboxPath)
+     */
     public abstract void createMailbox(MailboxPath mailboxPath) throws Exception;
 
     public String getHelloName() {

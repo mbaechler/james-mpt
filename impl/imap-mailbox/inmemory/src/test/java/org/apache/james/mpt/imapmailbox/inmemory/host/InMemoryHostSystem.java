@@ -33,16 +33,16 @@ import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreMailboxManager;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
-public class InMemoryHostSystem extends ImapHostSystem {
+public class InMemoryHostSystem extends JamesImapHostSystem {
 
     private StoreMailboxManager<Long> mailboxManager;
     private MockAuthenticator userManager; 
     private InMemoryMailboxSessionMapperFactory factory;
     
-    public static ImapHostSystem build() throws Exception {
+    public static JamesImapHostSystem build() throws Exception {
         InMemoryHostSystem host =  new InMemoryHostSystem();
         return host;
     }

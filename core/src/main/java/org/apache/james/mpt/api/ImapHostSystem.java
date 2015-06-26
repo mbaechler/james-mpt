@@ -16,27 +16,13 @@
  * specific language governing permissions and limitations      *
  * under the License.                                           *
  ****************************************************************/
-package org.apache.james.mpt.imapmailbox.jcr;
+package org.apache.james.mpt.api;
 
-import org.apache.james.mpt.api.HostSystem;
-import org.apache.james.mpt.api.ImapHostSystem;
-import org.apache.james.mpt.imapmailbox.jcr.host.JCRHostSystem;
+import org.apache.james.mailbox.model.MailboxPath;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
+public interface ImapHostSystem extends HostSystem {
 
-public class JcrMailboxTestModule extends AbstractModule {
-
-    @Override
-    protected void configure() {
-        bind(HostSystem.class).to(ImapHostSystem.class);
-    }
-
-    @Provides
-    @Singleton
-    public ImapHostSystem provideImapHostSystem() throws Exception {
-        return JCRHostSystem.build();
-    }
+    public abstract void createMailbox(MailboxPath mailboxPath)
+            throws Exception;
 
 }

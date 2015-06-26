@@ -19,7 +19,7 @@
 package org.apache.james.mpt.imapmailbox.inmemory;
 
 import org.apache.james.mpt.api.HostSystem;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.api.ImapHostSystem;
 import org.apache.james.mpt.imapmailbox.inmemory.host.InMemoryHostSystem;
 
 import com.google.inject.AbstractModule;

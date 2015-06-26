@@ -49,16 +49,16 @@ import org.apache.james.mailbox.jpa.user.model.JPASubscription;
 import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 import org.apache.openjpa.persistence.OpenJPAPersistence;
 import org.slf4j.LoggerFactory;
 
-public class JPAHostSystem extends ImapHostSystem {
+public class JPAHostSystem extends JamesImapHostSystem {
 
     public static final String META_DATA_DIRECTORY = "target/user-meta-data";
 
-    public static ImapHostSystem build() throws Exception {
+    public static JamesImapHostSystem build() throws Exception {
         JPAHostSystem host =  new JPAHostSystem();
         return host;
     }

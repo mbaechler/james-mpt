@@ -24,7 +24,7 @@ import java.util.Locale;
 import javax.inject.Inject;
 
 import org.apache.james.mailbox.model.MailboxPath;
-import org.apache.james.mpt.host.ImapHostSystem;
+import org.apache.james.mpt.api.ImapHostSystem;
 import org.apache.james.mpt.imapmailbox.suite.base.BaseAuthenticatedState;
 import org.junit.Test;
 
