@@ -72,4 +72,16 @@ public class ACLIntegration extends BaseImapProtocol {
         scriptTest("aclIntegration/ACLIntegrationWithoutRightL", Locale.US);
     }
 
+    @Test
+    public void rightAShouldBeSufficientToManageACLUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("a"));
+        scriptTest("aclIntegration/ACLIntegrationRightA", Locale.US);
+    }
+
+    @Test
+    public void rightAShouldBeNeededToManageACLUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rswipkxtecdl"));
+        scriptTest("aclIntegration/ACLIntegrationWithoutRightA", Locale.US);
+    }
+
 }
