@@ -20,11 +20,15 @@ package org.apache.james.mpt.imapmailbox.cyrus.host;
 
 import java.net.InetSocketAddress;
 
+import org.apache.james.mailbox.model.MailboxPath;
+import org.apache.james.mpt.api.Session;
 import org.apache.james.mpt.api.UserAdder;
 import org.apache.james.mpt.host.ExternalHostSystem;
 import org.apache.james.mpt.monitor.NullMonitor;
+import org.apache.james.mpt.protocol.ProtocolSession;
 
 import com.google.common.base.Supplier;
+import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.Singleton;
@@ -33,6 +37,7 @@ import com.spotify.docker.client.messages.ContainerCreation;
 @Singleton
 public class CyrusHostSystem extends ExternalHostSystem implements Provider<ContainerCreation> {
 
+    private static final String CREATE_MAILBOX_LOCATION = "CyrusHostSystem.createMailbox";
     private static final String SHABANG = "* OK IMAP4rev1 Server ready";
     private final Docker docker;
     private Supplier<InetSocketAddress> addressSupplier;
@@ -70,5 +75,27 @@ public class CyrusHostSystem extends ExternalHostSystem implements Provider<Cont
     @Override
     public ContainerCreation get() {
         return container;
+    }
+    
+    @Override
+    public void createMailbox(MailboxPath mailboxPath) {
+        ProtocolSession protocolSession = new ProtocolSession();
+        protocolSession.SL(".*", CREATE_MAILBOX_LOCATION);
+        protocolSession.CL(". LOGIN cyrus cyrus");
+        protocolSession.SL("\\. OK .*", CREATE_MAILBOX_LOCATION);
+        protocolSession.CL(String.format("A1 CREATE user.%s.%s", mailboxPath.getUser(), mailboxPath.getName()));
+        protocolSession.SL("A1 OK .*", CREATE_MAILBOX_LOCATION);
+        protocolSession.CL("A2 LOGOUT");
+        protocolSession.SL("\\* BYE .*", CREATE_MAILBOX_LOCATION);
+        try {
+            Session session = newSession(null);
+            try {
+                protocolSession.runSessions(new Session[]{session});
+            } finally {
+                session.stop();
+            }
+        } catch (Exception e) {
+            Throwables.propagate(e);
+        }
     }
 }
