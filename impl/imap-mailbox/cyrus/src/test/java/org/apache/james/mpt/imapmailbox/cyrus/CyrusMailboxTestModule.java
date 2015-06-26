@@ -5,6 +5,7 @@ import org.apache.james.mpt.api.ImapHostSystem;
 import org.apache.james.mpt.api.UserAdder;
 import org.apache.james.mpt.host.ExternalHostSystem;
 import org.apache.james.mpt.imapmailbox.GrantRightsOnHost;
+import org.apache.james.mpt.imapmailbox.MailboxMessageAppender;
 import org.apache.james.mpt.imapmailbox.cyrus.host.CyrusHostSystem;
 import org.apache.james.mpt.imapmailbox.cyrus.host.CyrusUserAdder;
 import org.apache.james.mpt.imapmailbox.cyrus.host.Docker;
@@ -12,6 +13,7 @@ import org.apache.james.mpt.imapmailbox.cyrus.host.Docker;
 import com.google.inject.AbstractModule;
 import com.spotify.docker.client.messages.ContainerCreation;
 import org.apache.james.mpt.imapmailbox.cyrus.host.GrantRightsOnCyrusHost;
+import org.apache.james.mpt.imapmailbox.cyrus.host.MailboxMessageAppenderOnCyrusHost;
 
 public class CyrusMailboxTestModule extends AbstractModule {
 
@@ -24,5 +26,6 @@ public class CyrusMailboxTestModule extends AbstractModule {
         bind(ExternalHostSystem.class).to(CyrusHostSystem.class);
         bind(UserAdder.class).to(CyrusUserAdder.class);
         bind(GrantRightsOnHost.class).to(GrantRightsOnCyrusHost.class);
+        bind(MailboxMessageAppender.class).to(MailboxMessageAppenderOnCyrusHost.class);
     }
 }

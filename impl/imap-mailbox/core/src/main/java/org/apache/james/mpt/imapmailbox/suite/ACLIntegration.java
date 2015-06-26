@@ -128,4 +128,34 @@ public class ACLIntegration extends BaseImapProtocol {
         scriptTest("aclIntegration/ACLIntegrationWithoutRightE", Locale.US);
     }
 
+    @Test
+    public void rightIShouldBeSufficientToPerformAppendUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("ri"));
+        scriptTest("aclIntegration/ACLIntegrationRightI", Locale.US);
+    }
+
+    @Test
+    public void rightIShouldBeNeededToPerformAppendUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rswepxtcdlak"));
+        scriptTest("aclIntegration/ACLIntegrationWithoutRightI", Locale.US);
+    }
+
+    @Test
+    public void rightISShouldBeSufficientToPerformAppendOfSeenMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("ris"));
+        scriptTest("aclIntegration/ACLIntegrationRightIS", Locale.US);
+    }
+
+    @Test
+    public void rightITShouldBeSufficientToPerformAppendOfDeletedMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("rit"));
+        scriptTest("aclIntegration/ACLIntegrationRightIT", Locale.US);
+    }
+
+    @Test
+    public void rightIWShouldBeSufficientToPerformAppendOfDeletedMessageUS() throws Exception {
+        grantRightsOnHost.grantRights(OTHER_USER_MAILBOX, USER, new SimpleMailboxACL.Rfc4314Rights("riw"));
+        scriptTest("aclIntegration/ACLIntegrationRightIW", Locale.US);
+    }
+
 }
