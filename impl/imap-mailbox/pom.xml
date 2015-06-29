@@ -44,6 +44,7 @@
         <module>jpa</module>
         <module>maildir</module>
         <module>cyrus</module>
+        <module>elasticsearch</module>
     </modules>
     
     <dependencyManagement>
@@ -93,6 +94,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>apache-james-mpt-imapmailbox-cyrus</artifactId>
+                <version>${project.version}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>apache-james-mpt-imapmailbox-elasticsearch</artifactId>
                 <version>${project.version}</version>
                 <scope>test</scope>
             </dependency>
@@ -247,6 +254,26 @@
                              <exclude>**/suite/*.java</exclude>
                              <exclude>**/suite/**/*.java</exclude>
                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>elasticsearch</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/elasticsearch/**/*.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>**/suite/*.java</exclude>
+                                <exclude>**/suite/**/*.java</exclude>
+                            </excludes>
                         </configuration>
                     </plugin>
                 </plugins>
