@@ -38,13 +38,13 @@
     <modules>
         <module>core</module>
         <module>cassandra</module>
+        <module>elasticsearch</module>
         <module>hbase</module>
         <module>inmemory</module>
         <module>jcr</module>
         <module>jpa</module>
         <module>maildir</module>
         <module>cyrus</module>
-        <module>elasticsearch</module>
     </modules>
     
     <dependencyManagement>

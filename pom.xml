@@ -309,12 +309,6 @@
                 <type>test-jar</type>
                 <version>${hbase.version}</version>
             </dependency>
-            <!-- Use lucene 2.4.1 for now to let jcr tests pass -->
-            <dependency>
-                <groupId>org.apache.lucene</groupId>
-                <artifactId>lucene-core</artifactId>
-                <version>${lucene-core.version}</version>
-            </dependency>
             <dependency>
                 <groupId>com.google.inject</groupId>
                 <artifactId>guice</artifactId>

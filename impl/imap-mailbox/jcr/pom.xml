@@ -43,9 +43,11 @@
             <artifactId>apache-james-mailbox-jcr</artifactId>
             <scope>test</scope>
         </dependency>
+        <!-- Use lucene 2.4.1 for now to let jcr tests pass -->
         <dependency>
             <groupId>org.apache.lucene</groupId>
             <artifactId>lucene-core</artifactId>
+            <version>${lucene-core.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
