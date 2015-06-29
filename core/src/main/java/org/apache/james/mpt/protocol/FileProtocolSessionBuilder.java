@@ -112,6 +112,13 @@ public class FileProtocolSessionBuilder extends ProtocolSessionBuilder {
                     }
                     session.SL(sessionNumber, serverMsg, location, lastClientMsg);
                 }
+                else if (next.startsWith(WAIT)) {
+                    if (next.length() > 5) {
+                        session.WAIT(sessionNumber, Long.valueOf(next.substring(5)));
+                    } else {
+                        throw new Exception("Invalid line length on WAIT instruction : " + next);
+                    }
+                }
                 else if (next.startsWith(OPEN_UNORDERED_BLOCK_TAG)) {
                     List<String> unorderedLines = new ArrayList<String>(5);
                     next = reader.readLine();

@@ -179,6 +179,14 @@ public class ProtocolSession implements ProtocolInteractor {
     }
 
     /**
+     * adds a Wait condition
+     */
+    public void WAIT(int sessionNumber, long timeToWaitInMs) {
+        this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
+        testElements.add(new WaitElement(timeToWaitInMs));
+    }
+
+    /**
      * A client request, which write the specified message to a Writer.
      */
     private static class ClientRequest implements ProtocolElement {
@@ -471,6 +479,28 @@ public class ProtocolSession implements ProtocolInteractor {
             }
         }
 
+        public boolean isClient() {
+            return false;
+        }
+    }
+
+    /**
+     * Allow you to wait a given time at a given point of the test script
+     */
+    private class WaitElement implements ProtocolElement {
+
+        private final long timeToWaitInMs;
+
+        public WaitElement(long timeToWaitInMs) {
+            this.timeToWaitInMs = timeToWaitInMs;
+        }
+
+        @Override
+        public void testProtocol(Session[] sessions, boolean continueAfterFailure) throws Exception {
+            Thread.sleep(timeToWaitInMs);
+        }
+
+        @Override
         public boolean isClient() {
             return false;
         }
