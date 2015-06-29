@@ -28,6 +28,7 @@ import org.apache.james.mailbox.acl.MailboxACLResolver;
 import org.apache.james.mailbox.acl.SimpleGroupMembershipResolver;
 import org.apache.james.mailbox.acl.UnionMailboxACLResolver;
 import org.apache.james.mailbox.exception.MailboxException;
+import org.apache.james.mailbox.inmemory.InMemoryId;
 import org.apache.james.mailbox.inmemory.InMemoryMailboxSessionMapperFactory;
 import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.MockAuthenticator;
@@ -38,7 +39,7 @@ import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
 public class InMemoryHostSystem extends JamesImapHostSystem {
 
-    private StoreMailboxManager<Long> mailboxManager;
+    private StoreMailboxManager<InMemoryId> mailboxManager;
     private MockAuthenticator userManager; 
     private InMemoryMailboxSessionMapperFactory factory;
     
@@ -67,7 +68,7 @@ public class InMemoryHostSystem extends JamesImapHostSystem {
         MailboxACLResolver aclResolver = new UnionMailboxACLResolver();
         GroupMembershipResolver groupMembershipResolver = new SimpleGroupMembershipResolver();
 
-        mailboxManager = new StoreMailboxManager<Long>(factory, userManager, aclResolver, groupMembershipResolver);
+        mailboxManager = new StoreMailboxManager<InMemoryId>(factory, userManager, aclResolver, groupMembershipResolver);
         mailboxManager.init();
 
         final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, new StoreSubscriptionManager(factory));
