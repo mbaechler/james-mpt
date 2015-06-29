@@ -31,6 +31,7 @@ import org.apache.james.mailbox.acl.GroupMembershipResolver;
 import org.apache.james.mailbox.acl.MailboxACLResolver;
 import org.apache.james.mailbox.acl.SimpleGroupMembershipResolver;
 import org.apache.james.mailbox.acl.UnionMailboxACLResolver;
+import org.apache.james.mailbox.elasticsearch.ClientProvider;
 import org.apache.james.mailbox.elasticsearch.ElasticSearchIndexer;
 import org.apache.james.mailbox.elasticsearch.EmbeddedElasticSearch;
 import org.apache.james.mailbox.elasticsearch.IndexCreationFactory;
@@ -40,6 +41,7 @@ import org.apache.james.mailbox.elasticsearch.json.MessageToElasticSearchJson;
 import org.apache.james.mailbox.elasticsearch.query.CriterionConverter;
 import org.apache.james.mailbox.elasticsearch.query.QueryConverter;
 import org.apache.james.mailbox.elasticsearch.search.ElasticSearchSearcher;
+import org.apache.james.mailbox.elasticsearch.utils.TestingClientProvider;
 import org.apache.james.mailbox.exception.MailboxException;
 import org.apache.james.mailbox.inmemory.InMemoryId;
 import org.apache.james.mailbox.inmemory.InMemoryMailboxSessionMapperFactory;
@@ -47,6 +49,7 @@ import org.apache.james.mailbox.model.MailboxPath;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreMailboxManager;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
+import org.apache.james.mailbox.store.extractor.DefaultTextExtractor;
 import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
@@ -88,8 +91,8 @@ public class ElasticSearchHostSystem extends JamesImapHostSystem {
     }
 
     private void initFields() {
-        NodeMappingFactory.applyMapping(
-            IndexCreationFactory.createIndex(embeddedElasticSearch.getNode())
+        ClientProvider clientProvider = NodeMappingFactory.applyMapping(
+            IndexCreationFactory.createIndex(new TestingClientProvider(embeddedElasticSearch.getNode()))
         );
 
         userManager = new MockAuthenticator();
@@ -97,14 +100,14 @@ public class ElasticSearchHostSystem extends JamesImapHostSystem {
 
         ElasticSearchListeningMessageSearchIndex<InMemoryId> searchIndex = new ElasticSearchListeningMessageSearchIndex<>(
             factory,
-            new ElasticSearchIndexer(embeddedElasticSearch.getNode()),
-            new ElasticSearchSearcher<InMemoryId>(embeddedElasticSearch.getNode(), new QueryConverter(new CriterionConverter())),
-            new MessageToElasticSearchJson());
+            new ElasticSearchIndexer(clientProvider),
+            new ElasticSearchSearcher<>(clientProvider, new QueryConverter(new CriterionConverter())),
+            new MessageToElasticSearchJson(new DefaultTextExtractor()));
 
         MailboxACLResolver aclResolver = new UnionMailboxACLResolver();
         GroupMembershipResolver groupMembershipResolver = new SimpleGroupMembershipResolver();
 
-        mailboxManager = new StoreMailboxManager<InMemoryId>(factory, userManager, aclResolver, groupMembershipResolver);
+        mailboxManager = new StoreMailboxManager<>(factory, userManager, aclResolver, groupMembershipResolver);
         mailboxManager.setMessageSearchIndex(searchIndex);
 
         try {
