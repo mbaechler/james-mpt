@@ -35,7 +35,12 @@ import org.apache.commons.io.IOUtils;
  * @version $Revision$
  */
 public class FileProtocolSessionBuilder extends ProtocolSessionBuilder {
-    
+
+    public static final String DEBUG = "DEBUG";
+    public static final String INFO = "INFO";
+    public static final String WARN = "WARN";
+    public static final String ERR = "ERR";
+
     /**
      * Builds a ProtocolSession by reading lines from the test file with the
      * supplied name.
@@ -117,6 +122,20 @@ public class FileProtocolSessionBuilder extends ProtocolSessionBuilder {
                         session.WAIT(sessionNumber, Long.valueOf(next.substring(5)));
                     } else {
                         throw new Exception("Invalid line length on WAIT instruction : " + next);
+                    }
+                }
+                else if (next.startsWith(LOG)) {
+                    String logInstruction = next.substring(4);
+                    if (logInstruction.startsWith(DEBUG)) {
+                        session.LOG(sessionNumber, ProtocolSession.LolLevel.Debug, logInstruction.substring(6));
+                    } else if (logInstruction.startsWith(INFO)) {
+                        session.LOG(sessionNumber, ProtocolSession.LolLevel.Info, logInstruction.substring(5));
+                    } else if (logInstruction.startsWith(WARN)) {
+                        session.LOG(sessionNumber, ProtocolSession.LolLevel.Warn, logInstruction.substring(5));
+                    } else if (logInstruction.startsWith(ERR)) {
+                        session.LOG(sessionNumber, ProtocolSession.LolLevel.Err, logInstruction.substring(4));
+                    } else {
+                        throw new Exception("Unrecognized log level for " + next);
                     }
                 }
                 else if (next.startsWith(OPEN_UNORDERED_BLOCK_TAG)) {

@@ -39,6 +39,8 @@ import org.apache.james.mpt.api.ProtocolInteractor;
  */
 public class ProtocolSessionBuilder {
 
+    public static final String LOG = "LOG";
+
     public static final String WAIT = "WAIT";
 
     public static final String SERVER_CONTINUATION_TAG = "S: \\+";

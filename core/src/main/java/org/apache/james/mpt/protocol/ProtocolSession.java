@@ -27,6 +27,8 @@ import java.util.regex.Pattern;
 
 import org.apache.james.mpt.api.ProtocolInteractor;
 import org.apache.james.mpt.api.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A protocol session which can be run against a reader and writer, which checks
@@ -37,6 +39,8 @@ import org.apache.james.mpt.api.Session;
  * @author Darrell DeBoer <darrell@apache.org>
  */
 public class ProtocolSession implements ProtocolInteractor {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProtocolSession.class);
 
     private boolean continued = false;
 
@@ -56,6 +60,13 @@ public class ProtocolSession implements ProtocolInteractor {
 
     public final boolean isContinueAfterFailure() {
         return continueAfterFailure;
+    }
+
+    enum LolLevel {
+        Debug,
+        Info,
+        Warn,
+        Err
     }
 
     public final void setContinueAfterFailure(boolean continueAfterFailure) {
@@ -184,6 +195,11 @@ public class ProtocolSession implements ProtocolInteractor {
     public void WAIT(int sessionNumber, long timeToWaitInMs) {
         this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
         testElements.add(new WaitElement(timeToWaitInMs));
+    }
+
+    public void LOG(int sessionNumber, LolLevel level, String message) {
+        this.maxSessionNumber = Math.max(this.maxSessionNumber, sessionNumber);
+        testElements.add(new LogElement(level, message));
     }
 
     /**
@@ -498,6 +514,43 @@ public class ProtocolSession implements ProtocolInteractor {
         @Override
         public void testProtocol(Session[] sessions, boolean continueAfterFailure) throws Exception {
             Thread.sleep(timeToWaitInMs);
+        }
+
+        @Override
+        public boolean isClient() {
+            return false;
+        }
+    }
+
+    /**
+     * Allow you to wait a given time at a given point of the test script
+     */
+    private class LogElement implements ProtocolElement {
+
+        private final LolLevel level;
+        private final String message;
+
+        public LogElement(LolLevel level, String message) {
+            this.level = level;
+            this.message = message;
+        }
+
+        @Override
+        public void testProtocol(Session[] sessions, boolean continueAfterFailure) throws Exception {
+            switch (level) {
+            case Debug:
+                LOGGER.debug(message);
+                break;
+            case Info:
+                LOGGER.info(message);
+                break;
+            case Warn:
+                LOGGER.warn(message);
+                break;
+            case Err:
+                LOGGER.error(message);
+                break;
+            }
         }
 
         @Override
