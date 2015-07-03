@@ -17,26 +17,27 @@
  * under the License.                                           *
  ****************************************************************/
 
-package org.apache.james.mpt.imapmailbox.cassandra;
+package org.apache.james.mpt.imapmailbox.suite;
+
+import com.google.inject.Inject;
+import java.util.Locale;
 
 import org.apache.james.mpt.api.HostSystem;
-import org.apache.james.mpt.api.ImapHostSystem;
-import org.apache.james.mpt.imapmailbox.cassandra.host.CassandraHostSystem;
+import org.apache.james.mpt.imapmailbox.suite.base.BaseAuthenticatedState;
+import org.junit.Test;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
+public class UserFlagsSupport extends BaseAuthenticatedState {
 
-public class CassandraMailboxTestModule extends AbstractModule {
+    @Inject
+    private static HostSystem system;
 
-    @Override
-    protected void configure() {
-        bind(HostSystem.class).to(ImapHostSystem.class);
+    public UserFlagsSupport() throws Exception {
+        super(system);
     }
 
-    @Provides
-    @Singleton
-    public ImapHostSystem provideHostSystem() throws Exception {
-        return new CassandraHostSystem();
+    @Test
+    public void testUserFlagsSupport() throws Exception {
+        scriptTest("UserFlagsSupport", Locale.US);
     }
+
 }
