@@ -36,12 +36,17 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.james</groupId>
-            <artifactId>apache-james-mailbox-cassandra</artifactId>
+            <artifactId>apache-james-backends-cassandra</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.james</groupId>
+            <artifactId>apache-james-backends-cassandra</artifactId>
+            <scope>test</scope>
+            <type>test-jar</type>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
             <artifactId>apache-james-mailbox-cassandra</artifactId>
-            <type>test-jar</type>
         </dependency>
         <dependency>
             <groupId>org.apache.james</groupId>
@@ -54,5 +59,9 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <build>
+
+    </build>
 </project>
 
