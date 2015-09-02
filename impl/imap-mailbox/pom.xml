@@ -39,7 +39,6 @@
         <module>core</module>
         <module>cassandra</module>
         <module>cyrus</module>
-        <module>elasticsearch</module>
         <module>external-james</module>
         <module>hbase</module>
         <module>inmemory</module>
