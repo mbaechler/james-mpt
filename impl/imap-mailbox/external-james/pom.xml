@@ -30,13 +30,6 @@
     <artifactId>apache-james-mpt-external-james</artifactId>
     <name>Apache James MPT Imap Mailbox - External James</name>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.james</groupId>
-            <artifactId>apache-james-mpt-imapmailbox-core</artifactId>
-        </dependency>
-    </dependencies>
-
     <profiles>
         <profile>
             <id>disable-build-for-older-jdk</id>
@@ -132,6 +125,12 @@
             <activation>
                 <jdk>[1.8,)</jdk>
             </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.apache.james</groupId>
+                    <artifactId>apache-james-mpt-imapmailbox-core</artifactId>
+                </dependency>
+            </dependencies>
             <build>
                 <plugins>
                     <plugin>
