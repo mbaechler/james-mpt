@@ -19,14 +19,14 @@
 package org.apache.james.mpt.imapmailbox.cassandra.host;
 
 import org.apache.james.backends.cassandra.CassandraClusterSingleton;
-import org.apache.james.backends.cassandra.components.CassandraModule;
+import org.apache.james.backends.cassandra.components.CassandraFeatures;
 import org.apache.james.backends.cassandra.init.CassandraTypesProvider;
 import org.apache.james.imap.encode.main.DefaultImapEncoderFactory;
 import org.apache.james.imap.main.DefaultImapDecoderFactory;
 import org.apache.james.imap.processor.main.DefaultImapProcessorFactory;
 import org.apache.james.mailbox.SubscriptionManager;
+import org.apache.james.mailbox.cassandra.CassandraMailboxFeatures;
 import org.apache.james.mailbox.cassandra.CassandraMailboxManager;
-import org.apache.james.mailbox.cassandra.CassandraMailboxModule;
 import org.apache.james.mailbox.cassandra.CassandraMailboxSessionMapperFactory;
 import org.apache.james.mailbox.cassandra.mail.CassandraModSeqProvider;
 import org.apache.james.mailbox.cassandra.mail.CassandraUidProvider;
@@ -41,11 +41,11 @@ public class CassandraHostSystem extends JamesImapHostSystem {
 
     private final CassandraMailboxManager mailboxManager;
     private final MockAuthenticator userManager;
-    private final CassandraModule mailboxModule;
+    private final CassandraFeatures mailboxModule;
     private CassandraClusterSingleton cassandraClusterSingleton;
 
     public CassandraHostSystem() throws Exception {
-        mailboxModule = new CassandraMailboxModule();
+        mailboxModule = new CassandraMailboxFeatures();
         cassandraClusterSingleton = CassandraClusterSingleton.create(mailboxModule);
         userManager = new MockAuthenticator();
         com.datastax.driver.core.Session session = cassandraClusterSingleton.getConf();
