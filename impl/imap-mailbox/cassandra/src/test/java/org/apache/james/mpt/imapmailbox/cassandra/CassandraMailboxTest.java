@@ -30,6 +30,7 @@ import org.apache.james.mpt.imapmailbox.suite.FetchHeaders;
 import org.apache.james.mpt.imapmailbox.suite.Listing;
 import org.apache.james.mpt.imapmailbox.suite.NonAuthenticatedState;
 import org.apache.james.mpt.imapmailbox.suite.PartialFetch;
+import org.apache.james.mpt.imapmailbox.suite.QuotaTest;
 import org.apache.james.mpt.imapmailbox.suite.Rename;
 import org.apache.james.mpt.imapmailbox.suite.Search;
 import org.apache.james.mpt.imapmailbox.suite.Security;
@@ -63,7 +64,8 @@ import org.junit.runners.Suite;
     SelectedInbox.class,
     SelectedState.class,
     UidSearch.class,
-    UserFlagsSupport.class
+    UserFlagsSupport.class,
+    QuotaTest.class
 })
 @GuiceModules({ CassandraMailboxTestModule.class })
 public class CassandraMailboxTest {
