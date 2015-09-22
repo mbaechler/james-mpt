@@ -28,10 +28,16 @@ import org.apache.james.mailbox.cassandra.CassandraMailboxSessionMapperFactory;
 import org.apache.james.mailbox.cassandra.CassandraTypesProvider;
 import org.apache.james.mailbox.cassandra.mail.CassandraModSeqProvider;
 import org.apache.james.mailbox.cassandra.mail.CassandraUidProvider;
+import org.apache.james.mailbox.cassandra.quota.CassandraCurrentQuotaManager;
+import org.apache.james.mailbox.cassandra.quota.CassandraPerUserMaxQuotaManager;
 import org.apache.james.mailbox.model.MailboxPath;
+import org.apache.james.mailbox.quota.QuotaRootResolver;
 import org.apache.james.mailbox.store.JVMMailboxPathLocker;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
+import org.apache.james.mailbox.store.quota.DefaultQuotaRootResolver;
+import org.apache.james.mailbox.store.quota.ListeningCurrentQuotaUpdater;
+import org.apache.james.mailbox.store.quota.StoreQuotaManager;
 import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
@@ -52,13 +58,33 @@ public class CassandraHostSystem extends JamesImapHostSystem {
         CassandraMailboxSessionMapperFactory mapperFactory = new CassandraMailboxSessionMapperFactory(uidProvider, modSeqProvider, session, new CassandraTypesProvider(session));
         
         mailboxManager = new CassandraMailboxManager(mapperFactory, userManager, new JVMMailboxPathLocker());
+        QuotaRootResolver quotaRootResolver = new DefaultQuotaRootResolver(mapperFactory);
+
+        CassandraPerUserMaxQuotaManager perUserMaxQuotaManager = new CassandraPerUserMaxQuotaManager(session);
+        perUserMaxQuotaManager.setDefaultMaxMessage(4096);
+        perUserMaxQuotaManager.setDefaultMaxStorage(5L * 1024L * 1024L * 1024L);
+
+        CassandraCurrentQuotaManager currentQuotaManager = new CassandraCurrentQuotaManager(session);
+
+        StoreQuotaManager quotaManager = new StoreQuotaManager();
+        quotaManager.setMaxQuotaManager(perUserMaxQuotaManager);
+        quotaManager.setCurrentQuotaManager(currentQuotaManager);
+
+        ListeningCurrentQuotaUpdater quotaUpdater = new ListeningCurrentQuotaUpdater();
+        quotaUpdater.setCurrentQuotaManager(currentQuotaManager);
+        quotaUpdater.setQuotaRootResolver(quotaRootResolver);
+
+        mailboxManager.setQuotaRootResolver(quotaRootResolver);
+        mailboxManager.setQuotaManager(quotaManager);
+        mailboxManager.setQuotaUpdater(quotaUpdater);
+
         mailboxManager.init();
 
         SubscriptionManager subscriptionManager = new StoreSubscriptionManager(mapperFactory);
 
         configure(new DefaultImapDecoderFactory().buildImapDecoder(),
                 new DefaultImapEncoderFactory().buildImapEncoder(),
-                DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, subscriptionManager));
+                DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, subscriptionManager, quotaManager, quotaRootResolver));
         cassandraClusterSingleton.ensureAllTables();
     }
 

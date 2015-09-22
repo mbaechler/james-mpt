@@ -30,22 +30,27 @@ import org.apache.james.mailbox.acl.UnionMailboxACLResolver;
 import org.apache.james.mailbox.exception.MailboxException;
 import org.apache.james.mailbox.inmemory.InMemoryId;
 import org.apache.james.mailbox.inmemory.InMemoryMailboxSessionMapperFactory;
+import org.apache.james.mailbox.inmemory.quota.InMemoryCurrentQuotaManager;
+import org.apache.james.mailbox.inmemory.quota.InMemoryPerUserMaxQuotaManager;
 import org.apache.james.mailbox.model.MailboxPath;
+import org.apache.james.mailbox.quota.QuotaRootResolver;
 import org.apache.james.mailbox.store.MockAuthenticator;
 import org.apache.james.mailbox.store.StoreMailboxManager;
 import org.apache.james.mailbox.store.StoreSubscriptionManager;
+import org.apache.james.mailbox.store.quota.CurrentQuotaCalculator;
+import org.apache.james.mailbox.store.quota.DefaultQuotaRootResolver;
+import org.apache.james.mailbox.store.quota.ListeningCurrentQuotaUpdater;
+import org.apache.james.mailbox.store.quota.StoreQuotaManager;
 import org.apache.james.mpt.host.JamesImapHostSystem;
 import org.apache.james.mpt.imapmailbox.MailboxCreationDelegate;
 
 public class InMemoryHostSystem extends JamesImapHostSystem {
 
     private StoreMailboxManager<InMemoryId> mailboxManager;
-    private MockAuthenticator userManager; 
-    private InMemoryMailboxSessionMapperFactory factory;
-    
+    private MockAuthenticator userManager;
+
     public static JamesImapHostSystem build() throws Exception {
-        InMemoryHostSystem host =  new InMemoryHostSystem();
-        return host;
+        return new InMemoryHostSystem();
     }
     
     private InMemoryHostSystem() throws MailboxException {
@@ -64,14 +69,36 @@ public class InMemoryHostSystem extends JamesImapHostSystem {
     
     private void initFields() throws MailboxException {
         userManager = new MockAuthenticator();
-        factory = new InMemoryMailboxSessionMapperFactory();
+        InMemoryMailboxSessionMapperFactory factory = new InMemoryMailboxSessionMapperFactory();
         MailboxACLResolver aclResolver = new UnionMailboxACLResolver();
         GroupMembershipResolver groupMembershipResolver = new SimpleGroupMembershipResolver();
 
         mailboxManager = new StoreMailboxManager<InMemoryId>(factory, userManager, aclResolver, groupMembershipResolver);
+        QuotaRootResolver quotaRootResolver = new DefaultQuotaRootResolver(factory);
+
+        InMemoryPerUserMaxQuotaManager perUserMaxQuotaManager = new InMemoryPerUserMaxQuotaManager();
+        perUserMaxQuotaManager.setDefaultMaxMessage(4096);
+        perUserMaxQuotaManager.setDefaultMaxStorage(5L * 1024L * 1024L * 1024L);
+
+        InMemoryCurrentQuotaManager currentQuotaManager = new InMemoryCurrentQuotaManager(
+            new CurrentQuotaCalculator(factory, quotaRootResolver),
+            mailboxManager);
+
+        StoreQuotaManager quotaManager = new StoreQuotaManager();
+        quotaManager.setMaxQuotaManager(perUserMaxQuotaManager);
+        quotaManager.setCurrentQuotaManager(currentQuotaManager);
+
+        ListeningCurrentQuotaUpdater quotaUpdater = new ListeningCurrentQuotaUpdater();
+        quotaUpdater.setCurrentQuotaManager(currentQuotaManager);
+        quotaUpdater.setQuotaRootResolver(quotaRootResolver);
+
+        mailboxManager.setQuotaRootResolver(quotaRootResolver);
+        mailboxManager.setQuotaManager(quotaManager);
+        mailboxManager.setQuotaUpdater(quotaUpdater);
+
         mailboxManager.init();
 
-        final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, new StoreSubscriptionManager(factory));
+        final ImapProcessor defaultImapProcessorFactory = DefaultImapProcessorFactory.createDefaultProcessor(mailboxManager, new StoreSubscriptionManager(factory), quotaManager, quotaRootResolver);
         configure(new DefaultImapDecoderFactory().buildImapDecoder(),
                 new DefaultImapEncoderFactory().buildImapEncoder(),
                 defaultImapProcessorFactory);
